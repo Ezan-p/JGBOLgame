@@ -5,6 +5,7 @@ local home = require("local_home")
 local combat = require("local_battle")
 local battleHall = require("local_battle_hall")
 local handbook = require("local_handbook")
+local cortege = require("local_cortege")
 local summonOK, summon = pcall(require,"local_summon")
 if not summonOK then CCLuaLog("LOCAL_SUMMON_LOAD_ERROR: "..tostring(summon)); error(summon) end
 local inventoryOK, inventory = pcall(require,"local_inventory")
@@ -193,6 +194,7 @@ render = function()
             end
         },state,function(target)
             if target=="heroes" then handbook.open() end
+            if target=="cortege" and page~="heroes" then cortege.open() end
             if target=="lineup" then lineup.open() end
             if target=="inventory" then inventory.open() end
             page=target; pageIndex=1; qualityFilter=0; homeInfo=nil; render()
@@ -201,7 +203,7 @@ render = function()
         end)
         return
     end
-    if state and (page=="home" or page=="heroes" or page=="lineup" or page=="inventory" or page=="summon") then
+    if state and (page=="home" or page=="cortege" or page=="heroes" or page=="lineup" or page=="inventory" or page=="summon") then
         home.draw({
             root=root, text=text, hideHeader=page~="home",
             hit=function(x,y,w,h,action,node)
@@ -209,6 +211,7 @@ render = function()
             end
         },state,function(target)
             if target=="heroes" then handbook.open() end
+            if target=="cortege" and page~="heroes" then cortege.open() end
             if target=="lineup" then lineup.open() end
             if target=="inventory" then inventory.open() end
             if target=="stages" then journey.open() end
@@ -272,6 +275,29 @@ render = function()
                     page=target;homeInfo=nil;render()
                 end,
             },state)
+            return
+        end
+        if page=="cortege" then
+            -- Original mainUI "神仙" board: four side tabs and the 图鉴 button.
+            local bottom={}
+            for _,b in ipairs(buttons) do
+                if b.y==0 and b.h<=80 then table.insert(bottom,b) end
+            end
+            buttons=bottom
+            cortege.draw({
+                root=root, render=render, send=send,
+                notice=busy and "正在保存…" or notice,
+                hit=function(x,y,w,h,action,enabled,node)
+                    table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node})
+                end,
+                navigate=function(target)
+                    if target=="heroes" then handbook.open() end
+                    page=target; homeInfo=nil; render()
+                end,
+            },state)
+            if failed then
+                button("重试连接",35,84,160,33,function() send("state",{}) end,true,true)
+            end
             return
         end
         if page=="heroes" then
@@ -459,6 +485,7 @@ end
 local function navigateBack()
     if not state or busy or session.pending then return end
     if page=="heroes" then handbook.back()
+    elseif page=="cortege" then cortege.back()
     elseif page=="stages" then journey.back()
     elseif page=="lineup" then lineup.back()
     elseif page=="battle_hall" then battleHall.back()
@@ -493,6 +520,10 @@ local function init()
         if event==1001 then navigateBack(); return true end
         if event==1002 then return true end
         if page=="inventory" and not busy and not session.pending and inventory.touch(event,x/sx,y/sy) then
+            pressed=nil
+            return true
+        end
+        if page=="cortege" and not busy and not session.pending and cortege.touch(event,x/sx,y/sy) then
             pressed=nil
             return true
         end

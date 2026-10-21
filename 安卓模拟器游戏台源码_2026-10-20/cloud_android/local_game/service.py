@@ -22,6 +22,7 @@ PORT = 8770
 import sys
 sys.path.insert(0, str(ROOT))
 from local_game.combat import resolve, apply_passives
+from local_game import cortege
 from local_game import inventory
 from local_game import synergy
 from local_game import summon as summon_rules
@@ -89,6 +90,7 @@ class Game:
             result["support"] = support
         if self.catalog.get("inventory"):
             result["inventory"] = inventory.view(state, self.catalog["inventory"])
+            result["owned"] = inventory.owned(state)
         result["summon"] = summon_rules.view(state, self.catalog)
         for hero in result["heroes"]:
             hero["active"] = hero["id"] in state["lineup"]
@@ -208,6 +210,12 @@ class Game:
                 extra["notice"] = result["grade_name"] + "免费召唤：" + result["hero"]["name"]
                 if not result["new"]:
                     extra["notice"] += "（重复，获得 %d 魂魄）" % result["soul_gain"]
+        elif op == "cortege_compose":
+            extra["notice"] = cortege.compose(
+                state, args, self.catalog, GameError,
+                lambda ident: self.add_to_lineup(state, ident))
+        elif op == "cortege_convert":
+            extra["notice"] = cortege.convert(state, args, self.catalog, GameError)
         elif op == "lineup":
             ident = self.integer(args, "hero")
             if str(ident) not in state["heroes"]:

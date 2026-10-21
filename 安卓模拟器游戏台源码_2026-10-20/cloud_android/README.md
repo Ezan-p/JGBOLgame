@@ -6,7 +6,7 @@
 
 招募现已覆盖原版图鉴全部 **166 位神仙**，支持品质筛选和双向翻页。原文介绍、属性成长、技能、仙缘、转生及剧情详见 [神仙角色介绍表](outputs/characters-20261020/神仙角色介绍表.xlsx)，提取口径见 [角色资料说明](local_game/README.md#神仙角色介绍表与提取依据)。
 
-底部“神仙”已还原为原版风格的图鉴：木纹边框、四个侧栏分类、六列三行头像及纵向滚动。支持查看全部神仙或已拥有伙伴，点击头像查看立绘、简介、技能和仙缘，并可招募、培养或调整出战。装备、法术与精魄分类提供原版资料查阅，成长与装备玩法尚未接入。
+底部“神仙”已还原为原版 `ui/lineupUI.lua` 的伙伴面板：木纹边框、四张卷轴分类（神仙、魂魄、精魄、五法界魂）和下方“图鉴”按钮。图鉴使用原版 `handbookUI.lua` 的四类（神仙、装备、法术、精魄）、六列三行头像及纵向滚动，已拥有条目点亮、未拥有条目变暗。神仙与魂魄可打开详情，并可培养或幻魂。装备、法术与精魄分类提供原版资料查阅，成长与装备玩法仍在包裹中。详见 [神仙模块逆向说明](local_game/CORTEGE.md)。
 
 本地版的运行、构建、备份及返回渠道版方法见 [本地版说明](local_game/README.md)。原联想渠道版 3.75（`com.sygame.jingubang.lenovo`）仍独立安装，数据保留。
 
@@ -131,7 +131,7 @@ node --check web/app.js
 .runtime/venv/bin/python scripts/check_browser.py
 ```
 
-浏览器检查需要 Chrome 和已启动的网页服务，生成 `.runtime/browser-check.json` / `.png` 和手机布局截图。当前 100 项自动测试通过，覆盖本地存档、重复结算保护、十关推进、全部角色招募、召唤池与免费/付费结算、原版魂魄转化、图鉴数据与素材。此前实机完成战斗、培养与招募，正式安装包及本地服务重启后进度保留；浏览器画面传输正常，无 JavaScript 错误、无移动端横向溢出。本地版初始验收记录在 `.runtime/local_game/validation.json`，神仙模块验收在 `.runtime/local_game/handbook-validation/`，原渠道版的镜像验证截图和日志另存于 `.runtime/compat32/game-screen.png`、`game-logcat.txt`。这些验证不代表原服功能已完整恢复。原 Noctilucent MOD 文件保留作历史资料，未接入金箍棒网页。
+浏览器检查需要 Chrome 和已启动的网页服务，生成 `.runtime/browser-check.json` / `.png` 和手机布局截图。当前 105 项自动测试通过，覆盖本地存档、重复结算保护、十关推进、全部角色招募、召唤池与免费/付费结算、原版魂魄转化、幻魂与五法界魂转化、图鉴数据与素材。此前实机完成战斗、培养与招募，正式安装包及本地服务重启后进度保留；浏览器画面传输正常，无 JavaScript 错误、无移动端横向溢出。本地版初始验收记录在 `.runtime/local_game/validation.json`，神仙模块验收在 `.runtime/local_game/handbook-validation/`，原渠道版的镜像验证截图和日志另存于 `.runtime/compat32/game-screen.png`、`game-logcat.txt`。这些验证不代表原服功能已完整恢复。原 Noctilucent MOD 文件保留作历史资料，未接入金箍棒网页。
 
 - 开机慢：ARM32 使用软件仿真；查看 `doctor` 的 `booted`，不要删除数据或反复重装 APK。
 - 引擎或镜像缺失：运行 `setup_compat32.py`，不要只改 `abi.type`。

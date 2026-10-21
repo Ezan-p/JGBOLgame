@@ -173,7 +173,7 @@ function M.draw(ui, state, navigate, info)
         {"Home","首页",.294,go("home")},
         {"shop","集市",.4,explain("集市",{"原版商品与道具交易尚未实现。","当前银两可用于角色培养与伙伴招募。"})},
         {"package","包裹",.506,go("inventory")},
-        {"character","神仙",.612,go("heroes")},
+        {"character","神仙",.612,go("cortege")},
         {"roleRebornUI/role_reborn","转生",.718,explain("转生",{"转生按钮已从原版更新资源中还原。","转生消耗、突破与成长规则尚未接入。","当前可在「神仙」中将伙伴培养至 20 级。"})},
         {"buddy","阵容",.824,go("lineup")},
         {"summon","召唤",.93,go("summon")}

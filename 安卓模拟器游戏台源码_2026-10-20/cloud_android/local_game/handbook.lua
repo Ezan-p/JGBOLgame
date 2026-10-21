@@ -59,6 +59,19 @@ local function own(id)
     end
 end
 
+-- state.owned comes from local_game.inventory.owned(): heroes, equipment,
+-- spells and 精魄 ids that the local save actually holds.
+local function catalogOwned()
+    local result={}
+    for _,name in ipairs({"heroes","equipment","spells","essence"}) do
+        result[name]={}
+        for _,id in ipairs((state.owned or {})[name] or {}) do
+            result[name][id]=true
+        end
+    end
+    return result
+end
+
 local function icon(entry,x,y,width,parent,dim)
     local info=entry.icon
     local node=CCSprite:create(info.file)
@@ -145,6 +158,7 @@ end
 
 local function drawGrid()
     local list={}
+    local ownedCatalog=catalogOwned()
     for _,entry in ipairs(data[M.tab]) do
         if M.tab~="heroes" or not M.ownedOnly or own(entry.id) then
             table.insert(list,entry)
@@ -171,7 +185,7 @@ local function drawGrid()
         local col=(i-1)%6
         local row=math.floor((i-1)/6)
         local x,y=FIRST_X+col*STEP_X,FIRST_Y-row*STEP_Y
-        icon(entry,x,y,96,container,M.tab=="heroes" and not own(entry.id))
+        icon(entry,x,y,96,container,not ownedCatalog[M.tab][entry.id])
         image("v2/handbook/name_frame.png",x,y-54,115.2,25,container)
         label(entry.name,x,y-54,16,{255,255,224},container,true)
         if M.lastSelected==M.tab..":"..entry.id then
@@ -211,7 +225,8 @@ local function drawDetail()
         label("生命 "..stats.hp.."   攻击 "..stats.attack,364,184,16,GOLD,nil,true)
         label("防御 "..stats.defense.."   基础法力 "..entry.magic,364,159,16,GOLD,nil,true)
     else
-        icon(entry,364,335,150,root,false)
+        local ownedCatalog=catalogOwned()
+        icon(entry,364,335,150,root,not ownedCatalog[M.tab][entry.id])
         label(entry.quality.."星",364,221,21,GOLD,nil,true)
         label("原版图鉴资料",364,183,16,MUTED,nil,true)
     end
@@ -290,7 +305,7 @@ function M.back()
     M.gesture=nil
     if heroDetail.closeInfo() then ui.render()
     elseif M.selected then M.selected=nil; heroDetail.reset(); ui.render()
-    else ui.navigate("home") end
+    else ui.navigate("cortege") end
 end
 
 function M.touch(event,x,y)

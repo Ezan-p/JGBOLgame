@@ -72,6 +72,7 @@ def main():
             if k not in ("resources", "sources")})).encode(),
         "lua/local_home.lua": (ROOT / "local_game/home.lua").read_bytes(),
         "lua/local_handbook.lua": (ROOT / "local_game/handbook.lua").read_bytes(),
+        "lua/local_cortege.lua": (ROOT / "local_game/cortege.lua").read_bytes(),
         "lua/local_summon.lua": (ROOT / "local_game/summon.lua").read_bytes(),
         "lua/local_summon_data.lua": ("return " + lua_literal(
             {"tiers": summon["tiers"], "rates": summon["rates"],
@@ -150,12 +151,12 @@ def main():
         "package": PACKAGE, "activity": ACTIVITY, "apk": str(apk),
         "sha256": hashlib.sha256(apk.read_bytes()).hexdigest(),
         "rules": "local-v4", "original_game_modified": False,
-        "features": ["38-live-traits", "75-awakening-stars", "native-awakening-and-spell-advance", "rulai-shield-and-sharing", "elite-arena-guild-story-modes", "uncompressed-native-audio", "original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-handbook-ui", "original-journey-ui", "original-summon-ui", "summon-free-timers-and-news", "summon-result-reveal", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
+        "features": ["38-live-traits", "75-awakening-stars", "native-awakening-and-spell-advance", "rulai-shield-and-sharing", "elite-arena-guild-story-modes", "uncompressed-native-audio", "original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-cortege-module", "original-handbook-ui", "original-journey-ui", "original-summon-ui", "summon-free-timers-and-news", "summon-result-reveal", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
         "journey_counts": {"chapters": len(journey["chapters"]),
                            "stages": sum(len(c["stages"]) for c in journey["chapters"]),
                            "map_positions": sum("x" in c for c in journey["chapters"])},
         "recruitable_count": len(assets["recruitable"]),
-        "handbook_counts": {k: len(v) for k, v in handbook.items() if k != "resources"},
+        "handbook_counts": {k: len(v) for k, v in handbook.items() if isinstance(v, list)},
     }
     (output / "build.json").write_text(json.dumps(receipt, ensure_ascii=False, indent=2))
     print("本地 APK：", apk)

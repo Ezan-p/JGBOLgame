@@ -139,6 +139,30 @@ def grant(state, key, count=1, level=1, catalog=None):
         bag["next"] += 1
 
 
+def owned(state):
+    """Catalogue ownership used by the 图鉴 brightness/dimming state.
+
+    Original handbookUI compares the owned package with the whole catalogue;
+    the local save keeps equipment/spells/traits as inventory entries.
+    """
+    result = {"heroes": sorted(int(ident) for ident in state.get("heroes", {})),
+              "equipment": set(), "spells": set(), "essence": set()}
+    for entry in state.get("inventory", {}).get("entries", []):
+        if int(entry.get("count", 0)) <= 0:
+            continue
+        key = str(entry.get("key", ""))
+        if key.startswith("i") and key[1:].isdigit():
+            ident = int(key[1:])
+            if 2000 <= ident < 5000:
+                result["equipment"].add(ident)
+            elif ident >= 10000:
+                result["essence"].add(ident)
+        elif key.startswith("s") and key[1:].isdigit():
+            result["spells"].add(int(key[1:]))
+    return {name: sorted(values) if isinstance(values, set) else values
+            for name, values in result.items()}
+
+
 def value(item, level):
     b = item["original"]
     field = {1: "gongji_plus", 2: "fangyu_plus", 3: "maxhp_plus"}.get(item["category"])
