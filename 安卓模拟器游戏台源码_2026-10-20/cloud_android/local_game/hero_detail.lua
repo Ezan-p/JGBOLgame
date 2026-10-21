@@ -209,19 +209,16 @@ local function drawLeft(opts)
     end
     label("等级 " .. level .. " / 20", bx + bw / 2, 166, 11, PALE, nil, true)
 
-    local function artButton(file, x, w, action, enabled)
-        local node = image(file, x, 112, w, 40)
+    local function artButton(file, x, w, action, enabled, h)
+        h = h or 40
+        local node = image(file, x, 112, w, h)
         if not enabled and node then node:setColor(ccc3(115, 105, 95)) end
-        ui.hit(x - w / 2, 92, w, 40, action, enabled, node)
+        ui.hit(x - w / 2, 112 - h / 2, w, h, action, enabled, node)
     end
 
     if hero then
-        local cost = hero.upgrade_cost or (80 * level)
-        artButton("v2/trainingUI/training1.png", 150, 160, opts.onTrain,
-                  level < 20 and state.silver >= cost)
-        artButton("v2/buttons/inherit1.png", 325, 160, opts.onInherit, true)
-        label(level >= 20 and "已达满级" or ("培养消耗 " .. cost .. " 银两"),
-              150, 146, 10, MUTED, nil, true)
+        artButton("v2/trainingUI/training1.png", 170, 150, opts.onTrain, true, 50)
+        artButton("v2/buttons/inherit1.png", 330, 150, opts.onInherit, true, 50)
     else
         local back = image("v2/multi-selectUI/back1.png", 245, 112, 190, 40)
         ui.hit(150, 92, 190, 40, opts.onBack, true, back)
@@ -253,6 +250,7 @@ local function drawRight(opts)
     local talentNameH = measure(talentName, nameSize, CW - 118)
     local talentDescH = measure(talentText, descSize, CW - 118)
     need = need + 8 + titleH + 4 + math.max(70, talentNameH + nameGap + talentDescH) + 16
+    need = need + 14 + titleH + 4 + 4 * 32 + 14
     local total = math.max(CH, need)
 
     local container = CCLayer:create()
@@ -311,6 +309,46 @@ local function drawRight(opts)
     else
         label("暂无天赋", 30, y - 8, 17, MUTED, container, false, descWidth)
         y = y - 40
+    end
+
+    -- Original intro_label_ql = 成长潜力. Four progress rows use the original
+    -- property_bkg/property_up bars, normalized by the maximum growth of all
+    -- 166 heroes for each attribute.
+    y = y - 14
+    image("v2/introUI/small_label.png", CW / 2, y - titleH / 2, 220, titleH, container)
+    image("v2/introUI/intro_label_ql.png", CW / 2, y - titleH / 2, 96, 28, container)
+    y = y - titleH - 4
+    local growth = entry.growth or {}
+    local growthMax = opts.growth_max or {}
+    local growthRows = {
+        {key = "hp", icon = "health", text = "生命"},
+        {key = "attack", icon = "damage", text = "攻击"},
+        {key = "defense", icon = "defence", text = "防御"},
+        {key = "magic", icon = "mana", text = "法力"},
+    }
+    for _, row in ipairs(growthRows) do
+        local cy = y - 16
+        image("v2/introUI/" .. row.icon .. ".png", 18, cy, 20, 20, container)
+        label(row.text, 32, cy, 15, GOLD, container)
+        local barX, barW, barH = 76, 268, 14
+        image("v2/introUI/property_bkg.png", barX + barW / 2, cy, barW, barH, container)
+        local value = tonumber(growth[row.key]) or 0
+        local maximum = tonumber(growthMax[row.key]) or 0
+        local ratio = maximum > 0 and math.min(1, value / maximum) or 0
+        if ratio > 0 then
+            local up = CCSprite:create("v2/introUI/property_up.png")
+            if up then
+                local size = up:getContentSize()
+                up:setAnchorPoint(CCPointMake(0, .5))
+                up:setScaleX(barW * ratio / size.width)
+                up:setScaleY(barH / size.height)
+                up:setPosition(CCPointMake(barX, cy))
+                container:addChild(up)
+            end
+        end
+        local valueLabel = label("+" .. tostring(value) .. "/级", 430, cy, 14, GOLD, container)
+        valueLabel:setAnchorPoint(CCPointMake(1, .5))
+        y = y - 32
     end
 
     local thumbHeight = math.max(24, CH * CH / total)

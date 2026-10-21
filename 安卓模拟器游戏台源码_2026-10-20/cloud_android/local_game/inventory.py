@@ -27,7 +27,12 @@ def build_inventory(game_root):
     dependencies = set(UI_RESOURCES)
     dependencies.update(n for n in r.names() if n.startswith("v2/packageUI/"))
     dependencies.update(["v2/smithUI/smith1.png", "v2/smithUI/smith2.png",
-                         "v2/stoneUI/putin_btn1.png", "v2/enhanceUI/up1.png", "map/parts.png"])
+                         "v2/stoneUI/putin_btn1.png", "v2/enhanceUI/up1.png", "map/parts.png",
+                         "v2/common/frame1.png", "v2/common/frame2.png",
+                         "v2/common/small_label.png", "v2/common/close1.png",
+                         "v2/enhanceUI/equipEnhance.png", "v2/enhanceUI/mid2.png",
+                         "v2/enhanceUI/mid3.png", "v2/enhanceUI/en_1.png",
+                         "v2/enhanceUI/continue_1.png", "v2/newIntroUI/star_bkg.png"])
     for b in rows("item_base"):
         ident, kind, resource = int(b["type_id"]), int(b["main_type"]), int(b["resource"])
         category = kind if kind <= 3 else 5 if kind == 9 else 6
@@ -305,7 +310,7 @@ def apply(state, op, args, catalog, error):
         for key, count in (("i2006", 1), ("i3002", 1), ("i4002", 1), ("i4012", 1),
                            ("i4013", 1), ("s202", 1), ("s22", 1), ("s42", 1), ("s43", 1), ("i1090", 3),
                            ("i1091", 3), ("i1092", 3), ("i1020", 3), ("i1024", 2),
-                           ("i10000", 10), ("i7006", 10)):
+                           ("i10000", 10), ("i7006", 10), ("i1001", 169)):
             grant(state, key, count, catalog=catalog)
         bag["claimed"] = True
         return "已领取入门包裹；点击物品可装备或使用"

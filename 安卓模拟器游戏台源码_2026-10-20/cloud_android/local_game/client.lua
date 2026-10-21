@@ -10,8 +10,11 @@ local summonOK, summon = pcall(require,"local_summon")
 if not summonOK then CCLuaLog("LOCAL_SUMMON_LOAD_ERROR: "..tostring(summon)); error(summon) end
 local inventoryOK, inventory = pcall(require,"local_inventory")
 if not inventoryOK then CCLuaLog("LOCAL_INVENTORY_LOAD_ERROR: "..tostring(inventory)); error(inventory) end
+local enhanceOK, enhance = pcall(require,"local_enhance")
+if not enhanceOK then CCLuaLog("LOCAL_ENHANCE_LOAD_ERROR: "..tostring(enhance)); error(enhance) end
 local lineupOK, lineup = pcall(require,"local_lineup")
 if not lineupOK then CCLuaLog("LOCAL_LINEUP_LOAD_ERROR: "..tostring(lineup)); error(lineup) end
+local training = require("local_training")
 local journeyOK, journey = pcall(require,"local_journey")
 if not journeyOK then CCLuaLog("LOCAL_JOURNEY_LOAD_ERROR: "..tostring(journey)); error(journey) end
 local KEY = "__LOCAL_KEY__"
@@ -128,9 +131,8 @@ local function heroCard(hero, x, mode)
         button("招募 · " .. hero.cost .. " 银两", x+25, 131, 226, 36,
                function() send("recruit", {hero=hero.id}) end, state.silver >= hero.cost)
     elseif mode == "hero" then
-        button("升级 · " .. hero.upgrade_cost, x+12, 133, 144, 39,
-               function() send("upgrade", {hero=hero.id}) end,
-               hero.level < 20 and state.silver >= hero.upgrade_cost)
+        button("培养", x+12, 133, 144, 39,
+               function() training.open(hero.id,"heroes"); page="training"; render() end, true)
         button(hero.active and "休息" or "出战", x+165, 133, 99, 39,
                function() send("lineup", {hero=hero.id}) end)
     else
@@ -203,6 +205,21 @@ render = function()
         end)
         return
     end
+    if state and page=="training" then
+        training.draw({
+            root=root, render=render, send=send, busy=busy, failed=failed,
+            error=lastError, notice=notice,
+            clearHits=function() buttons={} end,
+            hit=function(x,y,w,h,action,enabled,node)
+                table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node})
+            end,
+            navigate=function(target) page=target; homeInfo=nil; render() end,
+        },state)
+        if failed then
+            button("重试连接",35,84,160,33,function() send("state",{}) end,true,true)
+        end
+        return
+    end
     if state and (page=="home" or page=="cortege" or page=="heroes" or page=="lineup" or page=="inventory" or page=="summon") then
         home.draw({
             root=root, text=text, hideHeader=page~="home",
@@ -260,15 +277,19 @@ render = function()
             buttons=bottom
             lineup.draw({
                 root=root,render=render,send=send,busy=busy,failed=failed,error=lastError,
-                openBag=function(category,uid,hero,spellPos)
+                openBag=function(category,uid,hero,spellPos,preview)
                     inventory.open();inventory.returnPage="lineup";inventory.tab=category;inventory.selected=uid
-                    inventory.equipHero=hero;inventory.equipPos=spellPos
+                    inventory.equipHero=hero;inventory.equipPos=spellPos;inventory.preview=preview
                     page="inventory";render()
                 end,
                 demo=function() battle=combat.preview();page="battle";render() end,
                 clearHits=function() buttons={} end,
                 hit=function(x,y,w,h,action,enabled,node,retry)
                     table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node,retry=retry})
+                end,
+                openTraining=function(ident)
+                    training.open(ident,"lineup")
+                    page="training"; render()
                 end,
                 navigate=function(target)
                     if target=="summon" then summon.open() end
@@ -289,6 +310,10 @@ render = function()
                 notice=busy and "正在保存…" or notice,
                 hit=function(x,y,w,h,action,enabled,node)
                     table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node})
+                end,
+                openTraining=function(ident)
+                    training.open(ident,"cortege")
+                    page="training"; render()
                 end,
                 navigate=function(target)
                     if target=="heroes" then handbook.open() end
@@ -312,6 +337,10 @@ render = function()
                 notice=busy and "正在保存…" or notice,
                 hit=function(x,y,w,h,action,enabled,node)
                     table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node})
+                end,
+                openTraining=function(ident)
+                    training.open(ident,"heroes")
+                    page="training"; render()
                 end,
                 navigate=function(target) page=target; homeInfo=nil; render() end,
             },state)
@@ -456,6 +485,7 @@ local function tick(dt)
             if response.ok then
                 lastError=nil
                 state=response.state
+                if enhance.isOpen() then enhance.afterUpdate(state) end
                 if page=="inventory" and inventory.equipPending then page="lineup" end
                 notice=response.notice or "已连接本地服务 · 进度已保存"
                 if response.battle then battle=response.battle; page="battle" end
@@ -485,6 +515,7 @@ end
 local function navigateBack()
     if not state or busy or session.pending then return end
     if page=="heroes" then handbook.back()
+    elseif page=="training" then training.back()
     elseif page=="cortege" then cortege.back()
     elseif page=="stages" then journey.back()
     elseif page=="lineup" then lineup.back()

@@ -1,8 +1,12 @@
 -- Original charPositionUI.lua geometry and art; local roster mutations are atomic.
 local data=require('local_lineup_data')
 local heroDetail=require('local_hero_detail')
+local enhance=require('local_enhance')
 local M={mode='main',slot=1,offset=0}
 local inventoryData=require("local_inventory_data")
+local rulesOK,combatRules=pcall(require,"local_combat_rules")
+if not rulesOK or type(combatRules)~="table" then combatRules={} end
+combatRules.advance=combatRules.advance or {}
 local ui,state,root
 local P='v2/charPositionUI/'
 local GOLD={244,221,173}
@@ -27,8 +31,38 @@ local function atlas(info,x,y,w,h,parent)
     n:setPosition(CCPointMake(x,y)); (parent or root):addChild(n); return n
 end
 local function hit(x,y,w,h,f,n) ui.hit(x-w/2,y-h/2,w,h,f,true,n) end
+local function popupButton(x,file,y,action,height)
+    local n=image(file,x,y,120)
+    hit(x,y,120,height or 60,action,n)
+end
 local function owned(id) for _,h in ipairs(state.heroes) do if h.id==id then return h end end end
 local function entry(id) return data.heroes[tostring(id)] end
+-- charPositionUI.createSkillLabel: percent stats show one decimal, active spells
+-- use the original "strength" icon and an integer value.
+local function spellInfo(ident,level)
+    local base=ident and inventoryData.items["s"..ident]
+    if not base or not base.original then return nil end
+    local o=base.original
+    local field=tonumber(o.effect_field)
+    local plus=tonumber(o.upgrade_plus) or 0
+    local value,icon
+    if field==1 then
+        value=string.format("%.1f%%",(tonumber(o.gongji_plus) or 0)+plus*(level-1));icon="damage"
+    elseif field==2 then
+        value=string.format("%.1f%%",(tonumber(o.fangyu_plus) or 0)+plus*(level-1));icon="defence"
+    elseif field==3 then
+        value=string.format("%.1f%%",(tonumber(o.magic_plus) or 0)+plus*(level-1));icon="mana"
+    elseif field==5 then
+        value=string.format("%.1f%%",(tonumber(o.hp_plus) or 0)+plus*(level-1));icon="health"
+    else
+        value=tostring(math.floor((tonumber(o.intensity) or 0)+plus*(level-1)));icon="skill_strong"
+    end
+    return base,value,icon
+end
+local function equippedLevel(x,y,level)
+    -- Original equip_pos level label: 0.1w / 0.8h inside the 78px icon.
+    label(level,x-31,y+23,17,GOLD)
+end
 local function popup(title,body) M.info={title,body}; ui.render() end
 local function openDetail(h)
     if not h then return end
@@ -141,24 +175,36 @@ local function main()
             local spell
             for _,s in ipairs(data.spells) do if s.id==h.skill_id then spell=s end end
             if spell then atlas(spell.icon,180,y,78) end
+            if spell then equippedLevel(180,y,(h.battle_training or {}).native_level or 1) end
             label(h.skill_name,180,y-47,16,GOLD,nil,true)
             hit(180,y,84,98,function()
-                popup(h.skill_name,e.skill_description..'\n\n自带法术，不可更换或卸下。')
+                if h.skill_id and h.skill_id~=1 then
+                    M.spellIntro={pos=1};M.equipIntro=nil;M.info=nil;ui.render()
+                else popup(h.skill_name,e.skill_description or '该神仙暂无自带法术。') end
             end)
         else
             local passive=equipped["spell"..i];local spellPos=i
             if passive then
                 atlas(passive.base.icon,180,y,78)
+                equippedLevel(180,y,passive.entry.level or 1)
                 label(passive.base.name,180,y-47,16,GOLD,nil,true)
             else image(P..'skillHZ.png',180,y,78,78) end
-            hit(180,y,84,98,function() ui.openBag(4,nil,h.id,spellPos) end)
+            hit(180,y,84,98,function()
+                if passive then M.spellIntro={pos=spellPos};M.equipIntro=nil;M.info=nil;ui.render()
+                else ui.openBag(4,nil,h.id,spellPos) end
+            end)
         end
         local gear=equipped[i];local category=i
         if gear then
             atlas(gear.base.icon,770,y,78)
+            equippedLevel(770,y,gear.entry.level or 1)
             label(gear.base.name,770,y-47,16,GOLD,nil,true)
         else image(P..'itemHZ_'..i..'.png',770,y,78,78) end
-        hit(770,y,84,98,function() M.gearCategory=category;M.mode='equipment';M.choicePage=1;ui.render() end)
+        hit(770,y,84,98,function()
+            if gear then
+                M.equipIntro={pos=category};M.spellIntro=nil;M.info=nil;ui.render()
+            else M.gearCategory=category;M.mode='equipment';M.choicePage=1;ui.render() end
+        end)
     end
     image('v2/introUI/yuanfen_label.png',672,385,92,38)
     for i,f in ipairs(h.fates or e.fates) do
@@ -246,6 +292,127 @@ local function control(title,x,y,w,action,enabled)
 end
 local function confirm(message,action)
     M.info={'确认',message,action};ui.render()
+end
+-- charPositionUI.showItemIntro for o_t.skill: 221x400 panel scaled to 960x540,
+-- name 0.9h, level 0.73h, stat 0.73h, then upgrade/detail/change at 0.5/0.31/0.12h.
+local function spellIntro()
+    local h=owned(state.lineup[M.slot])
+    if not h then M.spellIntro=nil;return end
+    local pos=M.spellIntro.pos or 1
+    local equip,ident,level
+    if pos==1 then
+        ident=h.skill_id
+        level=(h.battle_training or {}).native_level or 1
+    else
+        for _,item in ipairs(state.inventory.entries) do
+            local base=inventoryData.items[item.key]
+            if item.hero==h.id and base.category==4 and item.equip_pos==pos then equip=item;break end
+        end
+        if not equip then M.spellIntro=nil;return end
+        ident=inventoryData.items[equip.key].id
+        level=equip.level or 1
+    end
+    local base,value,icon=spellInfo(ident,level)
+    if not ident or ident==1 or not base then M.spellIntro=nil;return end
+    local name=base.name
+    local top=tonumber(base.top_level) or 10
+    local rule=equip and combatRules.advance[tostring(base.id)]
+    local canAdvance=rule and not equip.advanced and level>=tonumber(rule.min_level or 10)
+    local w,hgt=166,300
+    local cx=326.4
+    local cy=({297,259.2,216})[pos] or 297
+    local left=cx-w/2
+    ui.clearHits()
+    ui.hit(0,0,960,540,function() M.spellIntro=nil;M.info=nil;ui.render() end,true,nil,true)
+    image(P..'skill_small_bkg.png',cx,cy,w,hgt)
+    image(P..'small_arrow.png',left-9.75,(0.89-pos*.2)*540,19.5,40.5)
+    label(name,cx,cy+120,23,GOLD,nil,true)
+    if equip and equip.advanced then
+        -- Original upgraded-skill branch: health + hp percent, then the spell stat.
+        local hp=tonumber(rule and rule.hp_plus) or 12
+        image('v2/introUI/health.png',left+63.6,cy+84,31,31)
+        label(hp..'%',left+93,cy+84,20,GOLD)
+        if value then
+            image('v2/introUI/'..icon..'.png',left+63.1,cy+48,31,31)
+            label(value,left+80.4,cy+48,20,GOLD)
+        end
+    else
+        image('v2/introUI/level.png',left+27.1,cy+69,31,31)
+        label(level,left+43.2,cy+69,20,GOLD)
+        if value then
+            image('v2/introUI/'..icon..'.png',cx+9,cy+69,31,31)
+            label(value,cx+26.3,cy+69,20,GOLD)
+        end
+    end
+    popupButton(cx,canAdvance and 'v2/enhanceUI/up_2.png' or 'v2/newIntroUI/upgrade1.png',cy,function()
+        if canAdvance then
+            confirm('参悟将消耗未装备材料：'..rule.material_list..'。参悟后增加 '..rule.hp_plus..'%生命。',function()
+                M.spellIntro=nil;ui.send('bag_advance',{uid=equip.uid})
+            end)
+        elseif level>=top then
+            popup('法术升级',pos==1 and '自带法术已满级，可在演武堂继续觉醒。'
+                or (equip.advanced and '该法术已参悟。' or '该法术已升至'..top..'级。'))
+        elseif pos==1 then
+            local cost=100*math.max(1,tonumber(h.quality) or 1)*level
+            confirm('花费 '..cost..' 银两，将「'..name..'」升至 '..(level+1)..' 级？',function()
+                M.spellIntro=nil;ui.send('battle_native_upgrade',{hero=h.id})
+            end)
+        else
+            local cost=equip.upgrade_cost or (100*math.max(1,tonumber(base.quality) or 1)*level)
+            confirm('花费 '..cost..' 银两，将「'..name..'」升至 '..(level+1)..' 级？',function()
+                M.spellIntro=nil;ui.send('bag_upgrade',{uid=equip.uid})
+            end)
+        end
+    end,canAdvance and 67.5 or 60)
+    popupButton(cx,P..'detail1.png',cy-57,function()
+        local uid=equip and equip.uid
+        M.spellIntro=nil;M.info=nil
+        if uid then ui.openBag(4,uid) else ui.openBag(4,nil,nil,nil,'s'..ident) end
+    end)
+    if pos>1 then
+        popupButton(cx,P..'change1.png',cy-114,function()
+            M.spellIntro=nil;M.info=nil
+            ui.openBag(4,nil,h.id,pos)
+        end)
+    end
+end
+local function equipIntro()
+    local h=owned(state.lineup[M.slot])
+    if not h then M.equipIntro=nil;return end
+    local pos=M.equipIntro.pos or 1
+    local equip
+    for _,item in ipairs(state.inventory.entries) do
+        local base=inventoryData.items[item.key]
+        if item.hero==h.id and base.category==pos then equip=item;break end
+    end
+    if not equip then M.equipIntro=nil;return end
+    local base=inventoryData.items[equip.key]
+    local cx=619.2
+    local cy=({297,259.2,216})[pos] or 297
+    local left=cx-83
+    ui.clearHits()
+    ui.hit(0,0,960,540,function() M.equipIntro=nil;M.info=nil;ui.render() end,true,nil,true)
+    image(P..'skill_small_bkg.png',cx,cy,166,300)
+    local arrow=image(P..'small_arrow.png',left+175.75,(0.89-pos*.2)*540,19.5,40.5)
+    arrow:setFlipX(true)
+    label(base.name,cx,cy+120,23,GOLD,nil,true)
+    image('v2/introUI/level.png',left+27.1,cy+69,31,31)
+    label(equip.level or 1,left+43.2,cy+69,20,GOLD)
+    local icon=({'damage','defence','health'})[pos]
+    image('v2/introUI/'..icon..'.png',cx+16.6,cy+69,31,31)
+    label(math.floor(tonumber(equip.value) or 0),cx+33.9,cy+69,20,GOLD)
+    popupButton(cx,P..'enhance1.png',cy,function()
+        M.equipIntro=nil;M.info=nil
+        enhance.open(ui,state,equip.uid);ui.render()
+    end)
+    popupButton(cx,P..'detail1.png',cy-57,function()
+        M.equipIntro=nil;M.info=nil
+        ui.openBag(pos,equip.uid)
+    end)
+    popupButton(cx,P..'change1.png',cy-114,function()
+        M.equipIntro=nil;M.info=nil
+        M.gearCategory=pos;M.mode='equipment';M.choicePage=1;ui.render()
+    end)
 end
 local function panelTitle(title,back)
     image('v2/introUI/small_label.png',480,479,720,50)
@@ -392,9 +559,10 @@ function M.draw(context,player)
             local e=entry(h.id)
             heroDetail.draw({
                 root=root,ui=ui,state=state,entry=e,hero=h,spells=data.spells,
+                growth_max=data.growth_max,
                 onClose=function() M.mode='main';M.detailHero=nil;heroDetail.reset();ui.render() end,
                 onBack=function() M.mode='main';M.detailHero=nil;heroDetail.reset();ui.render() end,
-                onTrain=function() ui.send('upgrade',{hero=h.id}) end,
+                onTrain=function() ui.openTraining(h.id) end,
                 onInherit=function()
                     heroDetail.showInfo('传承',
                         '传承可将一名神仙的培养等级转移给另一位神仙。\n'..
@@ -411,6 +579,8 @@ function M.draw(context,player)
     elseif M.mode=='support_target' then supportTarget() elseif M.mode=='equipment' then equipment()
     elseif M.mode=='fates' then fates() else main() end
     edges()
+    if M.spellIntro then spellIntro() end
+    if M.equipIntro then equipIntro() end
     if ui.failed then
         label('连接中断 · 点击重试',480,95,16,GOLD,nil,true)
         ui.hit(350,82,260,26,function() ui.send('state',{}) end,true,nil,true)
@@ -427,10 +597,14 @@ function M.draw(context,player)
         hit(480,150,180,48,function() M.info=nil;ui.render() end,n)
         if M.info[3] then control('确认',680,150,150,function() local action=M.info[3];M.info=nil;action() end) end
     end
+    if enhance.isOpen() then enhance.draw(ui,state) end
 end
-function M.open() M.mode='main';M.info=nil;M.pick=nil;M.offset=0;M.detailHero=nil;heroDetail.reset() end
+function M.open() M.mode='main';M.info=nil;M.pick=nil;M.offset=0;M.detailHero=nil;M.spellIntro=nil;M.equipIntro=nil;enhance.close();heroDetail.reset() end
 function M.back()
-    if heroDetail.closeInfo() then ui.render()
+    if enhance.isOpen() then enhance.close();ui.render();return end
+    if M.spellIntro then M.spellIntro=nil
+    elseif M.equipIntro then M.equipIntro=nil
+    elseif heroDetail.closeInfo() then ui.render()
     elseif M.mode=='detail' then M.mode='main';M.detailHero=nil;heroDetail.reset()
     elseif M.info then M.info=nil
     elseif M.mode=='support_choose' or M.mode=='support_target' then M.mode='support'
@@ -443,7 +617,7 @@ local function spot(x,y)
 end
 function M.touch(event,x,y)
     if M.mode=='detail' then return heroDetail.touch(event,x,y) end
-    if M.info then return false end
+    if M.info or M.spellIntro or M.equipIntro or enhance.isOpen() then return false end
     local began=event==CCTOUCHBEGAN or event=='began'
     local moved=event==CCTOUCHMOVED or event=='moved'
     local ended=event==CCTOUCHENDED or event=='ended'

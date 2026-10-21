@@ -253,9 +253,8 @@ local function drawDetail()
     if M.tab=="heroes" then
         if hero then
             local occupied=0;for _,id in ipairs(state.lineup) do if id~=0 then occupied=occupied+1 end end
-            button(hero.level>=20 and "已达满级" or "培养 · "..hero.upgrade_cost,500,113,174,43,
-                   function() ui.send("upgrade",{hero=entry.id}) end,
-                   hero.level<20 and state.silver>=hero.upgrade_cost)
+            button("培养",500,113,174,43,
+                   function() ui.openTraining(entry.id) end, true)
             button(hero.supporting and "助阵中" or hero.active and "休息" or "出战",696,113,174,43,
                    function() ui.send("lineup",{hero=entry.id}) end,
                    not hero.supporting and (hero.active and occupied>1 or not hero.active and occupied<(state.lineup_capacity or 4)))
@@ -280,9 +279,10 @@ function M.draw(context,player)
         local hero=own(entry.id)
         heroDetail.draw({
             root=root,ui=ui,state=state,entry=entry,hero=hero,spells=data.spells,
+            growth_max=data.growth_max,
             onClose=function() M.back() end,
             onBack=function() M.back() end,
-            onTrain=function() ui.send("upgrade",{hero=entry.id}) end,
+            onTrain=function() ui.openTraining(entry.id) end,
             onInherit=function()
                 heroDetail.showInfo("传承",
                     "传承可将一名神仙的培养等级转移给另一位神仙。\n"..

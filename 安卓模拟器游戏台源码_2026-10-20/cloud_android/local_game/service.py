@@ -26,7 +26,7 @@ from local_game import cortege
 from local_game import inventory
 from local_game import synergy
 from local_game import summon as summon_rules
-from local_game import battle_modes, battle_training
+from local_game import battle_modes, battle_training, training
 
 
 class GameError(ValueError):
@@ -72,9 +72,24 @@ class Game:
         for key in ("hp", "attack", "defense", "magic"):
             result[key] = round(base.get(key, 0) * (1 + .14 * (level - 1)))
         result["upgrade_cost"] = 80 * level
+        learned = None
+        if state is not None:
+            learned = training.read(state, int(ident), level)
+            bonus = learned["bonus"]
+            result["culture_point"] = learned["potential"]
+            result["hp_plus"] = int(bonus.get("hp", 0))
+            result["attack_plus"] = int(bonus.get("attack", 0))
+            result["defense_plus"] = int(bonus.get("defense", 0))
+            result["magic_plus"] = int(bonus.get("magic", 0))
+            result["train_pending"] = learned["pending"]
         if state is not None and self.catalog.get("inventory"):
             result = inventory.hero_with_inventory(result, state, self.catalog["inventory"])
-        return apply_passives(result, self.catalog.get("skills", {}))
+        result = apply_passives(result, self.catalog.get("skills", {}))
+        # Original training points are flat additions: +1 potential = +1 final stat.
+        if learned is not None:
+            for key in ("hp", "attack", "defense", "magic"):
+                result[key] += int(learned["bonus"].get(key, 0))
+        return result
 
     def roster(self, state):
         heroes = [self.hero(k, v, state, False) for k, v in state["heroes"].items()]
@@ -166,6 +181,7 @@ class Game:
         state.setdefault("gold", 500)
         state.setdefault("souls", {})
         summon_rules.ensure(state, self.catalog, now)
+        training.ensure(state, self.catalog.get("inventory", self.catalog))
         elapsed = max(0, (now - state["energy_time"]) // 300)
         if elapsed:
             state["energy"] = min(60, state["energy"] + elapsed)
@@ -175,6 +191,9 @@ class Game:
         extra = {}
         if op in ("login", "state"):
             pass
+        elif op in ("train", "train_accept", "train_giveup"):
+            extra["notice"] = training.apply(
+                state, op, args, self.catalog.get("inventory", self.catalog), GameError)
         elif op == "upgrade":
             ident = str(self.integer(args, "hero"))
             if ident not in state["heroes"]:
@@ -272,6 +291,7 @@ class Game:
         else:
             raise GameError("当前本地版不支持此操作")
         synergy.tidy_targets(state)
+        training.ensure(state, self.catalog.get("inventory", self.catalog))
         state["saved_at"] = now
         return {"ok": True, "state": self.view(state), **extra}
 

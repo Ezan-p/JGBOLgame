@@ -145,6 +145,10 @@ def catalog(game_root):
             "skill_name": skills[int(row["chushijineng"])]["name"],
             "attack": int(row["base_gongji"]), "defense": int(row["base_fangyu"]),
             "hp": int(row["base_max_hp"]), "magic": int(row["base_max_magic"]),
+            "growth": {"hp": float(row["base_maxhp_plus"]),
+                       "attack": float(row["base_gongji_plus"]),
+                       "defense": float(row["base_fangyu_plus"]),
+                       "magic": float(row["base_maxmagic_plus"])},
         }
     stages = []
     map_names = {int(r["id"]): r["name"] for r in rows("csv_config/map_name.csv")}

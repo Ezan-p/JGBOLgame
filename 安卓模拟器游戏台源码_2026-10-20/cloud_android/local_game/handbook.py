@@ -65,6 +65,9 @@ def build_handbook(game_root):
                     soul_gain=int(quality["spirit_convert_count"]))
         heroes.append(hero)
 
+    growth_max = {stat: max(h["growth"][stat] for h in heroes)
+                  for stat in ("hp", "attack", "defense", "magic")}
+
     item_names = {int(r["Ftype_id"]): r for r in resources.rows("csv_config/item_name.csv")}
     equipment, essence, spirits = [], [], []
     for row in resources.rows("csv_config/item_base.csv"):
@@ -111,10 +114,12 @@ def build_handbook(game_root):
                 "effect_field(1-gongji，2-fangyu，3-magic，4-intensity，5-hp)")],
         ))
     spells.sort(key=lambda r: (-r["quality"], *r["order"], r["id"]))
-    result = dict(heroes=heroes, equipment=equipment, spells=spells, essence=essence,
-                  spirits=spirits)
+    result = dict(heroes=heroes, growth_max=growth_max, equipment=equipment, spells=spells,
+                  essence=essence, spirits=spirits)
     files = set(UI_RESOURCES)
     for entries in result.values():
+        if not isinstance(entries, list):
+            continue
         for entry in entries:
             icon = entry["icon"]
             data = resources.read(icon["file"])

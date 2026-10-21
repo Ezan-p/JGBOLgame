@@ -57,6 +57,24 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(items["i1142"]["icon"]["file"], "v2/destinyUI/card.png")
         self.assertEqual(items["i1094"]["icon"]["file"], "v2/CardUI/card_bkg.png")
 
+    def test_original_equip_enhance_cost_by_level_and_star(self):
+        from local_game.inventory import upgrade_cost
+        costs = self.inventory["enhance_cost"]
+        self.assertEqual(costs["1"]["star5_money"], "50")
+        self.assertEqual(costs["2"]["star5_money"], "140")
+        self.assertEqual(costs["8"]["star5_money"], "1940")
+        self.assertEqual(costs["10"]["star5_money"], "3020")
+        self.assertEqual(costs["200"]["star5_money"], "42019274")
+        weapons = {}
+        for item in self.inventory["items"].values():
+            if item["category"] == 1 and item["quality"] not in weapons:
+                weapons[item["quality"]] = item
+        self.assertEqual(sorted(weapons), [2, 3, 4, 5])
+        for level in range(1, 201):
+            for quality in range(2, 6):
+                self.assertEqual(upgrade_cost(self.inventory, weapons[quality], level),
+                                 int(costs[str(level)][f"star{quality}_money"]))
+
     def test_migration_claim_idempotency_and_concurrency(self):
         before = self.raw()
         state = self.call("state")["state"]

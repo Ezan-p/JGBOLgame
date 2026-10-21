@@ -5,6 +5,7 @@ from pathlib import Path
 
 from game_config import load_config
 from local_game.assets import catalog, Resources
+from local_game.inventory import build_inventory
 from local_game.lineup import build_lineup
 from local_game.service import Game, GameError
 
@@ -14,6 +15,7 @@ class LineupTests(unittest.TestCase):
     def setUpClass(cls):
         cls.root = load_config()["game_root"]
         cls.catalog = catalog(cls.root)
+        cls.inventory = build_inventory(cls.root)
 
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -76,6 +78,29 @@ class LineupTests(unittest.TestCase):
             self.assertTrue(r.read(h["name_icon"]["file"]).startswith(b"\x89PNG"))
             self.assertTrue(1 <= h["name_icon"]["index"] <= 50)
         self.assertTrue(all(len(s["sha256"]) == 64 for s in data["sources"]))
+
+    def test_spell_intro_assets_and_level_formula(self):
+        data = build_lineup(self.root)
+        resources = set(data["resources"])
+        r = Resources(self.root)
+        for name in (
+            "v2/charPositionUI/skill_small_bkg.png",
+            "v2/charPositionUI/small_arrow.png",
+            "v2/charPositionUI/detail1.png", "v2/charPositionUI/detail2.png",
+            "v2/charPositionUI/change1.png", "v2/charPositionUI/change2.png",
+            "v2/newIntroUI/upgrade1.png", "v2/newIntroUI/upgrade2.png",
+            "v2/enhanceUI/up_2.png",
+            "v2/introUI/skill_strong.png", "v2/introUI/level.png",
+        ):
+            self.assertIn(name, resources)
+            self.assertTrue(r.read(name).startswith(b"\x89PNG"))
+        skill = self.inventory["items"]["s22"]
+        self.assertEqual(skill["name"], "指地成钢")
+        original = skill["original"]
+        self.assertEqual(original["effect_field"], "2")
+        # Original createSkillLabel: fangyu_plus + upgrade_plus * (level - 1).
+        self.assertAlmostEqual(float(original["fangyu_plus"])
+                               + float(original["upgrade_plus"]) * 7, 27.5)
 
     def test_eight_slot_save_sparse_swap_and_removal_preserve_pairing(self):
         with self.game.connect() as con:

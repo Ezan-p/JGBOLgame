@@ -289,8 +289,7 @@ local function drawRow(row,index,y,parent)
     local bx,by,bw,bh=RX0+RW-170,y-43,150,38
     if M.tab=="heroes" then
         local maxed=row.level>=20
-        local afford=(state.silver or 0)>=(row.upgrade_cost or 0)
-        rowButton(maxed and "已满级" or "培养",bx,by,bw,bh,not maxed and afford,parent)
+        rowButton(maxed and "已满级" or "培养",bx,by,bw,bh,true,parent)
     elseif M.tab=="souls" then
         if own(row.id) then rowButton("已拥有",bx,by,bw,bh,false,parent)
         elseif count>=row.soul_need then rowButton("幻魂 "..row.soul_need,bx,by,bw,bh,true,parent)
@@ -307,8 +306,8 @@ local function rowTap(entry,x,y,offset,index)
     local bx=GX+RX0+RW-170
     local onButton=x>=bx and x<=bx+150 and y>=rowY-43 and y<=rowY-5
     if M.tab=="heroes" then
-        if onButton and entry.level<20 and (state.silver or 0)>=(entry.upgrade_cost or 0) then
-            M.gesture=nil; ui.send("upgrade",{hero=entry.id})
+        if onButton then
+            M.gesture=nil; ui.openTraining(entry.id)
         else
             M.selected=entry; heroDetail.reset(); M.gesture=nil; ui.render()
         end
@@ -426,7 +425,7 @@ function M.draw(context,player)
             root=root,ui=ui,state=state,entry=entry,hero=own(entry.id),spells=data.spells,
             onClose=function() M.back() end,
             onBack=function() M.back() end,
-            onTrain=function() ui.send("upgrade",{hero=entry.id}) end,
+            onTrain=function() ui.openTraining(entry.id) end,
             onInherit=function()
                 heroDetail.showInfo("传承",
                     "本地版暂未开放跨角色传承；当前等级、仙缘与属性不会被扣除。")

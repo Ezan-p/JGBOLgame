@@ -1,5 +1,6 @@
 -- Original packageUI art and proportions; persistent local inventory actions.
 local data=require("local_inventory_data")
+local enhance=require("local_enhance")
 local M={tab=1,offset=0,page=1,catalog=false}
 local ui,state,root,scroll,gesture
 local GOLD={255,224,164}
@@ -62,6 +63,7 @@ local function icon(item,x,y,w,parent,level)
     if item.main_type==14 then image("map/parts.png",x,y,w,w,parent) end
 end
 local function own(uid)
+    if type(uid)~="number" then return end
     for _,e in ipairs(state.inventory.entries) do if e.uid==uid then return e end end
 end
 local function heroName(id)
@@ -80,11 +82,12 @@ local function confirm(message,op,args)
     M.confirm={message=message,op=op,args=args}; ui.render()
 end
 local function reset()
-    M.selected=nil; M.choice=nil; M.confirm=nil; M.reading=false; M.offset=0; M.page=1; gesture=nil
+    M.selected=nil; M.choice=nil; M.confirm=nil; M.reading=false; M.offset=0; M.page=1; M.preview=nil; gesture=nil
 end
 local function upgrade(e)
     local item=data.items[e.key]
     if e.level>=item.top_level then return end
+    if item.category<=3 then enhance.open(ui,state,e.uid);ui.render();return end
     confirm("花费 "..e.upgrade_cost.." 银两，将「"..item.name.."」升至 "..(e.level+1).." 级？",
         "bag_upgrade",{uid=e.uid})
 end
@@ -141,7 +144,7 @@ local function rule(item)
 end
 local function detail()
     local e=M.catalog and nil or own(M.selected)
-    local item=M.catalog and data.items[M.selected] or e and data.items[e.key]
+    local item=M.catalog and data.items[M.selected] or e and data.items[e.key] or M.preview and data.items[M.preview]
     if not item then return end
     if M.reading then
         local textBody=item.name.."\n\n"..item.description.."\n\n原版获取途径\n"..(item.obtain or "")..(item.category==4 and "\n\n装配规则\n" or "\n\n本地玩法\n")..rule(item)
@@ -155,7 +158,8 @@ local function detail()
     icon(item,289,445,76,nil,e and e.level)
     label(item.name,345,465,25)
     label(string.rep("★",item.quality),345,431,20,{255,194,51})
-    label(e and ("等级 "..e.level.."    数量 "..e.count.."    "..heroName(e.hero)) or "原版资源图录",345,403,18)
+    label(e and ("等级 "..e.level.."    数量 "..e.count.."    "..heroName(e.hero))
+        or M.preview and "自带法术 · 已装配" or "原版资源图录",345,403,18)
     local c=area(370,nil)
     -- Detail body uses the lower portion, keeping controls and heading unobstructed.
     local preview={};local count=0
@@ -171,6 +175,10 @@ local function detail()
         button(item.price>0 and ("兑换 · "..item.price.." 银两") or "暂未接入",260,135,240,function()
             confirm("花费 "..item.price.." 银两兑换「"..item.name.."」？","bag_buy",{key=item.key})
         end,item.price>0)
+        return
+    end
+    if not e then
+        button("返回阵容",360,135,240,function() M.preview=nil;M.back() end)
         return
     end
     if item.category<=4 or (item.action=="trait" or item.action=="star") then
@@ -326,11 +334,11 @@ local function listView()
 end
 function M.draw(context,player)
     ui,state,root=context,player,context.root;scroll=nil
-    if M.selected and not M.catalog and not own(M.selected) then
+    if M.selected and not M.catalog and type(M.selected)=="number" and not own(M.selected) then
         M.selected=nil;M.choice=nil;M.offset=0
     end
     frame()
-    if M.choice then choices() elseif M.selected then detail() else listView() end
+    if M.choice then choices() elseif M.selected or M.preview then detail() else listView() end
     label("银两 "..state.silver.."    "..(ui.busy and "正在保存…" or ui.error or ui.notice or ""),241,103,13,MUTED)
     if ui.failed then
         ui.hit(235,90,650,28,function() ui.send("state",{}) end,true,nil,true)
@@ -344,20 +352,24 @@ function M.draw(context,player)
         button("取消",220,170,180,function() M.confirm=nil;ui.render() end)
         button("确定",560,170,180,function() perform(M.confirm.op,M.confirm.args) end)
     end
+    if enhance.isOpen() then enhance.draw(ui,state) end
 end
 function M.open()
     M.returnPage=nil;M.equipHero=nil;M.equipPos=nil;M.equipPending=nil;M.tab=1;M.catalog=false;M.smelt=false;M.reading=false;reset()
 end
 function M.back()
     gesture=nil
+    if enhance.isOpen() then enhance.close();ui.render();return end
     if M.confirm then M.confirm=nil
     elseif M.reading then M.reading=false;M.offset=0
     elseif M.choice then M.choice=nil
+    elseif M.preview then M.preview=nil;ui.navigate(M.returnPage or "home");return
     elseif M.selected then M.selected=nil;M.offset=0
     else ui.navigate(M.returnPage or "home");return end
     ui.render()
 end
 function M.touch(event,x,y)
+    if enhance.isOpen() then return false end
     if not scroll then return false end
     if event==CCTOUCHBEGAN or event=="began" then
         -- Detail controls are outside the draggable text region.
