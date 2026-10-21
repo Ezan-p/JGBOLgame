@@ -1,0 +1,4 @@
+id,name,desc,csv_config
+1,shouce,玩法简介,abyss_rule_content1.csv
+2,shouce,随机事件,abyss_rule_content2.csv
+3,shouce,药神殿,abyss_rule_content3.csv

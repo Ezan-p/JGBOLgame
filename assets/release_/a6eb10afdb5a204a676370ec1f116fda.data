@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict> 
+		<!--- 类型(1:武器; 2:防具; 3:法宝; 4:道具;5:技能) -->
+		<!--- 中文名##类型(1:武器; 2:防具; 3:法宝; 4:道具)##图片名##星级##简介 -->
+		<key>item1001</key>    
+		<string>蟠桃##4##ItemIcon1.png##5##这是蟠桃的简介</string>
+		<key>item1002</key>      
+		<string>仙丹##4##ItemIcon1.png##3##这是仙丹的简介</string>
+		<key>item2001</key>    
+		<string>金箍棒##1##ItemIcon1.png##5##这是金箍棒的简介</string>
+		<key>item3001</key>     
+		<string>金袈裟##2##ItemIcon2.png##3##这是金袈裟的简介</string>
+		<key>item4001</key>     
+		<string>佛珠##3##ItemIcon2.png##2##这是佛珠的简介</string>
+		
+		<!--- (1)中文名##(2)类型##(3)图片名##(4)星级##(5)简介##(6)技能类型-->
+		<key>item1</key>
+		<string>一柱擎天##5##jineng1.png##2##这是一柱擎天的简介##单</string>
+		<key>item2</key>
+		<string>一柱擎天##5##jineng1.png##5##这是一柱擎天的简介##单</string>
+		<key>item3</key>
+		<string>一柱擎天##5##jineng1.png##4##这是一柱擎天的简介##单</string>
+		<key>item4</key>
+		<string>一柱擎天##5##jineng1.png##3##这是一柱擎天的简介##单</string>
+		<key>item5</key>
+		<string>一柱擎天##5##jineng1.png##5##这是一柱擎天的简介##单</string>
+		<key>item6</key>
+		<string>一柱擎天##5##jineng1.png##3##这是一柱擎天的简介##单</string>
+		<key>item21</key>
+		<string>金钟罩顶##5##jineng2.png##2##这是金钟罩顶的简介##加防</string>
+		<key>item31</key>
+		<string>法力无边##5##jineng2.png##4##这是法力无边的简介##加内</string>
+		<key>item101</key>
+		<string>三味真火##5##jineng2.png##3##这是三味真火的简介##群</string>
+		<key>item102</key>
+		<string>群体攻击##5##jineng2.png##3##这是群体攻击的简介##群</string>
+    </dict>
+</plist>

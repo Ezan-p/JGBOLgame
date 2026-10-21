@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict> 
+		<!--- 中文名##图片名##星级##简介##图像大小比例 -->
+		<key>character1</key>
+		<string>孙悟空##wukong2f.png##5##这是孙悟空的简介##9</string>
+		<key>character2</key>
+		<string>猪八戒##bonegirlf.png##4##这是猪八戒的简介##4</string>
+		<key>character3</key>      
+		<string>沙僧##spidergirlf.png##4##这是沙僧的简介##6</string>
+		<key>character4</key>     
+		<string>唐僧##tudif.png##3##这是唐僧的简介##5</string>
+		<key>character5</key>     
+		<string>白龙马##listenerf.png##3##这是白龙马的简介##5</string>
+		<key>character6</key>
+		<string>牛魔王##zhuanfengf.png##5##这是牛魔王的简介##3</string>
+		<key>character7</key>
+		<string>铁扇公主##shrimpsoldierf.png##1##这是铁扇公主的简介##3</string>
+		<key>character8</key>
+		<string>红孩儿##zhuanfengf.png##1##这是红孩儿的简介##3</string>
+	    <key>character9</key>    
+		<string>白骨精##bonegirlf.png##4##这是白骨精的简介##4</string>
+		<key>character10</key>      
+		<string>蜘蛛精##spidergirlf.png##4##这是蜘蛛精的简介##4</string>
+		<key>character11</key>    
+		<string>孙悟空##wukong2f.png##5##这是孙悟空的简介##5</string>
+		<key>character12</key>     
+		<string>土地公##tudif.png##3##这是土地公的简介##4</string>
+		<key>character13</key>     
+		<string>千里眼##listenerf.png##3##这是千里眼的简介##5</string>
+		<key>character14</key>
+		<string>嫦娥##moonfairyf.png##5##这是嫦娥的简介##4</string>
+		<key>character15</key>
+		<string>虾兵##shrimpsoldierf.png##1##这是虾兵的简介##3</string>
+		<key>character16</key>
+		<string>小转风##zhuanfengf.png##1##这是小转风的简介##3</string>
+		<key>character17</key>    
+		<string>白骨精##bonegirlf.png##4##这是白骨精的简介##4</string>
+		<key>character18</key>      
+		<string>蜘蛛精##spidergirlf.png##4##这是蜘蛛精的简介##4</string>
+		<key>character19</key>    
+		<string>孙悟空##wukong2f.png##5##这是孙悟空的简介##5</string>
+		<key>character20</key>     
+		<string>土地公##tudif.png##3##这是土地公的简介##4</string>
+		<key>character21</key>     
+		<string>千里眼##listenerf.png##3##这是千里眼的简介##5</string>
+		<key>character22</key>
+		<string>嫦娥##moonfairyf.png##5##这是嫦娥的简介##4</string>
+		<key>character23</key>
+		<string>虾兵##shrimpsoldierf.png##1##这是虾兵的简介##3</string>
+		<key>character24</key>
+		<string>小转风##zhuanfengf.png##1##这是小转风的简介##3</string>
+    </dict>
+</plist>

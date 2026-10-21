@@ -1,0 +1,15 @@
+stage,gold_count,key_string,desc,source_id
+1,11|1|1|20&11|1|1|20,first_com_win_boss,第一次boss战斗胜利并获得三星评价,1
+10,11|1|1|30&11|1|1|30,first_upgrade_level_3,将主角等级提升至3级,1
+11,11|1|1|50&11|1|1|50,first_enhance_equip,第一次完成装备强化,1
+2,11|1|1|50&11|1|1|50,first_upgrade_level_5,将主角等级提升至5级,1
+3,11|1|1|50&11|1|1|50,first_train_fight_win,第一次参与主角修炼并获得胜利,1
+4,11|1|1|50&11|1|1|50,first_top_fight_win,第一次在封神榜中挑战并获得胜利,1
+13,5|3019|1|1&5|3019|1|1,first_upgrade_level_7,主角等级提升到7级,1
+5,11|1|1|50&11|1|1|50,first_rape_fight_win,第一次在渡劫活动中挑战对手并获得胜利,1
+12,&,first_upgrade_level_9,主角等级提升到9级,2
+6,11|1|1|50&11|1|1|50,first_upgrade_level_12,将主角等级提升至12级,1
+7,11|1|1|100&11|1|1|50,first_pass_round_10,第一次在天命之战中成功闯过10关,2
+8,11|1|1|100&11|1|1|50,first_enhance_skill_3,第一次将法术升级至3级,2
+9,11|1|1|100&11|1|1|50,first_party_fight_20,在大闹蟠桃会活动中完成20次战斗,2
+14,11|1|1|50&11|1|1|50,first_register_real,通过个人中心绑定账号并注册实名信息,1

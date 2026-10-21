@@ -1,0 +1,1382 @@
+{
+  "version": "ver====1263====",
+  "source": "installed channel release_w",
+  "index_sha256": "dc0b516bb9ac821212f52eb868ecb7569dba66e3972c5ea2a9791babe4a71750",
+  "entries": {
+    "chars/5/5_47.png": {
+      "filename": "ec58b138cea4ed387c21eef28dd37bc2.data",
+      "size": 44025,
+      "index_size": 239329,
+      "sha256": "3fb46a44c8a01dc114c040212276d911923b54624aec181ae2a1116dfc60e5c8"
+    },
+    "chars/5/5_48.png": {
+      "filename": "5a692ffc7b1b63f0d04abe65ee88fe4f.data",
+      "size": 55286,
+      "index_size": 270844,
+      "sha256": "beefbd86267690f8893f12cda7477ec7792d67b2e8013b26e6d57be216a58888"
+    },
+    "chars/5/5_49.png": {
+      "filename": "efd459574316d59f1b3c755f6c31c652.data",
+      "size": 68831,
+      "index_size": 287642,
+      "sha256": "c4fcd9fecb89393c016957c4bca04d6f3c5814196a83510d0d7367be14fadfed"
+    },
+    "chars/5/5_50.png": {
+      "filename": "25c6e0aab2c4ea31119a3a6b383f4573.data",
+      "size": 45270,
+      "index_size": 208294,
+      "sha256": "01360f08a3f36448cad858b375735dfaef510ea276ca009b97de7226468c581f"
+    },
+    "chars/5/5_51.png": {
+      "filename": "de1f6913e427fb1d61a5e2c3d4867c0a.data",
+      "size": 41912,
+      "index_size": 195409,
+      "sha256": "b0cb0cdff7d21f277b06457fba01298c335214b5ff00b2ee7fe748582773fff9"
+    },
+    "chars/5/5_52.png": {
+      "filename": "7225106591b36143575845193f7ca7a1.data",
+      "size": 47769,
+      "index_size": 233458,
+      "sha256": "b9c93bf059b121a4310307703de5d8f12f1bbd6e84fdf0249986d96451198589"
+    },
+    "chars/5/5_53.png": {
+      "filename": "6fe4a5cd4e62dd4757bfdebb9427aa95.data",
+      "size": 47586,
+      "index_size": 214286,
+      "sha256": "2f34246cba6fad2d963d069d78d7ae615c3c152ee3715999ba2c90b079dfefb6"
+    },
+    "chars/5/5_54.png": {
+      "filename": "1b08c89ea3d9c02324939f2f859b7c7c.data",
+      "size": 34390,
+      "index_size": 156373,
+      "sha256": "f82c098c4afa94f7ce27e6747739bc37c68f471ae6fcdbf02f8be8c3f8578ff9"
+    },
+    "chars/5/5_55.png": {
+      "filename": "694e07e5f161dbfe20301dabd9f67439.data",
+      "size": 53218,
+      "index_size": 247491,
+      "sha256": "0f749abced2d799b989f04286f92d2c36047c79fb0ac3f62239156f9c5aae9f4"
+    },
+    "chars/5/5_56.png": {
+      "filename": "be8772d205c22d8e9ab10c2f0684dd78.data",
+      "size": 61848,
+      "index_size": 295062,
+      "sha256": "cfa99a7287d0741b0b1d4dad3b6bb7694ae64f92888a51ff4deaa2f8d334dbe4"
+    },
+    "chars/5/5_57.png": {
+      "filename": "5872a0f7b8a10f4a94dd6be9c86955a6.data",
+      "size": 54628,
+      "index_size": 237644,
+      "sha256": "8f16ec9e2ce77a8bc80174299b179b30299f0a1f06bd527298a783cb73bfc31d"
+    },
+    "chars/5/5_58.png": {
+      "filename": "800ec1b9ededb4aceba5db7914984329.data",
+      "size": 63666,
+      "index_size": 291294,
+      "sha256": "36158d1a657c477dc8e00038fce4280546810d49523a7c1afa07c8c45d8ea47f"
+    },
+    "chars/5/5_59.png": {
+      "filename": "a891742f06641264b8b589d7719e5c3f.data",
+      "size": 41061,
+      "index_size": 265756,
+      "sha256": "8397274ee75fd55c2ca3b1f5f15e7125198689f2a761d897b487e12564a07d13"
+    },
+    "chars/5/5_60.png": {
+      "filename": "8b44c02eb663bfb874482b3eff6a0e5e.data",
+      "size": 57918,
+      "index_size": 256877,
+      "sha256": "e5d4378bc3af4c8293e08374bb77df0d24d0272234eeb79722f8e674cbeaec5e"
+    },
+    "chars/5/5_61.png": {
+      "filename": "237a8bf3fab9a2ff3abd091a978e821a.data",
+      "size": 68945,
+      "index_size": 294436,
+      "sha256": "911c50fbb3dc02f1e088f40804dee1de82293f492323f6b6c82ce7a10145fa2a"
+    },
+    "chars/5/5_62.png": {
+      "filename": "56d60981953afe2b767a010a8fe489ad.data",
+      "size": 79324,
+      "index_size": 333833,
+      "sha256": "fd0f5e5073d2f5b267694195d7dfee3bc644395e020f5914c025655262e4d3dd"
+    },
+    "chars/5_all_head1.png": {
+      "filename": "f4971b55d0d28a83a8f5f2761ffbec2b.data",
+      "size": 203793,
+      "index_size": 802643,
+      "sha256": "83d92398e306d675e5caa3fe044fde40a3a91f6cbfd7a51b38b211c44b177185"
+    },
+    "chars/5_all_head2.png": {
+      "filename": "1493f017cc31d2765ed684a6fa728516.data",
+      "size": 102100,
+      "index_size": 388447,
+      "sha256": "31c0d4528ffa53d1a3190e9b3abba66a05cecaf4eb64066ebb4bf1a4f6eb94b2"
+    },
+    "chars/5_all_name1.png": {
+      "filename": "d958fceaffb378d27467f828d0fa7e23.data",
+      "size": 89399,
+      "index_size": 306305,
+      "sha256": "d3c44d985c399bb96cbed1c01a2409c1d8ca56763f6fd56e23094cd356336227"
+    },
+    "chars/5_all_name2.png": {
+      "filename": "fb2cd0e6c4ea0774a0c2263f7f5e833e.data",
+      "size": 48039,
+      "index_size": 117765,
+      "sha256": "e9130e0d111d1d7e754e6d622182fe692354360638b2c44df09174c8fc93b5f7"
+    },
+    "chars/cross_server/1001.png": {
+      "filename": "ad9cf0316068b136900d205f6125de31.data",
+      "size": 14351,
+      "index_size": 51387,
+      "sha256": "3665611b0df415221769a4eb4db0812c2c712e7f0dbc41298f50ef00e8953c0b"
+    },
+    "chars/cross_server/1002_1.png": {
+      "filename": "96e844c143e2ac3127c31018f594d0e5.data",
+      "size": 16649,
+      "index_size": 60751,
+      "sha256": "12518436ce4e5b6bf4e6722f71f707dcda7d1f7e01660d95ab847d3bbd395aaf"
+    },
+    "chars/cross_server/1002_2.png": {
+      "filename": "fff76719f37e74f898c9e13079d62f02.data",
+      "size": 16263,
+      "index_size": 58189,
+      "sha256": "83ef153b14fc952129fc9a7f7d0b78b8a9351181823a48c6cbfb4da3fcfd89e1"
+    },
+    "chars/cross_server/1002_3.png": {
+      "filename": "6e32847f92761f0b59a4feee0cd2ecae.data",
+      "size": 16360,
+      "index_size": 59271,
+      "sha256": "a134cea66ad653aa659df682cc22655a18e8fea6e4dbf18e7ac6029e48395457"
+    },
+    "chars/cross_server/1002_4.png": {
+      "filename": "6dde851469d70e0fa524f21a14ec680f.data",
+      "size": 17293,
+      "index_size": 67849,
+      "sha256": "20c554163b7c526f787260b9b0f24c9775b49c87d3cb75aa2419f65909bfede5"
+    },
+    "chars/cross_server/1002_5.png": {
+      "filename": "bc73492a12981c60d45f0adc748504fd.data",
+      "size": 17016,
+      "index_size": 67422,
+      "sha256": "a911fa77a992eda6ea11101a0cb080a33b2fb91db5152bad0ec0031c1251d850"
+    },
+    "chars/cross_server/1002_6.png": {
+      "filename": "ae027bd86f47700235ce56a610b8382c.data",
+      "size": 16935,
+      "index_size": 66947,
+      "sha256": "01bbd2188e1af8339be60f5d89b6249e1898f3df3a7c0951998169499a4f105d"
+    },
+    "chars/cross_server/1002_7.png": {
+      "filename": "dc74df3c9cda330b78dc4df1164ba54b.data",
+      "size": 19566,
+      "index_size": 75923,
+      "sha256": "29849f80c1ba6c4bf41fc30086ea8abfe5843b29d8265d4c2e21b467b2b9b0a9"
+    },
+    "chars/cross_server/1003_1.png": {
+      "filename": "38bc101995914641f144aff307284316.data",
+      "size": 18288,
+      "index_size": 69946,
+      "sha256": "326beb54f5864fecac7ab57c47a75873ad2662e9cd4f4b6cd5b2a55136d9a553"
+    },
+    "chars/cross_server/1003_2.png": {
+      "filename": "8c35a9d473f2d0af239960b5c889d981.data",
+      "size": 19279,
+      "index_size": 76963,
+      "sha256": "4700d4722b19d1cf517ef7efbdbf679b92e2af6c6724f03995572d7bf5b3aec4"
+    },
+    "chars/cross_server/1003_3.png": {
+      "filename": "3d599837e1a094b0a9a14bff4e0fc397.data",
+      "size": 19802,
+      "index_size": 75194,
+      "sha256": "67154ae7d6562e875555d76ea563d9fed44eae472baa319bdaa936749ae1ea6d"
+    },
+    "chars/cross_server/1003_4.png": {
+      "filename": "50a0f0195d83412278816a49f0fa16f3.data",
+      "size": 19799,
+      "index_size": 80597,
+      "sha256": "944dee184f5d9c18f9975fd8746172259dc79860197e576383ed5ef4ee2700e8"
+    },
+    "chars/cross_server/1003_5.png": {
+      "filename": "932f5303a6d5797b48de0b045af3b912.data",
+      "size": 19540,
+      "index_size": 79566,
+      "sha256": "e2460375adb9af81ba458610604de8e6711a152dbfc09ce0a261d4df830bc808"
+    },
+    "chars/cross_server/1004_1.png": {
+      "filename": "60b9d27c1212088f26e542e40a40ddb8.data",
+      "size": 13819,
+      "index_size": 54472,
+      "sha256": "d2a8f86ad376b5638d6918027468255e660cc8a617db62fccd5f3c1009577f58"
+    },
+    "chars/cross_server/1004_2.png": {
+      "filename": "7e110de6b38f5dc4cd4701db32b3ab68.data",
+      "size": 13377,
+      "index_size": 55297,
+      "sha256": "0744f69c82e6d8fa8d9502d6914695b970e51ab3c7429724b5c8606acf1f6b1d"
+    },
+    "chars/cross_server/1004_3.png": {
+      "filename": "edaf566f20b28dafe129d3bf65d3f05d.data",
+      "size": 13777,
+      "index_size": 52751,
+      "sha256": "67975627c36a9833c53ccfbca5e73d68a2b52df762ed3d2ecb9e101126534084"
+    },
+    "chars/cross_server/1004_4.png": {
+      "filename": "d73b5b257a82b1dcdd88589d9de7c140.data",
+      "size": 15545,
+      "index_size": 65260,
+      "sha256": "dade4c37c76420674d53da6f6c9e1f08257e0fa330a2124bd9be92aae4dda40b"
+    },
+    "chars/cross_server/1005_1.png": {
+      "filename": "5a095b71d37f1797100dfce15a14d3ac.data",
+      "size": 11764,
+      "index_size": 40606,
+      "sha256": "04d8579428189565e0902f392de7b956c95d3458192cff0f7bcf1962daf43258"
+    },
+    "chars/cross_server/1005_2.png": {
+      "filename": "a8d128a39f67801f1fbb625a2582a384.data",
+      "size": 18306,
+      "index_size": 68192,
+      "sha256": "780bd77b1bbc330a5b57848daa1d3b4040d6549c1ae8ecb2f3f8942ac9e1a651"
+    },
+    "chars/cross_server/1005_3.png": {
+      "filename": "083f7239ed1d8b12fc732246280f6289.data",
+      "size": 22444,
+      "index_size": 88995,
+      "sha256": "980f409e8310cf37b33839649c40722a074ab30eebebad5bb3d562e8d86ca372"
+    },
+    "chars/cross_server/1006_1.png": {
+      "filename": "ad7a5f4f2a61c5cdf3306a6bf17af489.data",
+      "size": 17583,
+      "index_size": 66427,
+      "sha256": "7a638a1c5cb706f0467863d38835978571b88dddc7699a5815e6639bda3dc66c"
+    },
+    "chars/cross_server/1006_2.png": {
+      "filename": "247f7d0bee87389fa5cc74da44e08109.data",
+      "size": 24493,
+      "index_size": 90451,
+      "sha256": "e3619f2b6f7dc61623a54fe7630c7495cd45d7de0a7f37117a22c7e8d4108407"
+    },
+    "chars/cross_server/1006_3.png": {
+      "filename": "1782b7b455cfdc933218c8dd77b978f9.data",
+      "size": 29332,
+      "index_size": 107597,
+      "sha256": "38d08173c7c66ca197565de1d4270317c005e6709c38fcb4f47ceaa1a18bac38"
+    },
+    "chars/cross_server/cross_server_all_head.png": {
+      "filename": "48cfdfa56892875443a285dcd543ceb3.data",
+      "size": 99842,
+      "index_size": 409434,
+      "sha256": "a979e52338415e01442b9b1b0b7c2a0922bb7d1dfcb43c3e124e3fbe2ca21a16"
+    },
+    "chars/cross_server/cross_server_all_name.png": {
+      "filename": "11f181ad8ad7f126ccd3781ff33d95fb.data",
+      "size": 20928,
+      "index_size": 68291,
+      "sha256": "1b678c096835cf970d857764082a91980c256aea9bc050dd1e2d5d9d1db213a0"
+    },
+    "csv_config/InvalidString.csv": {
+      "filename": "c17d8b854b85f600d80cda26eb354c1b.data",
+      "size": 57788,
+      "index_size": 57788,
+      "sha256": "1d486843146f994d46635f452d1951264c26741e142008a7d3e7bcc837325de5"
+    },
+    "csv_config/abyss_rule_config.csv": {
+      "filename": "5ccbf08703e4862554423c4c9f4be11e.data",
+      "size": 163,
+      "index_size": 163,
+      "sha256": "70954d8e002f34eadbf28f8af3ee6a35434a553183feb2aa813f498ef1fae40a"
+    },
+    "csv_config/abyss_rule_content1.csv": {
+      "filename": "321b30f68cd7a640a855c247f094a346.data",
+      "size": 1897,
+      "index_size": 1897,
+      "sha256": "26f58749651b58e9ece3034a89f6b0672eb9abdd0238a6d23a7328aeff32f8c9"
+    },
+    "csv_config/abyss_rule_content2.csv": {
+      "filename": "ffb5eb7a73ced9e76f63d79eb811e3b2.data",
+      "size": 980,
+      "index_size": 980,
+      "sha256": "28442ea0d75fee41913c039fb284056ec241dfdc5efa905c52d0dd234c6ebd39"
+    },
+    "csv_config/abyss_rule_content3.csv": {
+      "filename": "dba7c4a285f0c55d477f3ce82db833ef.data",
+      "size": 1213,
+      "index_size": 1213,
+      "sha256": "075cfcdf66cc8f8ba25770203ca11cf30a739950cf789437da92cdc897938443"
+    },
+    "csv_config/achievements_config.csv": {
+      "filename": "b697621f961bc3b6f732a64cd2dc6202.data",
+      "size": 17242,
+      "index_size": 17242,
+      "sha256": "407b06c83eda815e8fdb4195c945adb860cd54833dd6ae93c9ccabc8c9ebb24b"
+    },
+    "csv_config/adaptive_spirit_convert.csv": {
+      "filename": "c3c4d10243db6f7f40e3d9437c4a74d6.data",
+      "size": 921,
+      "index_size": 921,
+      "sha256": "6d1724d75866f33c675fa223b02b8bc47926d5575c1a465d2f73d73d8d30399a"
+    },
+    "csv_config/all_rank_prize.csv": {
+      "filename": "4fc4ef1cbada6898f5a65010b55012ab.data",
+      "size": 235,
+      "index_size": 235,
+      "sha256": "8fb5ba4f13abc3a08b58b70809615d77c737f76b6330a6612c83064d37b6df44"
+    },
+    "csv_config/amrita.csv": {
+      "filename": "9a792b838045bb874461b7431e39bfe4.data",
+      "size": 413,
+      "index_size": 413,
+      "sha256": "d1c93e478665401c7bdb9fdfadcc33b412b3ee2a105cedc28d3ea4bcf7db86fb"
+    },
+    "csv_config/animal_base.csv": {
+      "filename": "67d5853b8d543b448bfdd27ec996630c.data",
+      "size": 633,
+      "index_size": 633,
+      "sha256": "45a76b8285f28d3a507316c21703f3895aa078eb32f23659671c5dd83d0c6a54"
+    },
+    "csv_config/animal_control.csv": {
+      "filename": "631604887e618601382d13a1907fc0cd.data",
+      "size": 156,
+      "index_size": 156,
+      "sha256": "16a3a76ff369d767ec47bb0c10d1b5792fa8f00a5a9f0b6ff832958b2a024a51"
+    },
+    "csv_config/animal_exprience.csv": {
+      "filename": "e4f7243f3f5f69c6ea68053197849d14.data",
+      "size": 163,
+      "index_size": 163,
+      "sha256": "4b24147118f608bdf7c79c9e86e239cfd873d8f19bb6bc1560dba3456080299c"
+    },
+    "csv_config/animal_growup.csv": {
+      "filename": "73b06f86bdc170516ca36187daa0d98a.data",
+      "size": 180,
+      "index_size": 180,
+      "sha256": "3d97a8e6a91709c6b7723a00cd978152349576ad7cb0db2bedced11d3efc63d5"
+    },
+    "csv_config/animal_name.csv": {
+      "filename": "f29bce4039f4a557bb21e9b4acd8eabc.data",
+      "size": 1102,
+      "index_size": 1102,
+      "sha256": "b9eecac2639b4cb91d730969994fcfbf88d031189edc9bcbb967b8c35c6867e3"
+    },
+    "csv_config/animal_pet_exp.csv": {
+      "filename": "b4daaec59c933e6bb102a39a27c46658.data",
+      "size": 83,
+      "index_size": 83,
+      "sha256": "91724741b60e0845efb3986dbf8b93a602b2851348093f95c0f596ffc586261b"
+    },
+    "csv_config/animal_train_config.csv": {
+      "filename": "41c2fdf74367f5a41df9cc8fa2e35994.data",
+      "size": 1147,
+      "index_size": 1147,
+      "sha256": "4de1d8e206615d2c36723ad49aafcb03a016516e6cb171595114e488f57248a8"
+    },
+    "csv_config/animal_upgrade.csv": {
+      "filename": "558ebba7242bad91ed12d15194e4cc8f.data",
+      "size": 5485,
+      "index_size": 5485,
+      "sha256": "f7ad9dc0b2749779209aac77d40a41f25104ca94508d53e79cd76750a25e76fb"
+    },
+    "csv_config/answer_rule.csv": {
+      "filename": "1d092c3ad3165efac9a5b747e22ad472.data",
+      "size": 406,
+      "index_size": 406,
+      "sha256": "8679ef551b4d6354192735cc1e73e2eb335145c313f8de50dd6034d7a09e8e38"
+    },
+    "csv_config/assist_shop_config.csv": {
+      "filename": "e3ebdbbc878ba2da9d2d6a5a6f00de59.data",
+      "size": 255,
+      "index_size": 255,
+      "sha256": "75393121b3b11e026610fa1a4896870db57f1ede8bb274095cb50f5bcd9827c7"
+    },
+    "csv_config/awaken_skill_conf.csv": {
+      "filename": "a4339ff6b9dca99e5e15798b3560ef7e.data",
+      "size": 232,
+      "index_size": 232,
+      "sha256": "0a6a03f8e8a375e4f73960fd640761e1ae33ec84b59df04e04ab68077c327fa5"
+    },
+    "csv_config/awaken_skill_rate.csv": {
+      "filename": "00de518d1cbcb277cedf46aede2f2f7d.data",
+      "size": 438,
+      "index_size": 438,
+      "sha256": "bd1dedfb7f255f33e4646887cc9c5fababc4521661948c524c4184a77b355670"
+    },
+    "csv_config/babel_secret_tower_floor_prize.csv": {
+      "filename": "fe932451cf5cbe3e21e0f918ad1f0ebf.data",
+      "size": 362,
+      "index_size": 362,
+      "sha256": "82be832fd82b2bd247979cee6fcd9d0da60e826a258df9e43ae6ea921e4e11f1"
+    },
+    "csv_config/babel_tower_floor_prize.csv": {
+      "filename": "0001798e6b815f8b89b468fe28fe93c3.data",
+      "size": 1125,
+      "index_size": 1125,
+      "sha256": "d9fed53cbe11269f6b3aed3f141de97dcacc2caf32feaad92f51c3bbfcff0499"
+    },
+    "csv_config/cards_letter.csv": {
+      "filename": "e822f24e834037d68b2cc35e2c8dd3b0.data",
+      "size": 70,
+      "index_size": 70,
+      "sha256": "d2d014d367d4c33793d565235f235b11be54a14e31c3f2a4fc0c98085ecaf4e3"
+    },
+    "csv_config/cards_tip.csv": {
+      "filename": "4d6265c2179a2fedac56b5ea501a3c18.data",
+      "size": 122,
+      "index_size": 122,
+      "sha256": "ab85b59f28abc9aab7f54f4b74d6dd573ddd03efb35d2361a647fedcc8b6fde7"
+    },
+    "csv_config/charge_gift_config.csv": {
+      "filename": "dee3a36b5163295f539c085f47364e96.data",
+      "size": 47,
+      "index_size": 47,
+      "sha256": "025ffd85313083b31c7e4dd4a557d2367239b29f60dabee5672a02f2718133c5"
+    },
+    "csv_config/cheer_skill_config.csv": {
+      "filename": "2a25869f4285bdf4e56ec8c8dcb4a2bd.data",
+      "size": 12135,
+      "index_size": 12135,
+      "sha256": "e941671af6f245add9e7dfe92592f971176058f87edf8ad4d1a90cec90936f99"
+    },
+    "csv_config/collector_cortege.csv": {
+      "filename": "4b13c8d9d4bb9fb500a0c51c957140e7.data",
+      "size": 2166,
+      "index_size": 2166,
+      "sha256": "b7449dc359c9e914f47f1de755552ffe4edf0c1d2480f7deda53014c513ccc73"
+    },
+    "csv_config/compose_monthcake.csv": {
+      "filename": "61b339bab79bb4af379c14e515a9a146.data",
+      "size": 179,
+      "index_size": 179,
+      "sha256": "f11cedfc661bad7ee200172991e1c265607d846a212f02e4ac5678ba6391ad92"
+    },
+    "csv_config/convert_output.csv": {
+      "filename": "d326ac37efd440ce3453739bd7514467.data",
+      "size": 2480,
+      "index_size": 2480,
+      "sha256": "1fe88f6b99abe354c67729928691d2fa8d3918bb3bebd9293db316241892edb9"
+    },
+    "csv_config/cor_level_effect_config.csv": {
+      "filename": "a969903c1bbd407af9c034a71fd7df15.data",
+      "size": 258,
+      "index_size": 258,
+      "sha256": "a11edf33e7e1b4f262e8c5c89c0cc0fe261625544f15b869ec2975fdef9937df"
+    },
+    "csv_config/cortege/cortege_base_0.csv": {
+      "filename": "afe2b8737d06d22eb0d4ecb0863fa20d.data",
+      "size": 34100,
+      "index_size": 34100,
+      "sha256": "d1d94941b5665216ab1a20b5c0198f209cf79c42acd500e05b7587f4bda0ad88"
+    },
+    "csv_config/cortege/cortege_base_65.csv": {
+      "filename": "baac1267fd3ee534b529b80958eecf72.data",
+      "size": 6474,
+      "index_size": 6474,
+      "sha256": "a3773bfb2abcb6a07ab654a819f9117d101a3dc807d04a02194608f139704545"
+    },
+    "csv_config/cortege/cortege_base_66.csv": {
+      "filename": "b43b056d229c73ccd276f6da6549d128.data",
+      "size": 6475,
+      "index_size": 6475,
+      "sha256": "b192503ce893344de6301f3e55b380cc9dd77cca85f8e206493d615c0e610ca4"
+    },
+    "csv_config/cortege/cortege_name_0.csv": {
+      "filename": "50d0171085374c1a60a859cc00cb542e.data",
+      "size": 32552,
+      "index_size": 32552,
+      "sha256": "8047bc65d74672f6b4038c021d1bd2f72a6f99244bc0094aff806101b4b11971"
+    },
+    "csv_config/cortege_cheer_config.csv": {
+      "filename": "061d151edc2ef9063ebe2d892aaa024b.data",
+      "size": 4502,
+      "index_size": 4502,
+      "sha256": "89608c5ca3735c7a0de145ba7d43d489f6d89ef79e960cea6427ecbc5d04767d"
+    },
+    "csv_config/cortege_devolve.csv": {
+      "filename": "8124e6c9b2c3bdc1e8195b393d00fc58.data",
+      "size": 11138,
+      "index_size": 11138,
+      "sha256": "8298f67b9d345d199c924eb762c2ef0630f307185e27e97223800fd478241220"
+    },
+    "csv_config/cortege_evolution.csv": {
+      "filename": "e9451625687741e9764d949a388fbac8.data",
+      "size": 4591,
+      "index_size": 4591,
+      "sha256": "a243bd1107c20db971ff645a141f62889984c75fd5d0e24929dbf8ca4879b293"
+    },
+    "csv_config/cortege_evolve_config.csv": {
+      "filename": "c926b49ad61d6e670835b428f3a8698f.data",
+      "size": 26961,
+      "index_size": 26961,
+      "sha256": "1cca12ab12c5d66905b396c1df4301ebb8f27ccc2122b34314cef103125c6c0a"
+    },
+    "csv_config/cortege_experience.csv": {
+      "filename": "262b1ce7f29f86c9d16acfed91feaa4d.data",
+      "size": 50194,
+      "index_size": 50194,
+      "sha256": "38954961b55298f6ee1f8706d6784128668e0c15ca5b740a522ea60c979318ac"
+    },
+    "csv_config/cortege_reborn_config.csv": {
+      "filename": "7fc234f395a44a0e76d2096fd77985ff.data",
+      "size": 628,
+      "index_size": 628,
+      "sha256": "55724b260d04a3dc6a68b4fecceb05b5bd92302d603dc32cd9e41a81208dfc10"
+    },
+    "csv_config/cortege_reborn_effect.csv": {
+      "filename": "97e20024a814b6570ba21e4e5e729e1e.data",
+      "size": 785,
+      "index_size": 785,
+      "sha256": "6abff57d9c38d4125d0a2c6057e27a0aa080509d4f2edba2f71b0d6c5682317c"
+    },
+    "csv_config/cortege_reborn_layer.csv": {
+      "filename": "877bac9e5d98835cd550ab15000a3141.data",
+      "size": 455,
+      "index_size": 455,
+      "sha256": "597fcf01de61f9691d415237d54a6db5b59825e9bcd85c525c3ec9318edab71b"
+    },
+    "csv_config/cortege_reborn_vein.csv": {
+      "filename": "eef5a44b0490393c89a8660820b07b7b.data",
+      "size": 2986,
+      "index_size": 2986,
+      "sha256": "3ada40999765d679c007962353601751019350aea15a531cac6b8e99cba78209"
+    },
+    "csv_config/cross_match_prize.csv": {
+      "filename": "f1fa916636d7058b82afc11ab18d7159.data",
+      "size": 1394,
+      "index_size": 1394,
+      "sha256": "f2f7442ab1e8ef822fff1e9d9fca4f1b1404f723901e639d18bcd987295baf1d"
+    },
+    "csv_config/cross_server/aware_upgrade.csv": {
+      "filename": "a1b8de5ba277e83df553768ef4063659.data",
+      "size": 438,
+      "index_size": 438,
+      "sha256": "884db267177d0db79261138512da8002d5121a2cb22d467368742dc2a36fb9b7"
+    },
+    "csv_config/cross_server/camp_base.csv": {
+      "filename": "1841d4f7ab607fed376f1d9df56d383e.data",
+      "size": 976,
+      "index_size": 976,
+      "sha256": "2af9e24b4d4321f634f51c1c0e8161871d2fb50d77a3a21a0bf3432278072a2a"
+    },
+    "csv_config/cross_server/camp_control.csv": {
+      "filename": "487b5e9e5a068cee5e03a9b94e8b16a4.data",
+      "size": 504,
+      "index_size": 504,
+      "sha256": "ad75ec0c5a23dcde30d32c4bc2c7d9f93415db1bc0c785ca697eab4ddf916f69"
+    },
+    "csv_config/cross_server/camp_level.csv": {
+      "filename": "525d5e7787becd72c57ea788e32e4d84.data",
+      "size": 6758,
+      "index_size": 6758,
+      "sha256": "006927a48fc67262488dc66c4e8dca5bf28335ed443b1dccc673389d482df3c9"
+    },
+    "csv_config/cross_server/camp_pos_upgrade.csv": {
+      "filename": "50f164d7d4c296c6bc85ba63db88d90d.data",
+      "size": 181,
+      "index_size": 181,
+      "sha256": "dd6933b5a001680fb653b05e729ae93d29455c4c153ea7070d1c2aea40b8925c"
+    },
+    "csv_config/cross_server/camp_product.csv": {
+      "filename": "dc9ff46757e55b0923a25f0ca293e79b.data",
+      "size": 263,
+      "index_size": 263,
+      "sha256": "5987ae1576051f724d3425e0a6c0eb45a48aa89952007efffe59437ad72acdaf"
+    },
+    "csv_config/cross_server/camp_top_prize.csv": {
+      "filename": "9775d207b7e758847068f140c63bd5bf.data",
+      "size": 244,
+      "index_size": 244,
+      "sha256": "0a1c34950bc30b2863a3ebc15a085d2e052a0b836c6aab0086585279ac33f542"
+    },
+    "csv_config/cross_server/fight_tip.csv": {
+      "filename": "ff30c38f24367f42f5839b60896b46f3.data",
+      "size": 700,
+      "index_size": 700,
+      "sha256": "6c3557c1a65c4f8c5ebb7a35ef511d11987ffd913677b3773a1073630b4a8da3"
+    },
+    "csv_config/cross_server/manual.csv": {
+      "filename": "96b1e3544f4e32cd93b64ed940371729.data",
+      "size": 4061,
+      "index_size": 4061,
+      "sha256": "5ef9080f6b7d3a79f4dd88c66172e6b449e7333a9ff35d17f19600ad4d903601"
+    },
+    "csv_config/cross_server/rank_config.csv": {
+      "filename": "4be728c062605083d1bbeb3d01bbc27d.data",
+      "size": 386,
+      "index_size": 386,
+      "sha256": "486670e920b16498a5332eb53d8ce330c29086abb81a05885299beebf5cd52ef"
+    },
+    "csv_config/dream_prize_config.csv": {
+      "filename": "23a11b0466c571761269f4ee468bdf53.data",
+      "size": 501,
+      "index_size": 501,
+      "sha256": "ddcba2f8f0a8478b95d7071bdfa4baff33e1dda9b9c7ff795f6a0b4a760974b9"
+    },
+    "csv_config/duty_topprize_config.csv": {
+      "filename": "a58061bcf4e28e91e941d9f068291007.data",
+      "size": 1500,
+      "index_size": 1500,
+      "sha256": "1fae35b3b9011315ebada75b5959621d9914a41c5f563e17d5e9c752d21df978"
+    },
+    "csv_config/elite/elite_cortege_base.csv": {
+      "filename": "c76876681fb9cee46af4ccfafb926f70.data",
+      "size": 26844,
+      "index_size": 26844,
+      "sha256": "02fca20fe240f4859d1dce0737ed687fb08eb06809822266bdae09fa8819b236"
+    },
+    "csv_config/elite/elite_tollgate_config.csv": {
+      "filename": "0e8be9ecb29b507d9813e753ab5840d0.data",
+      "size": 8315,
+      "index_size": 8315,
+      "sha256": "1a608ea6e3b22b82f08e2db20e9f6ddbe390a189441e338ac3c147970c8dad76"
+    },
+    "csv_config/elite/specter_cortege_base.csv": {
+      "filename": "c1fae47af92212e2701cbf1db1c4ce20.data",
+      "size": 18526,
+      "index_size": 18526,
+      "sha256": "a6e2be7a49b952e95f68e10694fd7b7b9bd3d6bec72f83ddc313a79bdd384dcc"
+    },
+    "csv_config/elite/specter_cortege_name.csv": {
+      "filename": "57ebc54ea195d4c608f546f79d535386.data",
+      "size": 7854,
+      "index_size": 7854,
+      "sha256": "19a308bf1354bc6d09fd1379acd77b872f9e8f15e22363be1ab0832bc56ccb2f"
+    },
+    "csv_config/equip_reborn_advance.csv": {
+      "filename": "266d015752c56595258ca1b0154d7b92.data",
+      "size": 647,
+      "index_size": 647,
+      "sha256": "a9ea3a8f20d938c571f8f29b4ead032fc86210327e792c2929d69deba8d1126f"
+    },
+    "csv_config/equip_reborn_base.csv": {
+      "filename": "b1a8fe85f9105640f89e11b5a21ae7a9.data",
+      "size": 174,
+      "index_size": 174,
+      "sha256": "557122a2baab585b0560fdf082dc0531ce3b28742acb1d25e56116bd7cea2aa9"
+    },
+    "csv_config/equip_reborn_fate.csv": {
+      "filename": "b2a173506bcfb4f2c3268777e6d4d779.data",
+      "size": 1364,
+      "index_size": 1364,
+      "sha256": "ead6ced2dbff2977a6a3daca263dcdca9db7149d420d20822be324c0b8ed9114"
+    },
+    "csv_config/equip_reborn_level_plus.csv": {
+      "filename": "7ef941eac9786ed00898a3b17f2140a2.data",
+      "size": 287,
+      "index_size": 287,
+      "sha256": "0414100a87ed1f91d1f55748393a43389ca61c15d87ec5e38674bc1c75435bdc"
+    },
+    "csv_config/exam_rank_prize.csv": {
+      "filename": "d8ce6cced47f10a12d151da0a525fd9e.data",
+      "size": 436,
+      "index_size": 436,
+      "sha256": "3ef703b5059b82ba1882b011dfdc2111bbd9ca1474aef4346bef28cd1097da6d"
+    },
+    "csv_config/exchange_zone.csv": {
+      "filename": "56c7b77b18a62eed1f441a2e02ba62b1.data",
+      "size": 831,
+      "index_size": 831,
+      "sha256": "7ed4f5b98c91a0dd3824c332727d90ea62b8baf55dbfccc2240a1095f145ca81"
+    },
+    "csv_config/ext_skill.csv": {
+      "filename": "1e3c583e1fd996e302b5dc96362666be.data",
+      "size": 4450,
+      "index_size": 4450,
+      "sha256": "9549dd69e49c345e40428404d37421dc56b25a827f6878bb032cbcfafdf544e1"
+    },
+    "csv_config/ext_skill_lock_cost.csv": {
+      "filename": "d82fc3af8b1e2b0d124d83f475115b89.data",
+      "size": 46,
+      "index_size": 46,
+      "sha256": "fa345eee52a0623da36f1726952eff6ecff63082170fe43f5828f2a92e13183b"
+    },
+    "csv_config/ext_star_config.csv": {
+      "filename": "b75377475ece5a895f7113502f637753.data",
+      "size": 16490,
+      "index_size": 16490,
+      "sha256": "c92218a432cc02cdb3efb31b47eacbfdba26592b4382f02207be3dffee5dfc25"
+    },
+    "csv_config/fate_config.csv": {
+      "filename": "da387b2c3af7eba176e8c87c1158019c.data",
+      "size": 54753,
+      "index_size": 54753,
+      "sha256": "5981b005b633dbe4666eac9e19369fb4d52bf45b8ff08636eac91d4519be98cb"
+    },
+    "csv_config/fate_star_transform.csv": {
+      "filename": "f11cf1314adf18a112c7834c332164db.data",
+      "size": 3407,
+      "index_size": 3407,
+      "sha256": "f39ded0f1825a2d063f4b9fd90fa282e458854aaf893fc773b3b2708c8ad512f"
+    },
+    "csv_config/faterebuild_cort_active.csv": {
+      "filename": "40ad79e84ea6bbc8efb58ec76ab5fc87.data",
+      "size": 138,
+      "index_size": 138,
+      "sha256": "58cdbd78cd0ef8257c0c658d4b7c8a8c73d828bec00f1f2f191a2f576b896d88"
+    },
+    "csv_config/faterebuild_cort_property.csv": {
+      "filename": "716f721ce63e7f6cdfafe55474c18a89.data",
+      "size": 5343,
+      "index_size": 5343,
+      "sha256": "8c6d59fab64770b60c47b63bc6a2f05f09f3ca0b5114670c4c9dc3287afd56f5"
+    },
+    "csv_config/faterebuild_unblock_effect.csv": {
+      "filename": "cce4a289481240475c33e2eefd07b1fe.data",
+      "size": 921,
+      "index_size": 921,
+      "sha256": "de78008cb74af11e2e627ae46cf6a81f1fe227f4516dcf2d042a79e798c97f73"
+    },
+    "csv_config/get_lingqi_method.csv": {
+      "filename": "2d9d0230f06018baf37308f600b0f08e.data",
+      "size": 226,
+      "index_size": 226,
+      "sha256": "78fb7eec1e2b49778a3f7c30025a584ca700feec7083124edc35ac392789c21f"
+    },
+    "csv_config/gift_config.csv": {
+      "filename": "4d02a335388caca25da5e6a2a50910e4.data",
+      "size": 342,
+      "index_size": 342,
+      "sha256": "c01fe7b869098e13b71e89b943941992999ff6e172ee4954604d2641d953493a"
+    },
+    "csv_config/gold_rush_config.csv": {
+      "filename": "ee92590a6793badd32fd45f7e9274aa5.data",
+      "size": 219,
+      "index_size": 219,
+      "sha256": "938a297808250df0434d6451a102d9e322051f445c65678c4a3de3f26c8d4487"
+    },
+    "csv_config/happiness_bag_config.csv": {
+      "filename": "ecd1926c22b3ad11fc88546e079b74ed.data",
+      "size": 112,
+      "index_size": 112,
+      "sha256": "a62d96e7560d9a06acf27be6ba69a7f72133d2f335574df215dad337b721059a"
+    },
+    "csv_config/hill_top_prize.csv": {
+      "filename": "97baa0aa5a60b4449cad30781680e43f.data",
+      "size": 179,
+      "index_size": 179,
+      "sha256": "87c1d5ade3c2bce36a96ecd4a8bc5c1adac3b60e5ec0c1594e53d0eba2914d01"
+    },
+    "csv_config/hole/add_experience_config.csv": {
+      "filename": "24443b88c472013782abcc7517896f61.data",
+      "size": 149,
+      "index_size": 149,
+      "sha256": "b0ba0132b5098fa8f13b43cdca49f4d3234d81aa6f8671b6a6200cc2e52d4ef0"
+    },
+    "csv_config/hole/garden_building_config.csv": {
+      "filename": "7090e5ebcb52607037edf02ecaf9bf90.data",
+      "size": 619,
+      "index_size": 619,
+      "sha256": "401bf0d54f91c79538e3965058a3cb5197f4851b7a320c6da147b34f491a0d44"
+    },
+    "csv_config/hole/garden_grid_config.csv": {
+      "filename": "beda68f7d06bffdf3968fdc324deb389.data",
+      "size": 575,
+      "index_size": 575,
+      "sha256": "1d8cbeb7f0f32e8ed3f23dcc57c3c21cd0c686179bd1c7deb4beb1e817e56088"
+    },
+    "csv_config/hole/garden_seed_config.csv": {
+      "filename": "9de40a09150605b85dc5ddbe1f1a76a3.data",
+      "size": 526,
+      "index_size": 526,
+      "sha256": "677a938bf3decf5cc32731e5f282d56bc583a49368098d4c5726b9df54ed74ef"
+    },
+    "csv_config/hole/hole_owner_config.csv": {
+      "filename": "9ee9410cdc9000bf5a26aaf6189d6adc.data",
+      "size": 262,
+      "index_size": 262,
+      "sha256": "dbad0e609c076ec155494f80f1b0411bf475aca79c75a7b92ca4a5021ad225a4"
+    },
+    "csv_config/hole/hole_train_config.csv": {
+      "filename": "12e6134f65b051dca57a177797be5082.data",
+      "size": 4131,
+      "index_size": 4131,
+      "sha256": "eff54e15def5999c46d08785649ec158225801c18bb5efca89175d26d9d38f7a"
+    },
+    "csv_config/hole/main_building_config.csv": {
+      "filename": "a18de004b8e3302bbb909c8761887a42.data",
+      "size": 887,
+      "index_size": 887,
+      "sha256": "093d038517fb3e435a91a8beec91f2eef7b7b828563c3b42d811b2d24a32137e"
+    },
+    "csv_config/hole/pet_building_config.csv": {
+      "filename": "3e22e53614e25afdb4fe3fc7c449e3f8.data",
+      "size": 201,
+      "index_size": 201,
+      "sha256": "9c4afc815b43603f8acfbb9fe564b24b1d36eef043eebdd9f2c485ce5660775f"
+    },
+    "csv_config/hole/temple_config.csv": {
+      "filename": "bd17f8341cf90afcf5bf73ebc5c99591.data",
+      "size": 506,
+      "index_size": 506,
+      "sha256": "41477616f6fa248f3bf2245c22cf813688118e2a88d4a1bf53a11e5f2d2e17ce"
+    },
+    "csv_config/hole/temple_ext_prize.csv": {
+      "filename": "01255204daa182b134900cc19179b5b8.data",
+      "size": 264,
+      "index_size": 264,
+      "sha256": "30cc9314b8d81a67747560ffc422e0ed598e5a8c4cffadd3533faaef12634d5f"
+    },
+    "csv_config/hole/temple_level_plus.csv": {
+      "filename": "f483c3ff93be698bb0de714023156133.data",
+      "size": 3539,
+      "index_size": 3539,
+      "sha256": "4500366d726e74e1bde4bca72336015ccc4e1e20b5a4497bdbde4b2adb6d2292"
+    },
+    "csv_config/hole/train_building_config.csv": {
+      "filename": "38c9f63c7326e4de838f92e9cedc04d5.data",
+      "size": 275,
+      "index_size": 275,
+      "sha256": "7ffc18a60ba345b9c2a7bff9e310da6049818fffef1e7c083104e04a60564b8d"
+    },
+    "csv_config/hole/transform_pet_config.csv": {
+      "filename": "9933e3822d93c01f99c16b7b2561abcf.data",
+      "size": 168,
+      "index_size": 168,
+      "sha256": "e43477bb799396afb63c5978e27c163f5dc281a27fdbc007ab224f086e2a9988"
+    },
+    "csv_config/hole/upgrade_building_materials.csv": {
+      "filename": "fc6501d67006adb7b07cda15485ff33f.data",
+      "size": 8232,
+      "index_size": 8232,
+      "sha256": "4b2cc5b2fb7abd12b5c0f680ba0e2fea64957b57f876b48a90463bc19c2a6937"
+    },
+    "csv_config/item_base.csv": {
+      "filename": "4eeb205ef86ae5b637b358873accb9ab.data",
+      "size": 45379,
+      "index_size": 45379,
+      "sha256": "3d221883ab4086aa384424e938241c96153687e232e8ab51e74cb2108fbfbfb5"
+    },
+    "csv_config/item_name.csv": {
+      "filename": "84e94b4428947157442b732280106228.data",
+      "size": 105091,
+      "index_size": 105091,
+      "sha256": "1d4252cbf90e24a39cd48a99d1613b4dfc65ef89e51761c0459225b83d2d38b5"
+    },
+    "csv_config/item_value.csv": {
+      "filename": "a4d820f2bc4c9411b35b5cfdefb06e9f.data",
+      "size": 211,
+      "index_size": 211,
+      "sha256": "f3f8f42cb0f5311203b15a63d60e91b750c1b4220eba3f85ca42c2efa96d49b0"
+    },
+    "csv_config/jingpo_transform.csv": {
+      "filename": "f990f82e03176bec88e988bd69a6c6fa.data",
+      "size": 1546,
+      "index_size": 1546,
+      "sha256": "3cf2570a56f909926847cc097ab344e01c43579a324dd2b08ab21273aabd5b63"
+    },
+    "csv_config/jp_level_effect_config.csv": {
+      "filename": "6fd8cff2ef1287f0560b2ac2af9733cb.data",
+      "size": 254,
+      "index_size": 254,
+      "sha256": "e5dfd749b7f2c57d72f3e43b254a495677200f55a0556ef00f887b34aa0aa413"
+    },
+    "csv_config/level_effect_config.csv": {
+      "filename": "3fe7db1fc00477b80936a2b06376fdf6.data",
+      "size": 651,
+      "index_size": 651,
+      "sha256": "29e115cc2bebeb94446b4485138843a2e2fd09194ad6ecd4f1c3988804f7a157"
+    },
+    "csv_config/ling_active.csv": {
+      "filename": "d49ce431c4bd4cc9cf60a573aeffa687.data",
+      "size": 295,
+      "index_size": 295,
+      "sha256": "de9b90d7ca5c4ecac20fb2109d229074cb32c61649a93e261e1cc1ece59d5530"
+    },
+    "csv_config/ling_effect.csv": {
+      "filename": "2cc0c6bd7ce8719c2e7e907937d49880.data",
+      "size": 2376,
+      "index_size": 2376,
+      "sha256": "4b98a2d23827da67b9de89393599387f2d0feb828438c92865627540ef7ba544"
+    },
+    "csv_config/ling_first.csv": {
+      "filename": "eb5d5f294e2c0cb828539d618204500d.data",
+      "size": 56,
+      "index_size": 56,
+      "sha256": "e8f4dbf508d80a3a4af2e122519394251ffa8fe5f8c5eeaa3489f98220856cb8"
+    },
+    "csv_config/ling_pos_name.csv": {
+      "filename": "9ce5bd4d89f08c29f9cc5b2d6c17111b.data",
+      "size": 442,
+      "index_size": 442,
+      "sha256": "5b19bb3eeba351b858bc9bfd6880d0ccbfc2f7be88dcbc45243f8a5f405697ba"
+    },
+    "csv_config/ling_stone_value.csv": {
+      "filename": "655dd7294d8004322bf619ea1366443c.data",
+      "size": 285,
+      "index_size": 285,
+      "sha256": "5bd2a1601ba7783be4519dbb73315eacce6b6ff349a633ecaeba2007aff4c294"
+    },
+    "csv_config/ling_upgrade.csv": {
+      "filename": "093ca93c82790ea12b2343cdde887ece.data",
+      "size": 119,
+      "index_size": 119,
+      "sha256": "246e48dd9f0fc2c582a5bc19a2b260edd50e2cb219dc1a10996ee10b1faf26a0"
+    },
+    "csv_config/map_config.csv": {
+      "filename": "ef9b82fea5c10888d492e3c1c2623364.data",
+      "size": 1928,
+      "index_size": 1928,
+      "sha256": "1d082682943e17ae3ca615d15e1e08177f8d89ea1e95a79739f9c2bbc5190898"
+    },
+    "csv_config/material_transform.csv": {
+      "filename": "075b7c7280103a57990a3cefb7b2379d.data",
+      "size": 8485,
+      "index_size": 8485,
+      "sha256": "721600560fcd4919aabbb435df6ea1b65576201e3f6e4fcbb50ae27c01159936"
+    },
+    "csv_config/material_transform_index.csv": {
+      "filename": "68949dcf836d01ae381926b956df74a5.data",
+      "size": 177,
+      "index_size": 177,
+      "sha256": "9823a5a3fba6ca4e2c797c41ac6d037b9804a3edc0c0144f9412755927c89b6e"
+    },
+    "csv_config/monster_food_prize.csv": {
+      "filename": "d866e1018d2216b0192f6689cf89fd96.data",
+      "size": 298,
+      "index_size": 298,
+      "sha256": "1540cc9ea2c8afaa4cbe9cdb0431f67374e7f78b7a74f78c107e3b46b998cb2f"
+    },
+    "csv_config/monster_top_prize.csv": {
+      "filename": "ba2c6ebfd9a5aaf988915a922b4d8e4b.data",
+      "size": 251,
+      "index_size": 251,
+      "sha256": "35886096d3703c06a252eb386ca5dc8707c53027d0a7499defa0bc1084dc11e3"
+    },
+    "csv_config/newbie_content10.csv": {
+      "filename": "208a369311318ec7d7fdce2ac3965a14.data",
+      "size": 1889,
+      "index_size": 1889,
+      "sha256": "f72d719981f334de496426f70731fbff6cde64f55e00aceb4f15ef3e939b8e1d"
+    },
+    "csv_config/newbie_content11.csv": {
+      "filename": "a7c014b33ed8479f0889161be3993ef5.data",
+      "size": 704,
+      "index_size": 704,
+      "sha256": "e63651307bd6ce25cabca5ca557078f91d8cfc20a518100a0ff2fe5519459205"
+    },
+    "csv_config/newbie_content12.csv": {
+      "filename": "708cc471c3280c365dbd408e3266766b.data",
+      "size": 1849,
+      "index_size": 1849,
+      "sha256": "228a73d6b6ea866106dc8332d8c40754710f4c75c28de5ca10bb4d8ba9fedbc2"
+    },
+    "csv_config/newbie_content13.csv": {
+      "filename": "b1d3aeb530490bf4690f31182e036801.data",
+      "size": 902,
+      "index_size": 902,
+      "sha256": "23cb9d629bf2ece83bc55907cfdbc16b7baa84a16e758ff81b7496bcc4d3ee57"
+    },
+    "csv_config/newbie_content14.csv": {
+      "filename": "9a1383d7f3faa93e4634df1562a67d1f.data",
+      "size": 1442,
+      "index_size": 1442,
+      "sha256": "6a07c017947bb675589f328542d534fa117df9c7b4c4146f5bd050a43438d7ab"
+    },
+    "csv_config/newbie_content15.csv": {
+      "filename": "d629013f1f8b5772f4535c4a51c03797.data",
+      "size": 1686,
+      "index_size": 1686,
+      "sha256": "bcef74020185b7884e881ab389c10cf1506e9b3555c2395890ed43480533744d"
+    },
+    "csv_config/newbie_content16.csv": {
+      "filename": "4a456614ff7f55373b343aa7f47c909e.data",
+      "size": 1607,
+      "index_size": 1607,
+      "sha256": "798aeeb6dc4b9ee03a2b2c5d3eb34f5bd6534520692222b107626ac473895fa0"
+    },
+    "csv_config/newbie_content17.csv": {
+      "filename": "4d1b3296379c3ff64f5dc65780524181.data",
+      "size": 1944,
+      "index_size": 1944,
+      "sha256": "e5bfaa4368d303aa6ced6f09ad92a589f7abff3c83e99387c828f9a20c54091a"
+    },
+    "csv_config/newbie_content18.csv": {
+      "filename": "ea44d9443656c63a15de65c927462be9.data",
+      "size": 2602,
+      "index_size": 2602,
+      "sha256": "b598968b4f8a1c47aaad205dd097b3b8d0a21b0b991c187d15f0c77d73ed6fb3"
+    },
+    "csv_config/newbie_content9.csv": {
+      "filename": "c22c4cfd8290674561a50a3de8b9700f.data",
+      "size": 1216,
+      "index_size": 1216,
+      "sha256": "639c312c8697a418bd6afdfe2de450334fded38feba7171625f4b80caeb10485"
+    },
+    "csv_config/newbie_daily_activity_info.csv": {
+      "filename": "83fd65e5c4656aecefde52d0b808b865.data",
+      "size": 1027,
+      "index_size": 1027,
+      "sha256": "cb16a960fcc985447b7c7598bea8009ad78092682faa7e2355070d9130397c43"
+    },
+    "csv_config/newbie_item_sells.csv": {
+      "filename": "90324605324c06f1b530b605057a40b7.data",
+      "size": 225,
+      "index_size": 225,
+      "sha256": "a40e3cdfa8f293170f23e9759a2f07c59272d82e3145842e236421acde4caafe"
+    },
+    "csv_config/newbie_manual_config.csv": {
+      "filename": "64692c95b3f870084b65877ea5176ebc.data",
+      "size": 832,
+      "index_size": 832,
+      "sha256": "d2e56958ab1b4ad91a3d99dc320fe937f1b6a2e06b8426da1fd096cb0d96d8a8"
+    },
+    "csv_config/newbie_score_awards.csv": {
+      "filename": "c940ac00b1a0499c10bce2e4e79df5bf.data",
+      "size": 121,
+      "index_size": 121,
+      "sha256": "046fd2471ac9a96725bd96d4ceebdb4244cdd607f2fce9b402cc11387cee11e1"
+    },
+    "csv_config/newbie_target_info.csv": {
+      "filename": "9831ecd31fe2bd8fd4af44c77703873c.data",
+      "size": 1750,
+      "index_size": 1750,
+      "sha256": "b13896d3006570dad0bdc3876f757a006fe6f4aa783988314d1584801ae326be"
+    },
+    "csv_config/prey_open_charm.csv": {
+      "filename": "ec0328d3769601908df310c42f15620c.data",
+      "size": 916,
+      "index_size": 916,
+      "sha256": "d78cf01154e88cdb055a11f66866bae42dbcb4d4c1f657f52b431bdc7fc68d34"
+    },
+    "csv_config/prey_week_rank.csv": {
+      "filename": "1eac4a5e3a920a3fc6fda6b46c4ea8d4.data",
+      "size": 435,
+      "index_size": 435,
+      "sha256": "3aed1e39313ac94cad8e1e99772709e0badb2c1e4f4a79cd1a8182134ce5f1fc"
+    },
+    "csv_config/rank_prize.csv": {
+      "filename": "2321b69cb017d95dc6ae1bbf7eeab7cd.data",
+      "size": 759,
+      "index_size": 759,
+      "sha256": "0d48be820eb2a6ee2a3e28a79c081bf72f3a970bb2d7e3dfc4825dabde5a0d86"
+    },
+    "csv_config/rebuild_material_costs.csv": {
+      "filename": "7f7c10331115da4a8b0af11733221cb5.data",
+      "size": 147133,
+      "index_size": 147133,
+      "sha256": "dd9cf47e11da91a88579e44bed560e1cddf9cdc4d8f53b3edd99401499511f99"
+    },
+    "csv_config/rebuild_material_zs_costs.csv": {
+      "filename": "beb672b67176e421462c2cbce372fe2d.data",
+      "size": 424,
+      "index_size": 424,
+      "sha256": "973c518591a58dffcb410331a9398f03ca03565d639a28114ff2740c2f1cbebb"
+    },
+    "csv_config/rulai_skill_base.csv": {
+      "filename": "fbf12a357c4187f240e862251de106d5.data",
+      "size": 114,
+      "index_size": 114,
+      "sha256": "185e8f5ac1cde2c8a0cbb8ea1a25596c009f386a7103fb1fefedc6a3389aed03"
+    },
+    "csv_config/select_effect_config.csv": {
+      "filename": "99f692675508f2cf0463c74ae2f4f5f8.data",
+      "size": 208,
+      "index_size": 208,
+      "sha256": "c54384dfadd29ea093a91899892e594d117fd323933fae42cc2d5aa0375c54e4"
+    },
+    "csv_config/skill_advaced_conf.csv": {
+      "filename": "cfab3d739ca1961ed41947c9a35d3735.data",
+      "size": 263,
+      "index_size": 263,
+      "sha256": "81effe54ba7c4411e8ecc9d0098c9600e9a645895befb1514841094ff6ad3349"
+    },
+    "csv_config/skill_base.csv": {
+      "filename": "f1ee4370b34a46627d56f034f0aaa967.data",
+      "size": 3068,
+      "index_size": 3068,
+      "sha256": "4e526b9630e98cc4e948306626ee02a4021ff56017a42b018ed200ce17bf8515"
+    },
+    "csv_config/skill_material_transform.csv": {
+      "filename": "4083048d201415f4a5793bc8da7252b0.data",
+      "size": 725,
+      "index_size": 725,
+      "sha256": "6f90068e608f742d378168113f63ffd6e8102f938f9b0749c297a23f6a42a95f"
+    },
+    "csv_config/skill_name.csv": {
+      "filename": "0dd420bb0a0f535ac4b96e896e927c8c.data",
+      "size": 9583,
+      "index_size": 9583,
+      "sha256": "43ad79fb0ef7dbf72702b1550283bf07f03fc2567a2bccb7e2e6f8f6fcddd0db"
+    },
+    "csv_config/skill_value.csv": {
+      "filename": "4f7ff1273b6d1dda91da64d66400d088.data",
+      "size": 163,
+      "index_size": 163,
+      "sha256": "6faf7421c6d1572854f0cda7d065badb3d551193f7af193ae8a9e40432a529c9"
+    },
+    "csv_config/specter_boss_config.csv": {
+      "filename": "813e2156a45a2ce698be44441b4c3c4a.data",
+      "size": 6637,
+      "index_size": 6637,
+      "sha256": "ec357e90f60fcd5dec1391181b2fd89e49a05b662ebbf33413b74bebbf997c39"
+    },
+    "csv_config/specter_drug_study.csv": {
+      "filename": "e9dc367c3c6c31c5bc4f69f9c194206d.data",
+      "size": 2798,
+      "index_size": 2798,
+      "sha256": "00e9e26e00ddb65fd76be5006759a2bf80a840eee211ff86551f2e6744916bd7"
+    },
+    "csv_config/specter_druggist_config.csv": {
+      "filename": "e68456e0aeaf4b04ef4932a03d2714b2.data",
+      "size": 841,
+      "index_size": 841,
+      "sha256": "321b2aaab618c84d44fb34d1969141efefa2f84232a9182e9ab5c08e046d889f"
+    },
+    "csv_config/specter_extr_skill_drug.csv": {
+      "filename": "d4ce7d11c1ff500f875f632e7019b81d.data",
+      "size": 2383,
+      "index_size": 2383,
+      "sha256": "9be4f034ce06d5519826c9937fc5ee3e0d09f7a07d5839f2e9d8d9666f7fe04e"
+    },
+    "csv_config/specter_hang_ouput.csv": {
+      "filename": "bec5d943561ae325caad90c792b1f325.data",
+      "size": 25259,
+      "index_size": 25259,
+      "sha256": "2d8c1662d9f3cea779b2fe5cd5460fa1539f682ca0c38eaf34127799c3929b4e"
+    },
+    "csv_config/specter_jp_desc.csv": {
+      "filename": "ed2a6e2e5faf39eb4b4ed222628e17c2.data",
+      "size": 1825,
+      "index_size": 1825,
+      "sha256": "a322503f1684fb199c1d7b5d7dc48421b73eee266743ef3ffc43c4fb28c8effb"
+    },
+    "csv_config/specter_material_transform.csv": {
+      "filename": "24c3f6b2d3154806802205b4dddad5b9.data",
+      "size": 4520,
+      "index_size": 4520,
+      "sha256": "27d745778c314e235410fa08e1728bc9bc3308aab269566d0e458f9b5ba8187f"
+    },
+    "csv_config/specter_pill_config.csv": {
+      "filename": "4fc28a3deb1a0fcb00e60e7db770d79c.data",
+      "size": 2506,
+      "index_size": 2506,
+      "sha256": "0e88aba81ad2db379de1263be5f057e38f7bb908449bfe3326895f18ed965b8a"
+    },
+    "csv_config/specter_top_prize.csv": {
+      "filename": "743f980d00cb6d4848405919343f06f5.data",
+      "size": 213,
+      "index_size": 213,
+      "sha256": "6107e780bda87dd94594afbb11efcb6302745d7a1f7e1af98e6c5a5f97a3656c"
+    },
+    "csv_config/spring_card_config.csv": {
+      "filename": "e52c520ce9480424d4f0b8a2d284c6d5.data",
+      "size": 99,
+      "index_size": 99,
+      "sha256": "8fd118232b185d58fd90804419b5f6020ed1119289191eba1ea8ddbdf6829ef0"
+    },
+    "csv_config/star_config.csv": {
+      "filename": "9240c0c947385efca5322b78e59a8dfc.data",
+      "size": 3621,
+      "index_size": 3621,
+      "sha256": "441f826f456729c8b8aa4973b4fff845b5025b8c5a6db05e1b1bdb168af8ae72"
+    },
+    "csv_config/star_decompose_config.csv": {
+      "filename": "c0ddcdb88539d57b15b8892504afc920.data",
+      "size": 583,
+      "index_size": 583,
+      "sha256": "2a73948f7a745625518431a7604fadc1c27a16333bb83431fe5b627a09dd4f53"
+    },
+    "csv_config/star_element_open.csv": {
+      "filename": "e8f881c5ed6108504ff615581d1be526.data",
+      "size": 55,
+      "index_size": 55,
+      "sha256": "c552255d5fcf31ac2e98537bd47c9d30ce28a92c29e61f46bee52d9c9b3dd1e6"
+    },
+    "csv_config/star_element_relation.csv": {
+      "filename": "a53e40fd3f30f607e47f3bcce475e71e.data",
+      "size": 154,
+      "index_size": 154,
+      "sha256": "4a77b4ff245744c3f3824cb2abc1e389e3350be856145eba4780a74cb3922b20"
+    },
+    "csv_config/star_level_exp.csv": {
+      "filename": "dcf795e4d0cce7339ee63682bef62aae.data",
+      "size": 215,
+      "index_size": 215,
+      "sha256": "1b05e2609aefec453b05a9348c42039fc6ae0fa405aac8252e15699e24b9a0f6"
+    },
+    "csv_config/star_relation_config.csv": {
+      "filename": "5bf4843a07dfb649c8626830a9ed7a04.data",
+      "size": 295,
+      "index_size": 295,
+      "sha256": "9dd29481ce5c6a74410e4c42a8d7c3190f7aa699e44479da17b9edb213fb80e3"
+    },
+    "csv_config/stars_effect_config.csv": {
+      "filename": "5254559ea46958d36de2afce3dcd7370.data",
+      "size": 1315,
+      "index_size": 1315,
+      "sha256": "aa9ed2130234de5440f7e2088fc657e99d63889cf986d021a9971fcdb2525528"
+    },
+    "csv_config/stone_cost_worth.csv": {
+      "filename": "0125531148670eb6e741880e7e09ac19.data",
+      "size": 1085,
+      "index_size": 1085,
+      "sha256": "c43186544308c48b326540e40a3f45393951e3090515304b78b3cfc8f217fff0"
+    },
+    "csv_config/stone_reborn_cost_worth.csv": {
+      "filename": "820eea550c42ee649b8278697f7e6634.data",
+      "size": 499,
+      "index_size": 499,
+      "sha256": "c739b4bca3d06bd823795b30430b95e4cb014be73218b6e0ee8330b9cd425626"
+    },
+    "csv_config/summer_cards_letter.csv": {
+      "filename": "ac112e0ae1ece3da9f39d4b5fdcd0830.data",
+      "size": 56,
+      "index_size": 56,
+      "sha256": "e4eccbb39073bde42b652032cf7af5f785df01e65c620750ef939c18f1d09f53"
+    },
+    "csv_config/summer_cards_tip.csv": {
+      "filename": "ffaf371542304effb01dbb9520ba11b8.data",
+      "size": 117,
+      "index_size": 117,
+      "sha256": "ad9dc8a8f3cd4533edc5b3f5fe8fc267038cc3e3cb2e843078425d84d9150974"
+    },
+    "csv_config/summon_cortege_set.csv": {
+      "filename": "c287dfe2c29fe28c87ae2e45235126e9.data",
+      "size": 1177,
+      "index_size": 1177,
+      "sha256": "eb6ce0df21997d974f60539d8ff65ae9841a7d687c904d16cf5a543e2dccad9e"
+    },
+    "csv_config/title_config.csv": {
+      "filename": "572ab4cba4b6fb324f071a9a569fd6f1.data",
+      "size": 4136,
+      "index_size": 4136,
+      "sha256": "ddab67d07602af69ae458db1b0c2affb08d606c59d3cbe8e5c12c1e0b16cb9b3"
+    },
+    "csv_config/tollgate_config.csv": {
+      "filename": "c4bc8ec27a17037ff6b2772e8f321972.data",
+      "size": 71775,
+      "index_size": 71775,
+      "sha256": "0f00694c9ea022622c91702d3c9a0fe6f66d50bf8a734e218b4effefabf9b51b"
+    },
+    "csv_config/tollgate_name.csv": {
+      "filename": "d8e34b9b46ec42c012630a240bb09b52.data",
+      "size": 19862,
+      "index_size": 19862,
+      "sha256": "3d91e69f7ba2866876ac14e9a88cc29a4f2d7326ec70ec9c134d7b5116da7d9e"
+    },
+    "csv_config/tollgate_sweep_flush.csv": {
+      "filename": "554bbddb6ee38e0e8dca7b39e18a19f0.data",
+      "size": 6902,
+      "index_size": 6902,
+      "sha256": "776cc4c4cc6551bc66a2df043c466eddb952c55940a5e7c795d4c0169ddf70bc"
+    },
+    "csv_config/tongtianta_score_awards.csv": {
+      "filename": "a588f075e73bb644d60522f6b2f01216.data",
+      "size": 212,
+      "index_size": 212,
+      "sha256": "f12fb6d5eecf2c2800acdef21005ee820a61d4b120e3d19c5e235dc4e1f03d69"
+    },
+    "csv_config/top_score_exchange.csv": {
+      "filename": "b136973040f7f360ec5fe1c7a7d231b3.data",
+      "size": 254,
+      "index_size": 254,
+      "sha256": "f41cd01d0b99afa29e11830f1ecdf12d6ebedc9b6a042fc809f2b40673c9ae7f"
+    },
+    "csv_config/undergo_ordeal/elite_map_config.csv": {
+      "filename": "15b7f403c7544ebffc92518799eaf7ab.data",
+      "size": 197,
+      "index_size": 197,
+      "sha256": "923b2364d7700f8518f587cd6d42c5421e43735fb38860494ab495945da35c2d"
+    },
+    "csv_config/undergo_ordeal/elite_map_name.csv": {
+      "filename": "d821f4db9b50c033ce954a8c92e9be4c.data",
+      "size": 165,
+      "index_size": 165,
+      "sha256": "1074c44a0caafb82f6c5c9bcc39dd2f2ca10dded29f2de77a898206f1bc8f7fb"
+    },
+    "csv_config/undergo_ordeal/elite_tollgate_config.csv": {
+      "filename": "ebfc6b000c60b3d62b4cc2f1646675e1.data",
+      "size": 6031,
+      "index_size": 6031,
+      "sha256": "4fe6dac7313eae22376710f2396228468c1eecd9d08c356800090434bbce2d48"
+    },
+    "csv_config/undergo_ordeal/elite_tollgate_name.csv": {
+      "filename": "aba9b9a5f8a3772d1bc31262c4c333b6.data",
+      "size": 1889,
+      "index_size": 1889,
+      "sha256": "eac2b65fb347318a05d9cc7715b77c448d7028500474f4bc7c88226d20636efc"
+    },
+    "csv_config/undergo_ordeal/map_config.csv": {
+      "filename": "f3654860d4711bc2d84a1662b483c8a0.data",
+      "size": 326,
+      "index_size": 326,
+      "sha256": "d201a50631751f70ca131cfaceef32f96b65c2b2e13cf44fc102ee14d3dd6cae"
+    },
+    "csv_config/undergo_ordeal/map_name.csv": {
+      "filename": "3db171ec933e193dd7ae4422091b497f.data",
+      "size": 167,
+      "index_size": 167,
+      "sha256": "5e256badb43179a1b59a60da234fa79f278ecb8a573512d03440c0e86dd9256d"
+    },
+    "csv_config/undergo_ordeal/npc_list.csv": {
+      "filename": "981b47d7b7b981494cc03711bdbca71d.data",
+      "size": 33600,
+      "index_size": 33600,
+      "sha256": "6fd38465fc005bf8b6b990fe87470baa3002afc56548707172d63f38f25efc40"
+    },
+    "csv_config/undergo_ordeal/tollgate_config.csv": {
+      "filename": "01f73f01364aa4eeab6b18d377faf36b.data",
+      "size": 12596,
+      "index_size": 12596,
+      "sha256": "22254483353ba5380efa50ff008f2430afb86729bf7c42ab3b8baad23f4afcae"
+    },
+    "csv_config/undergo_ordeal/tollgate_name.csv": {
+      "filename": "86022be4337be38608d1e06730fde867.data",
+      "size": 1886,
+      "index_size": 1886,
+      "sha256": "a596851fa6d0dcda8df93d4b8edd9abb8163d04c9ee5366e0ee574d25b74fdb4"
+    },
+    "csv_config/union_match_prize.csv": {
+      "filename": "65a3be3782607a32a367032ee19d444f.data",
+      "size": 416,
+      "index_size": 416,
+      "sha256": "cb07205e09a50ad36f8e1b97a271e38b1c42d8a49612a1a2b30bfee7db33b8dd"
+    },
+    "csv_config/vip_pri_config.csv": {
+      "filename": "89992cbd4c6e629d6a18ec90dbb33234.data",
+      "size": 3768,
+      "index_size": 3768,
+      "sha256": "a15e24d8eb436a37c156ede4d8541e0efe4c32e3afb681a934a27e73a576bae9"
+    },
+    "items/all_items2.png": {
+      "filename": "a44e98a1d7d6a84edff760b67faf1a41.data",
+      "size": 49958,
+      "index_size": 179883,
+      "sha256": "55e50048f285a982fe689a6e09dcd20284c11b05c5931e057c72b0ae7c6b6a9d"
+    },
+    "lua/common/common_def.lua": {
+      "filename": "a2a1594a7058cd1383de067ee4ba8e97.data",
+      "size": 79626,
+      "index_size": 194351,
+      "sha256": "b97ea8068427eae8c15daa7f8c81e543020806ad98a631ffa52d98cfa1fe07b5"
+    },
+    "lua/ui/handbookUI.lua": {
+      "filename": "09c3cf3ce2810edcabfb85b0af3bf150.data",
+      "size": 30856,
+      "index_size": 44010,
+      "sha256": "4089c82ac2929f519058f424f75ed5e0f3e17a969569a17d8fd032a951ad90d6"
+    },
+    "lua/ui/lineupUI.lua": {
+      "filename": "1581f9ded261ae0e45ea540c4ffec29e.data",
+      "size": 40964,
+      "index_size": 78341,
+      "sha256": "45e6c01b758344d001abd22d84bac729b6bca93f1c6a3553792bd06991c308de"
+    },
+    "skill/skill_icons.png": {
+      "filename": "e92ce231a9efdf0b01dbab4a81234ab6.data",
+      "size": 290702,
+      "index_size": 1236365,
+      "sha256": "353033ed41226f244f43b8df4ec2b6d7c30aed0bc81597b9ff7562d4afa4cf5f"
+    }
+  },
+  "unavailable": [
+    "chars/5/5_63.png",
+    "chars/5/5_64.png",
+    "chars/5/5_65.png",
+    "chars/5/5_66.png",
+    "chars/5/5_67.png",
+    "chars/5/5_68.png",
+    "chars/5/5_69.png",
+    "chars/5/5_70.png",
+    "chars/5/5_71.png",
+    "chars/5/5_72.png",
+    "chars/5/5_73.png"
+  ]
+}

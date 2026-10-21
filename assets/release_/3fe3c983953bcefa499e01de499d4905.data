@@ -1,0 +1,10 @@
+type_id,base_type_id,name,category,resource,quality,base_gongji,base_fangyu,base_max_hp,base_max_magic,base_gongji_plus,base_fangyu_plus,base_maxhp_plus,base_maxmagic_plus,chushijineng,float_mode, offset_x, offset_y,book_hide
+10101,1020,tianbing,2,59,1,100,66,200,66,0,0,0,0,216,1,0.5,0.3,0
+10201,1020,tianbing,2,59,1,130,72,250,30,0,0,0,0,216,1,0.5,0.3,0
+10202,1021,tianbing,2,60,1,110,72,220,30,0,0,0,0,217,1,0.5,0.3,0
+10301,1021,tianbing,2,60,1,105,110,280,80,0,0,0,0,217,1,0.5,0.3,0
+10302,1020,tianbing,2,59,1,105,110,280,80,0,0,0,0,216,1,0.5,0.3,0
+10401,1020,erlangsheng,2,59,1,120,110,300,96,0,0,0,0,216,1,0.5,0.3,0
+10402,1021,tianjiang,2,60,1,120,110,300,96,0,0,0,0,217,1,0.5,0.3,0
+10501,5003,erlangsheng,1,3,5,130,120,500,134,0,0,0,0,210,1,0.5,0.3,0
+10502,1021,xiaotianquan,2,60,1,120,110,300,105,0,0,0,0,217,1,0.5,0.3,0

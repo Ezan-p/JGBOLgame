@@ -1,0 +1,27 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+// 1
+varying vec2 v_texCoord;
+uniform sampler2D u_texture;
+uniform float originX;
+uniform float originY;
+uniform float radius;
+uniform float alpha;
+
+void main()
+{
+	vec4 color;
+	color = texture2D(u_texture, v_texCoord).rgba;
+	float d = abs(distance(vec2(originX, originY),  v_texCoord));
+	if(d < radius)
+		color.a = clamp(d * alpha / radius, 0.0, 1.0);
+		
+	
+	if(color.a <= 0.001)
+		discard;
+	
+	
+	gl_FragColor = color.rgba;
+}

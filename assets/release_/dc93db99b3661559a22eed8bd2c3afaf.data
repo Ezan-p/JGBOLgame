@@ -1,0 +1,30 @@
+#ifdef GL_ES
+precision mediump float;
+#endif
+
+// 1
+varying vec2 v_texCoord;
+uniform sampler2D u_texture;
+uniform float u_time;
+
+#define Overlay(a, b) (a) <= 0.5 ? (2.0 * (a) * (b)) : (1.0 - 2.0 * (1.0 - (a)) * (1.0 - (b)))
+#define Screen(a, b)  1-(1-(a))*(1-(b))
+#define Multiply(a, b) (2.0 * (a) * (b))
+
+void main()
+{
+	vec4 color;
+	color = texture2D(u_texture, v_texCoord).rgba;
+    // 4
+    
+    if(texture2D(u_texture, v_texCoord).a != 0.0)
+    {
+		 
+		color.r = Overlay(texture2D(u_texture, v_texCoord).r , 0.34);
+		color.g = Overlay(texture2D(u_texture, v_texCoord).g , 0.34);
+		color.b = Overlay(texture2D(u_texture, v_texCoord).b , 0.57);
+		
+		//color = blendFunc(texture2D(u_texture, v_texCoord).rgb, vec3(0.31, 0.34, 0.63));
+	}
+	gl_FragColor = vec4(color.rgba);
+}

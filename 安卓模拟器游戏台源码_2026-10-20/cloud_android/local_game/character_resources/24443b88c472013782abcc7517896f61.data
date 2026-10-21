@@ -1,0 +1,4 @@
+index,consume(object_type|attach_type|attach_count|attach_level),add_experience,limit
+1,12|1|2000000|1,200,10
+2,11|1|50|1,200,0
+3,5|1364|1|1,200,0

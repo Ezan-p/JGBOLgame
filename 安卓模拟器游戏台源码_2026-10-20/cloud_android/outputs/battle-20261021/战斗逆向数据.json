@@ -1,0 +1,7120 @@
+{
+  "schema": 1,
+  "skills": {
+    "1": {
+      "id": 1,
+      "name": "普通攻击",
+      "active": true,
+      "multi": false,
+      "quality": 1
+    },
+    "2": {
+      "id": 2,
+      "name": "无尽战意",
+      "active": false,
+      "multi": false,
+      "quality": 1,
+      "title": "skill/name/2.png"
+    },
+    "3": {
+      "id": 3,
+      "name": "灵气入体",
+      "active": false,
+      "multi": false,
+      "quality": 1,
+      "title": "skill/name/3.png"
+    },
+    "4": {
+      "id": 4,
+      "name": "邪火燎原",
+      "active": true,
+      "multi": true,
+      "quality": 1,
+      "title": "skill/name/4.png",
+      "animation_skill": 101,
+      "cast": "101_1_2.ccbi",
+      "impact": "101_5.ccbi"
+    },
+    "5": {
+      "id": 5,
+      "name": "11",
+      "active": false,
+      "multi": false,
+      "quality": 1
+    },
+    "6": {
+      "id": 6,
+      "name": "慈心善佑",
+      "active": true,
+      "multi": true,
+      "quality": 1,
+      "title": "skill/name/6.png",
+      "animation_skill": 6,
+      "cast": "jiaxue.ccbi",
+      "impact": "jiaxue.ccbi"
+    },
+    "7": {
+      "id": 7,
+      "name": "灵气聚顶",
+      "active": false,
+      "multi": false,
+      "quality": 1,
+      "title": "skill/name/7.png"
+    },
+    "8": {
+      "id": 8,
+      "name": "弹道",
+      "active": true,
+      "multi": false,
+      "quality": 1,
+      "animation_skill": 202,
+      "cast": "112_11.ccbi",
+      "impact": "112_2.ccbi"
+    },
+    "9": {
+      "id": 9,
+      "name": "追踪",
+      "active": true,
+      "multi": false,
+      "quality": 1,
+      "animation_skill": 202,
+      "cast": "112_11.ccbi",
+      "impact": "112_2.ccbi"
+    },
+    "10": {
+      "id": 10,
+      "name": "贯穿",
+      "active": true,
+      "multi": false,
+      "quality": 1,
+      "animation_skill": 202,
+      "cast": "112_11.ccbi",
+      "impact": "112_2.ccbi"
+    },
+    "202": {
+      "id": 202,
+      "name": "袖里乾坤",
+      "active": true,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/202.png",
+      "animation_skill": 202,
+      "cast": "112_11.ccbi",
+      "impact": "112_2.ccbi"
+    },
+    "203": {
+      "id": 203,
+      "name": "番天印",
+      "active": true,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/203.png",
+      "animation_skill": 203,
+      "cast": "113_1.ccbi",
+      "impact": "113_2.ccbi"
+    },
+    "204": {
+      "id": 204,
+      "name": "冰魄天惊",
+      "active": true,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/204.png",
+      "animation_skill": 204,
+      "cast": "111_1.ccbi",
+      "impact": "245_1.ccbi"
+    },
+    "205": {
+      "id": 205,
+      "name": "天雷斩",
+      "active": true,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/205.png",
+      "animation_skill": 205,
+      "cast": "110_11.ccbi",
+      "impact": "110_1.ccbi"
+    },
+    "206": {
+      "id": 206,
+      "name": "千光斩",
+      "active": true,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/206.png",
+      "animation_skill": 206,
+      "cast": "201_4.ccbi",
+      "impact": "201_5.ccbi"
+    },
+    "207": {
+      "id": 207,
+      "name": "天罗地网",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/207.png",
+      "animation_skill": 207,
+      "cast": "113_1.ccbi",
+      "impact": "221_1.ccbi"
+    },
+    "208": {
+      "id": 208,
+      "name": "三头六臂",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/208.png",
+      "animation_skill": 208,
+      "cast": "116_1.ccbi",
+      "impact": "116_2.ccbi"
+    },
+    "209": {
+      "id": 209,
+      "name": "六魂幡",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/209.png",
+      "animation_skill": 209,
+      "cast": "1171_1.ccbi",
+      "impact": "1171_2.ccbi"
+    },
+    "210": {
+      "id": 210,
+      "name": "劈面雷",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/210.png",
+      "animation_skill": 210,
+      "cast": "118_1.ccbi",
+      "impact": "118_1.ccbi"
+    },
+    "211": {
+      "id": 211,
+      "name": "拿云手",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/211.png",
+      "animation_skill": 211,
+      "cast": "220_1.ccbi",
+      "impact": "220_2.ccbi"
+    },
+    "212": {
+      "id": 212,
+      "name": "破石劈山",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/212.png",
+      "animation_skill": 212,
+      "cast": "122_1.ccbi",
+      "impact": "122_1.ccbi"
+    },
+    "213": {
+      "id": 213,
+      "name": "虎啸",
+      "active": true,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/213.png",
+      "animation_skill": 213,
+      "cast": "243_1.ccbi",
+      "impact": "212_1.ccbi"
+    },
+    "214": {
+      "id": 214,
+      "name": "鹰击",
+      "active": true,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/214.png",
+      "animation_skill": 214,
+      "cast": "133_1.ccbi",
+      "impact": "133_2.ccbi"
+    },
+    "215": {
+      "id": 215,
+      "name": "飞头术",
+      "active": true,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/215.png",
+      "animation_skill": 215,
+      "cast": "117_1.ccbi",
+      "impact": "218_2.ccbi"
+    },
+    "216": {
+      "id": 216,
+      "name": "哼",
+      "active": true,
+      "multi": false,
+      "quality": 2,
+      "title": "skill/name/216.png",
+      "animation_skill": 216,
+      "cast": "134_1.ccbi",
+      "impact": "134_2.ccbi"
+    },
+    "217": {
+      "id": 217,
+      "name": "哈",
+      "active": true,
+      "multi": false,
+      "quality": 2,
+      "title": "skill/name/217.png",
+      "animation_skill": 217,
+      "cast": "136_1.ccbi",
+      "impact": "136_2.ccbi"
+    },
+    "218": {
+      "id": 218,
+      "name": "黑虎啸云",
+      "active": true,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/218.png",
+      "animation_skill": 218,
+      "cast": "242_2.ccbi",
+      "impact": "242_1.ccbi"
+    },
+    "220": {
+      "id": 220,
+      "name": "五指山",
+      "active": true,
+      "multi": true,
+      "quality": 5,
+      "title": "skill/name/220.png",
+      "animation_skill": 220,
+      "cast": "128_1.ccbi",
+      "impact": "241_2.ccbi"
+    },
+    "221": {
+      "id": 221,
+      "name": "引魄之术",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/221.png",
+      "animation_skill": 221,
+      "cast": "215_1.ccbi",
+      "impact": "215_1.ccbi"
+    },
+    "222": {
+      "id": 222,
+      "name": "钉头七剑书",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/222.png",
+      "animation_skill": 222,
+      "cast": "209_1.ccbi",
+      "impact": "209_1.ccbi"
+    },
+    "223": {
+      "id": 223,
+      "name": "掌心雷",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/223.png",
+      "animation_skill": 223,
+      "cast": "210_1.ccbi",
+      "impact": "210_5.ccbi"
+    },
+    "226": {
+      "id": 226,
+      "name": "定身术",
+      "active": true,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/226.png",
+      "animation_skill": 226,
+      "cast": "206_1.ccbi",
+      "impact": "206_1.ccbi"
+    },
+    "21": {
+      "id": 21,
+      "name": "大乘经",
+      "active": false,
+      "multi": false,
+      "quality": 5
+    },
+    "22": {
+      "id": 22,
+      "name": "指地成钢",
+      "active": false,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/22.png"
+    },
+    "23": {
+      "id": 23,
+      "name": "丈六金身",
+      "active": false,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/23.png"
+    },
+    "25": {
+      "id": 25,
+      "name": "铜头铁臂",
+      "active": false,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/25.png"
+    },
+    "27": {
+      "id": 27,
+      "name": "金蝉脱壳",
+      "active": false,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/27.png"
+    },
+    "28": {
+      "id": 28,
+      "name": "神烟术",
+      "active": false,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/28.png"
+    },
+    "29": {
+      "id": 29,
+      "name": "替身法",
+      "active": false,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/29.png"
+    },
+    "31": {
+      "id": 31,
+      "name": "太上感应篇",
+      "active": false,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/31.png"
+    },
+    "32": {
+      "id": 32,
+      "name": "般若波罗蜜",
+      "active": false,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/32.png"
+    },
+    "34": {
+      "id": 34,
+      "name": "法华经",
+      "active": false,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/34.png"
+    },
+    "35": {
+      "id": 35,
+      "name": "金刚经",
+      "active": false,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/35.png"
+    },
+    "36": {
+      "id": 36,
+      "name": "道德真经",
+      "active": false,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/36.png"
+    },
+    "38": {
+      "id": 38,
+      "name": "大藏经",
+      "active": false,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/38.png"
+    },
+    "39": {
+      "id": 39,
+      "name": "南华真经",
+      "active": false,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/39.png"
+    },
+    "42": {
+      "id": 42,
+      "name": "一气化三清",
+      "active": false,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/42.png"
+    },
+    "43": {
+      "id": 43,
+      "name": "火眼金睛",
+      "active": false,
+      "multi": false,
+      "quality": 5,
+      "title": "skill/name/43.png"
+    },
+    "45": {
+      "id": 45,
+      "name": "七十二变",
+      "active": false,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/45.png"
+    },
+    "46": {
+      "id": 46,
+      "name": "天罡正气",
+      "active": false,
+      "multi": false,
+      "quality": 4,
+      "title": "skill/name/46.png"
+    },
+    "48": {
+      "id": 48,
+      "name": "腾云术",
+      "active": false,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/48.png"
+    },
+    "49": {
+      "id": 49,
+      "name": "三十六变",
+      "active": false,
+      "multi": false,
+      "quality": 3,
+      "title": "skill/name/49.png"
+    },
+    "51": {
+      "id": 51,
+      "name": "阿弥陀经",
+      "active": false,
+      "multi": false,
+      "quality": 5
+    },
+    "52": {
+      "id": 52,
+      "name": "羽化飞仙",
+      "active": false,
+      "multi": false,
+      "quality": 5
+    },
+    "101": {
+      "id": 101,
+      "name": "三昧真火",
+      "active": true,
+      "multi": true,
+      "quality": 5,
+      "title": "skill/name/101.png",
+      "animation_skill": 101,
+      "cast": "101_1_2.ccbi",
+      "impact": "101_5.ccbi"
+    },
+    "102": {
+      "id": 102,
+      "name": "三昧神风",
+      "active": true,
+      "multi": true,
+      "quality": 5,
+      "title": "skill/name/102.png",
+      "animation_skill": 102,
+      "cast": "113_1.ccbi",
+      "impact": "208_1.ccbi"
+    },
+    "103": {
+      "id": 103,
+      "name": "五雷诀",
+      "active": true,
+      "multi": true,
+      "quality": 5,
+      "title": "skill/name/103.png",
+      "animation_skill": 103,
+      "cast": "114_1.ccbi",
+      "impact": "114_2.ccbi"
+    },
+    "104": {
+      "id": 104,
+      "name": "龙腾滔天",
+      "active": true,
+      "multi": true,
+      "quality": 4,
+      "title": "skill/name/104.png",
+      "animation_skill": 104,
+      "cast": "123_1.ccbi",
+      "impact": "123_2.ccbi"
+    },
+    "105": {
+      "id": 105,
+      "name": "冤魂乱舞",
+      "active": true,
+      "multi": true,
+      "quality": 4,
+      "title": "skill/name/105.png",
+      "animation_skill": 105,
+      "cast": "128_1.ccbi",
+      "impact": "244_1.ccbi"
+    },
+    "106": {
+      "id": 106,
+      "name": "火龙兵",
+      "active": true,
+      "multi": true,
+      "quality": 4,
+      "title": "skill/name/106.png",
+      "animation_skill": 106,
+      "cast": "101_1_2.ccbi",
+      "impact": "135_2.ccbi"
+    },
+    "107": {
+      "id": 107,
+      "name": "佛光普照",
+      "active": true,
+      "multi": true,
+      "quality": 3,
+      "title": "skill/name/107.png",
+      "animation_skill": 107,
+      "cast": "131_1.ccbi",
+      "impact": "131_2.ccbi"
+    },
+    "108": {
+      "id": 108,
+      "name": "黄泉之水",
+      "active": true,
+      "multi": true,
+      "quality": 5,
+      "title": "skill/name/108.png",
+      "animation_skill": 108,
+      "cast": "128_1.ccbi",
+      "impact": "214_1.ccbi"
+    },
+    "110": {
+      "id": 110,
+      "name": "风卷残云",
+      "active": true,
+      "multi": true,
+      "quality": 4,
+      "title": "skill/name/110.png",
+      "animation_skill": 110,
+      "cast": "113_1.ccbi",
+      "impact": "232_1.ccbi"
+    },
+    "112": {
+      "id": 112,
+      "name": "蒺藜雨",
+      "active": true,
+      "multi": true,
+      "quality": 3,
+      "title": "skill/name/112.png",
+      "animation_skill": 112,
+      "cast": "113_1.ccbi",
+      "impact": "211_1.ccbi"
+    },
+    "11": {
+      "id": 11,
+      "name": "慈心善佑",
+      "active": true,
+      "multi": true,
+      "quality": 1,
+      "animation_skill": 101,
+      "cast": "101_1_2.ccbi",
+      "impact": "101_5.ccbi"
+    }
+  },
+  "sounds": {
+    "got_char": [
+      {
+        "time": 0.0,
+        "file": "music/choujiang.mp3"
+      }
+    ],
+    "char_flyup": [
+      {
+        "time": 0.0,
+        "file": "music/choujiang.mp3"
+      }
+    ],
+    "dujie_rareskillshow": [
+      {
+        "time": 0.0,
+        "file": "music/chengjiu.mp3"
+      }
+    ],
+    "mission_all3star": [
+      {
+        "time": 0.222,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "got_achievement": [
+      {
+        "time": 0.0,
+        "file": "music/chengjiu.mp3"
+      }
+    ],
+    "fight_vs": [
+      {
+        "time": 0.0,
+        "file": "music/vs.mp3"
+      }
+    ],
+    "fight_splasheye": [
+      {
+        "time": 0.0,
+        "file": "music/shanyanshen1.mp3"
+      }
+    ],
+    "fight_splashskill": [
+      {
+        "time": 0.222,
+        "file": "music/shanyanshen2.mp3"
+      }
+    ],
+    "skill_qianguang_start": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "128_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-chushou.mp3"
+      }
+    ],
+    "127_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "130_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-chushou.mp3"
+      }
+    ],
+    "128_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/buff.mp3"
+      }
+    ],
+    "127_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/buff.mp3"
+      }
+    ],
+    "130_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/buff.mp3"
+      }
+    ],
+    "204_1.ccbi": [
+      {
+        "time": 0.001,
+        "file": "music/pugongjin-chushou.mp3"
+      },
+      {
+        "time": 0.111,
+        "file": "music/pugongjin-shouji2.mp3"
+      }
+    ],
+    "204_2.ccbi": [
+      {
+        "time": 0.001,
+        "file": "music/pugongjin-chushou.mp3"
+      },
+      {
+        "time": 0.111,
+        "file": "music/pugongjin-shouji2.mp3"
+      }
+    ],
+    "204_1_Y.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/pugongyuan-chushou2.mp3"
+      },
+      {
+        "time": 0.311,
+        "file": "music/pugongjin-shouji2.mp3"
+      }
+    ],
+    "204_2_Y.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/pugongyuan-chushou2.mp3"
+      },
+      {
+        "time": 0.311,
+        "file": "music/pugongjin-shouji2.mp3"
+      }
+    ],
+    "109_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/pugongyuan-chushou.mp3"
+      }
+    ],
+    "109_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/pugongyuan-chushou.mp3"
+      }
+    ],
+    "101_1_2.ccbi": [
+      {
+        "time": 0.03,
+        "file": "music/sanmeizhenhuo-chushou.mp3"
+      },
+      {
+        "time": 1.0,
+        "file": "music/sanmeizhenhuo-shouji.mp3"
+      }
+    ],
+    "113_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-chushou.mp3"
+      },
+      {
+        "time": 0.777,
+        "file": "music/sanmeishenfeng-shouji.mp3"
+      }
+    ],
+    "114_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      },
+      {
+        "time": 0.888,
+        "file": "music/wuleijue-shouji.mp3"
+      }
+    ],
+    "123_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      },
+      {
+        "time": 1.0,
+        "file": "music/sanmeizhenhuo-shouji.mp3"
+      }
+    ],
+    "244_1.ccbi": [
+      {
+        "time": 0.001,
+        "file": "music/yuanhunluanwu-shouji.mp3"
+      }
+    ],
+    "131_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-chushou.mp3"
+      }
+    ],
+    "131_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "214_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/huangquanzhishui-shouji.mp3"
+      }
+    ],
+    "112_12.ccbi": [
+      {
+        "time": 0.166,
+        "file": "music/xiuliqiankun-chushou.mp3"
+      }
+    ],
+    "112_11.ccbi": [
+      {
+        "time": 0.166,
+        "file": "music/xiuliqiankun-chushou.mp3"
+      }
+    ],
+    "113_2.ccbi": [
+      {
+        "time": 0.099,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "111_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "245_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/bingpotianjing-shouji.mp3"
+      }
+    ],
+    "110_12.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "110_11.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "110_1.ccbi": [
+      {
+        "time": 0.001,
+        "file": "music/tianleizhan-shouji.mp3"
+      }
+    ],
+    "201_4.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/qianguangzhan-shouji.mp3"
+      }
+    ],
+    "201_5.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/qianguangzhan-shouji.mp3"
+      }
+    ],
+    "221_1.ccbi": [
+      {
+        "time": 0.001,
+        "file": "music/qianguangzhan-chushou.mp3"
+      }
+    ],
+    "116_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-chushou.mp3"
+      }
+    ],
+    "116_2.ccbi": [
+      {
+        "time": 0.001,
+        "file": "music/qianguangzhan-chushou.mp3"
+      }
+    ],
+    "1171_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "1171_2.ccbi": [
+      {
+        "time": 0.099,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "118_1.ccbi": [
+      {
+        "time": 0.099,
+        "file": "music/tianleizhan-shouji.mp3"
+      }
+    ],
+    "220_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/nayunshou-shouji.mp3"
+      }
+    ],
+    "220_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/nayunshou-shouji.mp3"
+      }
+    ],
+    "122_1.ccbi": [
+      {
+        "time": 0.444,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "243_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/huxiao-feixing.mp3"
+      }
+    ],
+    "243_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/huxiao-feixing.mp3"
+      }
+    ],
+    "133_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "133_3_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/yingji-feixing.mp3"
+      }
+    ],
+    "133_3.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/yingji-feixing.mp3"
+      }
+    ],
+    "117_11.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/feitoushu-feixing.mp3"
+      }
+    ],
+    "117_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/feitoushu-feixing.mp3"
+      }
+    ],
+    "134_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "134_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/heng-shouji.mp3"
+      }
+    ],
+    "136_1.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "136_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/ha-shouji.mp3"
+      }
+    ],
+    "242_3.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/huxiao-feixing.mp3"
+      }
+    ],
+    "242_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/huxiao-feixing.mp3"
+      }
+    ],
+    "242_4.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "242_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "241_2.ccbi": [
+      {
+        "time": 0.222,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "241_1.ccbi": [
+      {
+        "time": 0.222,
+        "file": "music/foguangpuzhao-shouji.mp3"
+      }
+    ],
+    "215_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/foguangpuzhao-chushou.mp3"
+      }
+    ],
+    "209_2.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/dingtouqijianshu-shouji.mp3"
+      }
+    ],
+    "210_3.ccbi": [
+      {
+        "time": 0.002,
+        "file": "music/tongyongfashuchushou2.mp3"
+      }
+    ],
+    "210_4.ccbi": [
+      {
+        "time": 0.111,
+        "file": "music/zhangxinlei-feixing.mp3"
+      }
+    ],
+    "210_1.ccbi": [
+      {
+        "time": 0.111,
+        "file": "music/zhangxinlei-feixing.mp3"
+      }
+    ],
+    "206_1.ccbi": [
+      {
+        "time": 0.0,
+        "file": "music/bingpotianjing-shouji.mp3"
+      }
+    ]
+  },
+  "stages": {
+    "1": {
+      "background": "map/1/1.jpg",
+      "title": "map/1/name1.png"
+    },
+    "2": {
+      "background": "map/1/2.jpg",
+      "title": "map/1/name1.png"
+    },
+    "3": {
+      "background": "map/1/3.jpg",
+      "title": "map/1/name1.png"
+    },
+    "4": {
+      "background": "map/1/4.jpg",
+      "title": "map/1/name1.png"
+    },
+    "5": {
+      "background": "map/1/5.jpg",
+      "title": "map/1/name5.png"
+    },
+    "6": {
+      "background": "map/2/1.jpg",
+      "title": "map/2/name1.png"
+    },
+    "7": {
+      "background": "map/2/2.jpg",
+      "title": "map/2/name1.png"
+    },
+    "8": {
+      "background": "map/2/3.jpg",
+      "title": "map/2/name1.png"
+    },
+    "9": {
+      "background": "map/2/4.jpg",
+      "title": "map/2/name1.png"
+    },
+    "10": {
+      "background": "map/2/5.jpg",
+      "title": "map/2/name1.png"
+    }
+  },
+  "demo": {
+    "units": [
+      {
+        "id": 5022,
+        "name": "孙悟空",
+        "description": "灵明石猴，会七十二般变化，翻个筋斗十万八千里，手拿定海神针如意金箍棒，保唐僧西天取经，斩妖伏魔。",
+        "sprite": "chars/5/5_22.png",
+        "quality": 5,
+        "category": "佛",
+        "skill_id": 45,
+        "skill_name": "七十二变",
+        "attack": 271,
+        "defense": 76,
+        "hp": 3800,
+        "uid": "0-0",
+        "side": 0,
+        "slot": 1,
+        "max_hp": 3800
+      },
+      {
+        "id": 5034,
+        "name": "菩提祖师",
+        "description": "收孙悟空为徒，传授他七十二般变化和长生不老的法门。既精通道教也精通佛教的大仙形象：法力高深，弟子众多，教化广泛。山野之民，均受其教化。",
+        "sprite": "chars/5/5_34.png",
+        "quality": 5,
+        "category": "神",
+        "skill_id": 22,
+        "skill_name": "指地成钢",
+        "attack": 250,
+        "defense": 190,
+        "hp": 4500,
+        "uid": "0-1",
+        "side": 0,
+        "slot": 2,
+        "max_hp": 4500
+      },
+      {
+        "id": 5013,
+        "name": "六耳猕猴",
+        "description": "本领与悟空不相上下，善聆音，能察理，知前后，万物皆明。无名无姓，来历不明，师从蹊跷。四大神猴之一，冒充悟空动机令人费解，答案未揭晓前被如来识破，悟空一棍打死。",
+        "sprite": "chars/5/5_13.png",
+        "quality": 5,
+        "category": "妖",
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "attack": 250,
+        "defense": 95,
+        "hp": 4620,
+        "uid": "0-2",
+        "side": 0,
+        "slot": 3,
+        "max_hp": 4620
+      },
+      {
+        "id": 5023,
+        "name": "唐三藏",
+        "description": "金蝉子转世，坚定虔诚，最终为唐王取得大乘佛法三藏八十一部真经。",
+        "sprite": "chars/5/5_23.png",
+        "quality": 5,
+        "category": "佛",
+        "skill_id": 27,
+        "skill_name": "金蝉脱壳",
+        "attack": 194,
+        "defense": 150,
+        "hp": 4300,
+        "uid": "0-3",
+        "side": 0,
+        "slot": 4,
+        "max_hp": 4300
+      },
+      {
+        "id": 5020,
+        "name": "二郎神",
+        "description": "玉帝外甥，天生三眼，宠物哮天犬，会七十三般变化，与悟空本领不相上下。",
+        "sprite": "chars/5/5_20.png",
+        "quality": 5,
+        "category": "神",
+        "skill_id": 218,
+        "skill_name": "黑虎啸云",
+        "attack": 265,
+        "defense": 100,
+        "hp": 4250,
+        "uid": "1-0",
+        "side": 1,
+        "slot": 1,
+        "max_hp": 4250
+      },
+      {
+        "id": 5013,
+        "name": "六耳猕猴",
+        "description": "本领与悟空不相上下，善聆音，能察理，知前后，万物皆明。无名无姓，来历不明，师从蹊跷。四大神猴之一，冒充悟空动机令人费解，答案未揭晓前被如来识破，悟空一棍打死。",
+        "sprite": "chars/5/5_13.png",
+        "quality": 5,
+        "category": "妖",
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "attack": 250,
+        "defense": 95,
+        "hp": 4620,
+        "uid": "1-1",
+        "side": 1,
+        "slot": 2,
+        "max_hp": 4620
+      },
+      {
+        "id": 5019,
+        "name": "白象大王",
+        "description": "普贤菩萨坐骑白象，同在狮驼岭为王，青狮跟班，做个老二。",
+        "sprite": "chars/5/5_19.png",
+        "quality": 5,
+        "category": "魔",
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "attack": 194,
+        "defense": 86,
+        "hp": 5890,
+        "uid": "1-2",
+        "side": 1,
+        "slot": 3,
+        "max_hp": 5890
+      },
+      {
+        "id": 5014,
+        "name": "金翅大鹏王",
+        "description": "如来亲戚金翅大鹏雕，一翅九万里，法力无边，有法宝阴阳二气瓶，入瓶者一时三刻化为浆水，后被如来收服。",
+        "sprite": "chars/5/5_14.png",
+        "quality": 5,
+        "category": "魔",
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "attack": 242,
+        "defense": 87,
+        "hp": 4040,
+        "uid": "1-3",
+        "side": 1,
+        "slot": 4,
+        "max_hp": 4040
+      }
+    ],
+    "events": [
+      {
+        "turn": 1,
+        "actor": "0-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 226,
+            "hp": 4024
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 226,
+        "hp": 4024,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 1,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 3819
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 3819,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 1,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 3614
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 3614,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 1,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 149,
+            "hp": 3465
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 149,
+        "hp": 3465,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 1,
+        "actor": "1-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 231,
+            "hp": 3569
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 231,
+        "hp": 3569,
+        "text": "二郎神 · 普通攻击"
+      },
+      {
+        "turn": 1,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 216,
+            "hp": 3353
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 216,
+        "hp": 3353,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 1,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 160,
+            "hp": 3193
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 160,
+        "hp": 3193,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 1,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 208,
+            "hp": 2985
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 208,
+        "hp": 2985,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "0-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 226,
+            "hp": 3239
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 226,
+        "hp": 3239,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 3034
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 3034,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 2829
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 2829,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 149,
+            "hp": 2680
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 149,
+        "hp": 2680,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 231,
+            "hp": 2754
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 231,
+        "hp": 2754,
+        "text": "二郎神 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 216,
+            "hp": 2538
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 216,
+        "hp": 2538,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 160,
+            "hp": 2378
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 160,
+        "hp": 2378,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 208,
+            "hp": 2170
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 208,
+        "hp": 2170,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 3,
+        "actor": "0-0",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 348,
+            "hp": 2332
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 348,
+        "hp": 2332,
+        "text": "孙悟空 · 蓄力一击"
+      },
+      {
+        "turn": 3,
+        "actor": "0-1",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 318,
+            "hp": 2014
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 318,
+        "hp": 2014,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 3,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 318,
+            "hp": 1696
+          },
+          {
+            "target": "1-1",
+            "damage": 157,
+            "hp": 4463
+          },
+          {
+            "target": "1-2",
+            "damage": 161,
+            "hp": 5729
+          },
+          {
+            "target": "1-3",
+            "damage": 160,
+            "hp": 3880
+          }
+        ],
+        "kind": "skill",
+        "target": "1-0",
+        "damage": 318,
+        "hp": 1696,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 3,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 236,
+            "hp": 1460
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 236,
+        "hp": 1460,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 3,
+        "actor": "1-0",
+        "skill": true,
+        "skill_id": 218,
+        "skill_name": "黑虎啸云",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 350,
+            "hp": 1820
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 350,
+        "hp": 1820,
+        "text": "二郎神 · 黑虎啸云"
+      },
+      {
+        "turn": 3,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 328,
+            "hp": 1492
+          },
+          {
+            "target": "0-1",
+            "damage": 114,
+            "hp": 4386
+          },
+          {
+            "target": "0-2",
+            "damage": 157,
+            "hp": 4463
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 4168
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 328,
+        "hp": 1492,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 3,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 247,
+            "hp": 1245
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 247,
+        "hp": 1245,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 3,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 317,
+            "hp": 928
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 317,
+        "hp": 928,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 4,
+        "actor": "0-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 226,
+            "hp": 1234
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 226,
+        "hp": 1234,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 1029
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 1029,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 824
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 824,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 149,
+            "hp": 675
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 149,
+        "hp": 675,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 231,
+            "hp": 697
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 231,
+        "hp": 697,
+        "text": "二郎神 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 216,
+            "hp": 481
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 216,
+        "hp": 481,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 160,
+            "hp": 321
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 160,
+        "hp": 321,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 208,
+            "hp": 113
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 208,
+        "hp": 113,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "0-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 226,
+            "hp": 449
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 226,
+        "hp": 449,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 244
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 244,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 39
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 39,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 39,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 39,
+        "hp": 0,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 113,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 113,
+        "hp": 0,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 108,
+            "hp": 4278
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 108,
+        "hp": 4278,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 156,
+            "hp": 4122
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 156,
+        "hp": 4122,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 6,
+        "actor": "0-1",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 4143
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 4143,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 6,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 3823
+          },
+          {
+            "target": "1-2",
+            "damage": 161,
+            "hp": 5568
+          },
+          {
+            "target": "1-3",
+            "damage": 160,
+            "hp": 3720
+          }
+        ],
+        "kind": "skill",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 3823,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 6,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 239,
+            "hp": 3584
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 239,
+        "hp": 3584,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 6,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 277,
+            "hp": 3845
+          },
+          {
+            "target": "0-2",
+            "damage": 157,
+            "hp": 4306
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 4036
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 277,
+        "hp": 3845,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 6,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 196,
+            "hp": 3649
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 196,
+        "hp": 3649,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 6,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 265,
+            "hp": 3384
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 265,
+        "hp": 3384,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 7,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 3377
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 3377,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 3170
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 3170,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 3019
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 3019,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 164,
+            "hp": 3220
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 164,
+        "hp": 3220,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 108,
+            "hp": 3112
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 108,
+        "hp": 3112,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 156,
+            "hp": 2956
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 156,
+        "hp": 2956,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 2812
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 2812,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 2605
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 2605,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 2454
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 2454,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 164,
+            "hp": 2792
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 164,
+        "hp": 2792,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 108,
+            "hp": 2684
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 108,
+        "hp": 2684,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 156,
+            "hp": 2528
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 156,
+        "hp": 2528,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 9,
+        "actor": "0-1",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 2134
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 2134,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 9,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 1814
+          },
+          {
+            "target": "1-2",
+            "damage": 161,
+            "hp": 5407
+          },
+          {
+            "target": "1-3",
+            "damage": 160,
+            "hp": 3560
+          }
+        ],
+        "kind": "skill",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 1814,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 9,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 239,
+            "hp": 1575
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 239,
+        "hp": 1575,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 9,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 277,
+            "hp": 2251
+          },
+          {
+            "target": "0-2",
+            "damage": 157,
+            "hp": 4149
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 3904
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 277,
+        "hp": 2251,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 9,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 196,
+            "hp": 2055
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 196,
+        "hp": 2055,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 9,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 265,
+            "hp": 1790
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 265,
+        "hp": 1790,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 10,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 1368
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 1368,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 1161
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 1161,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 1010
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 1010,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 164,
+            "hp": 1626
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 164,
+        "hp": 1626,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 108,
+            "hp": 1518
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 108,
+        "hp": 1518,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 156,
+            "hp": 1362
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 156,
+        "hp": 1362,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 803
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 803,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 596
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 596,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 445
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 445,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 164,
+            "hp": 1198
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 164,
+        "hp": 1198,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 108,
+            "hp": 1090
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 108,
+        "hp": 1090,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 156,
+            "hp": 934
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 156,
+        "hp": 934,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 12,
+        "actor": "0-1",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 125
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 125,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 12,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 125,
+            "hp": 0
+          },
+          {
+            "target": "1-2",
+            "damage": 161,
+            "hp": 5246
+          },
+          {
+            "target": "1-3",
+            "damage": 160,
+            "hp": 3400
+          }
+        ],
+        "kind": "skill",
+        "target": "1-1",
+        "damage": 125,
+        "hp": 0,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 12,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 243,
+            "hp": 5003
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 243,
+        "hp": 5003,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 12,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 196,
+            "hp": 738
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 196,
+        "hp": 738,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 12,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 265,
+            "hp": 473
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 265,
+        "hp": 473,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 13,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 4792
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 4792,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 4581
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 4581,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 4426
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 4426,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 108,
+            "hp": 365
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 108,
+        "hp": 365,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 156,
+            "hp": 209
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 156,
+        "hp": 209,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 4215
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 4215,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 4004
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 4004,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 3849
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 3849,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 108,
+            "hp": 101
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 108,
+        "hp": 101,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 101,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 101,
+        "hp": 0,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 15,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 324,
+            "hp": 3525
+          },
+          {
+            "target": "1-3",
+            "damage": 160,
+            "hp": 3240
+          }
+        ],
+        "kind": "skill",
+        "target": "1-2",
+        "damage": 324,
+        "hp": 3525,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 15,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 243,
+            "hp": 3282
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 243,
+        "hp": 3282,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 15,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 239,
+            "hp": 3910
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 239,
+        "hp": 3910,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 15,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 308,
+            "hp": 3602
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 308,
+        "hp": 3602,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 16,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 3071
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 3071,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 16,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 2916
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 2916,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 16,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 151,
+            "hp": 3451
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 151,
+        "hp": 3451,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 16,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 199,
+            "hp": 3252
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 199,
+        "hp": 3252,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 17,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 2705
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 2705,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 17,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 2550
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 2550,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 17,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 151,
+            "hp": 3101
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 151,
+        "hp": 3101,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 17,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 199,
+            "hp": 2902
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 199,
+        "hp": 2902,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 18,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 324,
+            "hp": 2226
+          },
+          {
+            "target": "1-3",
+            "damage": 160,
+            "hp": 3080
+          }
+        ],
+        "kind": "skill",
+        "target": "1-2",
+        "damage": 324,
+        "hp": 2226,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 18,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 243,
+            "hp": 1983
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 243,
+        "hp": 1983,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 18,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 239,
+            "hp": 2663
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 239,
+        "hp": 2663,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 18,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 308,
+            "hp": 2355
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 308,
+        "hp": 2355,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 19,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 1772
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 1772,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 19,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 1617
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 1617,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 19,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 151,
+            "hp": 2204
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 151,
+        "hp": 2204,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 19,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 199,
+            "hp": 2005
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 199,
+        "hp": 2005,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 20,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 1406
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 1406,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 20,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 1251
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 1251,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 20,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 151,
+            "hp": 1854
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 151,
+        "hp": 1854,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 20,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 199,
+            "hp": 1655
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 199,
+        "hp": 1655,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 21,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 324,
+            "hp": 927
+          },
+          {
+            "target": "1-3",
+            "damage": 160,
+            "hp": 2920
+          }
+        ],
+        "kind": "skill",
+        "target": "1-2",
+        "damage": 324,
+        "hp": 927,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 21,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 243,
+            "hp": 684
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 243,
+        "hp": 684,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 21,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 239,
+            "hp": 1416
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 239,
+        "hp": 1416,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 21,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 308,
+            "hp": 1108
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 308,
+        "hp": 1108,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 22,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 473
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 473,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 22,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 318
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 318,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 22,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 151,
+            "hp": 957
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 151,
+        "hp": 957,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 22,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 199,
+            "hp": 758
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 199,
+        "hp": 758,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 23,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 107
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 107,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 23,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 107,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 107,
+        "hp": 0,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 23,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 199,
+            "hp": 559
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 199,
+        "hp": 559,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 24,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 323,
+            "hp": 2597
+          }
+        ],
+        "kind": "skill",
+        "target": "1-3",
+        "damage": 323,
+        "hp": 2597,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 24,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 242,
+            "hp": 2355
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 242,
+        "hp": 2355,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 24,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 308,
+            "hp": 251
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 308,
+        "hp": 251,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 25,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 211,
+            "hp": 2144
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 211,
+        "hp": 2144,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 25,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 155,
+            "hp": 1989
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 155,
+        "hp": 1989,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 25,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 199,
+            "hp": 52
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 199,
+        "hp": 52,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 26,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 211,
+            "hp": 1778
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 211,
+        "hp": 1778,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 26,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 155,
+            "hp": 1623
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 155,
+        "hp": 1623,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 26,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 52,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 52,
+        "hp": 0,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 27,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 242,
+            "hp": 1381
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 242,
+        "hp": 1381,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 27,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 283,
+            "hp": 3621
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 283,
+        "hp": 3621,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 28,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 155,
+            "hp": 1226
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 155,
+        "hp": 1226,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 28,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 3447
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 3447,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 29,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 155,
+            "hp": 1071
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 155,
+        "hp": 1071,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 29,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 3273
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 3273,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 30,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-3",
+            "damage": 242,
+            "hp": 829
+          }
+        ],
+        "kind": "attack",
+        "target": "1-3",
+        "damage": 242,
+        "hp": 829,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 30,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 283,
+            "hp": 2990
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 283,
+        "hp": 2990,
+        "text": "金翅大鹏王 · 三头六臂"
+      }
+    ],
+    "won": false,
+    "turns": 30,
+    "rules": "local-v2",
+    "report_version": 2,
+    "stage": {
+      "id": 0,
+      "name": "仙盟战场",
+      "background": "map/special/xmz.jpg",
+      "title": "map/special/xmz.png"
+    },
+    "preview": true,
+    "silver": 0,
+    "experience": 0,
+    "first_clear": false
+  },
+  "skill_demo": {
+    "units": [
+      {
+        "id": 4020,
+        "name": "风伯",
+        "description": "风伯方天君，掌八风消息，通五运之气候，搭档雨师。传为蚩尤师弟。",
+        "sprite": "chars/4/4_20.png",
+        "quality": 4,
+        "category": "神",
+        "skill_id": 104,
+        "skill_name": "龙腾滔天",
+        "attack": 173,
+        "defense": 83,
+        "hp": 2690,
+        "uid": "0-0",
+        "side": 0,
+        "slot": 1,
+        "max_hp": 2690
+      },
+      {
+        "id": 5022,
+        "name": "孙悟空",
+        "description": "灵明石猴，会七十二般变化，翻个筋斗十万八千里，手拿定海神针如意金箍棒，保唐僧西天取经，斩妖伏魔。",
+        "sprite": "chars/5/5_22.png",
+        "quality": 5,
+        "category": "佛",
+        "skill_id": 45,
+        "skill_name": "七十二变",
+        "attack": 271,
+        "defense": 76,
+        "hp": 3800,
+        "uid": "0-1",
+        "side": 0,
+        "slot": 2,
+        "max_hp": 3800
+      },
+      {
+        "id": 5034,
+        "name": "菩提祖师",
+        "description": "收孙悟空为徒，传授他七十二般变化和长生不老的法门。既精通道教也精通佛教的大仙形象：法力高深，弟子众多，教化广泛。山野之民，均受其教化。",
+        "sprite": "chars/5/5_34.png",
+        "quality": 5,
+        "category": "神",
+        "skill_id": 22,
+        "skill_name": "指地成钢",
+        "attack": 250,
+        "defense": 190,
+        "hp": 4500,
+        "uid": "0-2",
+        "side": 0,
+        "slot": 3,
+        "max_hp": 4500
+      },
+      {
+        "id": 5023,
+        "name": "唐三藏",
+        "description": "金蝉子转世，坚定虔诚，最终为唐王取得大乘佛法三藏八十一部真经。",
+        "sprite": "chars/5/5_23.png",
+        "quality": 5,
+        "category": "佛",
+        "skill_id": 27,
+        "skill_name": "金蝉脱壳",
+        "attack": 194,
+        "defense": 150,
+        "hp": 4300,
+        "uid": "0-3",
+        "side": 0,
+        "slot": 4,
+        "max_hp": 4300
+      },
+      {
+        "id": 5020,
+        "name": "二郎神",
+        "description": "玉帝外甥，天生三眼，宠物哮天犬，会七十三般变化，与悟空本领不相上下。",
+        "sprite": "chars/5/5_20.png",
+        "quality": 5,
+        "category": "神",
+        "skill_id": 218,
+        "skill_name": "黑虎啸云",
+        "attack": 265,
+        "defense": 100,
+        "hp": 4250,
+        "uid": "1-0",
+        "side": 1,
+        "slot": 1,
+        "max_hp": 4250
+      },
+      {
+        "id": 5013,
+        "name": "六耳猕猴",
+        "description": "本领与悟空不相上下，善聆音，能察理，知前后，万物皆明。无名无姓，来历不明，师从蹊跷。四大神猴之一，冒充悟空动机令人费解，答案未揭晓前被如来识破，悟空一棍打死。",
+        "sprite": "chars/5/5_13.png",
+        "quality": 5,
+        "category": "妖",
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "attack": 250,
+        "defense": 95,
+        "hp": 4620,
+        "uid": "1-1",
+        "side": 1,
+        "slot": 2,
+        "max_hp": 4620
+      },
+      {
+        "id": 5019,
+        "name": "白象大王",
+        "description": "普贤菩萨坐骑白象，同在狮驼岭为王，青狮跟班，做个老二。",
+        "sprite": "chars/5/5_19.png",
+        "quality": 5,
+        "category": "魔",
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "attack": 194,
+        "defense": 86,
+        "hp": 5890,
+        "uid": "1-2",
+        "side": 1,
+        "slot": 3,
+        "max_hp": 5890
+      },
+      {
+        "id": 5014,
+        "name": "金翅大鹏王",
+        "description": "如来亲戚金翅大鹏雕，一翅九万里，法力无边，有法宝阴阳二气瓶，入瓶者一时三刻化为浆水，后被如来收服。",
+        "sprite": "chars/5/5_14.png",
+        "quality": 5,
+        "category": "魔",
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "attack": 242,
+        "defense": 87,
+        "hp": 4040,
+        "uid": "1-3",
+        "side": 1,
+        "slot": 4,
+        "max_hp": 4040
+      }
+    ],
+    "events": [
+      {
+        "turn": 1,
+        "actor": "0-0",
+        "skill": true,
+        "skill_id": 104,
+        "skill_name": "龙腾滔天",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 206,
+            "hp": 4044
+          },
+          {
+            "target": "1-1",
+            "damage": 95,
+            "hp": 4525
+          },
+          {
+            "target": "1-2",
+            "damage": 99,
+            "hp": 5791
+          },
+          {
+            "target": "1-3",
+            "damage": 99,
+            "hp": 3941
+          }
+        ],
+        "kind": "skill",
+        "target": "1-0",
+        "damage": 206,
+        "hp": 4044,
+        "text": "风伯 · 龙腾滔天"
+      },
+      {
+        "turn": 1,
+        "actor": "0-1",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 348,
+            "hp": 3696
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 348,
+        "hp": 3696,
+        "text": "孙悟空 · 蓄力一击"
+      },
+      {
+        "turn": 1,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 318,
+            "hp": 3378
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 318,
+        "hp": 3378,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 1,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 236,
+            "hp": 3142
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 236,
+        "hp": 3142,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 1,
+        "actor": "1-0",
+        "skill": true,
+        "skill_id": 218,
+        "skill_name": "黑虎啸云",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 347,
+            "hp": 2343
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 347,
+        "hp": 2343,
+        "text": "二郎神 · 黑虎啸云"
+      },
+      {
+        "turn": 1,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 325,
+            "hp": 2018
+          },
+          {
+            "target": "0-1",
+            "damage": 165,
+            "hp": 3635
+          },
+          {
+            "target": "0-2",
+            "damage": 114,
+            "hp": 4386
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 4168
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 325,
+        "hp": 2018,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 1,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 244,
+            "hp": 1774
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 244,
+        "hp": 1774,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 1,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 314,
+            "hp": 1460
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 314,
+        "hp": 1460,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 2,
+        "actor": "0-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 128,
+            "hp": 3014
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 128,
+        "hp": 3014,
+        "text": "风伯 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 226,
+            "hp": 2788
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 226,
+        "hp": 2788,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 2583
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 2583,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 149,
+            "hp": 2434
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 149,
+        "hp": 2434,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 228,
+            "hp": 1232
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 228,
+        "hp": 1232,
+        "text": "二郎神 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 213,
+            "hp": 1019
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 213,
+        "hp": 1019,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 157,
+            "hp": 862
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 157,
+        "hp": 862,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 2,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 205,
+            "hp": 657
+          }
+        ],
+        "kind": "attack",
+        "target": "0-0",
+        "damage": 205,
+        "hp": 657,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 3,
+        "actor": "0-0",
+        "skill": true,
+        "skill_id": 104,
+        "skill_name": "龙腾滔天",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 206,
+            "hp": 2228
+          },
+          {
+            "target": "1-1",
+            "damage": 95,
+            "hp": 4430
+          },
+          {
+            "target": "1-2",
+            "damage": 99,
+            "hp": 5692
+          },
+          {
+            "target": "1-3",
+            "damage": 99,
+            "hp": 3842
+          }
+        ],
+        "kind": "skill",
+        "target": "1-0",
+        "damage": 206,
+        "hp": 2228,
+        "text": "风伯 · 龙腾滔天"
+      },
+      {
+        "turn": 3,
+        "actor": "0-1",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 348,
+            "hp": 1880
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 348,
+        "hp": 1880,
+        "text": "孙悟空 · 蓄力一击"
+      },
+      {
+        "turn": 3,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 318,
+            "hp": 1562
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 318,
+        "hp": 1562,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 3,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 236,
+            "hp": 1326
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 236,
+        "hp": 1326,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 3,
+        "actor": "1-0",
+        "skill": true,
+        "skill_id": 218,
+        "skill_name": "黑虎啸云",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 347,
+            "hp": 310
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 347,
+        "hp": 310,
+        "text": "二郎神 · 黑虎啸云"
+      },
+      {
+        "turn": 3,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-0",
+            "damage": 310,
+            "hp": 0
+          },
+          {
+            "target": "0-1",
+            "damage": 165,
+            "hp": 3470
+          },
+          {
+            "target": "0-2",
+            "damage": 114,
+            "hp": 4272
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 4036
+          }
+        ],
+        "kind": "skill",
+        "target": "0-0",
+        "damage": 310,
+        "hp": 0,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 3,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 247,
+            "hp": 3223
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 247,
+        "hp": 3223,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 3,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 317,
+            "hp": 2906
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 317,
+        "hp": 2906,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 4,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 226,
+            "hp": 1100
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 226,
+        "hp": 1100,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 895
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 895,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 149,
+            "hp": 746
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 149,
+        "hp": 746,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 231,
+            "hp": 2675
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 231,
+        "hp": 2675,
+        "text": "二郎神 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 216,
+            "hp": 2459
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 216,
+        "hp": 2459,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 160,
+            "hp": 2299
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 160,
+        "hp": 2299,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 4,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 208,
+            "hp": 2091
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 208,
+        "hp": 2091,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 226,
+            "hp": 520
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 226,
+        "hp": 520,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 205,
+            "hp": 315
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 205,
+        "hp": 315,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 149,
+            "hp": 166
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 149,
+        "hp": 166,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "1-0",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 231,
+            "hp": 1860
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 231,
+        "hp": 1860,
+        "text": "二郎神 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 216,
+            "hp": 1644
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 216,
+        "hp": 1644,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 160,
+            "hp": 1484
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 160,
+        "hp": 1484,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 5,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 208,
+            "hp": 1276
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 208,
+        "hp": 1276,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 6,
+        "actor": "0-1",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-0",
+            "damage": 166,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "1-0",
+        "damage": 166,
+        "hp": 0,
+        "text": "孙悟空 · 蓄力一击"
+      },
+      {
+        "turn": 6,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 4110
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 4110,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 6,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 239,
+            "hp": 3871
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 239,
+        "hp": 3871,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 6,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 328,
+            "hp": 948
+          },
+          {
+            "target": "0-2",
+            "damage": 114,
+            "hp": 4158
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 3904
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 328,
+        "hp": 948,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 6,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 247,
+            "hp": 701
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 247,
+        "hp": 701,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 6,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 317,
+            "hp": 384
+          }
+        ],
+        "kind": "skill",
+        "target": "0-1",
+        "damage": 317,
+        "hp": 384,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 7,
+        "actor": "0-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 228,
+            "hp": 3643
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 228,
+        "hp": 3643,
+        "text": "孙悟空 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 3436
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 3436,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 3285
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 3285,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 216,
+            "hp": 168
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 216,
+        "hp": 168,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 160,
+            "hp": 8
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 160,
+        "hp": 8,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 7,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-1",
+            "damage": 8,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "0-1",
+        "damage": 8,
+        "hp": 0,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 3078
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 3078,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 2927
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 2927,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 164,
+            "hp": 3994
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 164,
+        "hp": 3994,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 108,
+            "hp": 3886
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 108,
+        "hp": 3886,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 8,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 156,
+            "hp": 3730
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 156,
+        "hp": 3730,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 9,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 2607
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 2607,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 9,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 239,
+            "hp": 2368
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 239,
+        "hp": 2368,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 9,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 277,
+            "hp": 3453
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 3772
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 277,
+        "hp": 3453,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 9,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 196,
+            "hp": 3257
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 196,
+        "hp": 3257,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 9,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 265,
+            "hp": 2992
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 265,
+        "hp": 2992,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 10,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 2161
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 2161,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 2010
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 2010,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 164,
+            "hp": 2828
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 164,
+        "hp": 2828,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 108,
+            "hp": 2720
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 108,
+        "hp": 2720,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 10,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 156,
+            "hp": 2564
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 156,
+        "hp": 2564,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 1803
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 1803,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 1652
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 1652,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 164,
+            "hp": 2400
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 164,
+        "hp": 2400,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 108,
+            "hp": 2292
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 108,
+        "hp": 2292,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 11,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 156,
+            "hp": 2136
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 156,
+        "hp": 2136,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 12,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 1332
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 1332,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 12,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 239,
+            "hp": 1093
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 239,
+        "hp": 1093,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 12,
+        "actor": "1-1",
+        "skill": true,
+        "skill_id": 105,
+        "skill_name": "冤魂乱舞",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 277,
+            "hp": 1859
+          },
+          {
+            "target": "0-3",
+            "damage": 132,
+            "hp": 3640
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 277,
+        "hp": 1859,
+        "text": "六耳猕猴 · 冤魂乱舞"
+      },
+      {
+        "turn": 12,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 196,
+            "hp": 1663
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 196,
+        "hp": 1663,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 12,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 265,
+            "hp": 1398
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 265,
+        "hp": 1398,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 13,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 886
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 886,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 735
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 735,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 164,
+            "hp": 1234
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 164,
+        "hp": 1234,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 108,
+            "hp": 1126
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 108,
+        "hp": 1126,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 13,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 156,
+            "hp": 970
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 156,
+        "hp": 970,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 207,
+            "hp": 528
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 207,
+        "hp": 528,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 151,
+            "hp": 377
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 151,
+        "hp": 377,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "1-1",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 164,
+            "hp": 806
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 164,
+        "hp": 806,
+        "text": "六耳猕猴 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 108,
+            "hp": 698
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 108,
+        "hp": 698,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 14,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 156,
+            "hp": 542
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 156,
+        "hp": 542,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 15,
+        "actor": "0-2",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 320,
+            "hp": 57
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 320,
+        "hp": 57,
+        "text": "菩提祖师 · 蓄力一击"
+      },
+      {
+        "turn": 15,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-1",
+            "damage": 57,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "1-1",
+        "damage": 57,
+        "hp": 0,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 15,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 196,
+            "hp": 346
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 196,
+        "hp": 346,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 15,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 265,
+            "hp": 81
+          }
+        ],
+        "kind": "skill",
+        "target": "0-2",
+        "damage": 265,
+        "hp": 81,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 16,
+        "actor": "0-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 211,
+            "hp": 5481
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 211,
+        "hp": 5481,
+        "text": "菩提祖师 · 普通攻击"
+      },
+      {
+        "turn": 16,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 5326
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 5326,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 16,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-2",
+            "damage": 81,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "0-2",
+        "damage": 81,
+        "hp": 0,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 16,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 3466
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 3466,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 17,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 5171
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 5171,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 17,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 126,
+            "hp": 3340
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 126,
+        "hp": 3340,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 17,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 3166
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 3166,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 18,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 243,
+            "hp": 4928
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 243,
+        "hp": 4928,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 18,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 214,
+            "hp": 2952
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 214,
+        "hp": 2952,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 18,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 283,
+            "hp": 2669
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 283,
+        "hp": 2669,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 19,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 4773
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 4773,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 19,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 126,
+            "hp": 2543
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 126,
+        "hp": 2543,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 19,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 2369
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 2369,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 20,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 4618
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 4618,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 20,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 126,
+            "hp": 2243
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 126,
+        "hp": 2243,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 20,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 2069
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 2069,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 21,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 243,
+            "hp": 4375
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 243,
+        "hp": 4375,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 21,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 214,
+            "hp": 1855
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 214,
+        "hp": 1855,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 21,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 283,
+            "hp": 1572
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 283,
+        "hp": 1572,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 22,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 4220
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 4220,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 22,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 126,
+            "hp": 1446
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 126,
+        "hp": 1446,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 22,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 1272
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 1272,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 23,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 4065
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 4065,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 23,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 126,
+            "hp": 1146
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 126,
+        "hp": 1146,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 23,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 972
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 972,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 24,
+        "actor": "0-3",
+        "skill": true,
+        "skill_id": 1,
+        "skill_name": "蓄力一击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 243,
+            "hp": 3822
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 243,
+        "hp": 3822,
+        "text": "唐三藏 · 蓄力一击"
+      },
+      {
+        "turn": 24,
+        "actor": "1-2",
+        "skill": true,
+        "skill_id": 211,
+        "skill_name": "拿云手",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 214,
+            "hp": 758
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 214,
+        "hp": 758,
+        "text": "白象大王 · 拿云手"
+      },
+      {
+        "turn": 24,
+        "actor": "1-3",
+        "skill": true,
+        "skill_id": 208,
+        "skill_name": "三头六臂",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 283,
+            "hp": 475
+          }
+        ],
+        "kind": "skill",
+        "target": "0-3",
+        "damage": 283,
+        "hp": 475,
+        "text": "金翅大鹏王 · 三头六臂"
+      },
+      {
+        "turn": 25,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 3667
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 3667,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 25,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 126,
+            "hp": 349
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 126,
+        "hp": 349,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 25,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 174,
+            "hp": 175
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 174,
+        "hp": 175,
+        "text": "金翅大鹏王 · 普通攻击"
+      },
+      {
+        "turn": 26,
+        "actor": "0-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "1-2",
+            "damage": 155,
+            "hp": 3512
+          }
+        ],
+        "kind": "attack",
+        "target": "1-2",
+        "damage": 155,
+        "hp": 3512,
+        "text": "唐三藏 · 普通攻击"
+      },
+      {
+        "turn": 26,
+        "actor": "1-2",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 126,
+            "hp": 49
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 126,
+        "hp": 49,
+        "text": "白象大王 · 普通攻击"
+      },
+      {
+        "turn": 26,
+        "actor": "1-3",
+        "skill": false,
+        "skill_id": 1,
+        "skill_name": "普通攻击",
+        "hits": [
+          {
+            "target": "0-3",
+            "damage": 49,
+            "hp": 0
+          }
+        ],
+        "kind": "attack",
+        "target": "0-3",
+        "damage": 49,
+        "hp": 0,
+        "text": "金翅大鹏王 · 普通攻击"
+      }
+    ],
+    "won": false,
+    "turns": 26,
+    "rules": "local-v2",
+    "report_version": 2,
+    "stage": {
+      "id": 0,
+      "name": "仙盟战场",
+      "background": "map/special/pty.jpg",
+      "title": "map/special/pty.png"
+    },
+    "preview": true,
+    "silver": 0,
+    "experience": 0,
+    "first_clear": false
+  },
+  "resources": [
+    "101_1_2.ccbi",
+    "101_5.ccbi",
+    "106_1.ccbi",
+    "110_1.ccbi",
+    "110_11.ccbi",
+    "111_1.ccbi",
+    "112_11.ccbi",
+    "112_2.ccbi",
+    "113_1.ccbi",
+    "113_2.ccbi",
+    "114_1.ccbi",
+    "114_2.ccbi",
+    "116_1.ccbi",
+    "116_2.ccbi",
+    "1171_1.ccbi",
+    "1171_2.ccbi",
+    "117_1.ccbi",
+    "118_1.ccbi",
+    "122_1.ccbi",
+    "123_1.ccbi",
+    "123_2.ccbi",
+    "123_2_1.ccbi",
+    "128_1.ccbi",
+    "131_1.ccbi",
+    "131_2.ccbi",
+    "133_1.ccbi",
+    "133_2.ccbi",
+    "134_1.ccbi",
+    "134_2.ccbi",
+    "135_2.ccbi",
+    "136_1.ccbi",
+    "136_2.ccbi",
+    "201_4.ccbi",
+    "201_5.ccbi",
+    "204_1.ccbi",
+    "204_2.ccbi",
+    "206_1.ccbi",
+    "208_1.ccbi",
+    "209_1.ccbi",
+    "210_1.ccbi",
+    "210_5.ccbi",
+    "211_1.ccbi",
+    "212_1.ccbi",
+    "214_1.ccbi",
+    "215_1.ccbi",
+    "218_2.ccbi",
+    "220_1.ccbi",
+    "220_2.ccbi",
+    "221_1.ccbi",
+    "232_1.ccbi",
+    "241_2.ccbi",
+    "242_1.ccbi",
+    "242_2.ccbi",
+    "243_1.ccbi",
+    "244_1.ccbi",
+    "245_1.ccbi",
+    "blood_5.ccbi",
+    "blood_5_inv.ccbi",
+    "chars/4/4_20.png",
+    "chars/5/5_13.png",
+    "chars/5/5_14.png",
+    "chars/5/5_19.png",
+    "chars/5/5_20.png",
+    "chars/5/5_22.png",
+    "chars/5/5_23.png",
+    "chars/5/5_34.png",
+    "jiaxue.ccbi",
+    "map/1/1.jpg",
+    "map/1/2.jpg",
+    "map/1/3.jpg",
+    "map/1/4.jpg",
+    "map/1/5.jpg",
+    "map/1/name1.png",
+    "map/1/name5.png",
+    "map/2/1.jpg",
+    "map/2/2.jpg",
+    "map/2/3.jpg",
+    "map/2/4.jpg",
+    "map/2/5.jpg",
+    "map/2/name1.png",
+    "map/special/pty.jpg",
+    "map/special/pty.png",
+    "map/special/xmz.jpg",
+    "map/special/xmz.png",
+    "music/bingpotianjing-shouji.mp3",
+    "music/buff.mp3",
+    "music/chengjiu.mp3",
+    "music/choujiang.mp3",
+    "music/dingtouqijianshu-shouji.mp3",
+    "music/feitoushu-feixing.mp3",
+    "music/fight.mp3",
+    "music/foguangpuzhao-chushou.mp3",
+    "music/foguangpuzhao-shouji.mp3",
+    "music/ha-shouji.mp3",
+    "music/heng-shouji.mp3",
+    "music/huangquanzhishui-shouji.mp3",
+    "music/huxiao-feixing.mp3",
+    "music/nayunshou-shouji.mp3",
+    "music/pugongjin-chushou.mp3",
+    "music/pugongjin-shouji2.mp3",
+    "music/pugongyuan-chushou.mp3",
+    "music/pugongyuan-chushou2.mp3",
+    "music/qianguangzhan-chushou.mp3",
+    "music/qianguangzhan-shouji.mp3",
+    "music/sanmeishenfeng-shouji.mp3",
+    "music/sanmeizhenhuo-chushou.mp3",
+    "music/sanmeizhenhuo-shouji.mp3",
+    "music/shanyanshen1.mp3",
+    "music/shanyanshen2.mp3",
+    "music/tianleizhan-shouji.mp3",
+    "music/tongyongfashuchushou2.mp3",
+    "music/vs.mp3",
+    "music/wuleijue-shouji.mp3",
+    "music/xiuliqiankun-chushou.mp3",
+    "music/yingji-feixing.mp3",
+    "music/yuanhunluanwu-shouji.mp3",
+    "music/zhangxinlei-feixing.mp3",
+    "number/all_number_white.fnt",
+    "number/all_number_white.png",
+    "skill/name/101.png",
+    "skill/name/102.png",
+    "skill/name/103.png",
+    "skill/name/104.png",
+    "skill/name/105.png",
+    "skill/name/106.png",
+    "skill/name/107.png",
+    "skill/name/108.png",
+    "skill/name/110.png",
+    "skill/name/112.png",
+    "skill/name/2.png",
+    "skill/name/202.png",
+    "skill/name/203.png",
+    "skill/name/204.png",
+    "skill/name/205.png",
+    "skill/name/206.png",
+    "skill/name/207.png",
+    "skill/name/208.png",
+    "skill/name/209.png",
+    "skill/name/210.png",
+    "skill/name/211.png",
+    "skill/name/212.png",
+    "skill/name/213.png",
+    "skill/name/214.png",
+    "skill/name/215.png",
+    "skill/name/216.png",
+    "skill/name/217.png",
+    "skill/name/218.png",
+    "skill/name/22.png",
+    "skill/name/220.png",
+    "skill/name/221.png",
+    "skill/name/222.png",
+    "skill/name/223.png",
+    "skill/name/226.png",
+    "skill/name/23.png",
+    "skill/name/25.png",
+    "skill/name/27.png",
+    "skill/name/28.png",
+    "skill/name/29.png",
+    "skill/name/3.png",
+    "skill/name/31.png",
+    "skill/name/32.png",
+    "skill/name/34.png",
+    "skill/name/35.png",
+    "skill/name/36.png",
+    "skill/name/38.png",
+    "skill/name/39.png",
+    "skill/name/4.png",
+    "skill/name/42.png",
+    "skill/name/43.png",
+    "skill/name/45.png",
+    "skill/name/46.png",
+    "skill/name/48.png",
+    "skill/name/49.png",
+    "skill/name/6.png",
+    "skill/name/7.png",
+    "splash_eye.ccbi",
+    "splash_light.ccbi",
+    "v2/fightUI/blood_big.png",
+    "v2/fightUI/blood_char1.png",
+    "v2/fightUI/blood_char2.png",
+    "v2/fightUI/blood_mid.png",
+    "v2/fightUI/blood_star1.png",
+    "v2/fightUI/blood_star2.png",
+    "v2/fightUI/exp_bar.png",
+    "v2/fightUI/exp_bkg.png",
+    "v2/fightUI/fail1.png",
+    "v2/fightUI/fail2.png",
+    "v2/fightUI/fail3.png",
+    "v2/fightUI/firstFullStarHint.png",
+    "v2/fightUI/gate_name_bkg.png",
+    "v2/fightUI/list_bkg.png",
+    "v2/fightUI/replay1.png",
+    "v2/fightUI/replay2.png",
+    "v2/fightUI/return1.png",
+    "v2/fightUI/return2.png",
+    "v2/fightUI/succ1.png",
+    "v2/fightUI/succ2.png",
+    "v2/fightUI/succ3.png",
+    "v2/fightUI/up_halo.png",
+    "v2/fightUI/view1.png",
+    "v2/fightUI/view2.png",
+    "v2/skip_fight.png",
+    "v2/speed_1.png",
+    "v2/speed_2.png"
+  ],
+  "sources": [
+    {
+      "resource": "lua/common/constants.lua",
+      "version": "ver====1061====",
+      "filename": "975e866e48c1d7cb615d82067cf8d584.data",
+      "sha256": "b022af521ce24991e8d91d1116e3d1f0659603dd1363ea7cdef395e2089584f4"
+    },
+    {
+      "resource": "lua/unit/charecter.lua",
+      "version": "ver====1061====",
+      "filename": "b68dc331a6a11870f039d0a5db73b6cc.data",
+      "sha256": "de608a4f76303c8e1580dedd3ae9ba6df8fde9d44c0567a054c2f9286b03601e"
+    },
+    {
+      "resource": "lua/ui/fightUI.lua",
+      "version": "ver====1061====",
+      "filename": "c2d8ff644ac46bb8caeae06e54d4c26a.data",
+      "sha256": "63fd40fe8fc11b846184b456fa4be7c07a1a09f4b7cb9d310178bd8f49074183"
+    },
+    {
+      "resource": "lua/skill/skill.lua",
+      "version": "ver====1061====",
+      "filename": "6b44e7dcdecb45f3b5a5561e87b495c0.data",
+      "sha256": "c067103709471e84bb458a3281b755eaa34bdeae606927ac3b7c46fce230cac2"
+    },
+    {
+      "resource": "lua/skill/skill_mgr.lua",
+      "version": "ver====1061====",
+      "filename": "07437fc111dc116efccb6da6504e7eb9.data",
+      "sha256": "ff2b9def25c9f0f9d5a8bb2719fd5fca1dce16459044be33c395beb44b28fb0c"
+    },
+    {
+      "resource": "csv_config/skill_base.csv",
+      "version": "ver====1263====",
+      "filename": "f1ee4370b34a46627d56f034f0aaa967.data",
+      "sha256": "4e526b9630e98cc4e948306626ee02a4021ff56017a42b018ed200ce17bf8515"
+    },
+    {
+      "resource": "csv_config/skill_name.csv",
+      "version": "ver====1263====",
+      "filename": "0dd420bb0a0f535ac4b96e896e927c8c.data",
+      "sha256": "43ad79fb0ef7dbf72702b1550283bf07f03fc2567a2bccb7e2e6f8f6fcddd0db"
+    },
+    {
+      "resource": "csv_config/effect_sound.csv",
+      "version": "ver====1061====",
+      "filename": "297a7e1f7de5275f17b22df702b4f786.data",
+      "sha256": "37c3a2a3b70417245c746506736b429b468c722220b142d789dbc89e5ddf9156"
+    },
+    {
+      "resource": "lua/common/msg_def.lua",
+      "version": "ver====1061====",
+      "filename": "f720969432cc6a0f1fb7b3d7ac448195.data",
+      "sha256": "339d28f47e20d1bf7c039a8393f59896444c44ce6fe5a9212e8b19efa7356165"
+    },
+    {
+      "resource": "lua/skill/skill_1_new.lua",
+      "version": "ver====1061====",
+      "filename": "5a2d3cb3ac636a87c0ec515e2c5d799d.data",
+      "sha256": "d1b17b665451f857be18a9cc5c69df63c6b3779f6451a1921258d63404bd1dd6"
+    },
+    {
+      "resource": "lua/skill/skill_6.lua",
+      "version": "ver====1061====",
+      "filename": "baa8800cafc4a235fbb5b05993731c21.data",
+      "sha256": "386b38c6464aba022ef55cec2517c68a021e3f93a0ff195ee6f428f56f4a9370"
+    },
+    {
+      "resource": "lua/skill/skill_101.lua",
+      "version": "ver====1061====",
+      "filename": "3de73db0f9adbcb54270a7ae69913282.data",
+      "sha256": "05c342fcfbe53b387225223f94edf0eb11b0e80666ade18f176c6e64e063d9a8"
+    },
+    {
+      "resource": "lua/skill/skill_102.lua",
+      "version": "ver====1061====",
+      "filename": "9676482ee345c1032d71164ac49206f1.data",
+      "sha256": "f783ffbbfc24a862606c3d3f94b3974a63b69192999c1749a34437e6fbae39a8"
+    },
+    {
+      "resource": "lua/skill/skill_103.lua",
+      "version": "ver====1061====",
+      "filename": "783e3d8867a7eacc0412687e413323b2.data",
+      "sha256": "d3455a5833ef788a7d6da9adf84d3c6c4da62feb070756c97706221c50eddcde"
+    },
+    {
+      "resource": "lua/skill/skill_104.lua",
+      "version": "ver====1061====",
+      "filename": "80a8909ef56dfca895b89e0931a0963a.data",
+      "sha256": "8e1c40b3f11edbe6c71db5307579f20ae7ee9d226606d43ee0797d583c4f5e87"
+    },
+    {
+      "resource": "lua/skill/skill_105.lua",
+      "version": "ver====1061====",
+      "filename": "d2b0a55006e6f089f2e7520859a02793.data",
+      "sha256": "40783fb9cf62a2e66455628f255eacfb4ddf00e06b0cdff489f5774ec03dbb59"
+    },
+    {
+      "resource": "lua/skill/skill_106.lua",
+      "version": "ver====1061====",
+      "filename": "e0a35f3cdc9b70b23c6c6ec403a8732e.data",
+      "sha256": "2c0b3ad3deba6c713f29762fcf4370acf3722ca2927f5ac57c98ebd481ea770c"
+    },
+    {
+      "resource": "lua/skill/skill_107.lua",
+      "version": "ver====1061====",
+      "filename": "40e7fb5169f9bb236b2a1e8e32f467a8.data",
+      "sha256": "bb47503e7c91c59c6d47cfd7e178ffede28f3db17759ca991ada60dd51e8e3ab"
+    },
+    {
+      "resource": "lua/skill/skill_108.lua",
+      "version": "ver====1061====",
+      "filename": "a2f263c8c8c8d30cbc7abc80d21e7758.data",
+      "sha256": "62815f3185b9f74bb0c241492f853c7fd8dfc4ca399b6ec72e7dfd32e356ef0f"
+    },
+    {
+      "resource": "lua/skill/skill_110.lua",
+      "version": "ver====1061====",
+      "filename": "756adb267962ad8d7115d8ec12f78a57.data",
+      "sha256": "acb613b2b46cca4b3f3dbbdade210e7bb7d1c34ccf391ca2541f302217ed7bc4"
+    },
+    {
+      "resource": "lua/skill/skill_112.lua",
+      "version": "ver====1061====",
+      "filename": "bfa549a3f11212dd25effed3112ecb86.data",
+      "sha256": "956ca0a65ba5b7950bed7c9d241a96a10b44706d855a573bda04cd1bf56ff17a"
+    },
+    {
+      "resource": "lua/skill/skill_202.lua",
+      "version": "ver====1061====",
+      "filename": "bab32fe6176f3d9e328912d97a7be521.data",
+      "sha256": "a590ad9db2ab8a74622a18ef482f2edf4bfd7fc0ed3e31e39f687dd26c220e30"
+    },
+    {
+      "resource": "lua/skill/skill_203.lua",
+      "version": "ver====1061====",
+      "filename": "f8652e75389a8a9ee6640f2542fd498e.data",
+      "sha256": "7e6d7b4eb0039a738958955554ac9129c7517853401a737041fe3f66a1315f51"
+    },
+    {
+      "resource": "lua/skill/skill_204.lua",
+      "version": "ver====1061====",
+      "filename": "5b701757bfc86bdc5dabbc3260073041.data",
+      "sha256": "3be8731d148ee48e389c8ac87916475afaeca68738137373b2a5604b99f38900"
+    },
+    {
+      "resource": "lua/skill/skill_205.lua",
+      "version": "ver====1061====",
+      "filename": "7092393fa5155552d9905ea40edf6898.data",
+      "sha256": "2fa00098a7f82428aeec01cc9c359e3cc2ff48447cf9b923aa0a0079d3a901dd"
+    },
+    {
+      "resource": "lua/skill/skill_206.lua",
+      "version": "ver====1061====",
+      "filename": "3ebde0595d32d65f2371881fb4ce166b.data",
+      "sha256": "e4cf4e767fd5831f3c2f9b1e7b11a874d1ea4646ee665cc3eaa2750e5713648f"
+    },
+    {
+      "resource": "lua/skill/skill_207.lua",
+      "version": "ver====1061====",
+      "filename": "99db5fa4f7a6c96cdbcfdbb54781cec2.data",
+      "sha256": "83e026ea3714aada0a21b1fc9880bcb863f7a4a5dfcb53299a2fb4c7b053c89f"
+    },
+    {
+      "resource": "lua/skill/skill_208.lua",
+      "version": "ver====1061====",
+      "filename": "6b442091993b1611cc7aa3e1e893bd5e.data",
+      "sha256": "d7cdb6cd2238cbbb323c933b83a3aaf28cc76e4d0620694c3c00149c1dc22c1e"
+    },
+    {
+      "resource": "lua/skill/skill_209.lua",
+      "version": "ver====1061====",
+      "filename": "e7cb084b9be677f70cd2df6289a567a5.data",
+      "sha256": "eb6d5bf9cf9c882c14e580dc5a001e32704b1f12c6d58c134c3d94cbe2b5bbca"
+    },
+    {
+      "resource": "lua/skill/skill_210.lua",
+      "version": "ver====1061====",
+      "filename": "a8050dfadf6e2f80039aaa7e19b09ae5.data",
+      "sha256": "bfff33a68c6821184f239f9676a879a183e46d44c5ec9aa05e9a5ca5db0a09f4"
+    },
+    {
+      "resource": "lua/skill/skill_211.lua",
+      "version": "ver====1061====",
+      "filename": "fd91cb4bf66b0644e08e3b9f5901e981.data",
+      "sha256": "fcea2ffc1f52407732c0c17ae72d5c846ff852eec29205334dfbc392ce4972fe"
+    },
+    {
+      "resource": "lua/skill/skill_212.lua",
+      "version": "ver====1061====",
+      "filename": "35189264579d0ef670f699f208a5fce5.data",
+      "sha256": "2a5c5d2d8fe3f796c2a965e8ae9447b791d5673fa37215f7edd1a64b712aa6ad"
+    },
+    {
+      "resource": "lua/skill/skill_213.lua",
+      "version": "ver====1061====",
+      "filename": "ba0e7b1c1696ac0fec33c2f2f2442966.data",
+      "sha256": "c8e7cc6008a839a59e762043b8208689456d2567e808639d9892f0c36afc821a"
+    },
+    {
+      "resource": "lua/skill/skill_214.lua",
+      "version": "ver====1061====",
+      "filename": "a2d538903de3d34cee4a113de5da95cd.data",
+      "sha256": "7c4f924d7a4fc4a9c79aae3790e6d74c637bc436c4727a3adb10dd3df04b6670"
+    },
+    {
+      "resource": "lua/skill/skill_215.lua",
+      "version": "ver====1061====",
+      "filename": "4cde2df8053e99685a7805d57c98b4ed.data",
+      "sha256": "b3fa2404d9608190e79e6327eadefd96f1bdf8c8551376730bb992cfdf4c86a4"
+    },
+    {
+      "resource": "lua/skill/skill_216.lua",
+      "version": "ver====1061====",
+      "filename": "32e13f2f03434c213115532459883e25.data",
+      "sha256": "0000adbfb913b8dbc9d873fa907272e1381d1790589bac7c5815fc300e1d17e6"
+    },
+    {
+      "resource": "lua/skill/skill_217.lua",
+      "version": "ver====1061====",
+      "filename": "cbc8ad5332829f582b375382aa96ba14.data",
+      "sha256": "05d27d587082d2054ed507180573092457ae2eee6eba3c134067b0153a23503b"
+    },
+    {
+      "resource": "lua/skill/skill_218.lua",
+      "version": "ver====1061====",
+      "filename": "d2c1c890d31436022cea1d6fdae0019f.data",
+      "sha256": "6c0eca523a6950febde0e147fa6dc0d30f151c228ec69cca62bf822b456b1490"
+    },
+    {
+      "resource": "lua/skill/skill_220.lua",
+      "version": "ver====1061====",
+      "filename": "e13523cc1d1d41ed687f51374d821f90.data",
+      "sha256": "ba84746baa9b69aa474cd7b9c87ec0f6b213c4e74eeb0d2c774e26de5effc7ab"
+    },
+    {
+      "resource": "lua/skill/skill_221.lua",
+      "version": "ver====1061====",
+      "filename": "8fae79fecf12161daed727096f001a3e.data",
+      "sha256": "1ef2ef3fa6f868338176e2a43d8fdbd7112979be48d57f416849d41a5f5d8778"
+    },
+    {
+      "resource": "lua/skill/skill_222.lua",
+      "version": "ver====1061====",
+      "filename": "009d1ca85831f56195d3496a05bb012f.data",
+      "sha256": "418bb009ae2cbfe3bb87c1a4be96bc4cded9f400dd94f87c6dad0ea8a75b5b8d"
+    },
+    {
+      "resource": "lua/skill/skill_223.lua",
+      "version": "ver====1061====",
+      "filename": "36bd0b0c6daaf4012e2c9094be03bfa9.data",
+      "sha256": "9315bb9e8235b5a74f49820d6b52a984dc46706b5ba8c8a35ba9ad8333f06612"
+    },
+    {
+      "resource": "lua/skill/skill_226.lua",
+      "version": "ver====1061====",
+      "filename": "37293e7732627145c307d971ee536f55.data",
+      "sha256": "324198d51d6a7cd596f6388592b99a90a7e5f51cfc6cf34b5ea6e194baa589d2"
+    }
+  ]
+}

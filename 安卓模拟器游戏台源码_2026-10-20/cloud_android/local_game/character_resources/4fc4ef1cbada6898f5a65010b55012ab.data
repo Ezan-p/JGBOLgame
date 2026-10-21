@@ -1,0 +1,5 @@
+up_order,low_order,add_reputation,prize_list(object_type|attach_type|attach_count|attach_level/)
+1,1,1000,5|1001|500|1/5|1029|10|1
+2,3,800,5|1001|400|1/5|1029|8|1
+4,10,500,5|1001|250|1/5|1029|5|1
+11,20,300,5|1001|150|1/5|1029|3|1

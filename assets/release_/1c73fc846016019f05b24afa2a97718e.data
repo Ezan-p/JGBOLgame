@@ -1,0 +1,4 @@
+award_type,cost_gold,popularity,strength,energy,rate_times(plan_tree_rate|contrib_rate),fam_property_rate,attach_data
+1,1200,30,20,20,1,20,5|1029|1|1
+2,2000,100,35,35,2,40,5|1029|1|2
+3,5000,300,50,50,3,60,5|1029|1|3

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>Comp 1_0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{382,232},{222,200}}</string>
+                <key>offset</key>
+                <string>{-2,-24}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{15,52},{222,200}}</string>
+                <key>sourceSize</key>
+                <string>{256,256}</string>
+            </dict>
+            <key>Comp 1_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{382,2},{228,206}}</string>
+                <key>offset</key>
+                <string>{0,-21}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{14,46},{228,206}}</string>
+                <key>sourceSize</key>
+                <string>{256,256}</string>
+            </dict>
+            <key>Comp 1_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{208,240},{232,172}}</string>
+                <key>offset</key>
+                <string>{3,-39}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{15,81},{232,172}}</string>
+                <key>sourceSize</key>
+                <string>{256,256}</string>
+            </dict>
+            <key>Comp 1_3.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{198,2},{236,182}}</string>
+                <key>offset</key>
+                <string>{4,-34}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{14,71},{236,182}}</string>
+                <key>sourceSize</key>
+                <string>{256,256}</string>
+            </dict>
+            <key>Comp 1_4.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{242,194}}</string>
+                <key>offset</key>
+                <string>{7,-28}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{14,59},{242,194}}</string>
+                <key>sourceSize</key>
+                <string>{256,256}</string>
+            </dict>
+            <key>Comp 1_5.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,246},{240,204}}</string>
+                <key>offset</key>
+                <string>{7,-23}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{15,49},{240,204}}</string>
+                <key>sourceSize</key>
+                <string>{256,256}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>comp.png</string>
+            <key>size</key>
+            <string>{590,488}</string>
+            <key>textureFileName</key>
+            <string>comp.png</string>
+        </dict>
+    </dict>
+</plist>

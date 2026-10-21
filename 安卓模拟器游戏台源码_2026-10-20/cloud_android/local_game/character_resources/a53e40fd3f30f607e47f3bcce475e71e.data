@@ -1,0 +1,6 @@
+﻿index,element_a,element_b,plus_rate(effect_id|effect_plus/..(1-攻 2-防 3-血 4-法))
+1,2,3,1|300
+2,3,4,3|150
+3,4,5,3|150
+4,5,6,4|100
+5,6,2,2|100

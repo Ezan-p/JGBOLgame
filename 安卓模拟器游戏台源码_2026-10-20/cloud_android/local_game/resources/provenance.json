@@ -1,0 +1,20 @@
+[
+  {
+    "resource": "v2/bonusUI/sign1.png",
+    "sha256": "18149781a6c2658fab2a3654afbae02effa6e8793cd74071f6891e30003fb456",
+    "bytes": 4540,
+    "source": "installed channel release_w; index 1263"
+  },
+  {
+    "resource": "v2/roleRebornUI/role_reborn1.png",
+    "sha256": "bd52b593dec81fc6e596e5cae87e788b53beaece347535d233c53c457a4e65a3",
+    "bytes": 7347,
+    "source": "installed channel release_w; index 1263"
+  },
+  {
+    "resource": "v2/roleRebornUI/role_reborn2.png",
+    "sha256": "0a89b70eece3299360af44347805c084e6d56b93fe3ff988b12be2b94eea07fa",
+    "bytes": 8037,
+    "source": "installed channel release_w; index 1263"
+  }
+]

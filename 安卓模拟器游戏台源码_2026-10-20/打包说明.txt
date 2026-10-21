@@ -1,0 +1,4 @@
+本压缩包包含本项目 cloud_android 安卓模拟器游戏台的源码、网页、协议、脚本、测试及使用说明。
+不包含 Google Android Emulator 引擎源码（项目中使用的是下载的预编译 SDK）、SDK、虚拟环境、AVD 数据、日志、令牌或 APK。
+这是项目源码包，不是可直接运行的完整环境备份。部署步骤见 cloud_android/README.md。
+部分脚本依赖原项目的游戏解包资源；MOD 预览依赖 character_mods/gojo_satoru/assets，以上资源未纳入本源码包。

@@ -1,0 +1,4 @@
+﻿equip_type(1-武器 2-防具 3-法宝),cosume_item(objec_type|attach_type|attach_level|attach_count),plus_value
+1,5|1333|1|20,1|12
+2,5|1333|1|20,2|12
+3,5|1333|1|20,3|12

@@ -1,0 +1,15 @@
+{
+  "title": "金箍棒",
+  "game_root": "../..",
+  "package": "com.sygame.jingubang.localg",
+  "activity": "com.sygame.jingubang.lenovo.xiyoujilua",
+  "avd_name": "jingubang32native",
+  "mode": "emulator",
+  "serial": "emulator-5560",
+  "console_port": 5560,
+  "grpc_port": 8560,
+  "web_port": 8766,
+  "adb_path": ".runtime/sdk/platform-tools/adb",
+  "runtime_profile": "arm32-native",
+  "local_game": true
+}

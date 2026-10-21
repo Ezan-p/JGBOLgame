@@ -1,0 +1,33 @@
+Language model created by QuickLM on Sat Jul 27 04:38:17 EDT 2013
+Copyright (c) 1996-2000
+Carnegie Mellon University and Alexander I. Rudnicky
+
+This model based on a corpus of 3 sentences and 5 words
+The (fixed) discount mass is 0.5
+
+\data\
+ngram 1=5
+ngram 2=6
+ngram 3=3
+
+\1-grams:
+-0.7782 </s> -0.3010
+-0.7782 <s> -0.2218
+-1.2553 CALL -0.2218
+-1.2553 菩萨保佑 -0.2218
+-1.2553 金箍棒 -0.2218
+
+\2-grams:
+-0.7782 <s> CALL 0.0000
+-0.7782 <s> 菩萨保佑 0.0000
+-0.7782 <s> 金箍棒 0.0000
+-0.3010 CALL </s> -0.3010
+-0.3010 菩萨保佑 </s> -0.3010
+-0.3010 金箍棒 </s> -0.3010
+
+\3-grams:
+-0.3010 <s> CALL </s>
+-0.3010 <s> 菩萨保佑 </s>
+-0.3010 <s> 金箍棒 </s>
+
+\end\

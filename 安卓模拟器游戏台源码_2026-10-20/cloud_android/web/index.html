@@ -1,0 +1,7 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>金箍棒 · 安卓游戏台</title><link rel="stylesheet" href="/style.css"></head><body>
+<header><div class="brand"><span class="moon">◒</span><div><strong>金箍棒</strong><small id="edition">安卓游戏台</small></div></div><span id="status" role="status">正在检查安卓设备…</span></header>
+<main><div class="heading"><div><p class="eyebrow">重返西游世界</p><h1>进入金箍棒</h1><p id="compatibility" role="status">正在检查设备是否支持本游戏…</p></div><div class="buttons"><button id="connect" class="primary">连接画面</button><button id="launch" disabled>启动游戏</button></div></div>
+<section id="stage" tabindex="0" aria-label="安卓游戏画面，支持鼠标与触摸操作"><canvas id="screen" width="1280" height="720"></canvas><div id="empty"><span>◒</span><h2>等待连接</h2><p>安卓模拟器就绪后，点击「连接画面」。</p></div></section>
+<div class="toolbar"><div><button data-action="back">← 返回</button><button data-action="home">⌂ 安卓桌面</button><button id="sound">♬ 开启声音</button></div><div><span id="fps">尚未连接</span><button id="fullscreen">⛶ 全屏</button></div></div>
+<div id="notice" role="status">连接画面后即可操作游戏；运行版本会显示在页面左上方。</div>
+<details><summary>连接与使用说明</summary><p>这里显示安卓设备中的真实游戏画面。仅限当前 Mac 或通过 SSH 隧道访问，未开放到公网。</p><p>Esc 返回 · Enter 确认。中文请使用安卓内置输入法。其他窗口不能同时控制画面。</p><p>内置模拟器支持多点触控和浏览器声音。ADB 兼容模式仅支持单指操作，抬起后执行点击、长按或直线滑动；不支持实时拖动和多点手势，声音从安卓设备播放。</p><p id="game-help">本游戏需要支持 32 位 ARM 的安卓环境。能显示桌面不代表游戏兼容；登录、更新和战斗仍依赖原游戏服务。关闭网页不会关闭安卓设备。</p></details></main><script src="/app.js"></script></body></html>
