@@ -234,7 +234,7 @@ local function replace()
         label('前往召唤，招募新的伙伴',691,268,19,{187,153,113},nil,true)
         local n=image('v2/soulExchangeUI/btn_bkg1.png',691,210,210,46)
         label('前往召唤',691,210,21,GOLD,nil,true)
-        hit(691,210,210,46,function() ui.navigate('recruit') end,n)
+        hit(691,210,210,46,function() ui.navigate('summon') end,n)
     end
     setOffset(M.offset)
 end
@@ -338,7 +338,7 @@ local function supportChoose()
     choiceList(list,'选择助阵神仙',function(h)
         M.mode='support';ui.send('support_assign',{slot=M.supportSlot,hero=h.id})
     end)
-    control('前往召唤',795,108,160,function() ui.navigate('recruit') end)
+    control('前往召唤',795,108,160,function() ui.navigate('summon') end)
 end
 local function supportTarget()
     local list={}

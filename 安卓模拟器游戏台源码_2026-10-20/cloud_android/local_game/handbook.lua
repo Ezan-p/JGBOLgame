@@ -246,10 +246,7 @@ local function drawDetail()
                    not hero.supporting and (hero.active and occupied>1 or not hero.active and occupied<(state.lineup_capacity or 4)))
             label((state.lineup_capacity or 4)>4 and "四位在场，四位后备对应补位" or "最多四位神仙同时出战",695,94,14,MUTED,nil,true)
         else
-            button("招募 · 600 银两",500,113,200,43,
-                   function() ui.send("recruit",{hero=entry.id}) end,state.silver>=600)
-            label(state.silver<600 and "银两不足，可在旅途获取" or "招募后可培养、加入阵容",
-                  700,94,14,MUTED,nil,true)
+            label("尚未拥有 · 仅查看图鉴资料",500,113,17,MUTED,nil,true)
         end
     else
         label("收集与装备功能尚未开放",695,137,17,MUTED,nil,true)
@@ -276,7 +273,6 @@ function M.draw(context,player)
                     "传承可将一名神仙的培养等级转移给另一位神仙。\n"..
                     "本地版暂未开放跨角色传承；当前等级、仙缘与属性不会被扣除。")
             end,
-            onRecruit=function() ui.send("recruit",{hero=entry.id}) end,
         })
         return
     end

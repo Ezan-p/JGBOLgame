@@ -74,14 +74,12 @@ local function measure(value, size, width)
     return node:getContentSize().height
 end
 
-local function vertical(value, x, top, size, color)
+local function vertical(value, x, y, size, color)
     local chars = {}
     for ch in string.gmatch(value, "[%z\1-\127\194-\244][\128-\191]*") do
         table.insert(chars, ch)
     end
-    local node = label(table.concat(chars, "\n"), x, top, size, color, nil, true)
-    node:setAnchorPoint(CCPointMake(.5, 1))
-    return node
+    return label(table.concat(chars, "\n"), x, y, size, color, nil, true)
 end
 
 local function skillFor(entry, spells)
@@ -120,53 +118,83 @@ end
 
 local function drawLeft(opts)
     local entry, hero = opts.entry, opts.hero
-    local panel = image("v2/introUI/introBkg2.png", 240, 337, 350, 352)
-    if panel then panel:setColor(ccc3(96, 72, 54)) end
-    local floor = image("v2/introUI/floorHighLight.png", 246, 190, 330, 150)
+    -- Original detail ratios (1280x720): backdrop center .259375/.5 and size
+    -- .212/.799; name x .084375, stars/category x .05625, category y .875.
+    -- The local 912x432 board keeps the same left-section order and fits all
+    -- labels inside the original rounded frame.
+    image("v2/charPositionUI/mid_frame.png", 245, 322, 410, 368)
+    local panel = image("v2/introUI/introBkg2.png", 245, 322, 394, 352)
+    if panel then panel:setColor(ccc3(88, 66, 50)) end
+    local floor = image("v2/introUI/floorHighLight.png", 273, 190, 320, 150)
     if floor then
         floor:setColor(ccc3(214, 174, 116))
         floor:setOpacity(120)
     end
 
     local category = {["神"] = 1, ["妖"] = 2, ["人"] = 3, ["魔"] = 4, ["佛"] = 5}
-    image("v2/charPositionUI/type_" .. (category[entry.category] or 1) .. ".png",
-          52, 486, 30, 30)
 
-    if entry.name_icon then
-        atlas(entry.name_icon, 58, 356, 34, 140)
-    else
-        vertical(entry.name, 58, 426, 21, GOLD)
+    -- Original loadCharacterInfo scales by screen height (0.6 * 720) and lets
+    -- wide poses overflow the backdrop horizontally. Clip to the inner frame so
+    -- the weapon cannot cover the right-hand fate panel.
+    local node = CCSprite:create(entry.sprite)
+    if node then
+        local boxX, boxY, boxW, boxH = 116, 176, 326, 320
+        local clip = CCLayer:create()
+        clip:setContentSize(CCSizeMake(boxW, boxH))
+        local view = CCScrollView:create(CCSizeMake(boxW * root:getScaleX(),
+                                                  boxH * root:getScaleY()), clip)
+        view:setTouchEnabled(false)
+        view:setPosition(CCPointMake(boxX, boxY))
+        root:addChild(view)
+        local b = entry.sprite_bounds
+        if b and b.width > 0 and b.height > 0 then
+            node:setScale(boxH / b.height)
+            node:setAnchorPoint(CCPointMake((b.x + b.width / 2) / b.texture_width,
+                                            (b.texture_height - (b.y + b.height)) / b.texture_height))
+        else
+            local size = node:getContentSize()
+            node:setScale(boxH / size.height)
+            node:setAnchorPoint(CCPointMake(.5, 0))
+        end
+        node:setPosition(CCPointMake(boxW / 2, 0))
+        clip:addChild(node)
     end
-    local stars = image("v2/CharaterUI/stars.png", 88, 424, 13, 60)
+
+    image("v2/charPositionUI/type_" .. (category[entry.category] or 1) .. ".png",
+          62, 484, 30, 30)
+
+    local stars = image("v2/CharaterUI/stars.png", 68, 400, 13, 65)
     if stars then
         stars:setTextureRect(CCRectMake(0, 0, 22, 20 * (entry.quality or 1)))
     end
-
-    local node = CCSprite:create(entry.sprite)
-    if node then
-        local size = node:getContentSize()
-        node:setScale(math.min(300 / size.width, 300 / size.height))
-        node:setAnchorPoint(CCPointMake(.5, 0))
-        node:setPosition(CCPointMake(250, 174))
-        root:addChild(node)
+    if entry.name_icon then
+        atlas(entry.name_icon, 94, 400, 34, 140)
+    else
+        vertical(entry.name, 94, 400, 21, GOLD)
     end
 
     local values = {hero and hero.hp or entry.hp, hero and hero.attack or entry.attack,
                     hero and hero.defense or entry.defense, hero and hero.magic or entry.magic}
     local icons = {"health", "damage", "defence", "mana"}
-    local sx, sy, sw = 250, 181, 340
-    image("v2/introUI/property_bkg.png", sx, sy, sw, 20)
+    -- Original trainingUI.createCharaterStatsBar: 514x52 bar, four 41px icons,
+    -- font 25, start 4%, step 23%. Keep those ratios at a 330px local bar.
+    local sx, sy, sw = 250, 196, 330
+    local bs = sw / 514
+    local sh = 52 * bs
+    image("v2/trainingUI/stats_bkg.png", sx, sy, sw, sh)
+    local left = sx - sw / 2
+    local start, offset, isz = 514 * 0.04 * bs, 514 * 0.23 * bs, 41 * bs
     for i = 1, 4 do
-        local xx = sx - sw / 2 + (i - 1) * sw / 4 + 14
-        image("v2/introUI/" .. icons[i] .. ".png", xx, sy, 19, 19)
-        label(values[i] or 0, xx + 12, sy, 14, GOLD)
+        local xx = left + start + offset * (i - 1)
+        image("v2/introUI/" .. icons[i] .. ".png", xx + isz / 2, sy, isz, isz)
+        label(values[i] or 0, xx + isz + 0.01 * sw, sy, 16, GOLD)
     end
 
     local level = hero and hero.level or 1
-    image("v2/charPositionUI/level_bkg.png", 52, 157, 38, 24)
-    label(level, 52, 157, 16, GOLD, nil, true)
-    local bx, bw = 76, 340
-    image("v2/CharaterUI/expbar1.png", bx + bw / 2, 157, bw, 14)
+    image("v2/charPositionUI/level_bkg.png", 58, 166, 38, 24)
+    label(level, 58, 166, 16, GOLD, nil, true)
+    local bx, bw = 82, 332
+    image("v2/CharaterUI/expbar1.png", bx + bw / 2, 166, bw, 14)
     local ratio = hero and math.min(1, level / 20) or 0
     if ratio > 0 then
         local fillNode = CCSprite:create("v2/CharaterUI/expbar2.png")
@@ -175,11 +203,11 @@ local function drawLeft(opts)
             fillNode:setAnchorPoint(CCPointMake(0, .5))
             fillNode:setScaleX(bw * ratio / size.width)
             fillNode:setScaleY(14 / size.height)
-            fillNode:setPosition(CCPointMake(bx, 157))
+            fillNode:setPosition(CCPointMake(bx, 166))
             root:addChild(fillNode)
         end
     end
-    label("等级 " .. level .. " / 20", bx + bw / 2, 157, 11, PALE, nil, true)
+    label("等级 " .. level .. " / 20", bx + bw / 2, 166, 11, PALE, nil, true)
 
     local function artButton(file, x, w, action, enabled)
         local node = image(file, x, 112, w, 40)
@@ -193,13 +221,10 @@ local function drawLeft(opts)
                   level < 20 and state.silver >= cost)
         artButton("v2/buttons/inherit1.png", 325, 160, opts.onInherit, true)
         label(level >= 20 and "已达满级" or ("培养消耗 " .. cost .. " 银两"),
-              150, 140, 10, MUTED, nil, true)
+              150, 146, 10, MUTED, nil, true)
     else
-        artButton("v2/multi-selectUI/back1.png", 150, 160, opts.onBack, true)
-        local recruit = image("v2/soulExchangeUI/btn_bkg1.png", 325, 112, 160, 40)
-        label("招募 · 600 银两", 325, 112, 16, GOLD, nil, true)
-        ui.hit(245, 92, 160, 40, opts.onRecruit, state.silver >= 600, recruit)
-        label("招募消耗 600 银两", 325, 140, 10, MUTED, nil, true)
+        local back = image("v2/multi-selectUI/back1.png", 245, 112, 190, 40)
+        ui.hit(150, 92, 190, 40, opts.onBack, true, back)
     end
 
     local close = image("v2/introUI/close1.png", 917, 509, 44, 42)
@@ -211,15 +236,23 @@ local function drawRight(opts)
     local fates = (hero and hero.fates) or entry.fates or {}
     local skill = skillFor(entry, opts.spells)
     local descWidth = CW - 54
-    local titleH = 44
-    local need = 8 + titleH + 12
-    for _, fate in ipairs(fates) do
-        need = need + 22 + measure(fate.description or "", 15, descWidth) + 12
-    end
-    if #fates == 0 then need = need + 40 end
-    need = need + 14 + titleH + 8
+    local titleH = 32
+    local nameSize, descSize = 22, 19
+    local nameGap, itemGap = 6, 8
     local talentText = entry.skill_description or (skill and skill.description) or ""
-    need = need + math.max(78, 28 + measure(talentText, 15, CW - 118)) + 18
+    local talentName = entry.skill_name or (skill and skill.name) or ""
+    local items = {}
+    local need = 8 + titleH + 4
+    for _, fate in ipairs(fates) do
+        local item = {fate = fate, nameH = measure(fate.name, nameSize, descWidth),
+                      descH = measure(fate.description or "", descSize, descWidth)}
+        table.insert(items, item)
+        need = need + item.nameH + nameGap + item.descH + itemGap
+    end
+    if #items == 0 then need = need + 30 end
+    local talentNameH = measure(talentName, nameSize, CW - 118)
+    local talentDescH = measure(talentText, descSize, CW - 118)
+    need = need + 8 + titleH + 4 + math.max(70, talentNameH + nameGap + talentDescH) + 16
     local total = math.max(CH, need)
 
     local container = CCLayer:create()
@@ -235,44 +268,48 @@ local function drawRight(opts)
 
     local y = CH - 8
     local function title(file, width, height)
-        image("v2/introUI/small_label.png", CW / 2, y - titleH / 2, 250, titleH, container)
+        image("v2/introUI/small_label.png", CW / 2, y - titleH / 2, 220, titleH, container)
         image(file, CW / 2, y - titleH / 2, width, height, container)
-        y = y - titleH - 12
+        y = y - titleH - 4
     end
 
-    title("v2/introUI/yuanfen_label.png", 58, 35)
-    if #fates == 0 then
-        label("暂无仙缘", 30, y, 16, MUTED, container, false, descWidth)
-        y = y - 40
+    title("v2/introUI/yuanfen_label.png", 52, 32)
+    if #items == 0 then
+        label("暂无仙缘", 30, y, 17, MUTED, container, false, descWidth)
+        y = y - 30
     end
-    for _, fate in ipairs(fates) do
+    for _, item in ipairs(items) do
+        local fate = item.fate
         local active = fate.active
         local nameColor = active == false and DIMMED or GOLD
         local descColor = active == false and {188, 168, 142} or PALE
-        local dot = image("v2/CharaterUI/hongdian.png", 16, y - 9, 9, 9, container)
+        local nameCenter = y - item.nameH / 2
+        local dot = image("v2/CharaterUI/hongdian.png", 16, nameCenter, 9, 9, container)
         if dot then
             if active then dot:setColor(ccc3(132, 226, 104))
             elseif active == false then dot:setColor(ccc3(112, 88, 66)) end
         end
-        label(fate.name, 30, y, 19, nameColor, container)
-        local desc = label(fate.description or "", 30, y - 24, 15, descColor,
-                           container, false, descWidth)
-        y = y - 24 - desc:getContentSize().height - 12
+        label(fate.name, 30, nameCenter, nameSize, nameColor, container)
+        local descTop = y - item.nameH - nameGap
+        label(fate.description or "", 30, descTop, descSize, descColor,
+              container, false, descWidth)
+        y = descTop - item.descH - itemGap
     end
 
-    y = y - 14
-    image("v2/introUI/small_label.png", CW / 2, y - titleH / 2, 250, titleH, container)
-    image("v2/introUI/talent_label.png", CW / 2, y - titleH / 2, 52, 33, container)
-    y = y - titleH - 8
+    y = y - 8
+    image("v2/introUI/small_label.png", CW / 2, y - titleH / 2, 220, titleH, container)
+    image("v2/introUI/talent_label.png", CW / 2, y - titleH / 2, 46, 29, container)
+    y = y - titleH - 4
 
     if skill then
-        image("v2/charPositionUI/frame1.png", 49, y - 37, 80, 80, container)
-        atlas(skill.icon, 49, y - 37, 72, 72, container)
-        label(entry.skill_name or skill.name, 94, y, 21, GOLD, container)
-        local desc = label(talentText, 94, y - 28, 15, PALE, container, false, CW - 118)
-        y = y - 28 - desc:getContentSize().height
+        image("v2/charPositionUI/frame1.png", 49, y - 35, 78, 78, container)
+        atlas(skill.icon, 49, y - 35, 70, 70, container)
+        label(talentName, 94, y - talentNameH / 2, nameSize, GOLD, container)
+        local descTop = y - talentNameH - nameGap
+        label(talentText, 94, descTop, descSize, PALE, container, false, CW - 118)
+        y = descTop - talentDescH
     else
-        label("暂无天赋", 30, y - 8, 16, MUTED, container, false, descWidth)
+        label("暂无天赋", 30, y - 8, 17, MUTED, container, false, descWidth)
         y = y - 40
     end
 

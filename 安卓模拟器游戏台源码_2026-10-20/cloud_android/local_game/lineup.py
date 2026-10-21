@@ -22,6 +22,7 @@ def build_lineup(game_root):
         "v2/introUI/property_bkg.png", "v2/introUI/property_mid.png",
         "v2/introUI/property_up.png", "v2/introUI/close1.png",
         "v2/trainingUI/training1.png", "v2/trainingUI/training2.png",
+        "v2/trainingUI/stats_bkg.png",
         "v2/buttons/inherit1.png", "v2/buttons/inherit2.png",
         "v2/multi-selectUI/back1.png", "v2/multi-selectUI/back2.png",
         "v2/CharaterUI/hongdian.png", "v2/CharaterUI/underline1.png",

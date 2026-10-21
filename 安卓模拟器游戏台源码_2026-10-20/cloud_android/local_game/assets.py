@@ -6,6 +6,8 @@ import io
 import json
 from pathlib import Path
 
+from PIL import Image
+
 ALPHABET = b"yfgl mnovwxapzdechijkqrstbuHOMICDJPQRSTUVWXYZABKEFGLN39+0126-4785".replace(b" ", b"")
 STANDARD = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
@@ -102,6 +104,15 @@ def character_sprite(row):
     return f"chars/{group}/{group}_{int(row['resource'])}.png"
 
 
+def sprite_content(data):
+    """Opaque bounds used by the detail page to fit wide weapon poses."""
+    image = Image.open(io.BytesIO(data)).convert("RGBA")
+    bounds = image.getchannel("A").getbbox() or (0, 0, image.width, image.height)
+    x, y, right, bottom = bounds
+    return {"x": x, "y": y, "width": right - x, "height": bottom - y,
+            "texture_width": image.width, "texture_height": image.height}
+
+
 def catalog(game_root):
     resources = Resources(game_root)
     rows = resources.rows
@@ -123,11 +134,12 @@ def catalog(game_root):
         row = bases[ident]
         quality = int(row["quality"])
         sprite = character_sprite(row)
-        if not resources.read(sprite).startswith(b"\x89PNG\r\n\x1a\n"):
+        data = resources.read(sprite)
+        if not data.startswith(b"\x89PNG\r\n\x1a\n"):
             raise ValueError(f"Missing original character sprite: {sprite}")
         heroes[str(ident)] = {
             "id": ident, "name": names[ident]["name"].strip(), "description": names[ident]["desc"],
-            "sprite": sprite, "quality": quality,
+            "sprite": sprite, "sprite_bounds": sprite_content(data), "quality": quality,
             "category": CATEGORIES[int(row["category"])],
             "skill_id": int(row["chushijineng"]),
             "skill_name": skills[int(row["chushijineng"])]["name"],

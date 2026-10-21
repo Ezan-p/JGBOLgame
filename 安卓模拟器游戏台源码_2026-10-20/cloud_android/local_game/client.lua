@@ -169,6 +169,7 @@ render = function()
     buttons = {}
     statusLabel=nil
     pressed=nil
+    if page=="recruit" then page="summon"; if state then summon.open() end end
     if page=="battle" and battle then showBattle(); return end
     if state and page=="battle_hall" then
         battleHall.draw({root=root,render=render,send=send,busy=busy,failed=failed,error=lastError,notice=notice,
@@ -266,7 +267,10 @@ render = function()
                 hit=function(x,y,w,h,action,enabled,node,retry)
                     table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node,retry=retry})
                 end,
-                navigate=function(target) page=target;homeInfo=nil;render() end,
+                navigate=function(target)
+                    if target=="summon" then summon.open() end
+                    page=target;homeInfo=nil;render()
+                end,
             },state)
             return
         end
