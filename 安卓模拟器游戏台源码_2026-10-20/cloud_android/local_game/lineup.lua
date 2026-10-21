@@ -1,5 +1,6 @@
 -- Original charPositionUI.lua geometry and art; local roster mutations are atomic.
 local data=require('local_lineup_data')
+local heroDetail=require('local_hero_detail')
 local M={mode='main',slot=1,offset=0}
 local inventoryData=require("local_inventory_data")
 local ui,state,root
@@ -29,6 +30,12 @@ local function hit(x,y,w,h,f,n) ui.hit(x-w/2,y-h/2,w,h,f,true,n) end
 local function owned(id) for _,h in ipairs(state.heroes) do if h.id==id then return h end end end
 local function entry(id) return data.heroes[tostring(id)] end
 local function popup(title,body) M.info={title,body}; ui.render() end
+local function openDetail(h)
+    if not h then return end
+    M.detailHero=h; M.mode='detail'; M.pick=nil; M.info=nil
+    heroDetail.reset()
+    ui.render()
+end
 local function vertical(value,x,top,active)
     local chars={}
     for ch in string.gmatch(value,"[%z\1-\127\194-\244][\128-\191]*") do table.insert(chars,ch) end
@@ -74,6 +81,7 @@ local function header(parent,shift)
             local slot=i
             hit(x,470,90,90,function()
                 if slot>(state.lineup_capacity or 4) then popup('出战阵位','此阵位尚未解锁。')
+                elseif slot==M.slot and h then openDetail(h)
                 else M.slot=(state.lineup_capacity or 4)>4 and slot or math.min(slot,#state.lineup+1);ui.render() end
             end)
         end
@@ -159,16 +167,16 @@ local function main()
         end
     end
     hit(677,272,115,225,function()
-        M.mode='fates';ui.render()
+        openDetail(h)
     end)
-    hit(480,285,240,270,function() popup(h.name,'等级 '..h.level..'\n'..e.description) end)
+    hit(480,285,240,270,function() openDetail(h) end)
     label('演武堂',85,111,17,{244,221,173},nil,true)
     hit(85,111,108,30,function() ui.navigate('battle_hall') end)
     label('战斗演示',867,111,14,{178,136,83},nil,true)
     hit(867,111,100,26,ui.demo)
     local cheer=image('v2/cheerUI/cheer_head1.png',867,470,83,83)
     hit(867,470,86,86,function() M.mode='support';M.supportSlot=M.supportSlot or 1;ui.render() end,cheer)
-    hit(484,135,350,35,function() M.mode='fates';ui.render() end)
+    hit(484,135,350,35,function() openDetail(h) end)
 end
 local function formation()
     image(P..'max_bkg.png',480,302,925,430)
@@ -378,6 +386,25 @@ end
 function M.draw(context,player)
     ui,state,root=context,player,context.root;M.scroll=nil;M.gesture=nil
     M.slot=math.max(1,math.min(M.slot,(state.lineup_capacity or 4)>4 and state.lineup_capacity or math.min(4,#state.lineup+1)))
+    if M.mode=='detail' then
+        local h=owned(state.lineup[M.slot])
+        if h then
+            local e=entry(h.id)
+            heroDetail.draw({
+                root=root,ui=ui,state=state,entry=e,hero=h,spells=data.spells,
+                onClose=function() M.mode='main';M.detailHero=nil;heroDetail.reset();ui.render() end,
+                onBack=function() M.mode='main';M.detailHero=nil;heroDetail.reset();ui.render() end,
+                onTrain=function() ui.send('upgrade',{hero=h.id}) end,
+                onInherit=function()
+                    heroDetail.showInfo('传承',
+                        '传承可将一名神仙的培养等级转移给另一位神仙。\n'..
+                        '本地版暂未开放跨角色传承；当前等级、仙缘与属性不会被扣除。')
+                end,
+            })
+            return
+        end
+        M.mode='main'
+    end
     frame()
     if M.mode=='formation' then formation() elseif M.mode=='replace' then replace()
     elseif M.mode=='support' then support() elseif M.mode=='support_choose' then supportChoose()
@@ -401,9 +428,11 @@ function M.draw(context,player)
         if M.info[3] then control('确认',680,150,150,function() local action=M.info[3];M.info=nil;action() end) end
     end
 end
-function M.open() M.mode='main';M.info=nil;M.pick=nil;M.offset=0 end
+function M.open() M.mode='main';M.info=nil;M.pick=nil;M.offset=0;M.detailHero=nil;heroDetail.reset() end
 function M.back()
-    if M.info then M.info=nil
+    if heroDetail.closeInfo() then ui.render()
+    elseif M.mode=='detail' then M.mode='main';M.detailHero=nil;heroDetail.reset()
+    elseif M.info then M.info=nil
     elseif M.mode=='support_choose' or M.mode=='support_target' then M.mode='support'
     elseif M.mode~='main' then M.mode='main';M.pick=nil
     else ui.navigate('home');return end
@@ -413,6 +442,7 @@ local function spot(x,y)
     for i,p in ipairs(M.spots or {}) do if math.abs(x-p.x)<45 and math.abs(y-p.y)<45 then return i end end
 end
 function M.touch(event,x,y)
+    if M.mode=='detail' then return heroDetail.touch(event,x,y) end
     if M.info then return false end
     local began=event==CCTOUCHBEGAN or event=='began'
     local moved=event==CCTOUCHMOVED or event=='moved'

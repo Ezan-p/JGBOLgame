@@ -1,6 +1,7 @@
 -- Reconstructed from original handbookUI.lua / mainUI.createBoardBkg().
 -- Canvas: 960 x 540. Six columns, original atlas portraits, clipped vertical scroll.
 local data = require("local_handbook_data")
+local heroDetail = require("local_hero_detail")
 local M = {tab="heroes", ownedOnly=false, offsets={}}
 local GOLD = {255,235,190}
 local MUTED = {179,152,119}
@@ -161,7 +162,9 @@ local function drawGrid()
         if col<0 or col>=6 or row<0 then return end
         local entry=list[row*6+col+1]
         if entry then
-            M.selected=entry; M.lastSelected=M.tab..":"..entry.id; M.gesture=nil; ui.render()
+            M.selected=entry; M.lastSelected=M.tab..":"..entry.id; M.gesture=nil
+            if M.tab=="heroes" then heroDetail.reset() end
+            ui.render()
         end
     end)
     for i,entry in ipairs(list) do
@@ -260,6 +263,23 @@ end
 function M.draw(context,player)
     ui,state,root=context,player,context.root
     M.scroll=nil
+    if M.selected and M.tab=="heroes" then
+        local entry=M.selected
+        local hero=own(entry.id)
+        heroDetail.draw({
+            root=root,ui=ui,state=state,entry=entry,hero=hero,spells=data.spells,
+            onClose=function() M.back() end,
+            onBack=function() M.back() end,
+            onTrain=function() ui.send("upgrade",{hero=entry.id}) end,
+            onInherit=function()
+                heroDetail.showInfo("传承",
+                    "传承可将一名神仙的培养等级转移给另一位神仙。\n"..
+                    "本地版暂未开放跨角色传承；当前等级、仙缘与属性不会被扣除。")
+            end,
+            onRecruit=function() ui.send("recruit",{hero=entry.id}) end,
+        })
+        return
+    end
     frame()
     tabs()
     if M.selected then drawDetail() else drawGrid() end
@@ -267,15 +287,18 @@ end
 
 function M.open()
     M.tab="heroes"; M.selected=nil; M.ownedOnly=false; M.gesture=nil
+    heroDetail.reset()
 end
 
 function M.back()
     M.gesture=nil
-    if M.selected then M.selected=nil; ui.render()
+    if heroDetail.closeInfo() then ui.render()
+    elseif M.selected then M.selected=nil; heroDetail.reset(); ui.render()
     else ui.navigate("home") end
 end
 
 function M.touch(event,x,y)
+    if M.selected and M.tab=="heroes" then return heroDetail.touch(event,x,y) end
     local s=M.scroll
     if not s then return false end
     if event==CCTOUCHBEGAN or event=="began" then

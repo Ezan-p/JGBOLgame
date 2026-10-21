@@ -16,6 +16,16 @@ def build_lineup(game_root):
         "v2/CharaterUI/stars.png", "v2/introUI/stars.png", "v2/CharaterUI/xiaguang.png",
         "v2/CharaterUI/expbar1.png", "v2/CharaterUI/expbar2.png",
         "v2/introUI/yuanfen_label.png", "v2/introUI/level.png",
+        "v2/introUI/talent_label.png", "v2/introUI/small_label.png",
+        "v2/introUI/intro_label_ql.png", "v2/introUI/introBkg2.png",
+        "v2/introUI/rightBkg.png", "v2/introUI/floorHighLight.png",
+        "v2/introUI/property_bkg.png", "v2/introUI/property_mid.png",
+        "v2/introUI/property_up.png", "v2/introUI/close1.png",
+        "v2/trainingUI/training1.png", "v2/trainingUI/training2.png",
+        "v2/buttons/inherit1.png", "v2/buttons/inherit2.png",
+        "v2/multi-selectUI/back1.png", "v2/multi-selectUI/back2.png",
+        "v2/CharaterUI/hongdian.png", "v2/CharaterUI/underline1.png",
+        "v2/CharaterUI/underline2.png", "v2/soulExchangeUI/btn_bkg1.png",
         *["v2/introUI/" + n + ".png" for n in ("health", "damage", "defence", "mana")],
     ])
     files.update(h["name_icon"]["file"] for h in heroes.values())

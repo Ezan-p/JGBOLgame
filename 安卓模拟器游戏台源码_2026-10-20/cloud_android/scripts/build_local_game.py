@@ -64,6 +64,7 @@ def main():
         "lua/local_inventory.lua": (ROOT / "local_game/inventory.lua").read_bytes(),
         "lua/local_inventory_data.lua": ("return " + lua_literal({"items": inventory["items"]})).encode(),
         "lua/local_lineup.lua": (ROOT / "local_game/lineup.lua").read_bytes(),
+        "lua/local_hero_detail.lua": (ROOT / "local_game/hero_detail.lua").read_bytes(),
         "lua/local_lineup_data.lua": ("return " + lua_literal({k: v for k, v in lineup.items()
             if k not in ("resources", "sources")})).encode(),
         "lua/local_battle.lua": (ROOT / "local_game/battle.lua").read_bytes(),
