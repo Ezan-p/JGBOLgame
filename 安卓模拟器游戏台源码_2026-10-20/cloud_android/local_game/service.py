@@ -21,7 +21,7 @@ PORT = 8770
 # Also support direct execution by manage.py.
 import sys
 sys.path.insert(0, str(ROOT))
-from local_game.combat import resolve
+from local_game.combat import resolve, apply_passives
 from local_game import inventory
 from local_game import synergy
 
@@ -70,7 +70,7 @@ class Game:
         result["upgrade_cost"] = 80 * level
         if state is not None and self.catalog.get("inventory"):
             result = inventory.hero_with_inventory(result, state, self.catalog["inventory"])
-        return result
+        return apply_passives(result, self.catalog.get("skills", {}))
 
     def roster(self, state):
         heroes = [self.hero(k, v, state, False) for k, v in state["heroes"].items()]
@@ -107,23 +107,36 @@ class Game:
             raise GameError("参数必须是整数：" + name)
         return value
 
+    @staticmethod
+    def capacity(state):
+        return max(4, min(8, int(state.get("lineup_capacity", 4))))
+
+    def add_to_lineup(self, state, ident):
+        lineup = state["lineup"]
+        if 0 in lineup:
+            lineup[lineup.index(0)] = ident
+        elif len(lineup) < self.capacity(state):
+            lineup.append(ident)
+        else:
+            raise GameError("阵位已满，请先让一名神仙休息")
+
     def battle(self, state, stage_id):
         stages = self.catalog["stages"]
         if not 1 <= stage_id <= len(stages) or stage_id > state["unlocked"]:
             raise GameError("关卡尚未解锁")
         if state["energy"] < 2:
             raise GameError("体力不足，每五分钟恢复一点")
-        if not state["lineup"]:
+        if not any(state["lineup"]):
             raise GameError("请至少安排一名角色出战")
         stage = stages[stage_id - 1]
         roster, _ = self.roster(state)
-        allies = [roster[i] for i in state["lineup"]]
+        allies = [dict(roster[i], lineup_slot=slot) for slot, i in enumerate(state["lineup"], 1) if i]
         enemies = [self.hero(i, 1) for i in stage["enemies"]]
         scale = .75 + stage_id * .11
         for unit in enemies:
             for stat in ("hp", "attack", "defense"):
                 unit[stat] = round(unit[stat] * scale)
-        report = resolve(allies, enemies, self.catalog.get("skills", {}))
+        report = resolve(allies, enemies, self.catalog.get("skills", {}), seed=state["battle_count"] * 1009 + stage_id)
         won = report["won"]
         first = won and str(stage_id) not in state["wins"]
         reward = stage["silver"] * (2 if first else 1) if won else 20
@@ -170,30 +183,35 @@ class Game:
                 raise GameError("招募需要 600 银两")
             state["silver"] -= 600
             state["heroes"][str(ident)] = 1
-            if len(state["lineup"]) < 4:
-                state["lineup"].append(ident)
+            if sum(bool(i) for i in state["lineup"]) < self.capacity(state):
+                self.add_to_lineup(state, ident)
             extra["notice"] = "招募成功，已保存"
         elif op == "lineup":
             ident = self.integer(args, "hero")
             if str(ident) not in state["heroes"]:
                 raise GameError("尚未拥有该角色")
             if ident in state["lineup"]:
-                if len(state["lineup"]) == 1:
+                if sum(bool(i) for i in state["lineup"]) == 1:
                     raise GameError("至少保留一名出战角色")
-                state["lineup"].remove(ident)
+                if self.capacity(state) > 4:
+                    state["lineup"][state["lineup"].index(ident)] = 0
+                    while state["lineup"] and not state["lineup"][-1]:
+                        state["lineup"].pop()
+                else:
+                    state["lineup"].remove(ident)
             else:
                 if ident in synergy.support_ids(state):
                     raise GameError("该神仙正在助阵，请先卸下助阵")
-                if len(state["lineup"]) >= 4:
-                    raise GameError("最多四名角色出战，请先让一名角色休息")
-                state["lineup"].append(ident)
+                self.add_to_lineup(state, ident)
         elif op == "lineup_swap":
             source = self.integer(args, "source")
             target = self.integer(args, "target")
-            if not (1 <= source <= len(state["lineup"]) and
-                    1 <= target <= len(state["lineup"])):
+            limit = self.capacity(state) if self.capacity(state) > 4 else len(state["lineup"])
+            if not (1 <= source <= len(state["lineup"]) and state["lineup"][source-1] and
+                    1 <= target <= limit):
                 raise GameError("请选择已有神仙的阵位")
             lineup = state["lineup"]
+            lineup.extend([0] * max(0, target-len(lineup)))
             lineup[source - 1], lineup[target - 1] = lineup[target - 1], lineup[source - 1]
             extra["notice"] = "阵位已保存"
         elif op == "lineup_replace":
@@ -205,12 +223,11 @@ class Game:
                 raise GameError("该神仙已在阵中，请使用布阵调整站位")
             if ident in synergy.support_ids(state):
                 raise GameError("该神仙正在助阵，请先卸下助阵")
-            if not 1 <= slot <= min(4, len(state["lineup"]) + 1):
+            limit = self.capacity(state) if self.capacity(state) > 4 else min(4, len(state["lineup"]) + 1)
+            if not 1 <= slot <= limit:
                 raise GameError("阵位无效")
-            if slot > len(state["lineup"]):
-                state["lineup"].append(ident)
-            else:
-                state["lineup"][slot - 1] = ident
+            state["lineup"].extend([0] * max(0, slot-len(state["lineup"])))
+            state["lineup"][slot - 1] = ident
             extra["notice"] = "神仙已更换，阵容已保存"
         elif op.startswith("support_") and self.catalog.get("synergy"):
             extra["notice"] = synergy.apply(state, op, args, self.catalog, GameError)
@@ -275,7 +292,7 @@ def handler(game, key):
                 return self.reply({"ok": False, "error": "请求过大"}, 413)
             url = urlsplit(self.path)
             if url.path == "/health":
-                return self.reply({"ok": True, "service": "jingubang-local", "rules": "local-v2"})
+                return self.reply({"ok": True, "service": "jingubang-local", "rules": "local-v3"})
             if url.path != "/rpc":
                 return self.reply({"ok": False, "error": "接口不存在"}, 404)
             query = parse_qs(url.query)

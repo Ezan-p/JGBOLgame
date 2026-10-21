@@ -67,14 +67,14 @@ local function header(parent,shift)
         else
             image(P..'square_bkg.png',x,470,83,84,parent)
             image(P..'frame1.png',x,470,83,84,parent)
-            if i>4 then image(P..'lock.png',x,470,91,78,parent) end
+            if i>(state.lineup_capacity or 4) then image(P..'lock.png',x,470,91,78,parent) end
         end
         if i==M.slot then image(P..'choose.png',x,470,91,91,parent) end
         if not parent then
             local slot=i
             hit(x,470,90,90,function()
-                if slot>4 then popup('出战阵位','当前最多四位神仙出战。点击顶部右侧八卦「阵」进入助阵。')
-                else M.slot=math.min(slot,#state.lineup+1);ui.render() end
+                if slot>(state.lineup_capacity or 4) then popup('出战阵位','此阵位尚未解锁。')
+                else M.slot=(state.lineup_capacity or 4)>4 and slot or math.min(slot,#state.lineup+1);ui.render() end
             end)
         end
     end
@@ -183,11 +183,11 @@ local function formation()
             n=atlas(entry(h.id).icon,x,y,size)
             image(P..'char_name_bkg.png',x,y-size*.65,100,23)
             label(h.name,x,y-size*.65,15,GOLD,nil,true)
-        else square(x,y,size,i>4) end
+        else square(x,y,size,i>(state.lineup_capacity or 4)) end
         if M.pick==i then image(P..'choose.png',x,y,size+9,size+9) end
         M.spots[i]={x=x,y=y,node=n}
     end
-    label('四位出战 · 拖动头像交换阵位',480,110,15,{168,132,94},nil,true)
+    label((state.lineup_capacity or 4)>4 and '四位在场 · 后备对应补位 · 拖动头像布阵' or '四位出战 · 拖动头像交换阵位',480,110,15,{168,132,94},nil,true)
 end
 local function setOffset(value)
     local s=M.scroll;M.offset=math.max(0,math.min(s.max,value));s.node:setPositionY(M.offset)
@@ -332,7 +332,7 @@ local function supportChoose()
 end
 local function supportTarget()
     local list={}
-    for i,id in ipairs(state.lineup) do local h=owned(id);list[#list+1]=h end
+    for i,id in ipairs(state.lineup) do local h=owned(id);if h then list[#list+1]=h end end
     choiceList(list,'选择受助阵位 · 每个出战阵位接受一位助阵',function(h)
         local target
         for i,id in ipairs(state.lineup) do if id==h.id then target=i end end
@@ -375,7 +375,7 @@ end
 
 function M.draw(context,player)
     ui,state,root=context,player,context.root;M.scroll=nil;M.gesture=nil
-    M.slot=math.max(1,math.min(M.slot,math.min(4,#state.lineup+1)))
+    M.slot=math.max(1,math.min(M.slot,(state.lineup_capacity or 4)>4 and state.lineup_capacity or math.min(4,#state.lineup+1)))
     frame()
     if M.mode=='formation' then formation() elseif M.mode=='replace' then replace()
     elseif M.mode=='support' then support() elseif M.mode=='support_choose' then supportChoose()
@@ -418,18 +418,21 @@ function M.touch(event,x,y)
     if M.mode=='formation' then
         if began then
             local i=spot(x,y)
-            if i and i<=#state.lineup then M.gesture={slot=i,x=x,y=y};return true end
+            if i and i<=(state.lineup_capacity or 4) then
+                M.gesture={slot=i,x=x,y=y};return true
+            end
         elseif M.gesture then
             local g=M.gesture;local p=M.spots[g.slot]
             if moved then
                 g.dragged=g.dragged or math.abs(x-g.x)+math.abs(y-g.y)>9
-                if g.dragged then p.node:setPosition(CCPointMake(x,y)) end
+                if g.dragged and p.node then p.node:setPosition(CCPointMake(x,y)) end
             elseif ended then
                 M.gesture=nil;local target=spot(x,y)
-                if target and target<=#state.lineup then
-                    if not g.dragged and M.pick and M.pick~=target then
+                if target and target<=(state.lineup_capacity or 4) then
+                    if not g.dragged and M.pick and M.pick~=target and owned(state.lineup[M.pick]) then
                         local source=M.pick;M.pick=nil;ui.send('lineup_swap',{source=source,target=target})
-                    elseif target~=g.slot then M.pick=nil;ui.send('lineup_swap',{source=g.slot,target=target})
+                    elseif target~=g.slot and owned(state.lineup[g.slot]) then M.pick=nil;ui.send('lineup_swap',{source=g.slot,target=target})
+                    elseif not owned(state.lineup[target]) then M.slot=target;M.mode='replace';M.pick=nil;ui.render()
                     else M.pick=target;ui.render() end
                 else ui.render() end
             else M.gesture=nil;ui.render() end

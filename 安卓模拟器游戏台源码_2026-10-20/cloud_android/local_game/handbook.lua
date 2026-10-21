@@ -234,13 +234,14 @@ local function drawDetail()
     button("返回图鉴",35,163,160,39,function() M.selected=nil; ui.render() end)
     if M.tab=="heroes" then
         if hero then
+            local occupied=0;for _,id in ipairs(state.lineup) do if id~=0 then occupied=occupied+1 end end
             button(hero.level>=20 and "已达满级" or "培养 · "..hero.upgrade_cost,500,113,174,43,
                    function() ui.send("upgrade",{hero=entry.id}) end,
                    hero.level<20 and state.silver>=hero.upgrade_cost)
             button(hero.supporting and "助阵中" or hero.active and "休息" or "出战",696,113,174,43,
                    function() ui.send("lineup",{hero=entry.id}) end,
-                   not hero.supporting and (hero.active and #state.lineup>1 or not hero.active and #state.lineup<4))
-            label("最多四位神仙同时出战",695,94,14,MUTED,nil,true)
+                   not hero.supporting and (hero.active and occupied>1 or not hero.active and occupied<(state.lineup_capacity or 4)))
+            label((state.lineup_capacity or 4)>4 and "四位在场，四位后备对应补位" or "最多四位神仙同时出战",695,94,14,MUTED,nil,true)
         else
             button("招募 · 600 银两",500,113,200,43,
                    function() ui.send("recruit",{hero=entry.id}) end,state.silver>=600)

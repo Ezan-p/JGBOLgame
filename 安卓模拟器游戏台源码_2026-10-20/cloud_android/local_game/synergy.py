@@ -125,7 +125,7 @@ def apply(state, op, args, catalog, error):
         notice = '助阵伙伴已保存；仙缘与属性已刷新'
     elif op == 'support_target':
         target = integer('target')
-        check(0 <= target <= len(state['lineup']), '请选择当前出战阵位')
+        check(0 <= target <= len(state['lineup']) and (target == 0 or state['lineup'][target-1]), '请选择当前出战阵位')
         check(s['hero'] and catalog['heroes'][str(s['hero'])]['quality'] >= 5, '五星助阵神仙才能传递属性')
         # Assigning an already supported combat slot transfers its one support link.
         for other in all_slots.values():
@@ -162,4 +162,4 @@ def apply(state, op, args, catalog, error):
 def tidy_targets(state):
     if 'support' in state:
         for s in state['support']['slots'].values():
-            if s['target'] > len(state['lineup']): s['target'] = 0
+            if s['target'] > len(state['lineup']) or (s['target'] and not state['lineup'][s['target']-1]): s['target'] = 0

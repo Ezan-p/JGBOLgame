@@ -15,6 +15,7 @@ from local_game.manifest import build_manifest, PACKAGE, ACTIVITY
 from local_game.dex_patch import patch_dex
 from local_game.handbook import build_handbook
 from local_game.battle import build_battle
+from local_game.battle_research import build_research
 from local_game.lineup import build_lineup
 from local_game.inventory import build_inventory
 from local_game.synergy import build_synergy
@@ -48,6 +49,7 @@ def main():
     handbook = build_handbook(game)
     journey = build_journey(game)
     battle = build_battle(game)
+    (output / "battle-mechanics.json").write_text(json.dumps(build_research(game), ensure_ascii=False, indent=2))
     lineup = build_lineup(game)
     (output / "lineup.json").write_text(json.dumps(lineup, ensure_ascii=False, indent=2))
     (output / "battle.json").write_text(json.dumps(battle, ensure_ascii=False, indent=2))
@@ -129,8 +131,8 @@ def main():
     receipt = {
         "package": PACKAGE, "activity": ACTIVITY, "apk": str(apk),
         "sha256": hashlib.sha256(apk.read_bytes()).hexdigest(),
-        "rules": "local-v2", "original_game_modified": False,
-        "features": ["original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "four-slot-battle", "original-home-ui", "original-handbook-ui", "original-journey-ui", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
+        "rules": "local-v3", "original_game_modified": False,
+        "features": ["original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-handbook-ui", "original-journey-ui", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
         "journey_counts": {"chapters": len(journey["chapters"]),
                            "stages": sum(len(c["stages"]) for c in journey["chapters"]),
                            "map_positions": sum("x" in c for c in journey["chapters"])},

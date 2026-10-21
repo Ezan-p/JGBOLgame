@@ -145,4 +145,4 @@ def catalog(game_root):
         })
     return {"schema": 2, "heroes": heroes, "stages": stages,
             "recruitable": recruitable,
-            "skills": skill_config, "rules": "local-v2", "source": "Original APK 1061 + installed update 1263; local combat/reward rules"}
+            "skills": skill_config, "rules": "local-v3", "source": "Original APK 1061 + installed update 1263; local combat/reward rules"}

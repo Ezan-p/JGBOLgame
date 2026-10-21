@@ -175,6 +175,13 @@ def hero_with_inventory(hero, state, catalog):
     hero = copy.deepcopy(hero)
     bonuses = {"attack": 0, "defense": 0, "hp": 0, "magic": 0}
     percent = {"attack": 0, "defense": 0, "hp": 0, "magic": 0}
+    positions = spell_positions(state, catalog)
+    hero["spells"] = [{"id": hero.get("skill_id", 1), "level": 1, "position": 1}]
+    native = catalog["items"].get('s'+str(hero.get('skill_id', 1)))
+    if native and not native['active']:
+        stat = {1: "attack", 2: "defense", 3: "magic", 5: "hp"}.get(int(native['original']['effect_field']))
+        if stat:
+            percent[stat] += value(native, 1)/100
     for entry in state.get("inventory", {}).get("entries", []):
         if entry["hero"] != hero["id"]:
             continue
@@ -185,12 +192,17 @@ def hero_with_inventory(hero, state, catalog):
             stone = catalog["stones"].get(f'{item["category"]}:{entry["gem"]}', {})
             bonuses[stat] += round(bonus * (1 + float(stone.get("base", 0))))
         elif item["category"] == 4:
+            position = positions.get(entry['uid'], 0)
+            if not position:
+                continue
+            hero["spells"].append(dict(id=item['id'], level=entry['level'], position=position))
             if not item["active"]:
                 stat = {1: "attack", 2: "defense", 3: "magic", 5: "hp"}.get(int(item["original"]["effect_field"]))
                 if stat:
                     percent[stat] += value(item, entry["level"])/100
     for stat in bonuses:
         hero[stat] = round((hero.get(stat, 0) + bonuses[stat]) * (1 + percent[stat]))
+    hero["battle_stats_ready"] = True
     hero["equipment_bonus"] = bonuses
     return hero
 

@@ -86,7 +86,8 @@ class InventoryTests(unittest.TestCase):
         upgraded = self.game.hero(5022, 1, self.raw())
         self.assertGreater(upgraded["attack"], equipped["attack"])
         shown = next(e for e in self.game.view(self.raw())["inventory"]["entries"] if e["uid"] == weapon["uid"])
-        self.assertEqual(shown["value"], upgraded["attack"] - base["attack"])
+        raw_attack = self.catalog["heroes"]["5022"]["attack"]
+        self.assertEqual(upgraded["attack"], round((raw_attack+shown["value"])*1.065))
         report = self.call("battle", stage=1)["battle"]
         self.assertEqual(report["units"][0]["attack"], upgraded["attack"])
         self.call("bag_unsocket", uid=weapon["uid"])
@@ -101,7 +102,7 @@ class InventoryTests(unittest.TestCase):
         self.call("bag_equip", uid=b["uid"], hero=5022, equip_pos=3)
         base = self.game.hero(5022, 1)
         hero = self.game.hero(5022, 1, self.raw())
-        self.assertEqual(hero["attack"], round(base["attack"]*1.21))
+        self.assertEqual(hero["attack"], round(self.catalog["heroes"]["5022"]["attack"]*1.275))
         self.assertEqual(hero["skill_id"], base["skill_id"])
         active = self.entry("s202")
         self.call("bag_equip", uid=active["uid"], hero=5022, equip_pos=2)
@@ -109,6 +110,7 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(self.entry("s43")["hero"], 5022)
         self.assertEqual(self.game.hero(5022, 1, self.raw())["skill_id"], base["skill_id"])
         self.assertNotIn("skill_factor", self.game.hero(5022, 1, self.raw()))
+        self.assertEqual([(s["id"],s["position"]) for s in self.game.hero(5022, 1, self.raw())["spells"]], [(45,1),(202,2),(43,3)])
         self.call("bag_equip", uid=active["uid"], hero=5004, equip_pos=3)
         self.assertEqual(self.entry("s202")["hero"], 5004)
         resumed=Game(self.game.db,self.catalog).view(self.raw())

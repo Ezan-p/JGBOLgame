@@ -56,6 +56,16 @@ local function ccbi(file,x,y,scale,lifetime,parent,modern,flip)
     soundEvent(file)
     return n
 end
+local function showPassives(a)
+    if a.buffsShown then return end
+    a.buffsShown=true
+    for i,buff in ipairs(a.unit.passives or {}) do
+        local spec=D.skills[buff.id] or {}
+        ccbi(spec.passive_effect,a.x,a.foot,1.4,1.1,fx,true)
+        local n=label(buff.name,fx,a.x,a.y+35+(i-1)*23,17,{255,228,138},45)
+        table.insert(transient,{node=n,untilTime=clock+1.25})
+    end
+end
 local function updateHP()
     local totals={{0,0},{0,0}}
     for _,a in pairs(actors) do
@@ -111,9 +121,10 @@ local function finish()
     if finished then return end
     finished=true;paused=false;CCDirector:sharedDirector():resume();clearEffects();ui.clearButtons();controls:removeAllChildrenWithCleanup(true)
     for _,event in ipairs(report.events) do
+        if event.kind=='enter' then actors[event.actor].inField=true end
         for _,hit in ipairs(event.hits or {{target=event.target,hp=event.hp}}) do actors[hit.target].hp=hit.hp end
     end
-    for _,a in pairs(actors) do pose(a);a.body:setColor(ccc3(255,255,255));a.body:setVisible(a.hp>0);a.info:setVisible(a.hp>0) end
+    for _,a in pairs(actors) do pose(a);a.body:setColor(ccc3(255,255,255));a.body:setVisible(a.hp>0 and a.inField);a.info:setVisible(a.hp>0 and a.inField) end
     updateHP();shade(overlay,150)
     local result=sprite(report.won and 'v2/fightUI/succ2.png' or 'v2/fightUI/fail2.png',overlay,480,340,.7,1)
     if result then result:setScale(math.min(420/result:getContentSize().width,190/result:getContentSize().height)) end
@@ -153,8 +164,8 @@ function M.show(context,data)
     label('我方阵容',hud,290,480,15,nil,4);label('敌方阵容',hud,670,480,15,nil,4)
     for _,unit in ipairs(report.units) do
         local slot=unit.slot or tonumber(string.sub(unit.uid,3))+1
-        local p=(unit.side==0 and P or E)[slot]
-        local a={unit=unit,hp=unit.hp,x=p[1]*W,foot=p[2]*H}
+        local p=(unit.side==0 and P or E)[(slot-1)%4+1]
+        local a={unit=unit,hp=unit.hp,x=p[1]*W,foot=p[2]*H,inField=unit.in_field~=false and slot<=4}
         a.container=node(world,p[3]);a.body=sprite(unit.sprite,a.container,a.x,0,1)
         a.scale=.57*H/512;a.height=a.body:getContentSize().height*a.scale;a.y=a.foot+a.height/2
         a.body:setFlipX(unit.side==1);pose(a)
@@ -167,6 +178,7 @@ function M.show(context,data)
         a.bar=sprite('v2/fightUI/blood_char2.png',a.info,a.x-W*.06,by,1,3)
         a.bar:setAnchorPoint(CCPointMake(0,.5));a.barScale=W*.12/a.bar:getContentSize().width
         a.bar:setScaleY(.75);a.hpLabel=label(unit.hp,a.info,a.x,by-1,14,nil,4)
+        a.body:setVisible(a.inField);a.info:setVisible(a.inField)
         actors[unit.uid]=a
     end
     updateHP()
@@ -196,7 +208,15 @@ local function beginEvent(event)
     local skill=event.skill_id and event.skill_id~=1
     current={event=event,actor=a,target=target,t=0,skill=skill,impact=false,cast=false,ink=false,hit=false}
     time=0
-    if skill then
+    if event.kind=='enter' then
+        current.duration=1.7;current.strike=99
+        local sheet=CCSprite:create('v2/enterSence.png')
+        local size=sheet:getContentSize();local fw,fh=size.width/4,size.height/3
+        current.fall=CCSprite:create('v2/enterSence.png',CCRectMake(0,0,fw,fh))
+        current.fall:setScale(.2*W/fw);current.fall:setFlipX(a.unit.side==1);fx:addChild(current.fall,30)
+        current.frameW=fw;current.frameH=fh
+        label(a.unit.name..' · 援军入阵',overlay,480,440,22,{255,228,166})
+    elseif skill then
         current.spec=D.skills[event.skill_id] or {}
         current.cinematic=current.spec.quality and (current.spec.quality>=4 or current.spec.multi)
         current.duration=current.cinematic and 4.8 or 3.3
@@ -211,7 +231,22 @@ end
 local function playEvent(dt)
     local c=current;local e=c.event;local a=c.actor;local target=c.target
     c.t=c.t+dt;local t=c.t;local direction=a.unit.side==0 and 1 or -1
-    if c.skill then
+    if e.kind=='enter' then
+        local q=clamp((t-.6)/.4,0,1)
+        local frame=math.min(1,math.floor(math.max(0,t-.6)/.2))
+        c.fall:setTextureRect(CCRectMake(frame*c.frameW,0,c.frameW,c.frameH))
+        c.fall:setPosition(CCPointMake(a.x+direction*W*.4*(1-q),a.foot+H*.8*(1-q)))
+        c.fall:setVisible(t>=.6 and t<1)
+        if t>=1 and not c.cast then
+            c.cast=true;a.inField=true;a.body:setVisible(true);a.info:setVisible(true)
+            ccbi('105_1.ccbi',a.x+W*.12,a.foot,4,1.5);showPassives(a)
+        end
+        if t>=c.duration then
+            remove(c.fall);overlay:removeAllChildrenWithCleanup(true);current=nil
+            if index>=#report.events then finish() end
+        end
+        return
+    elseif c.skill then
         local intro=c.cinematic and 2.35 or .95
         if t<intro then
             local q=clamp(t/.16,0,1)
@@ -295,7 +330,10 @@ function M.update(dt)
     end
     world:setPosition(CCPointMake(0,0))
     for _,a in pairs(actors) do
-        if a.deadAt then
+        if a.inField and a.hp>0 and clock>.2 then showPassives(a) end
+        if not a.inField then
+            a.body:setVisible(false);a.info:setVisible(false)
+        elseif a.deadAt then
             local q=clamp((clock-a.deadAt)/.65,0,1);pose(a,a.x+(a.unit.side==0 and -28 or 28)*q,a.y,1,0,math.floor(255*(1-q)));a.info:setVisible(false)
         elseif a.hitAt and clock-a.hitAt<.55 then
             local q=(clock-a.hitAt)/.55;local d=a.unit.side==0 and -1 or 1

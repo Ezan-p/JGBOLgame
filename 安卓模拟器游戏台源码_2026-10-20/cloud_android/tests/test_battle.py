@@ -58,13 +58,81 @@ class BattleTests(unittest.TestCase):
         for event in report['events']:
             if event['skill_id'] != 1:
                 self.assertTrue(self.catalog['skills'][str(event['skill_id'])]['active'])
-        self.assertTrue(any(e['skill_name'] == '蓄力一击' for e in report['events']))
+        self.assertFalse(any(e['skill_name'] == '蓄力一击' for e in report['events']))
 
     def test_healing_caps_at_max_and_does_not_revive(self):
         hero = dict(self.catalog['heroes']['5022'], skill_id=6, hp=1000, attack=30)
         foe = dict(hero, skill_id=1, attack=20)
-        report = resolve([hero], [foe], self.catalog['skills'])
+        skills = copy.deepcopy(self.catalog['skills'])
+        skills['6']['original']['use_probability'] = '100'  # Scripted heal fixture; original tutorial value is zero.
+        report = resolve([hero], [foe], skills)
         healing = [h for e in report['events'] if e['kind']=='heal' for h in e['hits']]
         self.assertTrue(healing)
         self.assertTrue(all(h['damage'] < 0 and h['hp'] <= 1000 for h in healing))
         self.assertLessEqual(report['turns'], 30)
+
+    def test_reserves_are_untargetable_and_replace_only_paired_position(self):
+        def unit(slot, hp, attack=1):
+            return dict(self.catalog['heroes']['5022'], skill_id=1, lineup_slot=slot,
+                        hp=hp, attack=attack, defense=0)
+        report = resolve([unit(1, 10), unit(2, 1000), unit(5, 1000), unit(6, 1000)],
+                         [unit(1, 100000, 30)], self.catalog['skills'])
+        field = {u['uid'] for u in report['units'] if u['in_field']}
+        deaths = set()
+        for e in report['events']:
+            if e['kind'] == 'enter':
+                self.assertIn(e['replaces'], deaths)
+                self.assertEqual(int(e['actor'][2:]), int(e['replaces'][2:])+4)
+                field.add(e['actor'])
+            else:
+                self.assertIn(e['actor'], field-deaths)
+                for h in e['hits']:
+                    self.assertIn(h['target'], field-deaths)
+                    if not h['hp']: deaths.add(h['target'])
+        entries = [e['actor'] for e in report['events'] if e['kind']=='enter']
+        self.assertIn('0-4', entries)
+        self.assertNotIn('0-5', entries)
+
+    def test_group_kill_enters_all_four_reserves_before_next_attack(self):
+        skills = copy.deepcopy(self.catalog['skills'])
+        skills['104']['original']['use_probability'] = '100'
+        front = [dict(self.catalog['heroes']['5022'], skill_id=1, hp=10, attack=1, defense=0) for _ in range(8)]
+        for u in front[4:]: u['hp'] = 10000
+        foe = dict(front[0], hp=100000, skill_id=104, magic=100, attack=100)
+        report = resolve(front, [foe], skills)
+        start = next(i for i,e in enumerate(report['events']) if e['actor']=='1-0')
+        hit = report['events'][start]
+        self.assertEqual(len(hit['hits']),4)
+        self.assertTrue(all(h['hp']==0 for h in hit['hits']))
+        self.assertEqual([e['actor'] for e in report['events'][start+1:start+5]], ['0-4','0-5','0-6','0-7'])
+        self.assertTrue(all(e['kind']=='enter' for e in report['events'][start+1:start+5]))
+
+    def test_equipped_spells_both_cast_and_levels_increase_damage(self):
+        hero = dict(self.catalog['heroes']['5022'], hp=100000, attack=10, magic=100,
+                    spells=[dict(id=45, level=1, position=1), dict(id=202, level=1, position=2), dict(id=104, level=1, position=3)])
+        foe = dict(hero, skill_id=1, spells=[], defense=0, attack=1)
+        casts = set()
+        for seed in range(10):
+            report = resolve([hero], [foe], self.catalog['skills'], seed=seed)
+            casts.update(e['skill_id'] for e in report['events'] if e['actor']=='0-0')
+        self.assertTrue({1,202,104}.issubset(casts))
+        low = resolve([hero], [foe], self.catalog['skills'], opening_skill=True)
+        higher = copy.deepcopy(hero);higher['spells'][1]['level']=10
+        high = resolve([higher], [foe], self.catalog['skills'], opening_skill=True)
+        self.assertGreater(high['events'][0]['damage'],low['events'][0]['damage'])
+
+    def test_zero_probability_never_auto_casts_and_seed_changes_replay(self):
+        hero = dict(self.catalog['heroes']['5022'], skill_id=6, hp=100000)
+        foe = dict(hero, skill_id=202)
+        one = resolve([hero], [foe], self.catalog['skills'], seed=21)
+        two = resolve([hero], [foe], self.catalog['skills'], seed=22)
+        self.assertTrue(all(e['skill_id']==1 for e in one['events'] if e['actor']=='0-0'))
+        self.assertNotEqual(one['events'], two['events'])
+
+    def test_reserve_in_empty_pair_enters_at_start_and_can_win(self):
+        hero = dict(self.catalog['heroes']['5022'], lineup_slot=8, attack=99999)
+        foe = dict(self.catalog['heroes']['5004'], hp=1)
+        report = resolve([hero], [foe], self.catalog['skills'])
+        self.assertEqual(report['events'][0]['kind'], 'enter')
+        self.assertEqual(report['events'][0]['actor'], '0-7')
+        self.assertTrue(report['won'])

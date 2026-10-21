@@ -31,7 +31,7 @@ def build_battle(game_root):
     dependencies = {
         'map/special/xmz.jpg', 'map/special/xmz.png', 'map/special/pty.jpg',
         'map/special/pty.png', 'blood_5.ccbi', 'blood_5_inv.ccbi', 'splash_eye.ccbi',
-        'splash_light.ccbi', '123_2_1.ccbi', '204_1.ccbi', '204_2.ccbi', '106_1.ccbi',
+        'splash_light.ccbi', '127_2.ccbi', '128_2.ccbi', '130_2.ccbi', '105_1.ccbi', 'v2/enterSence.png', '123_2_1.ccbi', '204_1.ccbi', '204_2.ccbi', '106_1.ccbi',
         'number/all_number_white.fnt', 'number/all_number_white.png', 'music/fight.mp3',
         'v2/skip_fight.png', 'v2/speed_1.png', 'v2/speed_2.png',
     }
@@ -49,6 +49,8 @@ def build_battle(game_root):
             item['animation_skill'] = animation
             item['cast'], item['impact'] = EFFECTS[animation]
             dependencies.update(EFFECTS[animation])
+        if not row['active']:
+            item['passive_effect'] = '130_2.ccbi' if 42<=sid<=49 else '128_2.ccbi' if 31<=sid<=39 else '127_2.ccbi'
         skills[sid] = item
     stages = {}
     for stage in c['stages']:

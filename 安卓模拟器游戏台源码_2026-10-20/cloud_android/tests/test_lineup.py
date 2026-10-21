@@ -76,3 +76,21 @@ class LineupTests(unittest.TestCase):
             self.assertTrue(r.read(h["name_icon"]["file"]).startswith(b"\x89PNG"))
             self.assertTrue(1 <= h["name_icon"]["index"] <= 50)
         self.assertTrue(all(len(s["sha256"]) == 64 for s in data["sources"]))
+
+    def test_eight_slot_save_sparse_swap_and_removal_preserve_pairing(self):
+        with self.game.connect() as con:
+            state = self.game.initial()
+            state['lineup_capacity'] = 8
+            state['heroes']['5034'] = 1
+            con.execute('UPDATE players SET state=? WHERE id=?', (json.dumps(state),self.player))
+        result = self.request('eight-replace','lineup_replace',slot=8,hero=5034)['state']
+        self.assertEqual(result['lineup'], [5022,5004,0,0,0,0,0,5034])
+        result = self.request('eight-swap','lineup_swap',source=1,target=5)['state']
+        self.assertEqual(result['lineup'], [0,5004,0,0,5022,0,0,5034])
+        result = self.request('eight-remove','lineup',hero=5004)['state']
+        self.assertEqual(result['lineup'], [0,0,0,0,5022,0,0,5034])
+        report = self.request('eight-battle','battle',stage=1)['battle']
+        self.assertEqual([u['slot'] for u in report['units'] if u['side']==0],[5,8])
+        for e in report['events'][:2]: self.assertEqual(e['kind'],'enter')
+        self.request('eight-remove-last-but-one','lineup',hero=5022)
+        with self.assertRaises(GameError): self.request('eight-remove-last','lineup',hero=5034)
