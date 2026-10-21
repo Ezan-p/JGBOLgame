@@ -111,7 +111,7 @@ function M.draw(ui, state, navigate, info)
     sprite("v2/Energy2.png",hx+hw*.18,hy+hh*.60)
     shadow("—",hx+hw*.20,hy+hh*.60,16)
     sprite("v2/money_gold.png",hx+hw*.73,hy+hh*.60)
-    shadow("0",hx+hw*.75,hy+hh*.60,16)
+    shadow(state.gold or 0,hx+hw*.75,hy+hh*.60,16)
     sprite("v2/money_silver.png",hx+hw*.85,hy+hh*.60)
     shadow(state.silver,hx+hw*.87,hy+hh*.60,16)
     local exp=sprite("v2/exp_bar2.png",hx+hw*.51-335*S/2,hy+hh*.30,S,0,.5)
@@ -125,9 +125,9 @@ function M.draw(ui, state, navigate, info)
     local portrait=sprite("v2/namingUI/head_201.png",37.44,502.2,76.8/94)
     hit(0,463,80,77,explain("本地行者",{
         "等级 "..state.level.." · 已解锁关卡 "..state.unlocked.."/10",
-        "银两 "..state.silver.." · 体力 "..state.energy.."/60",
+        "银两 "..state.silver.." · 元宝 "..(state.gold or 0).." · 体力 "..state.energy.."/60",
         "本地存档自动保存，免账号登录。",
-        "元宝、VIP 与精力系统尚未启用。"}),portrait)
+        "元宝用于召唤，VIP 与精力系统尚未启用。"}),portrait)
     local power=0
     for _,hero in ipairs(state.heroes) do
         if hero.active then power=power+hero.hp+hero.attack*3+hero.defense*2 end
@@ -176,7 +176,7 @@ function M.draw(ui, state, navigate, info)
         {"character","神仙",.612,go("heroes")},
         {"roleRebornUI/role_reborn","转生",.718,explain("转生",{"转生按钮已从原版更新资源中还原。","转生消耗、突破与成长规则尚未接入。","当前可在「神仙」中将伙伴培养至 20 级。"})},
         {"buddy","阵容",.824,go("lineup")},
-        {"summon","召唤",.93,go("recruit")}
+        {"summon","召唤",.93,go("summon")}
     }
     for _,item in ipairs(menu) do
         local x=item[3]*960

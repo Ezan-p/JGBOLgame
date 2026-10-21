@@ -5,6 +5,8 @@ local home = require("local_home")
 local combat = require("local_battle")
 local battleHall = require("local_battle_hall")
 local handbook = require("local_handbook")
+local summonOK, summon = pcall(require,"local_summon")
+if not summonOK then CCLuaLog("LOCAL_SUMMON_LOAD_ERROR: "..tostring(summon)); error(summon) end
 local inventoryOK, inventory = pcall(require,"local_inventory")
 if not inventoryOK then CCLuaLog("LOCAL_INVENTORY_LOAD_ERROR: "..tostring(inventory)); error(inventory) end
 local lineupOK, lineup = pcall(require,"local_lineup")
@@ -198,7 +200,7 @@ render = function()
         end)
         return
     end
-    if state and (page=="home" or page=="heroes" or page=="lineup" or page=="inventory") then
+    if state and (page=="home" or page=="heroes" or page=="lineup" or page=="inventory" or page=="summon") then
         home.draw({
             root=root, text=text, hideHeader=page~="home",
             hit=function(x,y,w,h,action,node)
@@ -209,10 +211,27 @@ render = function()
             if target=="lineup" then lineup.open() end
             if target=="inventory" then inventory.open() end
             if target=="stages" then journey.open() end
+            if target=="summon" then summon.open() end
             page=target; pageIndex=1; qualityFilter=0; homeInfo=nil; render()
         end,function(title,lines)
             page="home"; homeInfo={title=title,lines=lines}; render()
         end)
+        if page=="summon" then
+            local bottom={}
+            for _,b in ipairs(buttons) do
+                if b.y==0 and b.h<=80 then table.insert(bottom,b) end
+            end
+            buttons=bottom
+            summon.draw({
+                root=root,render=render,send=send,busy=busy,failed=failed,error=lastError,notice=notice,
+                clearHits=function() buttons={} end,
+                hit=function(x,y,w,h,action,enabled,node)
+                    table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node})
+                end,
+                navigate=function(target) page=target;homeInfo=nil;render() end,
+            },state)
+            return
+        end
         if page=="inventory" then
             local bottom={}
             for _,b in ipairs(buttons) do
@@ -410,6 +429,7 @@ local function tick(dt)
                 if page=="inventory" and inventory.equipPending then page="lineup" end
                 notice=response.notice or "已连接本地服务 · 进度已保存"
                 if response.battle then battle=response.battle; page="battle" end
+                if response.summon_result and page=="summon" then summon.reveal(response.summon_result) end
             else
                 notice=response.error or "操作失败"
                 lastError=notice
@@ -439,6 +459,7 @@ local function navigateBack()
     elseif page=="lineup" then lineup.back()
     elseif page=="battle_hall" then battleHall.back()
     elseif page=="inventory" then inventory.back()
+    elseif page=="summon" then summon.back()
     else page="home"; homeInfo=nil; render() end
 end
 
@@ -480,6 +501,10 @@ local function init()
             return true
         end
         if page=="stages" and not busy and not session.pending and journey.touch(event,x/sx,y/sy) then
+            pressed=nil
+            return true
+        end
+        if page=="summon" and summon.touch(event,x/sx,y/sy) then
             pressed=nil
             return true
         end

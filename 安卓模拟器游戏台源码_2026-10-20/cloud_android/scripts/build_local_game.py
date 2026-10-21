@@ -19,6 +19,7 @@ from local_game.battle_research import build_research
 from local_game.lineup import build_lineup
 from local_game.inventory import build_inventory
 from local_game.synergy import build_synergy
+from local_game.summon import build_summon
 from local_game.journey import build_journey, lua_literal
 from scripts.prepare_apk import ROOTS, java_home, validate_source
 
@@ -39,7 +40,10 @@ def main():
     assets["inventory"] = inventory
     synergy = build_synergy(game)
     assets["synergy"] = synergy
+    summon = build_summon(game)
+    assets["summon"] = {"pools": summon["pools"], "tiers": summon["tiers"]}
     (output / "synergy.json").write_text(json.dumps(synergy, ensure_ascii=False, indent=2))
+    (output / "summon.json").write_text(json.dumps(summon, ensure_ascii=False, indent=2))
     (output / "inventory.json").write_text(json.dumps(inventory, ensure_ascii=False, indent=2))
     (output / "catalog.json").write_text(json.dumps(assets, ensure_ascii=False, indent=2))
     header, entries = decode_index((game / "assets/release_/index.txt").read_bytes())
@@ -67,6 +71,10 @@ def main():
             if k not in ("resources", "sources")})).encode(),
         "lua/local_home.lua": (ROOT / "local_game/home.lua").read_bytes(),
         "lua/local_handbook.lua": (ROOT / "local_game/handbook.lua").read_bytes(),
+        "lua/local_summon.lua": (ROOT / "local_game/summon.lua").read_bytes(),
+        "lua/local_summon_data.lua": ("return " + lua_literal(
+            {"tiers": summon["tiers"], "rates": summon["rates"],
+             "normal_daily_free": summon["normal_daily_free"]})).encode(),
         "lua/local_journey.lua": (ROOT / "local_game/journey.lua").read_bytes(),
         "lua/local_journey_data.lua": (
             "return " + lua_literal({k: v for k, v in journey.items()
@@ -83,7 +91,7 @@ def main():
     for hero in all_units:
         if hero["sprite"] in resources.updated:
             extra[hero["sprite"]] = resources.read(hero["sprite"])
-    for name in set(handbook["resources"]) | set(journey["resources"]) | set(battle["resources"]) | set(lineup["resources"]) | set(inventory["resources"]) | set(synergy["resources"]):
+    for name in set(handbook["resources"]) | set(journey["resources"]) | set(battle["resources"]) | set(lineup["resources"]) | set(inventory["resources"]) | set(synergy["resources"]) | set(summon["resources"]):
         # Validate original dependencies too; only updated art needs an APK overlay.
         content = resources.read(name)
         if name in resources.updated:
@@ -141,7 +149,7 @@ def main():
         "package": PACKAGE, "activity": ACTIVITY, "apk": str(apk),
         "sha256": hashlib.sha256(apk.read_bytes()).hexdigest(),
         "rules": "local-v4", "original_game_modified": False,
-        "features": ["38-live-traits", "75-awakening-stars", "native-awakening-and-spell-advance", "rulai-shield-and-sharing", "elite-arena-guild-story-modes", "uncompressed-native-audio", "original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-handbook-ui", "original-journey-ui", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
+        "features": ["38-live-traits", "75-awakening-stars", "native-awakening-and-spell-advance", "rulai-shield-and-sharing", "elite-arena-guild-story-modes", "uncompressed-native-audio", "original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-handbook-ui", "original-journey-ui", "original-summon-ui", "summon-free-timers-and-news", "summon-result-reveal", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
         "journey_counts": {"chapters": len(journey["chapters"]),
                            "stages": sum(len(c["stages"]) for c in journey["chapters"]),
                            "map_positions": sum("x" in c for c in journey["chapters"])},

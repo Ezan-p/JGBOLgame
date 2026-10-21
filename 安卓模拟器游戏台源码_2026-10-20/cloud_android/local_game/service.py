@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT))
 from local_game.combat import resolve, apply_passives
 from local_game import inventory
 from local_game import synergy
+from local_game import summon as summon_rules
 from local_game import battle_modes, battle_training
 
 
@@ -52,10 +53,11 @@ class Game:
 
     def initial(self):
         return {
-            "schema": 1, "name": "本地行者", "silver": 1200, "experience": 0,
+            "schema": 1, "name": "本地行者", "silver": 1200, "gold": 500, "experience": 0,
             "energy": 60, "energy_time": int(time.time()), "unlocked": 1,
             "heroes": {"5022": 1, "5004": 1}, "lineup": [5022, 5004],
-            "wins": {}, "battle_count": 0,
+            "souls": {}, "wins": {}, "battle_count": 0,
+            "summon": summon_rules.initial_state(self.catalog),
         }
 
     def hero(self, ident, level, state=None, resolve_synergy=True):
@@ -87,6 +89,7 @@ class Game:
             result["support"] = support
         if self.catalog.get("inventory"):
             result["inventory"] = inventory.view(state, self.catalog["inventory"])
+        result["summon"] = summon_rules.view(state, self.catalog)
         for hero in result["heroes"]:
             hero["active"] = hero["id"] in state["lineup"]
         result["stages"] = [
@@ -158,6 +161,9 @@ class Game:
 
     def apply(self, state, op, args):
         now = int(time.time())
+        state.setdefault("gold", 500)
+        state.setdefault("souls", {})
+        summon_rules.ensure(state, self.catalog, now)
         elapsed = max(0, (now - state["energy_time"]) // 300)
         if elapsed:
             state["energy"] = min(60, state["energy"] + elapsed)
@@ -190,6 +196,18 @@ class Game:
             if sum(bool(i) for i in state["lineup"]) < self.capacity(state):
                 self.add_to_lineup(state, ident)
             extra["notice"] = "招募成功，已保存"
+        elif op == "summon":
+            result = summon_rules.pull(
+                state, args.get("grade"), self.catalog, GameError,
+                lambda ident: self.add_to_lineup(state, ident), now=now)
+            extra["summon_result"] = result
+            extra["notice"] = ("召唤成功：" + result["hero"]["name"] if result["new"] else
+                               "重复神仙，获得 %d 魂魄（共有 %d）" %
+                               (result["soul_gain"], result["soul_total"]))
+            if result["free"]:
+                extra["notice"] = result["grade_name"] + "免费召唤：" + result["hero"]["name"]
+                if not result["new"]:
+                    extra["notice"] += "（重复，获得 %d 魂魄）" % result["soul_gain"]
         elif op == "lineup":
             ident = self.integer(args, "hero")
             if str(ident) not in state["heroes"]:

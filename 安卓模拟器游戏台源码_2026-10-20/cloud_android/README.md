@@ -1,6 +1,8 @@
 # 金箍棒安卓游戏台
 
-当前默认使用 **Android 6.0 / ARM32 本地可玩版**，无需联想账号，角色与进度保存在本机。已依据原客户端布局与美术资源还原仙山首页，并接通角色培养、阵容、招募和十个本地 PvE 关卡；使用独立本地规则，并非原官服完整复刻。
+当前默认使用 **Android 6.0 / ARM32 本地可玩版**，无需联想账号，角色与进度保存在本机。已依据原客户端布局与美术资源还原仙山首页，并接通角色培养、阵容、招募、召唤和十个本地 PvE 关卡；使用独立本地规则，并非原官服完整复刻。
+
+“召唤”已按原版 `ui/summonUI.lua` 还原三栏卡片、左侧“召唤喜讯公告”、星级区间、免费倒计时、上次召唤与全屏结果；普通/高级/超级池分别覆盖 120/128/93 位神仙，消耗 10/100/300 元宝，普通每日 5 次免费。结果页采用原版 `getSummonResult()` 的居中立绘、属性条、名称/星级、仙缘与“详情/继续”结构；重复神仙按原版 `cortege_quality.csv` 获得 4/9/12/15 魂魄，左侧显示本次获得与共有数量。原服概率未包含在 APK 中，本地概率与冷却口径见 [召唤逆向与本地规则](local_game/SUMMON.md)。
 
 招募现已覆盖原版图鉴全部 **166 位神仙**，支持品质筛选和双向翻页。原文介绍、属性成长、技能、仙缘、转生及剧情详见 [神仙角色介绍表](outputs/characters-20261020/神仙角色介绍表.xlsx)，提取口径见 [角色资料说明](local_game/README.md#神仙角色介绍表与提取依据)。
 
@@ -129,7 +131,7 @@ node --check web/app.js
 .runtime/venv/bin/python scripts/check_browser.py
 ```
 
-浏览器检查需要 Chrome 和已启动的网页服务，生成 `.runtime/browser-check.json` / `.png` 和手机布局截图。当前 37 项自动测试通过，覆盖本地存档、重复结算保护、十关推进、全部角色招募及图鉴数据与素材。此前实机完成战斗、培养与招募，正式安装包及本地服务重启后进度保留；浏览器画面传输正常，无 JavaScript 错误、无移动端横向溢出。本地版初始验收记录在 `.runtime/local_game/validation.json`，神仙模块验收在 `.runtime/local_game/handbook-validation/`，原渠道版的镜像验证截图和日志另存于 `.runtime/compat32/game-screen.png`、`game-logcat.txt`。这些验证不代表原服功能已完整恢复。原 Noctilucent MOD 文件保留作历史资料，未接入金箍棒网页。
+浏览器检查需要 Chrome 和已启动的网页服务，生成 `.runtime/browser-check.json` / `.png` 和手机布局截图。当前 100 项自动测试通过，覆盖本地存档、重复结算保护、十关推进、全部角色招募、召唤池与免费/付费结算、原版魂魄转化、图鉴数据与素材。此前实机完成战斗、培养与招募，正式安装包及本地服务重启后进度保留；浏览器画面传输正常，无 JavaScript 错误、无移动端横向溢出。本地版初始验收记录在 `.runtime/local_game/validation.json`，神仙模块验收在 `.runtime/local_game/handbook-validation/`，原渠道版的镜像验证截图和日志另存于 `.runtime/compat32/game-screen.png`、`game-logcat.txt`。这些验证不代表原服功能已完整恢复。原 Noctilucent MOD 文件保留作历史资料，未接入金箍棒网页。
 
 - 开机慢：ARM32 使用软件仿真；查看 `doctor` 的 `booted`，不要删除数据或反复重装 APK。
 - 引擎或镜像缺失：运行 `setup_compat32.py`，不要只改 `abi.type`。
