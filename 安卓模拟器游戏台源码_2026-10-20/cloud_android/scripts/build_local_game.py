@@ -55,6 +55,8 @@ def main():
     (output / "battle.json").write_text(json.dumps(battle, ensure_ascii=False, indent=2))
     (output / "journey.json").write_text(json.dumps(journey, ensure_ascii=False, indent=2))
     extra = {
+        "lua/local_battle_hall.lua": (ROOT / "local_game/battle_hall.lua").read_bytes(),
+        "lua/local_combat_rules.lua": ("return " + lua_literal(assets["combat_rules"])).encode(),
         "lua/local_inventory.lua": (ROOT / "local_game/inventory.lua").read_bytes(),
         "lua/local_inventory_data.lua": ("return " + lua_literal({"items": inventory["items"]})).encode(),
         "lua/local_lineup.lua": (ROOT / "local_game/lineup.lua").read_bytes(),
@@ -77,7 +79,8 @@ def main():
         ).encode(),
     }
     resources = Resources(game)
-    for hero in assets["heroes"].values():
+    all_units=list(assets["heroes"].values())+[u for mode in assets["battle_modes"].values() for team in mode.values() for u in team]
+    for hero in all_units:
         if hero["sprite"] in resources.updated:
             extra[hero["sprite"]] = resources.read(hero["sprite"])
     for name in set(handbook["resources"]) | set(journey["resources"]) | set(battle["resources"]) | set(lineup["resources"]) | set(inventory["resources"]) | set(synergy["resources"]):
@@ -101,6 +104,12 @@ def main():
         "assets/release_/" + filename: script,
         **resource_patches,
     }
+    # Android MediaPlayer/SoundPool open APK assets via file descriptors; compressed
+    # hashed .data entries cannot be opened that way even when the logical name is MP3.
+    audio_entries = {'assets/release_/' + entry[0] for name, entry in entries.items()
+                     if name.lower().endswith(('.mp3', '.wav', '.ogg'))}
+    def compression(name):
+        return zipfile.ZIP_STORED if name in audio_entries else zipfile.ZIP_DEFLATED
     unsigned = output / "local-unsigned.apk"
     with zipfile.ZipFile(unsigned, "w", compression=zipfile.ZIP_DEFLATED, allowZip64=False) as archive:
         for root in ROOTS:
@@ -113,11 +122,11 @@ def main():
                     raise ValueError("Game sources must not contain symlinks")
                 name = path.relative_to(game).as_posix()
                 if name in patches:
-                    archive.writestr(name, patches.pop(name))
+                    archive.writestr(name, patches.pop(name), compress_type=compression(name))
                 else:
-                    archive.write(path, name)
+                    archive.write(path, name, compress_type=compression(name))
         for name, value in patches.items():
-            archive.writestr(name, value)
+            archive.writestr(name, value, compress_type=compression(name))
     java = java_home() / "bin/java"
     bt = SDK / "build-tools/35.0.0"
     aligned = output / "local-aligned.apk"
@@ -131,8 +140,8 @@ def main():
     receipt = {
         "package": PACKAGE, "activity": ACTIVITY, "apk": str(apk),
         "sha256": hashlib.sha256(apk.read_bytes()).hexdigest(),
-        "rules": "local-v3", "original_game_modified": False,
-        "features": ["original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-handbook-ui", "original-journey-ui", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
+        "rules": "local-v4", "original_game_modified": False,
+        "features": ["38-live-traits", "75-awakening-stars", "native-awakening-and-spell-advance", "rulai-shield-and-sharing", "elite-arena-guild-story-modes", "uncompressed-native-audio", "original-inventory-ui", "inventory-equip-upgrade-socket-compose-use-smelt", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-handbook-ui", "original-journey-ui", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
         "journey_counts": {"chapters": len(journey["chapters"]),
                            "stages": sum(len(c["stages"]) for c in journey["chapters"]),
                            "map_positions": sum("x" in c for c in journey["chapters"])},

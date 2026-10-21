@@ -21,6 +21,8 @@ def build_inventory(game_root):
     names = {int(x["Ftype_id"]): x for x in rows("item_name")}
     card_letters = {int(x["level"]): x["letter"] for x in rows("cards_letter")}
     summer_letters = {int(x["level"]): x["letter"] for x in rows("summer_cards_letter")}
+    from .battle_rules import build_rules
+    combat_rules = build_rules(r)
     items = {}
     dependencies = set(UI_RESOURCES)
     dependencies.update(n for n in r.names() if n.startswith("v2/packageUI/"))
@@ -47,7 +49,7 @@ def build_inventory(game_root):
             icon = atlas(f"items/all_items{(resource-1)//100+1}.png", (resource-1)%100+1, 10, 10)
         else:
             icon = atlas(f"items/all_daoju{(resource-1)//64+1}.png", (resource-1)%64+1, 8, 8)
-        action = "equip" if kind <= 3 else "gem" if kind == 9 else "reference"
+        action = "equip" if kind <= 3 else "trait" if kind == 15 and str(ident) in combat_rules["traits"] else "star" if kind == 19 and str(ident) in combat_rules["stars"] else "gem" if kind == 9 else "reference"
         if kind == 5 and int(b["strength_plus"]) > 0:
             action = "energy"
         if kind == 5 and int(b["experience_plus"]) > 0:
@@ -56,6 +58,8 @@ def build_inventory(game_root):
             action = "train"
         if ident == 10000:
             action = "material"
+        if ident == 1206:
+            action = "cheer_material"
         if ident == 1015:
             action = "support_material"
         if kind == 14 and ident-5000 in names:
@@ -64,7 +68,7 @@ def build_inventory(game_root):
             name=names[ident]["name"], description=names[ident]["desc"],
             obtain=names[ident].get("product_desc", ""), quality=int(b["quality"]),
             main_type=kind, sub_type=int(b["sub_type"]), icon=icon,
-            top_level=int(b["top_level"]), original=b, action=action,
+            top_level=5 if action == "trait" else 10 if action == "star" else int(b["top_level"]), original=b, action=action,
             original_bag=kind not in EXCLUDED_PROPS,
             price=max(40, int(b["quality"])*100) if action != "reference" else 0)
     names = {int(x["type_id"]): x for x in rows("skill_name")}
@@ -108,7 +112,7 @@ def build_inventory(game_root):
     for n in dependencies:
         r.read(n)
     native_skills = {x["type_id"]: int(x["chushijineng"]) for x in r.rows("csv_config/cortege/cortege_base_0.csv")}
-    return dict(schema=2, items=items, categories=CATEGORIES, native_skills=native_skills,
+    return dict(schema=2, combat_rules=combat_rules, items=items, categories=CATEGORIES, native_skills=native_skills,
         enhance_cost={x["level"]: x for x in costs},
         stones={f'{x["stone_type"]}:{x["level"]}': x for x in stones},
         raw_tables=raw_tables, sources=sources, missing_icons=missing, resources=sorted(dependencies))
@@ -123,7 +127,7 @@ def migrate(state):
 def grant(state, key, count=1, level=1, catalog=None):
     bag = migrate(state)
     item = catalog["items"][key]
-    stack = item["category"] in (5, 6)
+    stack = item["category"] in (5, 6) and item["action"] not in ("trait","star")
     if stack:
         for entry in bag["entries"]:
             if entry["key"] == key and entry["level"] == level:
@@ -176,17 +180,41 @@ def hero_with_inventory(hero, state, catalog):
     bonuses = {"attack": 0, "defense": 0, "hp": 0, "magic": 0}
     percent = {"attack": 0, "defense": 0, "hp": 0, "magic": 0}
     positions = spell_positions(state, catalog)
-    hero["spells"] = [{"id": hero.get("skill_id", 1), "level": 1, "position": 1}]
+    from .battle_training import training
+    from .synergy import support_ids
+    rules=catalog.get('combat_rules',{})
+    learned=training(state,hero['id'])
+    native_level=learned.get('native_level',1)
+    hero['battle_training']=dict(native_level=native_level,awaken=learned.get('awaken',0),cheer_level=learned.get('cheer_level',0))
+    cheer_rate=float(rules.get('cheer',{}).get(str(learned.get('cheer_level',0)),{}).get('plus_rate',.5)) if hero['id'] in support_ids(state) else 1
+    hero["traits"] = []
+    hero["stars"] = []
+    hero["spells"] = [{"id": hero.get("skill_id", 1), "level": native_level, "position": 1, "awaken": learned.get("awaken",0)}]
     native = catalog["items"].get('s'+str(hero.get('skill_id', 1)))
     if native and not native['active']:
         stat = {1: "attack", 2: "defense", 3: "magic", 5: "hp"}.get(int(native['original']['effect_field']))
         if stat:
-            percent[stat] += value(native, 1)/100
+            percent[stat] += value(native, native_level)/100*(1+rules.get('awaken_rates',{}).get(str(native['id']),0)/100 if learned.get('awaken') else 1)
     for entry in state.get("inventory", {}).get("entries", []):
         if entry["hero"] != hero["id"]:
             continue
         item = catalog["items"][entry["key"]]
-        if item["category"] <= 3:
+        if item["action"] == "trait":
+            hero["traits"].append(dict(id=item["id"],level=entry["level"]))
+        elif item['action']=='star':
+            hero['stars'].append(dict(id=item['id'],level=entry['level']))
+            star=rules['stars'][str(item['id'])];family=star['family'];strength=star['values'][min(10,entry['level'])-1]
+            if family<=8:
+                stat={1:'attack',2:'defense',3:'hp',4:'magic'}[(family+1)//2]
+                if family%2:percent[stat]+=strength
+                else:bonuses[stat]+=strength
+            else:
+                field={9:'spell_power_percent',10:'spell_power_flat',11:'crit_rate',12:'crit_bonus',13:'crit_resist',14:'crit_reduction',15:'death_prevent_rate'}[family]
+                hero[field]=hero.get(field,0)+strength
+                if family==15:
+                    params=star['parameters'].split('/')[min(10,entry['level'])-1].split('|')
+                    hero['death_prevent_limit']=int(float(params[1])) if len(params)>1 else 1
+        elif item["category"] <= 3:
             stat = {1: "attack", 2: "defense", 3: "hp"}[item["category"]]
             bonus = value(item, entry["level"])
             stone = catalog["stones"].get(f'{item["category"]}:{entry["gem"]}', {})
@@ -195,11 +223,16 @@ def hero_with_inventory(hero, state, catalog):
             position = positions.get(entry['uid'], 0)
             if not position:
                 continue
-            hero["spells"].append(dict(id=item['id'], level=entry['level'], position=position))
+            hero["spells"].append(dict(id=item['id'], level=entry['level'], position=position, awaken=entry.get('awaken',0), advanced=entry.get('advanced',False)))
             if not item["active"]:
                 stat = {1: "attack", 2: "defense", 3: "magic", 5: "hp"}.get(int(item["original"]["effect_field"]))
                 if stat:
-                    percent[stat] += value(item, entry["level"])/100
+                    percent[stat] += value(item, entry["level"])/100*cheer_rate
+            if entry.get('advanced'):
+                percent['hp']+=float(rules.get('advance',{}).get(str(item['id']),{}).get('hp_plus',0))/100*cheer_rate
+    awaken=rules.get('awaken',{}).get(str(learned.get('awaken',0)))
+    if awaken:
+        bonuses[{1:'attack',2:'defense',3:'magic'}[learned['awaken']]]+=int(awaken['plus_value'])
     for stat in bonuses:
         hero[stat] = round((hero.get(stat, 0) + bonuses[stat]) * (1 + percent[stat]))
     hero["battle_stats_ready"] = True
@@ -256,8 +289,10 @@ def apply(state, op, args, catalog, error):
         check(isinstance(args.get("key"), str), "请选择物品")
         item = catalog["items"].get(args["key"])
         check(item and item["action"] != "reference", "该物品仅供原版资料查阅")
-        spend(item["price"])
-        grant(state, item["key"], catalog=catalog)
+        count=args.get('count',1)
+        check(type(count) is int and 1<=count<=999 and (count==1 or item['action']=='cheer_material'), '兑换数量无效')
+        spend(item["price"]*count)
+        grant(state, item["key"], count=count, catalog=catalog)
         return "已兑换 " + item["name"]
     uid = integer("uid")
     entry = next((e for e in bag["entries"] if e["uid"] == uid), None)
@@ -265,10 +300,26 @@ def apply(state, op, args, catalog, error):
     item = catalog["items"][entry["key"]]
     category = item["category"]
     if op == "bag_equip":
-        check(category <= 4 and item["action"] != "reference", "此物品不能装备")
+        check(category <= 4 or item["action"] in ("trait","star"), "此物品不能装备")
         hero = integer("hero")
         check(hero == 0 or str(hero) in state["heroes"], "尚未拥有该神仙")
-        if category == 4 and hero:
+        if item['action']=='star' and hero:
+            from .battle_training import training
+            check(training(state,hero).get('awaken'), '原生法术觉醒后才能装备星宿')
+            worn=[e for e in bag['entries'] if e['hero']==hero and catalog['items'][e['key']]['action']=='star' and e['uid']!=uid]
+            check(len(worn)<5,'每位神仙最多装备五颗星宿')
+            check(not any(catalog['items'][e['key']]['id']%100==item['id']%100 for e in worn),'同类星宿不能重复装备')
+            if entry['count']>1:
+                entry['count']-=1;grant(state,entry['key'],level=entry['level'],catalog=catalog);entry=bag['entries'][-1]
+        elif item["action"] == "trait" and hero:
+            worn=[e for e in bag['entries'] if e['hero']==hero and catalog['items'][e['key']]['action']=='trait' and e['uid']!=uid]
+            check(len(worn)<4, '每位神仙最多装备四项特技')
+            check(not any(catalog['items'][e['key']]['id']%100==item['id']%100 for e in worn), '不能重复装备同类特技')
+            if entry['count']>1:
+                entry['count']-=1
+                grant(state,entry['key'],level=entry['level'],catalog=catalog)
+                entry=bag['entries'][-1]
+        elif category == 4 and hero:
             positions = spell_positions(state, catalog)
             equipped = [e for e in bag["entries"] if e["hero"] == hero and catalog["items"][e["key"]]["category"] == 4]
             pos = args.get("equip_pos")
@@ -293,8 +344,16 @@ def apply(state, op, args, catalog, error):
         if category == 4 and not hero:
             entry["equip_pos"] = 0
         return "装备已保存" if hero else "已卸下"
+    if op == "bag_advance":
+        from .battle_training import consume_materials
+        rule=catalog.get('combat_rules',{}).get('advance',{}).get(str(item['id']))
+        check(category==4 and rule and entry['level']>=int(rule['min_level']), '该法术不满足进阶条件')
+        check(not entry.get('advanced'), '该法术已经进阶')
+        consume_materials(state,rule['material_list'],error,exclude_uid=uid)
+        entry['advanced']=True
+        return '法术进阶成功，装备后增加生命'
     if op == "bag_upgrade":
-        check(category <= 4 and item["action"] != "reference", "此物品不能强化")
+        check(category <= 4 or item["action"] in ("trait","star"), "此物品不能强化")
         check(entry["level"] < item["top_level"], "已达到等级上限")
         spend(upgrade_cost(catalog, item, entry["level"]))
         entry["level"] += 1

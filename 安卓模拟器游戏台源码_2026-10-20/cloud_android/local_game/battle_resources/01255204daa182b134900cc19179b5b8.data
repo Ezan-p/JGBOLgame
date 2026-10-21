@@ -1,0 +1,2 @@
+pray_count,ext_list(weight|object_type|attach_type|attach_count|attach_level/...),level_plus(temple_level/count)
+7,20|5|5001|10|1/20|5|5005|10|1/10|5|1323|2|1/10|5|1343|10|1/20|5|1329|2|1/10|5|1007|2|1/5|11|1|400|1,0|100/8|150/14|200/20|250/30|400/40|500/50|600

@@ -127,6 +127,9 @@ local function rule(item)
     if a=="spell" then
         return "自带法术不可替换。第2、3格可装配法术，不限主动或被动；同一神仙不可重复装备同名法术。"
     end
+    if a=="star" then return "原生法术觉醒后可在演武堂装备，最多五颗，同类不重复。" end
+    if a=="trait" then return "每位神仙最多四项特技，同类不能重复；前往阵容的演武堂可兑换、装备和升级。" end
+    if a=="cheer_material" then return "在演武堂修炼页，用于助阵法术进修。" end
     if a=="gem" then return "3颗同类同级灵石合成1颗高一级灵石，最高10级。镶嵌提升对应装备属性，卸下完整归还。" end
     if a=="fragment" then return "10个同名碎片合成1件对应装备。" end
     if a=="energy" then return "使用恢复 "..item.original.strength_plus.." 点体力，上限60。体力已满时不消耗。" end
@@ -170,7 +173,7 @@ local function detail()
         end,item.price>0)
         return
     end
-    if item.category<=4 then
+    if item.category<=4 or (item.action=="trait" or item.action=="star") then
         button("装备 / 更换",250,135,145,function()
             if M.equipHero and item.category==4 then replaceSpell(e)
             else M.choice="hero";M.page=1;ui.render() end
@@ -183,10 +186,16 @@ local function detail()
                 else M.choice="gem";M.page=1;ui.render() end
             end)
         end
+        if item.category==4 then
+            local rule=require('local_combat_rules').advance[tostring(item.id)]
+            if rule then button(e.advanced and '已进阶' or '进阶',637,135,130,function()
+                confirm('进阶将消耗未装备材料：'..rule.material_list..'。装备后增加 '..rule.hp_plus..'%生命。','bag_advance',{uid=e.uid})
+            end,not e.advanced and e.level>=tonumber(rule.min_level)) end
+        end
         button("熔炼",777,135,115,function()
             confirm("熔炼将移除「"..item.name.."」，获得 "..math.max(1,item.quality)*e.level.." 颗精魄石。",
                 "bag_smelt",{uid=e.uid})
-        end,e.hero==0 and e.gem==0)
+        end,item.category<=4 and e.hero==0 and e.gem==0)
     elseif item.category==5 or item.action=="fragment" then
         button("合成",260,135,220,function()
             confirm(item.category==5 and "消耗3颗同类同级灵石，合成1颗高一级灵石？"
@@ -196,7 +205,7 @@ local function detail()
         button(item.action=="material" and "兑换20银两" or "使用",260,135,220,function()
             if item.action=="train" then M.choice="train";M.page=1;ui.render()
             else confirm("消耗1个「"..item.name.."」？\n"..rule(item),"bag_use",{uid=e.uid}) end
-        end,item.action~="reference" and item.action~="support_material")
+        end,item.action~="reference" and item.action~="support_material" and item.action~="cheer_material")
     end
 end
 local function choices()

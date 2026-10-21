@@ -3,6 +3,7 @@
 local json = require("base.json")
 local home = require("local_home")
 local combat = require("local_battle")
+local battleHall = require("local_battle_hall")
 local handbook = require("local_handbook")
 local inventoryOK, inventory = pcall(require,"local_inventory")
 if not inventoryOK then CCLuaLog("LOCAL_INVENTORY_LOAD_ERROR: "..tostring(inventory)); error(inventory) end
@@ -167,6 +168,13 @@ render = function()
     statusLabel=nil
     pressed=nil
     if page=="battle" and battle then showBattle(); return end
+    if state and page=="battle_hall" then
+        battleHall.draw({root=root,render=render,send=send,busy=busy,failed=failed,error=lastError,notice=notice,
+            clearHits=function() buttons={} end,
+            hit=function(x,y,w,h,action,enabled,node) table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node}) end,
+            navigate=function(target) page=target;render() end},state)
+        return
+    end
     if state and page=="stages" then
         journey.draw({
             root=root, render=render, send=send, failed=failed, error=lastError, busy=busy,
@@ -397,6 +405,7 @@ local function tick(dt)
             requestPending=nil
             saveSession()
             if response.ok then
+                lastError=nil
                 state=response.state
                 if page=="inventory" and inventory.equipPending then page="lineup" end
                 notice=response.notice or "已连接本地服务 · 进度已保存"
@@ -428,6 +437,7 @@ local function navigateBack()
     if page=="heroes" then handbook.back()
     elseif page=="stages" then journey.back()
     elseif page=="lineup" then lineup.back()
+    elseif page=="battle_hall" then battleHall.back()
     elseif page=="inventory" then inventory.back()
     else page="home"; homeInfo=nil; render() end
 end

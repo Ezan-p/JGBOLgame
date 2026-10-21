@@ -71,9 +71,10 @@ local function updateHP()
     for _,a in pairs(actors) do
         local hp=math.max(0,a.hp)
         a.hpLabel:setString(tostring(hp))
-        a.bar:setScaleX(a.barScale*hp/a.unit.max_hp)
+        a.statusLabel:setString((a.shield>0 and ('盾'..a.shield..' ') or '')..((a.poison or 0)>0 and ('毒×'..a.poison..' ') or '')..((a.armor or 0)>0 and '破甲' or ''))
+        a.bar:setScaleX(a.barScale*hp/a.maxHp)
         totals[a.unit.side+1][1]=totals[a.unit.side+1][1]+hp
-        totals[a.unit.side+1][2]=totals[a.unit.side+1][2]+a.unit.max_hp
+        totals[a.unit.side+1][2]=totals[a.unit.side+1][2]+a.maxHp
     end
     for side=1,2 do
         teamBars[side].sprite:setScaleX(teamBars[side].baseScale*totals[side][1]/math.max(1,totals[side][2]))
@@ -94,18 +95,35 @@ local function hpFloat(a,hit)
     n:setScale(.68);fx:addChild(n,40)
     table.insert(transient,{node=n,untilTime=clock+1,born=clock,life=1,floatY=a.y+a.height*.1,floatX=a.x})
 end
+local function applyChanges(event)
+    for _,change in ipairs(event.changes or {}) do
+        local a=actors[change.target]
+        if a then
+            a.hp=change.hp or a.hp;a.maxHp=change.max_hp or a.maxHp;a.shield=change.shield or 0
+            a.poison=change.poison_stacks or 0;a.armor=change.armor_loss or 0
+            if change.in_field~=nil then a.inField=change.in_field end
+        end
+    end
+end
 local function applyHits(event)
     for _,hit in ipairs(event.hits or {{target=event.target,damage=event.damage,hp=event.hp}}) do
         local a=actors[hit.target]
         if a then
-            a.hp=hit.hp;a.hitAt=clock;hpFloat(a,hit)
+            a.hp=hit.hp;a.maxHp=hit.max_hp or a.maxHp;a.shield=hit.shield or a.shield
+            if hit.revive then a.deadAt=nil;a.inField=true;a.body:setVisible(true);a.info:setVisible(true);pose(a) end
+            if hit.damage>0 then a.hitAt=clock end
+            if hit.damage~=0 then hpFloat(a,hit) end
+            if hit.prevented or hit.dodged or (hit.absorbed or 0)>0 then
+                local n=label(hit.prevented and '免死' or hit.dodged and '闪避' or ('护盾 -'..hit.absorbed),fx,a.x,a.y+35,18,{100,225,255},40)
+                table.insert(transient,{node=n,untilTime=clock+1})
+            end
             if hit.hp<=0 then
                 a.deadAt=clock
                 ccbi('106_1.ccbi',a.x+W*.05,a.y+H*.12,2,1.3)
             end
         end
     end
-    updateHP()
+    applyChanges(event);updateHP()
 end
 local function control(title,x,y,w,action)
     local n=label(title,controls,x+w/2,y+14,17,{255,225,177},1)
@@ -122,13 +140,17 @@ local function finish()
     finished=true;paused=false;CCDirector:sharedDirector():resume();clearEffects();ui.clearButtons();controls:removeAllChildrenWithCleanup(true)
     for _,event in ipairs(report.events) do
         if event.kind=='enter' then actors[event.actor].inField=true end
-        for _,hit in ipairs(event.hits or {{target=event.target,hp=event.hp}}) do actors[hit.target].hp=hit.hp end
+        for _,hit in ipairs(event.hits or {{target=event.target,hp=event.hp}}) do
+            local a=actors[hit.target];if a then a.hp=hit.hp;a.maxHp=hit.max_hp or a.maxHp;a.shield=hit.shield or a.shield end
+        end
+        applyChanges(event)
     end
+    applyChanges({changes=report.final_units or {}})
     for _,a in pairs(actors) do pose(a);a.body:setColor(ccc3(255,255,255));a.body:setVisible(a.hp>0 and a.inField);a.info:setVisible(a.hp>0 and a.inField) end
     updateHP();shade(overlay,150)
     local result=sprite(report.won and 'v2/fightUI/succ2.png' or 'v2/fightUI/fail2.png',overlay,480,340,.7,1)
     if result then result:setScale(math.min(420/result:getContentSize().width,190/result:getContentSize().height)) end
-    label(report.preview and '演武结束' or report.won and '战斗胜利' or '战斗结束',overlay,480,232,30,{255,219,146},3)
+    label(report.preview and '演武结束' or report.result=='draw' and '回合结束 · 平局' or report.won and '战斗胜利' or '战斗结束',overlay,480,232,30,{255,219,146},3)
     label(report.preview and '演示不消耗体力，不改变存档' or ('银两 +'..report.silver..'    经验 +'..report.experience),overlay,480,190,21,nil,3)
     if not report.preview then label(report.first_clear and '首通奖励已保存' or '战斗结果已保存',overlay,480,157,16,nil,3) end
     control('重放战报',240,100,140,function() M.show(ui,report) end)
@@ -165,7 +187,7 @@ function M.show(context,data)
     for _,unit in ipairs(report.units) do
         local slot=unit.slot or tonumber(string.sub(unit.uid,3))+1
         local p=(unit.side==0 and P or E)[(slot-1)%4+1]
-        local a={unit=unit,hp=unit.hp,x=p[1]*W,foot=p[2]*H,inField=unit.in_field~=false and slot<=4}
+        local a={unit=unit,hp=unit.hp,maxHp=unit.max_hp,shield=0,x=p[1]*W,foot=p[2]*H,inField=unit.in_field~=false and slot<=4}
         a.container=node(world,p[3]);a.body=sprite(unit.sprite,a.container,a.x,0,1)
         a.scale=.57*H/512;a.height=a.body:getContentSize().height*a.scale;a.y=a.foot+a.height/2
         a.body:setFlipX(unit.side==1);pose(a)
@@ -178,6 +200,7 @@ function M.show(context,data)
         a.bar=sprite('v2/fightUI/blood_char2.png',a.info,a.x-W*.06,by,1,3)
         a.bar:setAnchorPoint(CCPointMake(0,.5));a.barScale=W*.12/a.bar:getContentSize().width
         a.bar:setScaleY(.75);a.hpLabel=label(unit.hp,a.info,a.x,by-1,14,nil,4)
+        a.statusLabel=label('',a.info,a.x,by-19,13,{125,230,255},5)
         a.body:setVisible(a.inField);a.info:setVisible(a.inField)
         actors[unit.uid]=a
     end
@@ -208,7 +231,18 @@ local function beginEvent(event)
     local skill=event.skill_id and event.skill_id~=1
     current={event=event,actor=a,target=target,t=0,skill=skill,impact=false,cast=false,ink=false,hit=false}
     time=0
-    if event.kind=='enter' then
+    if event.tags and #event.tags>0 then
+        local n=label(table.concat(event.tags,' · '),fx,a.x,a.y+55,18,{255,225,145},45)
+        table.insert(transient,{node=n,untilTime=clock+1.5})
+    end
+    if event.kind=='effect' then
+        current.duration=.95;current.strike=.2;current.effect=true
+        local b=target or a
+        local n=label(event.skill_name,fx,b.x,b.y+40,23,{255,228,145},50)
+        table.insert(transient,{node=n,untilTime=clock+.95})
+        local effect=D.statusEffects and D.statusEffects[event.skill_name]
+        ccbi(effect,b.x,b.y,1.4,1.2,fx,true)
+    elseif event.kind=='enter' then
         current.duration=1.7;current.strike=99
         local sheet=CCSprite:create('v2/enterSence.png')
         local size=sheet:getContentSize();local fw,fh=size.width/4,size.height/3
@@ -231,7 +265,11 @@ end
 local function playEvent(dt)
     local c=current;local e=c.event;local a=c.actor;local target=c.target
     c.t=c.t+dt;local t=c.t;local direction=a.unit.side==0 and 1 or -1
-    if e.kind=='enter' then
+    if c.effect then
+        if t>=c.strike and not c.hit then c.hit=true;applyHits(e) end
+        if t>=c.duration then current=nil;if index>=#report.events then finish() end end
+        return
+    elseif e.kind=='enter' then
         local q=clamp((t-.6)/.4,0,1)
         local frame=math.min(1,math.floor(math.max(0,t-.6)/.2))
         c.fall:setTextureRect(CCRectMake(frame*c.frameW,0,c.frameW,c.frameH))

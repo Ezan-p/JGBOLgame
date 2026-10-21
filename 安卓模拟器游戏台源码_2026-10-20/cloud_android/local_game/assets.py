@@ -54,11 +54,16 @@ class Resources:
         self.synergy_updated = (json.loads(synergy_manifest.read_text())["entries"]
                                 if synergy_manifest.exists() else {})
         self.updated.update(self.synergy_updated)
+        self.battle_directory = Path(__file__).parent / "battle_resources"
+        manifest = self.battle_directory / "manifest.json"
+        self.battle_updated = json.loads(manifest.read_text())["entries"] if manifest.exists() else {}
+        self.updated.update(self.battle_updated)
 
     def read(self, name):
         if name in self.updated:
             entry = self.updated[name]
-            directory = (self.synergy_directory if name in self.synergy_updated else
+            directory = (self.battle_directory if name in self.battle_updated else
+                         self.synergy_directory if name in self.synergy_updated else
                          self.inventory_directory if name in self.inventory_updated else CHARACTER_RESOURCES)
             data = (directory / entry["filename"]).read_bytes()
             if len(data) != entry["size"] or hashlib.sha256(data).hexdigest() != entry["sha256"]:
@@ -143,6 +148,8 @@ def catalog(game_root):
             "enemies": [1020, 1021, 5003 if number % 5 == 0 else 1020],
             "silver": 180 + number * 40, "exp": 30 + number * 10,
         })
-    return {"schema": 2, "heroes": heroes, "stages": stages,
+    from .battle_rules import build_rules
+    from .battle_modes import build_modes
+    return {"schema": 2, "combat_rules": build_rules(resources), "battle_modes": build_modes(resources), "heroes": heroes, "stages": stages,
             "recruitable": recruitable,
-            "skills": skill_config, "rules": "local-v3", "source": "Original APK 1061 + installed update 1263; local combat/reward rules"}
+            "skills": skill_config, "rules": "local-v4", "source": "Original APK 1061 + installed update 1263; local combat/reward rules"}

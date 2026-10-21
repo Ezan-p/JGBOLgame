@@ -1,0 +1,302 @@
+{
+  "version": "ver====1263====",
+  "source": "installed original-channel release_w, read only",
+  "index_sha256": "dc0b516bb9ac821212f52eb868ecb7569dba66e3972c5ea2a9791babe4a71750",
+  "entries": {
+    "csv_config/awaken_skill_conf.csv": {
+      "filename": "a4339ff6b9dca99e5e15798b3560ef7e.data",
+      "size": 232,
+      "index_size": 232,
+      "sha256": "0a6a03f8e8a375e4f73960fd640761e1ae33ec84b59df04e04ab68077c327fa5"
+    },
+    "csv_config/awaken_skill_rate.csv": {
+      "filename": "00de518d1cbcb277cedf46aede2f2f7d.data",
+      "size": 438,
+      "index_size": 438,
+      "sha256": "bd1dedfb7f255f33e4646887cc9c5fababc4521661948c524c4184a77b355670"
+    },
+    "csv_config/cheer_skill_config.csv": {
+      "filename": "2a25869f4285bdf4e56ec8c8dcb4a2bd.data",
+      "size": 12135,
+      "index_size": 12135,
+      "sha256": "e941671af6f245add9e7dfe92592f971176058f87edf8ad4d1a90cec90936f99"
+    },
+    "csv_config/elite/elite_tollgate_config.csv": {
+      "filename": "0e8be9ecb29b507d9813e753ab5840d0.data",
+      "size": 8315,
+      "index_size": 8315,
+      "sha256": "1a608ea6e3b22b82f08e2db20e9f6ddbe390a189441e338ac3c147970c8dad76"
+    },
+    "csv_config/ext_skill.csv": {
+      "filename": "1e3c583e1fd996e302b5dc96362666be.data",
+      "size": 4450,
+      "index_size": 4450,
+      "sha256": "9549dd69e49c345e40428404d37421dc56b25a827f6878bb032cbcfafdf544e1"
+    },
+    "csv_config/ext_skill_lock_cost.csv": {
+      "filename": "d82fc3af8b1e2b0d124d83f475115b89.data",
+      "size": 46,
+      "index_size": 46,
+      "sha256": "fa345eee52a0623da36f1726952eff6ecff63082170fe43f5828f2a92e13183b"
+    },
+    "csv_config/ext_star_config.csv": {
+      "filename": "b75377475ece5a895f7113502f637753.data",
+      "size": 16490,
+      "index_size": 16490,
+      "sha256": "c92218a432cc02cdb3efb31b47eacbfdba26592b4382f02207be3dffee5dfc25"
+    },
+    "csv_config/hole/temple_ext_prize.csv": {
+      "filename": "01255204daa182b134900cc19179b5b8.data",
+      "size": 264,
+      "index_size": 264,
+      "sha256": "30cc9314b8d81a67747560ffc422e0ed598e5a8c4cffadd3533faaef12634d5f"
+    },
+    "csv_config/rulai_skill_base.csv": {
+      "filename": "fbf12a357c4187f240e862251de106d5.data",
+      "size": 114,
+      "index_size": 114,
+      "sha256": "185e8f5ac1cde2c8a0cbb8ea1a25596c009f386a7103fb1fefedc6a3389aed03"
+    },
+    "csv_config/skill_advaced_conf.csv": {
+      "filename": "cfab3d739ca1961ed41947c9a35d3735.data",
+      "size": 263,
+      "index_size": 263,
+      "sha256": "81effe54ba7c4411e8ecc9d0098c9600e9a645895befb1514841094ff6ad3349"
+    },
+    "csv_config/skill_base.csv": {
+      "filename": "f1ee4370b34a46627d56f034f0aaa967.data",
+      "size": 3068,
+      "index_size": 3068,
+      "sha256": "4e526b9630e98cc4e948306626ee02a4021ff56017a42b018ed200ce17bf8515"
+    },
+    "csv_config/skill_material_transform.csv": {
+      "filename": "4083048d201415f4a5793bc8da7252b0.data",
+      "size": 725,
+      "index_size": 725,
+      "sha256": "6f90068e608f742d378168113f63ffd6e8102f938f9b0749c297a23f6a42a95f"
+    },
+    "csv_config/skill_name.csv": {
+      "filename": "0dd420bb0a0f535ac4b96e896e927c8c.data",
+      "size": 9583,
+      "index_size": 9583,
+      "sha256": "43ad79fb0ef7dbf72702b1550283bf07f03fc2567a2bccb7e2e6f8f6fcddd0db"
+    },
+    "csv_config/skill_value.csv": {
+      "filename": "4f7ff1273b6d1dda91da64d66400d088.data",
+      "size": 163,
+      "index_size": 163,
+      "sha256": "6faf7421c6d1572854f0cda7d065badb3d551193f7af193ae8a9e40432a529c9"
+    },
+    "csv_config/specter_extr_skill_drug.csv": {
+      "filename": "d4ce7d11c1ff500f875f632e7019b81d.data",
+      "size": 2383,
+      "index_size": 2383,
+      "sha256": "9be4f034ce06d5519826c9937fc5ee3e0d09f7a07d5839f2e9d8d9666f7fe04e"
+    },
+    "csv_config/tollgate_config.csv": {
+      "filename": "c4bc8ec27a17037ff6b2772e8f321972.data",
+      "size": 71775,
+      "index_size": 71775,
+      "sha256": "0f00694c9ea022622c91702d3c9a0fe6f66d50bf8a734e218b4effefabf9b51b"
+    },
+    "csv_config/tollgate_name.csv": {
+      "filename": "d8e34b9b46ec42c012630a240bb09b52.data",
+      "size": 19862,
+      "index_size": 19862,
+      "sha256": "3d91e69f7ba2866876ac14e9a88cc29a4f2d7326ec70ec9c134d7b5116da7d9e"
+    },
+    "csv_config/tollgate_sweep_flush.csv": {
+      "filename": "554bbddb6ee38e0e8dca7b39e18a19f0.data",
+      "size": 6902,
+      "index_size": 6902,
+      "sha256": "776cc4c4cc6551bc66a2df043c466eddb952c55940a5e7c795d4c0169ddf70bc"
+    },
+    "csv_config/undergo_ordeal/elite_tollgate_config.csv": {
+      "filename": "ebfc6b000c60b3d62b4cc2f1646675e1.data",
+      "size": 6031,
+      "index_size": 6031,
+      "sha256": "4fe6dac7313eae22376710f2396228468c1eecd9d08c356800090434bbce2d48"
+    },
+    "csv_config/undergo_ordeal/elite_tollgate_name.csv": {
+      "filename": "aba9b9a5f8a3772d1bc31262c4c333b6.data",
+      "size": 1889,
+      "index_size": 1889,
+      "sha256": "eac2b65fb347318a05d9cc7715b77c448d7028500474f4bc7c88226d20636efc"
+    },
+    "csv_config/undergo_ordeal/tollgate_config.csv": {
+      "filename": "01f73f01364aa4eeab6b18d377faf36b.data",
+      "size": 12596,
+      "index_size": 12596,
+      "sha256": "22254483353ba5380efa50ff008f2430afb86729bf7c42ab3b8baad23f4afcae"
+    },
+    "csv_config/undergo_ordeal/tollgate_name.csv": {
+      "filename": "86022be4337be38608d1e06730fde867.data",
+      "size": 1886,
+      "index_size": 1886,
+      "sha256": "a596851fa6d0dcda8df93d4b8edd9abb8163d04c9ee5366e0ee574d25b74fdb4"
+    },
+    "dachengjin.ccbi": {
+      "filename": "746f941ff24fd8552cdff8b9cea7e0c8.data",
+      "size": 1081,
+      "index_size": 1081,
+      "sha256": "1f69a580aef4392978b6e84a5ca8d7aa79f17ad8e219ebbd680c6bf2534855a9"
+    },
+    "dachengjing.plist": {
+      "filename": "bbfd37137d55fbcba28f84517da2fc03.data",
+      "size": 5464,
+      "index_size": 5464,
+      "sha256": "d9eb419e54c6901f220551f34592560c440495c26a7aa313bd22c0a0358c0465"
+    },
+    "dachengjing.png": {
+      "filename": "f3bbcebc75dfff5ade1d2b33559304d9.data",
+      "size": 90855,
+      "index_size": 316903,
+      "sha256": "9682509998d551c84caf2b6adfb0ba5ed1a126d86cd6393efb4d1aa6a454876b"
+    },
+    "dachengjing01.plist": {
+      "filename": "93ee776505160b5eedc44faf5e1657b8.data",
+      "size": 5967,
+      "index_size": 5967,
+      "sha256": "8da3a8ec1a24914bc7ac2d9506b7b575092fbe27027c80ab863d83759704cad6"
+    },
+    "dachengjing01.png": {
+      "filename": "b23ee9d84161c9633418260a175e01ae.data",
+      "size": 92776,
+      "index_size": 283759,
+      "sha256": "c373d860998f365cefe09850fee1234c88b05c9242ae6a836862e976659f297c"
+    },
+    "dachengjinghudun.ccbi": {
+      "filename": "7b6a05eded594843c21ad8465bac0847.data",
+      "size": 2761,
+      "index_size": 2761,
+      "sha256": "6df76b32b7ff42e1477919b83d202f9e0aefc790eea055f94d7150fd60a1f4a6"
+    },
+    "lua/common/fight_data.lua": {
+      "filename": "52e4df4a75d81996c273609597c17be7.data",
+      "size": 12887,
+      "index_size": 36015,
+      "sha256": "7767a20b7bc5e7c0b2f9f09f8be0f707f21f24a8a17c39ada203055fbc1db9b4"
+    },
+    "lua/common/msg_def.lua": {
+      "filename": "eed8397c035c76f1453edbfbadc57720.data",
+      "size": 54254,
+      "index_size": 77944,
+      "sha256": "1d5ab534f8619438a5680b0062da31bf38d8cf6eebd9e0324aee8b39695e4cd8"
+    },
+    "lua/skill/skill.lua": {
+      "filename": "a6fcab666701dadc1928d5c4f776d3a5.data",
+      "size": 16153,
+      "index_size": 19995,
+      "sha256": "d6ba42d724ea62de7ead32eaa74f9f4d808d9bd3ca12a16ef56edc03d9ca4c17"
+    },
+    "lua/skill/skillExt.lua": {
+      "filename": "8ffaf0ac047166a2759e04ab67f379f4.data",
+      "size": 27294,
+      "index_size": 36623,
+      "sha256": "b19379db52975347c467fb20fc9a3bda27c6a07d52f5f2048f0976dea878b072"
+    },
+    "lua/skill/skill_1.lua": {
+      "filename": "d66feea2019730f58dbcecc29376d0e6.data",
+      "size": 4803,
+      "index_size": 7264,
+      "sha256": "6ee317bd3abebe5fb4c91e72e57f49d494a8e54abbeedfe2dd0b6e03ab31f949"
+    },
+    "lua/skill/skill_11.lua": {
+      "filename": "8ca6cdf245cdc29747361204cad498c7.data",
+      "size": 3340,
+      "index_size": 5138,
+      "sha256": "1ba3677250d43009107ff1c01558432e800824cbd53f3a0bd60964fd7d8bb15a"
+    },
+    "lua/skill/skill_1Far.lua": {
+      "filename": "b89d6d19e45fd44e77cf48bfc35c83e1.data",
+      "size": 6449,
+      "index_size": 8883,
+      "sha256": "756f93409eaca79d620ce2dde242aa6823f5ed7d1f2f494d0ef6efbd042cace3"
+    },
+    "lua/skill/skill_1Far_new.lua": {
+      "filename": "3d544a30b99f98588d592b6db8ce48ac.data",
+      "size": 7262,
+      "index_size": 8853,
+      "sha256": "edd0e903e928be5daa0773c68116186153032eda2a37904bce802e8a4699c78d"
+    },
+    "lua/skill/skill_1_new.lua": {
+      "filename": "669c365fe3ec502dd41954791695f59f.data",
+      "size": 8932,
+      "index_size": 11070,
+      "sha256": "32956087715249f07b45603d94b3c94c9ab095af168956cb8f58ed18cdc2dd00"
+    },
+    "lua/skill/skill_22.lua": {
+      "filename": "ae6a853d3629c671be4426bb596e99e4.data",
+      "size": 4242,
+      "index_size": 6203,
+      "sha256": "4780389ac2b75a45403273b37b0097abb8d67e9b45c30088b808ff579f545454"
+    },
+    "lua/skill/skill_k_10.lua": {
+      "filename": "d220874d0265ca49945f9daac2fa5231.data",
+      "size": 4545,
+      "index_size": 6215,
+      "sha256": "3af907622478f50b2429fecc4fc7b798e51d66acbb6f81a71f84f3f07ff86a9a"
+    },
+    "lua/skill/skill_k_11.lua": {
+      "filename": "89c7fc5e85a24b78fd35ea93bae09cb1.data",
+      "size": 4986,
+      "index_size": 6236,
+      "sha256": "f9e75465aa5e5b7c197f8eb52100067322569a9e6a098a534cc39851e48eec9e"
+    },
+    "lua/skill/skill_k_8.lua": {
+      "filename": "bbfffab8362e525865e142f71ab8032e.data",
+      "size": 6927,
+      "index_size": 8970,
+      "sha256": "b6e30b2b75525c3de95ed14cfc5df085b287bc5fd07966e7eb243d68dd1ca6fd"
+    },
+    "lua/skill/skill_k_9.lua": {
+      "filename": "a91d90b17eae9d00e26f8e74fbcc6696.data",
+      "size": 8590,
+      "index_size": 10723,
+      "sha256": "2751f69943096fbd7ed26719a4b2d22d9268845e5da157bb5083269055b490fc"
+    },
+    "lua/skill/skill_mgr.lua": {
+      "filename": "dc9fb60119b199d7f223bd559e2a1479.data",
+      "size": 4874,
+      "index_size": 9748,
+      "sha256": "847aa26b9a230bcc52bd0f58e0e85b5d72ebc29db94299b69446c0cd94bd7099"
+    },
+    "lua/ui/cheerSquadUI.lua": {
+      "filename": "6dd48a9e5345688aae451f6ddb6aac65.data",
+      "size": 94726,
+      "index_size": 123815,
+      "sha256": "a69f1e8f54eec94e8eacc6b73049eae718f5a4ef4e988e449a2abce3d468e322"
+    },
+    "lua/ui/fightUI.lua": {
+      "filename": "a2d4463e544fae37d9e2840657a2d557.data",
+      "size": 91583,
+      "index_size": 144972,
+      "sha256": "a6104c9674ef71fe6d0321656b05483d0b960e1e00ed640d37aaeddc36d2c33b"
+    },
+    "lua/ui/lineupUI.lua": {
+      "filename": "1581f9ded261ae0e45ea540c4ffec29e.data",
+      "size": 40964,
+      "index_size": 78341,
+      "sha256": "45e6c01b758344d001abd22d84bac729b6bca93f1c6a3553792bd06991c308de"
+    },
+    "lua/ui/skillUpgradeUI.lua": {
+      "filename": "d312ee575ca61eea0f713679037fad06.data",
+      "size": 48343,
+      "index_size": 67003,
+      "sha256": "3364fe63f82302909dcc6bec83894a02ac61411f8e0782780831e59930d6ef05"
+    },
+    "lua/ui/wakeUI.lua": {
+      "filename": "6690dc048d6ff5a5b26de6eb3f02b769.data",
+      "size": 106455,
+      "index_size": 124813,
+      "sha256": "58f353aee67c376a25cfc71fd748812d32d000727587a1ab06dcc70cf8482b20"
+    },
+    "lua/unit/charecter.lua": {
+      "filename": "53f500223328712524538006b2ba14c4.data",
+      "size": 30315,
+      "index_size": 44530,
+      "sha256": "dff57c005ab0f9499b5063cb67204d07af09009375173e659cf346b8edf2ef4b"
+    }
+  },
+  "unavailable": []
+}

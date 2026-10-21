@@ -1,0 +1,19 @@
+"""Read-only capture of updated battle scripts/config from installed original client."""
+import hashlib,json,subprocess,sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from game_config import ROOT,load_config
+from local_game.assets import decode_index
+c=load_config();adb=[str(c['adb_path']),'-s',c['serial']];remote='/data/data/com.sygame.jingubang.lenovo/release_w/'
+raw=subprocess.check_output(adb+['exec-out','cat',remote+'index.txt']);header,index=decode_index(raw)
+_,base=decode_index((c['game_root']/'assets/release_/index.txt').read_bytes())
+available=set(subprocess.check_output(adb+['shell','ls',remote]).decode().split())
+out=ROOT/'local_game/battle_resources';out.mkdir(exist_ok=True);entries={};missing=[]
+for name,(filename,size) in index.items():
+ wanted=('dacheng' in name or name.startswith('lua/skill/') or name in ['lua/ui/fightUI.lua','lua/unit/charecter.lua','lua/common/msg_def.lua','lua/common/fight_data.lua','lua/ui/skillUpgradeUI.lua','lua/ui/lineupUI.lua','lua/ui/wakeUI.lua','lua/ui/cheerSquadUI.lua'] or (name.endswith('.csv') and any(s in name for s in ['skill','tollgate','ext_'])))
+ if not wanted or base.get(name)==(filename,size):continue
+ if filename not in available:missing.append(name);continue
+ content=subprocess.check_output(adb+['exec-out','cat',remote+filename]);(out/filename).write_bytes(content)
+ entries[name]=dict(filename=filename,size=len(content),index_size=size,sha256=hashlib.sha256(content).hexdigest())
+(out/'manifest.json').write_text(json.dumps(dict(version=header.decode(),source='installed original-channel release_w, read only',index_sha256=hashlib.sha256(raw).hexdigest(),entries=entries,unavailable=missing),ensure_ascii=False,indent=2))
+print('Battle snapshot:',len(entries),'available;',len(missing),'unavailable')

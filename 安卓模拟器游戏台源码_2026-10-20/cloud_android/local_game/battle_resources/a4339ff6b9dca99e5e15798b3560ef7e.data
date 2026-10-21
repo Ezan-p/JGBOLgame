@@ -1,0 +1,4 @@
+awaken_type(1-gongji 2-fangyu 3-magic),min_level(技能书需要达到的等级),material_list(object_type|attach_type|attach_count|attach_level),plus_value
+1,10,6|42|1|1/6|43|1|1,1500
+2,10,6|22|1|1/6|23|1|1,1000
+3,10,6|31|1|1/6|32|1|1,800

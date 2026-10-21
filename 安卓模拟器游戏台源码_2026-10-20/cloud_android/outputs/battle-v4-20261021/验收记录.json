@@ -1,0 +1,72 @@
+{
+  "version": "local-v4",
+  "date": "2026-10-21",
+  "tests": 90,
+  "tests_passed": true,
+  "apk_sha256": "c6e96949643bb4ba52792a640535f0ad4a5516063beee066bd57081ca7a35241",
+  "apk_installed": true,
+  "package": "com.sygame.jingubang.localg",
+  "native_process": 24584,
+  "native_fixture": {
+    "units": 16,
+    "events": 378,
+    "entrances": 8,
+    "event_names": [
+      "中毒",
+      "反击",
+      "嗜血",
+      "复活",
+      "大乘经护盾",
+      "威慑",
+      "威慑解除",
+      "强壮",
+      "愈合",
+      "战意",
+      "招架",
+      "援军入阵",
+      "普通攻击",
+      "毒伤",
+      "破甲",
+      "祝福",
+      "龙腾滔天"
+    ]
+  },
+  "native_markers": [
+    "START",
+    "FULL_REPORT_COMPLETE",
+    "SKIP_COMPLETE",
+    "REPLAY_COMPLETE",
+    "HALL_modes",
+    "HALL_training",
+    "HALL_traits",
+    "HALL_stars",
+    "ALL_COMPLETE"
+  ],
+  "native_errors": [],
+  "audio_stored": 39,
+  "catalog_counts": {
+    "traits": 38,
+    "stars": 75,
+    "pve": 597,
+    "elite": 67
+  },
+  "save_audit": {
+    "assets_unchanged": true,
+    "lineup_capacity": 8,
+    "changed_fields": [
+      "energy",
+      "saved_at",
+      "energy_time"
+    ],
+    "energy_before": 58,
+    "energy_after": 60,
+    "reason": "normal login regeneration and save timestamps"
+  },
+  "test_overlay_removed": true,
+  "formal_hall": "formal-hall.png",
+  "formula": "reconstructed, not proven official server expression",
+  "formal_process": 25227,
+  "formal_errors": [],
+  "native_battle_verified_apk_sha256": "8ec8d88c55a5399a6252f757757203afef9c6a5cfa6a0780e4958107b513284f",
+  "final_layout_fix": "training cheer description moved 20px upward; battle player unchanged"
+}

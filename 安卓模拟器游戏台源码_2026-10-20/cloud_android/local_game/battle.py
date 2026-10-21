@@ -36,6 +36,15 @@ def build_battle(game_root):
         'v2/skip_fight.png', 'v2/speed_1.png', 'v2/speed_2.png',
     }
     dependencies.update(n for n in names if n.startswith('v2/fightUI/'))
+    status_effects={
+        '威慑':'weisheshu_001.ccbi','破甲':'pojia001.ccbi','中毒':'zhongdushu_001.ccbi',
+        '毒伤':'zhongdushu_001.ccbi','愈合':'jiaxue.ccbi','嗜血':'xixue001.ccbi',
+        '复活':'fuhuo001.ccbi','大乘经护盾':'dachengjinghudun.ccbi',
+        '祝福':'127_2.ccbi','强壮':'130_2.ccbi','战意':'zhanyi.ccbi','招架':'gedang001.ccbi',
+        '解毒':'jiaxue.ccbi'}
+    status_effects={k:v for k,v in status_effects.items() if v in names}
+    dependencies.update(status_effects.values())
+    dependencies.update(n for n in names if 'dacheng' in n and n.endswith(('.png','.plist','.ccbi')))
     skills = {}
     for ident, row in c['skills'].items():
         sid = int(ident)
@@ -80,7 +89,7 @@ def build_battle(game_root):
                 h.update(skill_id=104, skill_name='龙腾滔天')  # Screenshot equipment fixture, not saved roster.
             dependencies.add(h['sprite'])
             return h
-        report = resolve([unit(i) for i in ids], [unit(i) for i in [5020, 5013, 5019, 5014]], c['skills'], opening)
+        report = resolve([unit(i) for i in ids], [unit(i) for i in [5020, 5013, 5019, 5014]], c['skills'], opening, rules=c['combat_rules'])
         return {**report, 'stage': {'id': 0, 'name': '仙盟战场', 'background': background, 'title': title},
                 'preview': True, 'silver': 0, 'experience': 0, 'first_clear': False}
     reference = demo([5022, 5034, 5013, 5023], 'map/special/xmz.jpg', 'map/special/xmz.png', False)
@@ -93,5 +102,5 @@ def build_battle(game_root):
         sources.append(r.source(f'lua/skill/skill_{sid}.lua'))
     for n in dependencies:
         r.read(n)  # Fail the build on missing or corrupted dependencies.
-    return {'schema': 1, 'skills': skills, 'sounds': sounds, 'stages': stages,
+    return {'schema': 2, 'statusEffects': status_effects, 'skills': skills, 'sounds': sounds, 'stages': stages,
             'demo': reference, 'skill_demo': skill_demo, 'resources': sorted(dependencies), 'sources': sources}

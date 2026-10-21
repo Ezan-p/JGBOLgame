@@ -24,6 +24,7 @@ sys.path.insert(0, str(ROOT))
 from local_game.combat import resolve, apply_passives
 from local_game import inventory
 from local_game import synergy
+from local_game import battle_modes, battle_training
 
 
 class GameError(ValueError):
@@ -97,6 +98,7 @@ class Game:
             {**self.hero(i, 1), "cost": 600}
             for i in self.catalog["recruitable"] if str(i) not in state["heroes"]
         ]
+        result["combat_modes"] = battle_modes.MODES
         result["level"] = 1 + state["experience"] // 200
         return result
 
@@ -131,12 +133,14 @@ class Game:
         stage = stages[stage_id - 1]
         roster, _ = self.roster(state)
         allies = [dict(roster[i], lineup_slot=slot) for slot, i in enumerate(state["lineup"], 1) if i]
-        enemies = [self.hero(i, 1) for i in stage["enemies"]]
+        enemies = copy.deepcopy(self.catalog.get("battle_modes", {}).get("pve", {}).get(str(stage["original_id"])))
+        original_enemies = bool(enemies)
+        enemies = enemies or [self.hero(i, 1) for i in stage["enemies"]]
         scale = .75 + stage_id * .11
-        for unit in enemies:
+        for unit in ([] if original_enemies else enemies):
             for stat in ("hp", "attack", "defense"):
                 unit[stat] = round(unit[stat] * scale)
-        report = resolve(allies, enemies, self.catalog.get("skills", {}), seed=state["battle_count"] * 1009 + stage_id)
+        report = resolve(allies, enemies, self.catalog.get("skills", {}), seed=state["battle_count"] * 1009 + stage_id, rules=self.catalog.get("combat_rules"))
         won = report["won"]
         first = won and str(stage_id) not in state["wins"]
         reward = stage["silver"] * (2 if first else 1) if won else 20
@@ -231,6 +235,10 @@ class Game:
             extra["notice"] = "神仙已更换，阵容已保存"
         elif op.startswith("support_") and self.catalog.get("synergy"):
             extra["notice"] = synergy.apply(state, op, args, self.catalog, GameError)
+        elif op == "battle_mode":
+            extra["battle"] = battle_modes.fight(self,state,args.get('mode'),GameError)
+        elif op in ("battle_native_upgrade", "battle_awaken", "battle_cheer_upgrade"):
+            extra['notice']=battle_training.apply(state,op,args,self.catalog,GameError)
         elif op == "battle":
             extra["battle"] = self.battle(state, self.integer(args, "stage"))
         elif op.startswith("bag_") and self.catalog.get("inventory"):
@@ -292,7 +300,7 @@ def handler(game, key):
                 return self.reply({"ok": False, "error": "请求过大"}, 413)
             url = urlsplit(self.path)
             if url.path == "/health":
-                return self.reply({"ok": True, "service": "jingubang-local", "rules": "local-v3"})
+                return self.reply({"ok": True, "service": "jingubang-local", "rules": "local-v4"})
             if url.path != "/rpc":
                 return self.reply({"ok": False, "error": "接口不存在"}, 404)
             query = parse_qs(url.query)
