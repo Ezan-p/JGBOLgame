@@ -1,0 +1,465 @@
+{
+  "date": "2026-10-23",
+  "tests": 138,
+  "test_result": "passed",
+  "native_process": 1925,
+  "native_markers": [
+    "CAPTURE_1",
+    "CAPTURE_2",
+    "CAPTURE_3",
+    "FULL_COMPLETE reserves=8",
+    "OPENING_SKIP_OK",
+    "REPLAY_SPEED_OK",
+    "ALL_COMPLETE"
+  ],
+  "native_errors": [],
+  "units": 16,
+  "events": 62,
+  "reserves": 8,
+  "apk_sha256": "ba0d22f025f0c4c2628c4f59b82847f338921f525a940b1a5c9cde79abb6d66a",
+  "sources": [
+    {
+      "resource": "lua/skill/skill_mgr.lua",
+      "version": "ver====1263====",
+      "filename": "dc9fb60119b199d7f223bd559e2a1479.data",
+      "sha256": "847aa26b9a230bcc52bd0f58e0e85b5d72ebc29db94299b69446c0cd94bd7099"
+    },
+    {
+      "resource": "lua/skill/skill_22.lua",
+      "version": "ver====1263====",
+      "filename": "ae6a853d3629c671be4426bb596e99e4.data",
+      "sha256": "4780389ac2b75a45403273b37b0097abb8d67e9b45c30088b808ff579f545454"
+    },
+    {
+      "resource": "lua/unit/charecter.lua",
+      "version": "ver====1263====",
+      "filename": "53f500223328712524538006b2ba14c4.data",
+      "sha256": "dff57c005ab0f9499b5063cb67204d07af09009375173e659cf346b8edf2ef4b"
+    },
+    {
+      "resource": "lua/common/utils.lua",
+      "version": "ver====1061====",
+      "filename": "6b48490362466dd8ba0b69c47b04ec29.data",
+      "sha256": "a216820c06bf05739ddfbe91b3b17db49c35bd538a7b648d0a9230f92b6eeb90"
+    },
+    {
+      "resource": "lua/data.lua",
+      "version": "ver====1263====",
+      "filename": "167306a3e04c030beaecb178b917575b.data",
+      "sha256": "ab5f1497ed4a3d6711a080d1bd4d2ec4a71caa4eaa2b1a282a47175a26f4d36e"
+    },
+    {
+      "resource": "127_2.ccbi",
+      "version": "ver====1061====",
+      "filename": "3f0c6060d939a7dab84869ff2f79b02f.data",
+      "sha256": "c782f1d4007f6824e2a141c5e6c24abda81557dffa78b2419fefa796e23c54a1"
+    },
+    {
+      "resource": "128_2.ccbi",
+      "version": "ver====1061====",
+      "filename": "c86e8dd4050b70caa4fde75084d6a74c.data",
+      "sha256": "0ba220ff138bee597d0befb51607724d8560b0ea0d55d760203079f3971c1e16"
+    },
+    {
+      "resource": "130_2.ccbi",
+      "version": "ver====1061====",
+      "filename": "051f260721cea6aa2b703f11b0515c93.data",
+      "sha256": "ea307d212c3ac9517592cb4e2a892f1929e38101b771d3fedb65677cecf64972"
+    },
+    {
+      "resource": "skill/name/2.png",
+      "version": "ver====1061====",
+      "filename": "c90285133d190c4f4b5471efecdee72b.data",
+      "sha256": "6c1b601e29a7e8f5a97d2da984e74fe068e31eeee49dba9a5c794fd7595ec6db"
+    },
+    {
+      "resource": "skill/name/3.png",
+      "version": "ver====1061====",
+      "filename": "dfc6020b8b1b6eca63894f8236c12786.data",
+      "sha256": "47cca081be1706f1d9e08c3e99ad888b3e2ad6c350e54b44cde12c69311eb14b"
+    },
+    {
+      "resource": "skill/name/7.png",
+      "version": "ver====1061====",
+      "filename": "5a9b9c08b99c6795f9cdc42d3d92fb3d.data",
+      "sha256": "b0dfd6620e0756a08e425865a5d8c4199fbe3a8c46400ac8830fd40d9b8807eb"
+    },
+    {
+      "resource": "skill/name/22.png",
+      "version": "ver====1061====",
+      "filename": "d7a1b55fb84883968d4632bfc0b6536a.data",
+      "sha256": "b4acbd4b0892b76db77b9e707479a850f566c8c377b9215e09cc2ce971a198e5"
+    },
+    {
+      "resource": "skill/name/23.png",
+      "version": "ver====1061====",
+      "filename": "ffebc2ed0355cfb437e0386aba3e418c.data",
+      "sha256": "164e7cfe796659e5ecd4cb16069ec775f1b9ccc4080f02c9fb48f67f5ce87eb5"
+    },
+    {
+      "resource": "skill/name/25.png",
+      "version": "ver====1061====",
+      "filename": "e1f81eeadcd80abe6ace5a783a033cef.data",
+      "sha256": "79405f6dd6ae38fafda1ab602454f612af54e40325f291087de5cb72fc4e9ba4"
+    },
+    {
+      "resource": "skill/name/27.png",
+      "version": "ver====1061====",
+      "filename": "f57d23d1ede8e083b26e22d91bc5626e.data",
+      "sha256": "360a4e3628a048059c1ec21e62bcd6cf8fd92d3d2f0882d93fcb64e7d323e9e5"
+    },
+    {
+      "resource": "skill/name/28.png",
+      "version": "ver====1061====",
+      "filename": "a313bfc9dfa213f233a6c92592a3ea0d.data",
+      "sha256": "10215d887fd98e2030287f008365c58859202c2a8fc58095b2f4cb8f9255fe7f"
+    },
+    {
+      "resource": "skill/name/29.png",
+      "version": "ver====1061====",
+      "filename": "f88232c9e93be511aed7256456731476.data",
+      "sha256": "760623af2668215c2a108b5fd33674e01b819aedf4843c2e48c6fe0cd1be6b90"
+    },
+    {
+      "resource": "skill/name/31.png",
+      "version": "ver====1061====",
+      "filename": "8aaf5875cd01b0440c7a6c837ad38cb3.data",
+      "sha256": "d062076702f95fc56f3627b438d2057b293e4e428b40df0690b06e938650bb39"
+    },
+    {
+      "resource": "skill/name/32.png",
+      "version": "ver====1061====",
+      "filename": "399cdf3d9eee66b41e9430149635ea8d.data",
+      "sha256": "f7adb5c9836f514323c71a07f760998d33f933e4340f670265fcf6127506fe57"
+    },
+    {
+      "resource": "skill/name/34.png",
+      "version": "ver====1061====",
+      "filename": "3a6caedc0f95f40ba1a49099889e3536.data",
+      "sha256": "25d3723854b02994e521c142212c09963c0aca054872516cc6b4b873469e7294"
+    },
+    {
+      "resource": "skill/name/35.png",
+      "version": "ver====1061====",
+      "filename": "8c2d6ab5168887d5925b1be393769709.data",
+      "sha256": "39572b48e7d04d1e20c6187c55417f688b09d42cc47f558cb0bb0a51bfec0b7b"
+    },
+    {
+      "resource": "skill/name/36.png",
+      "version": "ver====1061====",
+      "filename": "c171916de0df48b70138e48063b2a12f.data",
+      "sha256": "03cc816b1fcd129d73eda295822c8a42e2f03e5f0a22c6d11dd506684378b133"
+    },
+    {
+      "resource": "skill/name/38.png",
+      "version": "ver====1061====",
+      "filename": "813a30dcf8e238ca6f06664d1c060284.data",
+      "sha256": "d66454e954504ffde4c4df18dcbdaea6e17dd66ff583c6571359146db539b179"
+    },
+    {
+      "resource": "skill/name/39.png",
+      "version": "ver====1061====",
+      "filename": "1eae5a8ad09ddacf10f61f8b066d9cc9.data",
+      "sha256": "6efb571fdfd97eb6fda27c8318e98d2af8e9d71b69a652beccb35a235139e8a8"
+    },
+    {
+      "resource": "skill/name/42.png",
+      "version": "ver====1061====",
+      "filename": "cbb02c5ee66ea8b4fc703b7b18075696.data",
+      "sha256": "d62cb344c7e257c29bf5cf2e1d6c8d9fc7265346914a2c7f1de13b6e1504f1ab"
+    },
+    {
+      "resource": "skill/name/43.png",
+      "version": "ver====1061====",
+      "filename": "b57c6b0ca5238e2d258bd0f31b615c01.data",
+      "sha256": "b5e9ac81c35598017df18699e8061c396725003e27a9ee52b4dfd8602e9e2a77"
+    },
+    {
+      "resource": "skill/name/45.png",
+      "version": "ver====1061====",
+      "filename": "df8fe04f03370c6bd9a49ef915136cec.data",
+      "sha256": "ebf58534f7eb841f1fc0521bf758da4c486fdb8cd7b3dfaf0b4f8d2caf66f412"
+    },
+    {
+      "resource": "skill/name/46.png",
+      "version": "ver====1061====",
+      "filename": "fea6927e57a39836c09fd4e3b42a03da.data",
+      "sha256": "1f93c75c7ce7261a9b009c686e46ce6e7f4036aa4a5ba3bcec93985ef73237e3"
+    },
+    {
+      "resource": "skill/name/48.png",
+      "version": "ver====1061====",
+      "filename": "fcb1c23faeaa6bf4bb129112d8eefa09.data",
+      "sha256": "d11cfd6f4e32ebb3014f9c3bac3e4ada240b61aa9e792235679fb3e997f3ea39"
+    },
+    {
+      "resource": "skill/name/49.png",
+      "version": "ver====1061====",
+      "filename": "90653579f8166a64252f4d67ca90f7fd.data",
+      "sha256": "d9651c868582083808d018709c132527681ce045a12655cfd83707e802ed01a5"
+    }
+  ],
+  "rendering": {
+    "passive_types": {
+      "2": [
+        "127_2.ccbi",
+        4
+      ],
+      "3": [
+        "128_2.ccbi",
+        2.5
+      ],
+      "4": [
+        "130_2.ccbi",
+        3
+      ]
+    },
+    "ccbi_root": [
+      1280,
+      752
+    ],
+    "logical_canvas": [
+      960,
+      540
+    ],
+    "anchor": [
+      0.5,
+      0.5
+    ],
+    "title_width": [
+      0.1,
+      0.2,
+      0.16
+    ],
+    "grow": 0.1,
+    "hold": 0.5,
+    "fade": 0.5,
+    "delay": 0.8,
+    "effect_duration": 0.8
+  },
+  "notes": [
+    "Original PNG lettering; original per-type CCBI; corrected root-size coordinate conversion.",
+    "Server-defined buff order reconstructed as native / equipment slot 2 / slot 3.",
+    "Android guest recovered during testing; final test process passed all assertions."
+  ],
+  "passive_skills": [
+    {
+      "id": 2,
+      "name": "无尽战意",
+      "title": "skill/name/2.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 3,
+      "name": "灵气入体",
+      "title": "skill/name/3.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 5,
+      "name": "11",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 7,
+      "name": "灵气聚顶",
+      "title": "skill/name/7.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 21,
+      "name": "大乘经",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 22,
+      "name": "指地成钢",
+      "title": "skill/name/22.png",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 23,
+      "name": "丈六金身",
+      "title": "skill/name/23.png",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 25,
+      "name": "铜头铁臂",
+      "title": "skill/name/25.png",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 27,
+      "name": "金蝉脱壳",
+      "title": "skill/name/27.png",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 28,
+      "name": "神烟术",
+      "title": "skill/name/28.png",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 29,
+      "name": "替身法",
+      "title": "skill/name/29.png",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 31,
+      "name": "太上感应篇",
+      "title": "skill/name/31.png",
+      "passive_type": 3,
+      "passive_effect": "128_2.ccbi",
+      "passive_scale": 2.5
+    },
+    {
+      "id": 32,
+      "name": "般若波罗蜜",
+      "title": "skill/name/32.png",
+      "passive_type": 3,
+      "passive_effect": "128_2.ccbi",
+      "passive_scale": 2.5
+    },
+    {
+      "id": 34,
+      "name": "法华经",
+      "title": "skill/name/34.png",
+      "passive_type": 3,
+      "passive_effect": "128_2.ccbi",
+      "passive_scale": 2.5
+    },
+    {
+      "id": 35,
+      "name": "金刚经",
+      "title": "skill/name/35.png",
+      "passive_type": 3,
+      "passive_effect": "128_2.ccbi",
+      "passive_scale": 2.5
+    },
+    {
+      "id": 36,
+      "name": "道德真经",
+      "title": "skill/name/36.png",
+      "passive_type": 3,
+      "passive_effect": "128_2.ccbi",
+      "passive_scale": 2.5
+    },
+    {
+      "id": 38,
+      "name": "大藏经",
+      "title": "skill/name/38.png",
+      "passive_type": 3,
+      "passive_effect": "128_2.ccbi",
+      "passive_scale": 2.5
+    },
+    {
+      "id": 39,
+      "name": "南华真经",
+      "title": "skill/name/39.png",
+      "passive_type": 3,
+      "passive_effect": "128_2.ccbi",
+      "passive_scale": 2.5
+    },
+    {
+      "id": 42,
+      "name": "一气化三清",
+      "title": "skill/name/42.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 43,
+      "name": "火眼金睛",
+      "title": "skill/name/43.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 45,
+      "name": "七十二变",
+      "title": "skill/name/45.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 46,
+      "name": "天罡正气",
+      "title": "skill/name/46.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 48,
+      "name": "腾云术",
+      "title": "skill/name/48.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 49,
+      "name": "三十六变",
+      "title": "skill/name/49.png",
+      "passive_type": 4,
+      "passive_effect": "130_2.ccbi",
+      "passive_scale": 3
+    },
+    {
+      "id": 51,
+      "name": "阿弥陀经",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    },
+    {
+      "id": 52,
+      "name": "羽化飞仙",
+      "passive_type": 2,
+      "passive_effect": "127_2.ccbi",
+      "passive_scale": 4
+    }
+  ],
+  "apk_installed": true,
+  "formal_process": 2416,
+  "formal_errors": [],
+  "save_audit": {
+    "assets_unchanged": true,
+    "changed_fields": [
+      "energy_time",
+      "saved_at"
+    ],
+    "lineup_capacity": 8,
+    "battle_count": 28
+  },
+  "test_overlays_removed": true,
+  "formal_view_restored": "home via Android back; preview did not settle rewards"
+}

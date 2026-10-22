@@ -128,17 +128,18 @@ function M.draw(ui, state, navigate, info)
         "银两 "..state.silver.." · 元宝 "..(state.gold or 0).." · 体力 "..state.energy.."/60",
         "本地存档自动保存，免账号登录。",
         "元宝用于召唤，VIP 与精力系统尚未启用。"}),portrait)
-    local power=0
-    for _,hero in ipairs(state.heroes) do
-        if hero.active then power=power+hero.hp+hero.attack*3+hero.defense*2 end
-    end
+    local power=state.role_combat_power
     sprite("v2/playerInfoUI/com_sword.png",178,466,.75)
     sprite("v2/playerInfoUI/com_label.png",132,486,.75)
-    number(power,174,485,.54,"v2/playerInfoUI/com_num.png",36,46)
+    if type(power)=="number" then
+        number(power,174,485,.54,"v2/playerInfoUI/com_num.png",36,46)
+    else
+        shadow("—",192,485,22,nil,true)
+    end
     hit(88,451,245,47,explain("战斗力",{
-        "当前出战阵容战斗力："..power,
-        "本地计算：生命 + 攻击 × 3 + 防御 × 2。",
-        "培养角色、调整阵容后会同步刷新。"}))
+        "当前出战阵容战斗力："..(type(power)=="number" and tostring(power) or "暂不可用"),
+        "原版战斗力由服务器提供。",
+        "本地版尚缺原版战力公式，四维属性和战斗照常生效。"}))
     local buff=sprite("v2/mainUI/level_buff.png",39.36,421.2,57.6/118)
     shadow("经验加成",39.36,390,16,{248,222,142},true)
     hit(7,379,68,77,explain("经验加成",{

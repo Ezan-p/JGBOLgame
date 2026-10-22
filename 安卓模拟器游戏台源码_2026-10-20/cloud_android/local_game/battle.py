@@ -24,6 +24,15 @@ EFFECTS = {
 }
 
 
+# skill_mgr.current_skill routes into skill_22; unlisted passives fall back to 2.
+PASSIVE_TYPES = {**{i: 2 for i in (22,23,25,27,28,29)},
+                 **{i: 3 for i in (31,32,34,35,36,38,39)},
+                 **{i: 4 for i in (2,3,5,7,42,43,45,46,48,49)}}
+PASSIVE_EFFECTS = {2: ('127_2.ccbi', 4), 3: ('128_2.ccbi', 2.5), 4: ('130_2.ccbi', 3)}
+PASSIVE_TIMING = dict(entry=1.5, delay=.8, grow=.1, hold=.5, fade=.5,
+                      effect=.8, width=.1, grow_factor=2, fade_factor=.8, after=.1)
+
+
 def build_battle(game_root):
     r = Resources(game_root)
     c = catalog(game_root)
@@ -59,7 +68,8 @@ def build_battle(game_root):
             item['cast'], item['impact'] = EFFECTS[animation]
             dependencies.update(EFFECTS[animation])
         if not row['active']:
-            item['passive_effect'] = '130_2.ccbi' if 42<=sid<=49 else '128_2.ccbi' if 31<=sid<=39 else '127_2.ccbi'
+            item['passive_type'] = PASSIVE_TYPES.get(sid, 2)
+            item['passive_effect'], item['passive_scale'] = PASSIVE_EFFECTS[item['passive_type']]
         skills[sid] = item
     stages = {}
     for stage in c['stages']:
@@ -97,10 +107,11 @@ def build_battle(game_root):
     sources = [r.source(n) for n in ['lua/common/constants.lua', 'lua/unit/charecter.lua',
                'lua/ui/fightUI.lua', 'lua/skill/skill.lua', 'lua/skill/skill_mgr.lua',
                'csv_config/skill_base.csv', 'csv_config/skill_name.csv', 'csv_config/effect_sound.csv',
-               'lua/common/msg_def.lua', 'lua/skill/skill_1_new.lua']]
+               'lua/common/msg_def.lua', 'lua/skill/skill_1_new.lua', 'lua/skill/skill_22.lua',
+               'lua/data.lua', 'lua/common/utils.lua']]
     for sid in EFFECTS:
         sources.append(r.source(f'lua/skill/skill_{sid}.lua'))
     for n in dependencies:
         r.read(n)  # Fail the build on missing or corrupted dependencies.
-    return {'schema': 2, 'statusEffects': status_effects, 'skills': skills, 'sounds': sounds, 'stages': stages,
+    return {'schema': 2, 'passiveTiming': PASSIVE_TIMING, 'statusEffects': status_effects, 'skills': skills, 'sounds': sounds, 'stages': stages,
             'demo': reference, 'skill_demo': skill_demo, 'resources': sorted(dependencies), 'sources': sources}

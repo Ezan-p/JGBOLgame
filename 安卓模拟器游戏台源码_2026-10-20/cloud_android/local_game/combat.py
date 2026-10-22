@@ -71,8 +71,9 @@ class Battle:
                 u.update(uid=f'{side}-{slot-1}',side=side,slot=slot,max_hp=u['hp'],
                          in_field=slot<=4 and u.get('step',0)<=0,shield=0)
                 u['passives']=[dict(id=s['id'],name=skills[str(s['id'])]['name'],level=s['level'])
-                               for s in spell_loadout(u) if str(s['id']) in skills
-                               and not skills[str(s['id'])].get('active') and spell_value(skills[str(s['id'])],s['level'])>0]
+                               for s in sorted(spell_loadout(u),key=lambda x:x.get('position',1)) if str(s['id']) in skills
+                               and not skills[str(s['id'])].get('active')
+                               and (s['id']==21 or spell_value(skills[str(s['id'])],s['level'])>0)]
             team.sort(key=lambda u:u['slot'])
         self.initial=copy.deepcopy(self.teams[0]+self.teams[1])
         for u in self.units():

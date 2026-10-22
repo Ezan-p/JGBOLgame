@@ -1,0 +1,15 @@
+{
+  "tests": 136,
+  "tests_passed": true,
+  "original_formula_verified": false,
+  "save_content_preserved": true,
+  "changed_fields": [
+    "energy_time",
+    "saved_at"
+  ],
+  "apk_installed": true,
+  "home_visual_checked": true,
+  "lineup_visual_checked": true,
+  "apk_sha256": "b54956bf077b26eee1f38110db0d4bd9a8179aa2edf95c0b26f5e63bada3741d",
+  "test_command": ".runtime/venv/bin/python -m unittest discover -s tests -p 'test_*.py'"
+}

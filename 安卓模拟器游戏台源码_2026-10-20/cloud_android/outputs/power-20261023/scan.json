@@ -1,0 +1,65 @@
+{
+  "counts": {
+    "lua": 289,
+    "csv": 379
+  },
+  "matches": [
+    {
+      "resource": "lua/common/common_def.lua",
+      "terms": [
+        "combat_power",
+        "fight_power"
+      ]
+    },
+    {
+      "resource": "lua/common/msg_def.lua",
+      "terms": [
+        "combat_power"
+      ]
+    },
+    {
+      "resource": "lua/event_mgr.lua",
+      "terms": [
+        "combat_power"
+      ]
+    },
+    {
+      "resource": "lua/ui/charPositionUI.lua",
+      "terms": [
+        "combat_power"
+      ]
+    },
+    {
+      "resource": "lua/ui/checkLineupUI.lua",
+      "terms": [
+        "combat_power"
+      ]
+    },
+    {
+      "resource": "lua/ui/fightrecordUI.lua",
+      "terms": [
+        "combat_power",
+        "fightpower"
+      ]
+    },
+    {
+      "resource": "lua/ui/landUI.lua",
+      "terms": [
+        "combat_power",
+        "fight_power"
+      ]
+    },
+    {
+      "resource": "lua/ui/mainUI.lua",
+      "terms": [
+        "combat_power"
+      ]
+    },
+    {
+      "resource": "lua/ui/runeUI.lua",
+      "terms": [
+        "combat_power"
+      ]
+    }
+  ]
+}

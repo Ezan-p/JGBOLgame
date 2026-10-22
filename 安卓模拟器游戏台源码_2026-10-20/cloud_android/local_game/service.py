@@ -23,7 +23,7 @@ PORT = 8770
 import sys
 sys.path.insert(0, str(ROOT))
 from local_game.combat import resolve, apply_passives
-from local_game import cortege
+from local_game import cortege, power
 from local_game import inventory
 from local_game import synergy
 from local_game import summon as summon_rules
@@ -261,6 +261,13 @@ class Game:
         result = copy.deepcopy(state)
         heroes, support = self.roster(state)
         result["heroes"] = list(heroes.values())
+        # Combat power is server-owned in the original protocol. Local stats
+        # cannot reproduce it; do not reuse a stale imported/template value.
+        result.pop("role_combat_power", None)
+        for hero in result["heroes"]:
+            hero.pop("combat_power", None)
+            hero["combat_power_status"] = "unavailable"
+        result["power"] = power.local_view(result["heroes"], state["lineup"])
         if support is not None:
             for slot in support["slots"]:
                 hero = heroes.get(slot.get("hero"))

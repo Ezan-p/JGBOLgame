@@ -136,3 +136,30 @@ class BattleTests(unittest.TestCase):
         self.assertEqual(report['events'][0]['kind'], 'enter')
         self.assertEqual(report['events'][0]['actor'], '0-7')
         self.assertTrue(report['won'])
+
+    def test_passive_art_routes_and_original_timing(self):
+        # Distinct original art, including the non-range tutorial type-4 route.
+        for sid,effect,scale in ((22,'127_2.ccbi',4),(31,'128_2.ccbi',2.5),
+                                 (45,'130_2.ccbi',3),(3,'130_2.ccbi',3),
+                                 (51,'127_2.ccbi',4),(21,'127_2.ccbi',4)):
+            self.assertEqual(self.data['skills'][sid]['passive_effect'],effect)
+            self.assertEqual(self.data['skills'][sid]['passive_scale'],scale)
+        for sid in (22,27,43,45,46,48):
+            title=self.data['skills'][sid]['title']
+            self.assertIn(title,self.data['resources'])
+            self.assertTrue(Resources(self.root).read(title).startswith(b'\x89PNG'))
+        timing=self.data['passiveTiming']
+        self.assertEqual(timing['entry'],1.5);self.assertEqual(timing['delay'],.8)
+        self.assertAlmostEqual(timing['grow']+timing['hold']+timing['fade'],1.1)
+
+    def test_passive_report_order_includes_non_scalar_rulai_without_double_stats(self):
+        hero=dict(self.catalog['heroes']['5022'],spells=[
+            dict(id=43,level=2,position=3),dict(id=21,level=1,position=1),dict(id=22,level=1,position=2)])
+        enemy=dict(hero,spells=[])
+        original=copy.deepcopy(hero)
+        r=resolve([hero],[enemy],self.catalog['skills'],rules=self.catalog['combat_rules'])
+        self.assertEqual([p['id'] for p in r['units'][0]['passives']],[21,22,43])
+        self.assertEqual(hero,original)
+        self.assertEqual(r['units'][0]['defense'],round(hero['defense']*1.1))
+        # The player only animates metadata; passive spells never become attack events.
+        self.assertFalse(any(e['skill_id'] in (21,22,43) for e in r['events']))

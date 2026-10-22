@@ -1,0 +1,1853 @@
+{
+  "lua/common/common_def.lua": [
+    {
+      "line": 205,
+      "text": "\tlast_west_book_time = 156,"
+    },
+    {
+      "line": 206,
+      "text": "\ttop_score = 131,"
+    },
+    {
+      "line": 207,
+      "text": "\tunheaven_des_index = 733,"
+    },
+    {
+      "line": 208,
+      "text": "\trole_wuligongji_plus = 77,"
+    },
+    {
+      "line": 209,
+      "text": "\trole_combat_power = 30,"
+    },
+    {
+      "line": 210,
+      "text": "\tunheaven_src_index = 732,"
+    },
+    {
+      "line": 211,
+      "text": "\tsingle_free_challenge = 184,"
+    },
+    {
+      "line": 212,
+      "text": "\ttop_fight_time = 133,"
+    },
+    {
+      "line": 213,
+      "text": "\taddition_rule_index = 73,"
+    },
+    {
+      "line": 214,
+      "text": "\thill_des_index = 464,"
+    },
+    {
+      "line": 215,
+      "text": "\tpool_src_index = 473,"
+    },
+    {
+      "line": 216,
+      "text": "\taddition_rule_id = 72,"
+    },
+    {
+      "line": 217,
+      "text": "\trush_gold_time = 202,"
+    },
+    {
+      "line": 218,
+      "text": "\tearth_hp = 311,"
+    },
+    {
+      "line": 219,
+      "text": "\tfam_store_flush_time = 501,"
+    },
+    {
+      "line": 220,
+      "text": "\tunpool_src_index = 803,"
+    },
+    {
+      "line": 221,
+      "text": "\ttake_vip_gold_time = 15,"
+    },
+    {
+      "line": 222,
+      "text": "\tnext_charge_gold = 70,"
+    },
+    {
+      "line": 223,
+      "text": "\telite_tollgate_flush_count = 511,"
+    },
+    {
+      "line": 224,
+      "text": "\telite_tollgate_flush_time = 512,"
+    },
+    {
+      "line": 372,
+      "text": "\tunwater_fangyu_plus = 697,"
+    },
+    {
+      "line": 373,
+      "text": "\tshake_plus = 422,"
+    },
+    {
+      "line": 374,
+      "text": "\tunwater_gongji_plus = 698,"
+    },
+    {
+      "line": 375,
+      "text": "\tunion_store_flush_time = 147,"
+    },
+    {
+      "line": 376,
+      "text": "\tmax_combat_power = 39,"
+    },
+    {
+      "line": 377,
+      "text": "\tcheer_count = 160,"
+    },
+    {
+      "line": 378,
+      "text": "\tunearth_skill_level = 622,"
+    },
+    {
+      "line": 379,
+      "text": "\tshake_des_index = 424,"
+    },
+    {
+      "line": 380,
+      "text": "\tsunda_fangyu = 333,"
+    },
+    {
+      "line": 381,
+      "text": "\thill_gongji_plus = 368,"
+    },
+    {
+      "line": 382,
+      "text": "\tunfire_hp = 701,"
+    },
+    {
+      "line": 383,
+      "text": "\tfire_hp_plus = 355,"
+    },
+    {
+      "line": 384,
+      "text": "\tparty_day_lucky = 115,"
+    },
+    {
+      "line": 385,
+      "text": "\tearth_plus = 411,"
+    },
+    {
+      "line": 386,
+      "text": "\tunfire_fangyu = 703,"
+    },
+    {
+      "line": 387,
+      "text": "\tpool_fangyu_plus = 377,"
+    },
+    {
+      "line": 388,
+      "text": "\tbuchang_v5 = 204,"
+    },
+    {
+      "line": 389,
+      "text": "\tpool_magic_plus = 376,"
+    },
+    {
+      "line": 390,
+      "text": "\tcheer_water_effect = 175,"
+    },
+    {
+      "line": 391,
+      "text": "\tunfire_gongji = 704,"
+    },
+    {
+      "line": 573,
+      "text": "\tspirit_heaven_choice_id = 380,"
+    },
+    {
+      "line": 574,
+      "text": "\tskill_max_hp_plus = 215,"
+    },
+    {
+      "line": 575,
+      "text": "\tstar_gongji_value = 254,"
+    },
+    {
+      "line": 576,
+      "text": "\tbase_max_magic = 72,"
+    },
+    {
+      "line": 577,
+      "text": "\tcombat_power = 58,"
+    },
+    {
+      "line": 578,
+      "text": "\ttrain_protect_times = 184,"
+    },
+    {
+      "line": 579,
+      "text": "\tfanji_invalid_counter = 202,"
+    },
+    {
+      "line": 580,
+      "text": "\tprey_fangyu_rate = 141,"
+    },
+    {
+      "line": 581,
+      "text": "\tbase_max_hp = 71,"
+    },
+    {
+      "line": 582,
+      "text": "\tgoss_cortege_fangyu = 221,"
+    },
+    {
+      "line": 583,
+      "text": "\tlast_train_protect_field = 185,"
+    },
+    {
+      "line": 584,
+      "text": "\tgongji_plus_rate = 178,"
+    },
+    {
+      "line": 585,
+      "text": "\tmax_hp_rate = 174,"
+    },
+    {
+      "line": 586,
+      "text": "\ttrain_decrease_field = 56,"
+    },
+    {
+      "line": 587,
+      "text": "\tpoison_buff_last_round = 213,"
+    },
+    {
+      "line": 588,
+      "text": "\tgoss_cortege_hp = 222,"
+    },
+    {
+      "line": 589,
+      "text": "\ttrain_increase_field = 55,"
+    },
+    {
+      "line": 590,
+      "text": "\trole_genius_fangyu_rate = 132,"
+    },
+    {
+      "line": 591,
+      "text": "\twuligongji_calc = 67,"
+    },
+    {
+      "line": 592,
+      "text": "\trole_collect_hp_plus = 216,"
+    },
+    {
+      "line": 2992,
+      "text": "\tcheer_data = 14,"
+    },
+    {
+      "line": 2993,
+      "text": "\tactivity_time = 20,"
+    },
+    {
+      "line": 2994,
+      "text": "\torder_config = 5,"
+    },
+    {
+      "line": 2995,
+      "text": "\tland_father = 17,"
+    },
+    {
+      "line": 2996,
+      "text": "\tcombat_power = 25,"
+    },
+    {
+      "line": 2997,
+      "text": "\tsingle_fight = 19,"
+    },
+    {
+      "line": 2998,
+      "text": "\thero_back_config = 33,"
+    },
+    {
+      "line": 2999,
+      "text": "\tonline_prize = 13,"
+    },
+    {
+      "line": 3000,
+      "text": "\tchat_info = 18,"
+    },
+    {
+      "line": 3001,
+      "text": "\tcountry_config = 28,"
+    },
+    {
+      "line": 3002,
+      "text": "\tawaken_star_config = 32,"
+    },
+    {
+      "line": 3003,
+      "text": "\tupdate_version = 29,"
+    },
+    {
+      "line": 3004,
+      "text": "\tcheckin = 3,"
+    },
+    {
+      "line": 3005,
+      "text": "\toption_config = 7,"
+    },
+    {
+      "line": 3006,
+      "text": "\tspring_festival = 30,"
+    },
+    {
+      "line": 3007,
+      "text": "\tskill_transform = 12,"
+    },
+    {
+      "line": 3008,
+      "text": "\tinvite_config = 22,"
+    },
+    {
+      "line": 3009,
+      "text": "\tvip_config = 1,"
+    },
+    {
+      "line": 3010,
+      "text": "\tadaptive_spirtit = 15,"
+    },
+    {
+      "line": 3011,
+      "text": "\tcheckin_bonus = 9,"
+    }
+  ],
+  "lua/common/msg_def.lua": [
+    {
+      "line": 466,
+      "text": "\t\tdef = \"id=\" .. type_def.objguid .. \",new_order=B\""
+    },
+    {
+      "line": 467,
+      "text": "\t},"
+    },
+    {
+      "line": 468,
+      "text": "\t{"
+    },
+    {
+      "line": 469,
+      "text": "\t\tid = common_id.type_cortege_data,"
+    },
+    {
+      "line": 470,
+      "text": "\t\tdef = \"id=\" .. type_def.objguid .. \",order=B,cheer_order=B,type=I,level=W,cur_exp=d,next_exp=d,hp=I,magic=I,gongji=I,fangyu=I,combat_power=I\" .. \",culture_point=W,hp_plus=I,magic_plus=I,gongji_plus=I,fangyu_plus=I,train_increase_field=I,train_decrease_field=I,train_change_value=I,evolve_level=W\" .. \",equiped_ext_skill_limit=B,equiped_ext_star_limit=B,next_ext_skill_luck_point=W,reborn_layer=B,reborn_vein_level=B,reborn_plus_type=B\""
+    },
+    {
+      "line": 471,
+      "text": "\t},"
+    },
+    {
+      "line": 472,
+      "text": "\t{"
+    },
+    {
+      "line": 473,
+      "text": "\t\tid = common_id.type_skill_data,"
+    },
+    {
+      "line": 474,
+      "text": "\t\tdef = \"id=\" .. type_def.objguid .. \",order=B,equip_pos=B,skill_type=I,level=B,effect_value=I\""
+    },
+    {
+      "line": 475,
+      "text": "\t},"
+    },
+    {
+      "line": 476,
+      "text": "\t{"
+    },
+    {
+      "line": 477,
+      "text": "\t\tid = common_id.type_attach_pos,"
+    },
+    {
+      "line": 478,
+      "text": "\t\tdef = \"id=\" .. type_def.objguid .. \",order=I,equip_pos=I\""
+    },
+    {
+      "line": 479,
+      "text": "\t},"
+    },
+    {
+      "line": 480,
+      "text": "\t{"
+    },
+    {
+      "line": 481,
+      "text": "\t\tid = common_id.type_attach_data,"
+    },
+    {
+      "line": 482,
+      "text": "\t\tdef = \"id=\" .. type_def.objguid .. \",attach_type=B,type_id=I,count=I,level=I,equip_order=B,equip_pos=B,protogenic=B,effect_value=I,drill_count=B,stone1_level=B,stone1_level=B,\" .. \"stone2_level=B,stone3_level=B,stone4_level=B,prob_compen=I,advance_level=B,star_count=B,cur_spirit_count=I,ext_skill_pos=B,ext_awaken_pos=B,upgrade_level=B,reborn_bit=B,cast_level=I,awaken=b,is_lock=B,absorb_rate=I,shield_rate=I,owner_id=\" .. type_def.objguid .. \",star_level=B\""
+    },
+    {
+      "line": 483,
+      "text": "\t},"
+    },
+    {
+      "line": 484,
+      "text": "\t{"
+    },
+    {
+      "line": 485,
+      "text": "\t\tid = common_id.type_object_data,"
+    },
+    {
+      "line": 659,
+      "text": "\t},"
+    },
+    {
+      "line": 660,
+      "text": "\t{"
+    },
+    {
+      "line": 661,
+      "text": "\t\tid = gscl_msg_id.msg_inside_game,"
+    },
+    {
+      "line": 662,
+      "text": "\t\tbase = common_id.msg_base,"
+    },
+    {
+      "line": 663,
+      "text": "\t\tdef = \"area_id=I,cross_area_id=I,role_id=\" .. type_def.objguid .. \",role_name=S[\" .. const.MAX_SEND_NAME_LEN .. \"],gm_level=W,vip_level=W,level=W,rule_index=W,new_role_gift=I\" .. \",register_account=S[\" .. const.MAX_MOBILE_ACCOUNT_LEN .. \"],mobile_account=S[\" .. const.MAX_MOBILE_ACCOUNT_LEN .. \"],pf_account=S[\" .. const.MAX_MOBILE_ACCOUNT_LEN .. \"]\" .. \",cur_exp=I,next_exp=I,cortege_count=B,silver_coin=I,gold_coin=I,strength=I,energy=I,random_key=I,reconnect=l,max_hp_plus=I,max_magic_plus=I\" .. \",gongji_plus=I,fangyu_plus=I,renew_time1=B,renew_time2=B,server_time=I,normal_time=I,advanced_time=I,super_time=I,advanced_first_pick_time=I,super_first_pick_time=I,normal_count=B,first_charge=B,vip_gift=I\" .. \",party_order=I,party_take_prize=B,party_fight_count=I,party_fight_count_plus=I,guide_progress=I,top_order=I,top_day_prize_time=I,top_first_promote_time=I,top_first_promote_prize=I\" .. \",strength_item_count=B,energy_item_count=B,strength_item_time=I,energy_item_time=I,strength_item_limit=B,energy_item_limit=B,top_fight_limit=B,rape_flush_limit=B\" .. \",day_take_gold_limit=I,spirit_retain=I,fight_lose_count=I,feed_time1=I,feed_time2=I,can_visit=l,checkin_time=I,tollgate_flush_limit=I,tollgate_flush_count=I,tollgate_flush_time=I\" .. \",sweep_flush_limit=I,sweep_flush_count=I,last_sweep_time=I,month_card_time=I,month_card_record=I,first_charge_gift=I\" .. \",task_progress=I,task_prize=I,take_vip_gold_time=I,take_charge_gift_time=I,vip_buy_cheap_item=I,vip_buy_cheap_item_time=I,enhance_inbatch_limit=I,next_charge_gold=I,pray_spirit_times=I\" .. \",convert_fight_limit=I,convert_fight_count=I,convert_fight_time=I,online_prize_index=B,tao_point=I,last_report_time=I,last_report_count=B,union_id=d,union_rank=I,union_contrib=I,union_store_flush_time=I,cur_union_contrib=I\" .. \",last_feast_grab_time=I,last_feast_grab_count=I,last_rece_award_time=I,cheer_count=B,cheer_heaven_level=B,cheer_earth_level=B,cheer_heaven_effect=B,cheer_earth_effect=B,cheer_sunda_level=B,cheer_sunda_effect=B,cheer_water_level=B,cheer_water_effect=B\" .. \",cheer_fire_level=B,cheer_fire_effect=B,heaven_hp=I,heaven_fangyu=I,heaven_gongji=I,heaven_magic=I,heaven_hp_plus=I,heaven_magic_plus=I,heaven_fangyu_plus=I,heaven_gongji_plus=I,earth_hp=I,earth_magic=I,earth_fangyu=I,earth_gongji=I,cheer_pool_level=B,cheer_pool_effect=B\" .. \",earth_hp_plus=I,earth_magic_plus=I,earth_fangyu_plus=I,earth_gongji_plus=I,win_streak_count=I,single_score=I,single_free_challenge=I,single_charge_challenge=I,single_next_flush_time=I\" .. \",single_charge_flush_time=I,single_charge_flush_count=I,single_rank=I,max_win_streak_count=I,last_chat_time=I,last_chat_count=I,last_west_book_time=I,west_book_count=B\" .. \",last_stop_book_time=I,stop_book_count=B,head_type=B,cur_genius_type=I,role_combat_power=I,reg_card_finish=I,monthcard_act_time=I,monthcard_unact_count=B\" .. \",cheer_shake_level=B,cheer_shake_effect=B,shake_hp=I,shake_fangyu=I,shake_gongji=I,shake_magic=I,shake_hp_plus=I,shake_magic_plus=I,shake_fangyu_plus=I,shake_gongji_plus=I\" .. \",elite_tollgate_flush_count=I,elite_tollgate_flush_time=I,elite_fight_count=I,elite_fight_time=I,buy_growup=B,single_free_flush_count=B\" .. \",sunda_hp=I,sunda_magic=I,sunda_fangyu=I,sunda_gongji=I,sunda_hp_plus=I,sunda_magic_plus=I,sunda_fangyu_plus=I,sunda_gongji_plus=I\" .. \",water_hp=I,water_magic=I,water_fangyu=I,water_gongji=I,water_hp_plus=I,water_magic_plus=I,water_fangyu_plus=I,water_gongji_plus=I\" .. \",fire_hp=I,fire_magic=I,fire_fangyu=I,fire_gongji=I,fire_hp_plus=I,fire_magic_plus=I,fire_fangyu_plus=I,fire_gongji_plus=I\" .. \",hill_hp=I,hill_magic=I,hill_fangyu=I,hill_gongji=I,hill_hp_plus=I,hill_magic_plus=I,hill_fangyu_plus=I,hill_gongji_plus=I,cheer_hill_level=B,cheer_hill_effect=B\" .. \",pool_hp=I,pool_magic=I,pool_fangyu=I,pool_gongji=I,pool_hp_plus=I,pool_magic_plus=I,pool_fangyu_plus=I,pool_gongji_plus=I\" .. \",relation_player=\" .. type_def.objguid .. \",union_name=S[\" .. const.MAX_SEND_NAME_LEN .. \"]\" .. \",reborn_layer=B\" .. \",maxlayer_reborn_count=B,drug_level=B,drug_exp=I,drug_study_flag=I,drug_study_flag2=I\" .. \",heaven_skill_level=I,earth_skill_level=I,shake_skill_level=I,sunda_skill_level=I,water_skill_level=I,fire_skill_level=I,hill_skill_level=I,pool_skill_level=I,cheer_skill_open=I\" .. \",cheer_skill_ni_open=I,unheaven_skill_level=B,unearth_skill_level=B,unshake_skill_level=B,unsunda_skill_level=B,unwater_skill_level=B,unfire_skill_level=B,unhill_skill_level=B,unpool_skill_level=B\" .. \",cheer_unheaven_level=B,cheer_unearth_level=B,cheer_unshake_level=B,cheer_unsunda_level=B,cheer_unwater_level=B,cheer_unfire_level=B,cheer_unhill_level=B,cheer_unpool_level=B\" .. \",cheer_unheaven_effect=B,cheer_unearth_effect=B,cheer_unshake_effect=B,cheer_unsunda_effect=B,cheer_unwater_effect=B,cheer_unfire_effect=B,cheer_unhill_effect=B,cheer_unpool_effect=B\" .. \",unheaven_hp=I,unheaven_magic=I,unheaven_fangyu=I,unheaven_gongji=I,unheaven_hp_plus=I,unheaven_magic_plus=I,unheaven_fangyu_plus=I,unheaven_gongji_plus=I\" .. \",unearth_hp=I,unearth_magic=I,unearth_fangyu=I,unearth_gongji=I,unearth_hp_plus=I,unearth_magic_plus=I,unearth_fangyu_plus=I,unearth_gongji_plus=I\" .. \",unshake_hp=I,unshake_magic=I,unshake_fangyu=I,unshake_gongji=I,unshake_hp_plus=I,unshake_magic_plus=I,unshake_fangyu_plus=I,unshake_gongji_plus=I\" .. \",unsunda_hp=I,unsunda_magic=I,unsunda_fangyu=I,unsunda_gongji=I,unsunda_hp_plus=I,unsunda_magic_plus=I,unsunda_fangyu_plus=I,unsunda_gongji_plus=I\" .. \",unwater_hp=I,unwater_magic=I,unwater_fangyu=I,unwater_gongji=I,unwater_hp_plus=I,unwater_magic_plus=I,unwater_fangyu_plus=I,unwater_gongji_plus=I\" .. \",unfire_hp=I,unfire_magic=I,unfire_fangyu=I,unfire_gongji=I,unfire_hp_plus=I,unfire_magic_plus=I,unfire_fangyu_plus=I,unfire_gongji_plus=I\" .. \",unhill_hp=I,unhill_magic=I,unhill_fangyu=I,unhill_gongji=I,unhill_hp_plus=I,unhill_magic_plus=I,unhill_fangyu_plus=I,unhill_gongji_plus=I\" .. \",unpool_hp=I,unpool_magic=I,unpool_fangyu=I,unpool_gongji=I,unpool_hp_plus=I,unpool_magic_plus=I,unpool_fangyu_plus=I,unpool_gongji_plus=I\""
+    },
+    {
+      "line": 664,
+      "text": "\t},"
+    },
+    {
+      "line": 665,
+      "text": "\t{"
+    },
+    {
+      "line": 666,
+      "text": "\t\tdef = \"serial_num=I,flag=B\","
+    },
+    {
+      "line": 667,
+      "text": "\t\tid = gscl_msg_id.msg_query_map_list,"
+    },
+    {
+      "line": 668,
+      "text": "\t\tbase = common_id.msg_base"
+    },
+    {
+      "line": 669,
+      "text": "\t},"
+    },
+    {
+      "line": 670,
+      "text": "\t{"
+    },
+    {
+      "line": 671,
+      "text": "\t\tdef = \"serial_num=I,map_id=B,pass_map=I,tollgate_id=I,day_count=W,flush_count=W,pass_star=B,tollgate_type=B\","
+    },
+    {
+      "line": 672,
+      "text": "\t\tid = gscl_msg_id.msg_update_tollgate_data,"
+    },
+    {
+      "line": 673,
+      "text": "\t\tbase = common_id.msg_base"
+    },
+    {
+      "line": 674,
+      "text": "\t},"
+    },
+    {
+      "line": 675,
+      "text": "\t{"
+    },
+    {
+      "line": 676,
+      "text": "\t\tid = gscl_msg_id.msg_update_tollgate_list,"
+    },
+    {
+      "line": 677,
+      "text": "\t\tbase = common_id.msg_base,"
+    },
+    {
+      "line": 678,
+      "text": "\t\tdef = \"serial_num=I,first_send=l,tollgate_count=B,tollgate_list=$\" .. common_id.type_tollgate_data .. \"{\" .. const.MAX_SEND_COUNT .. \"}\""
+    }
+  ],
+  "lua/ui/mainUI.lua": [
+    {
+      "line": 800,
+      "text": "\t\tg_needCheckCollect = true"
+    },
+    {
+      "line": 801,
+      "text": "\tend"
+    },
+    {
+      "line": 802,
+      "text": "end"
+    },
+    {
+      "line": 803,
+      "text": ""
+    },
+    {
+      "line": 804,
+      "text": "function showCombat()"
+    },
+    {
+      "line": 805,
+      "text": "\tif d_ms.d_loginUI.g_currentSence == d_ms.d_loginUI.senceID.mainUI then"
+    },
+    {
+      "line": 806,
+      "text": "\t\td_ms.d_playerInfoUI.showCombatLayer(g_mainUI.main_layer, combatTag, 2, g_playerInfo.role_combat_power)"
+    },
+    {
+      "line": 807,
+      "text": "\tend"
+    },
+    {
+      "line": 808,
+      "text": "end"
+    },
+    {
+      "line": 809,
+      "text": ""
+    },
+    {
+      "line": 810,
+      "text": "function changeNewBkg()"
+    },
+    {
+      "line": 811,
+      "text": "\tlocal mask = CCLayerColor:create(ccc4(0, 0, 0, 0))"
+    },
+    {
+      "line": 812,
+      "text": ""
+    },
+    {
+      "line": 813,
+      "text": "\tg_mainUI.bkg_layer:addChild(mask, 111)"
+    },
+    {
+      "line": 814,
+      "text": ""
+    },
+    {
+      "line": 815,
+      "text": "\tlocal function clean_tree_bkg()"
+    },
+    {
+      "line": 816,
+      "text": "\t\tg_mainUI.bkg_layer:removeChildByTag(990071, true)"
+    },
+    {
+      "line": 817,
+      "text": "\tend"
+    },
+    {
+      "line": 818,
+      "text": ""
+    },
+    {
+      "line": 819,
+      "text": "\tlocal tmp_array = CCArray:create()"
+    },
+    {
+      "line": 820,
+      "text": ""
+    },
+    {
+      "line": 821,
+      "text": "\ttmp_array:addObject(CCFadeIn:create(0.5))"
+    },
+    {
+      "line": 2710,
+      "text": "\tend)"
+    },
+    {
+      "line": 2711,
+      "text": "end"
+    },
+    {
+      "line": 2712,
+      "text": ""
+    },
+    {
+      "line": 2713,
+      "text": "function checkCombatAnim()"
+    },
+    {
+      "line": 2714,
+      "text": "\tif not g_oldCombat then"
+    },
+    {
+      "line": 2715,
+      "text": "\t\tg_oldCombat = g_playerInfo.role_combat_power"
+    },
+    {
+      "line": 2716,
+      "text": "\telseif g_oldCombat ~= g_playerInfo.role_combat_power and d_ms.d_loginUI.g_currentSence == d_ms.d_loginUI.senceID.mainUI and g_currentBoard == boardID.none and not d_ms.d_godBlessUI.g_isInBlessPage then"
+    },
+    {
+      "line": 2717,
+      "text": "\t\td_ms.d_playerInfoUI.showCombatAnim(g_mainUI.main_layer, g_oldCombat, g_playerInfo.role_combat_power)"
+    },
+    {
+      "line": 2718,
+      "text": ""
+    },
+    {
+      "line": 2719,
+      "text": "\t\tg_oldCombat = g_playerInfo.role_combat_power"
+    },
+    {
+      "line": 2720,
+      "text": "\tend"
+    },
+    {
+      "line": 2721,
+      "text": "end"
+    },
+    {
+      "line": 2722,
+      "text": ""
+    },
+    {
+      "line": 2723,
+      "text": "function checkRot()"
+    },
+    {
+      "line": 2724,
+      "text": "\tif d_ms.d_rotUI.g_self.byTime then"
+    },
+    {
+      "line": 2725,
+      "text": "\t\td_ms.d_rotUI.changeStatus()"
+    },
+    {
+      "line": 2726,
+      "text": "\tend"
+    },
+    {
+      "line": 2727,
+      "text": "end"
+    },
+    {
+      "line": 2728,
+      "text": ""
+    },
+    {
+      "line": 2729,
+      "text": "function checkMystery()"
+    },
+    {
+      "line": 2730,
+      "text": "\td_ms.d_mysteryUI.checkTime()"
+    },
+    {
+      "line": 2731,
+      "text": "end"
+    },
+    {
+      "line": 2732,
+      "text": ""
+    },
+    {
+      "line": 2733,
+      "text": "function updateRefreshTime()"
+    },
+    {
+      "line": 2734,
+      "text": "\tif g_playerInfo.refreshCountDown ~= nil then"
+    }
+  ],
+  "lua/ui/charPositionUI.lua": [
+    {
+      "line": 1918,
+      "text": "\t\ty = 0.68"
+    },
+    {
+      "line": 1919,
+      "text": "\t})"
+    },
+    {
+      "line": 1920,
+      "text": ""
+    },
+    {
+      "line": 1921,
+      "text": "\tlocal charSpriteSize = characterTypeSprite:getContentSize()"
+    },
+    {
+      "line": 1922,
+      "text": "\tlocal combat = characterInfo.combat_power or 0"
+    },
+    {
+      "line": 1923,
+      "text": "\tlocal combat_pos = {"
+    },
+    {
+      "line": 1924,
+      "text": "\t\ty = 0.76,"
+    },
+    {
+      "line": 1925,
+      "text": "\t\tx = 0.27 - 0.5 * charSpriteSize.width / scrSize.width"
+    },
+    {
+      "line": 1926,
+      "text": "\t}"
+    },
+    {
+      "line": 1927,
+      "text": ""
+    },
+    {
+      "line": 1928,
+      "text": "\td_ms.d_playerInfoUI.showCortegeCombatLayer(parentLayer, combat_pos, combat)"
+    },
+    {
+      "line": 1929,
+      "text": ""
+    },
+    {
+      "line": 1930,
+      "text": "\tif not g_charPosUI.isReadOnly then"
+    },
+    {
+      "line": 1931,
+      "text": "\t\tlocal lastCombat = g_lastCombat[tag]"
+    },
+    {
+      "line": 1932,
+      "text": "\t\tlocal plus = nil"
+    },
+    {
+      "line": 1933,
+      "text": ""
+    },
+    {
+      "line": 1934,
+      "text": "\t\tif lastCombat and lastCombat < combat then"
+    },
+    {
+      "line": 1935,
+      "text": "\t\t\tplus = d_ms.d_u.createByStyle({"
+    },
+    {
+      "line": 1936,
+      "text": "\t\t\t\tfont = \"arial\","
+    },
+    {
+      "line": 1937,
+      "text": "\t\t\t\ttype = \"label\","
+    },
+    {
+      "line": 4507,
+      "text": "\tfor i = 1, 8 do"
+    },
+    {
+      "line": 4508,
+      "text": "\t\tlocal char = d_ms.d_lineupUI.g_usedCharacters[i]"
+    },
+    {
+      "line": 4509,
+      "text": ""
+    },
+    {
+      "line": 4510,
+      "text": "\t\tif char and char.character then"
+    },
+    {
+      "line": 4511,
+      "text": "\t\t\tg_lastCombat[i] = char.character.combat_power"
+    },
+    {
+      "line": 4512,
+      "text": "\t\tend"
+    },
+    {
+      "line": 4513,
+      "text": "\tend"
+    },
+    {
+      "line": 4514,
+      "text": "end"
+    },
+    {
+      "line": 4515,
+      "text": ""
+    },
+    {
+      "line": 4516,
+      "text": "function changeCharOrderSucceed()"
+    },
+    {
+      "line": 4517,
+      "text": "\tupdateCombatList()"
+    },
+    {
+      "line": 4518,
+      "text": ""
+    },
+    {
+      "line": 4519,
+      "text": "\tif not g_isQuitBoard then"
+    },
+    {
+      "line": 4520,
+      "text": "\t\treloadData()"
+    },
+    {
+      "line": 4521,
+      "text": "\t\tcreateHeader(g_lastShowOrder, true)"
+    },
+    {
+      "line": 4522,
+      "text": "\tend"
+    },
+    {
+      "line": 4523,
+      "text": "end"
+    },
+    {
+      "line": 4524,
+      "text": ""
+    },
+    {
+      "line": 4525,
+      "text": "function createChgPos(parent)"
+    },
+    {
+      "line": 4526,
+      "text": "\tg_ChgPosInfo = {}"
+    },
+    {
+      "line": 5279,
+      "text": "function showOthersInfo(info)"
+    },
+    {
+      "line": 5280,
+      "text": "\tlocal isMe = g_charPosUI.playerInfo.isMe"
+    },
+    {
+      "line": 5281,
+      "text": "\tlocal union_name = info.union_name or gethz(\"no\")"
+    },
+    {
+      "line": 5282,
+      "text": "\tlocal tao_point = info.tao_point or 0"
+    },
+    {
+      "line": 5283,
+      "text": "\tlocal combat_power = info.role_combat_power or 0"
+    },
+    {
+      "line": 5284,
+      "text": "\tlocal board_layer = g_charPosUI.board_layer"
+    },
+    {
+      "line": 5285,
+      "text": "\tlocal lframe = d_ms.d_u.createByStyle({"
+    },
+    {
+      "line": 5286,
+      "text": "\t\tpic = \"v2/charPositionUI/lframe.png\","
+    },
+    {
+      "line": 5287,
+      "text": "\t\ty = 0.805,"
+    },
+    {
+      "line": 5288,
+      "text": "\t\tx = 0.11,"
+    },
+    {
+      "line": 5289,
+      "text": "\t\tscaleY = 0.64,"
+    },
+    {
+      "line": 5290,
+      "text": "\t\tanchor = {"
+    },
+    {
+      "line": 5291,
+      "text": "\t\t\t0.5,"
+    },
+    {
+      "line": 5292,
+      "text": "\t\t\t1"
+    },
+    {
+      "line": 5293,
+      "text": "\t\t}"
+    },
+    {
+      "line": 5294,
+      "text": "\t})"
+    },
+    {
+      "line": 5295,
+      "text": ""
+    },
+    {
+      "line": 5296,
+      "text": "\tboard_layer:addChild(lframe, 0)"
+    },
+    {
+      "line": 5297,
+      "text": ""
+    },
+    {
+      "line": 5298,
+      "text": "\tlocal nameLabel = d_ms.d_u.createByStyle({"
+    },
+    {
+      "line": 5410,
+      "text": "\tboard_layer:addChild(d_ms.d_u.createByStyle({"
+    },
+    {
+      "line": 5411,
+      "text": "\t\tfont = \"arial\","
+    },
+    {
+      "line": 5412,
+      "text": "\t\ttype = \"label\","
+    },
+    {
+      "line": 5413,
+      "text": "\t\tfontsize = 26,"
+    },
+    {
+      "line": 5414,
+      "text": "\t\tstring = combat_power,"
+    },
+    {
+      "line": 5415,
+      "text": "\t\tcolor = {"
+    },
+    {
+      "line": 5416,
+      "text": "\t\t\t181,"
+    },
+    {
+      "line": 5417,
+      "text": "\t\t\t181,"
+    },
+    {
+      "line": 5418,
+      "text": "\t\t\t181"
+    },
+    {
+      "line": 5419,
+      "text": "\t\t},"
+    },
+    {
+      "line": 5420,
+      "text": "\t\tx = left_x[2],"
+    },
+    {
+      "line": 5421,
+      "text": "\t\ty = my + 0.5 * dy,"
+    },
+    {
+      "line": 5422,
+      "text": "\t\tanchor = {"
+    },
+    {
+      "line": 5423,
+      "text": "\t\t\t0,"
+    },
+    {
+      "line": 5424,
+      "text": "\t\t\t0.5"
+    },
+    {
+      "line": 5425,
+      "text": "\t\t}"
+    },
+    {
+      "line": 5426,
+      "text": "\t}), 1)"
+    },
+    {
+      "line": 5427,
+      "text": "\tboard_layer:addChild(d_ms.d_u.createByStyles({"
+    },
+    {
+      "line": 5428,
+      "text": "\t\tpic = \"v2/achievementsUI/tao.png\","
+    },
+    {
+      "line": 5429,
+      "text": "\t\tx = left_x[1],"
+    }
+  ],
+  "lua/ui/checkLineupUI.lua": [
+    {
+      "line": 54,
+      "text": "\tend"
+    },
+    {
+      "line": 55,
+      "text": ""
+    },
+    {
+      "line": 56,
+      "text": "\tinfo.union_rank = data_table.rank"
+    },
+    {
+      "line": 57,
+      "text": "\tinfo.isMe = false"
+    },
+    {
+      "line": 58,
+      "text": "\tdisplayLineupInfo.usedCharacters, info.role_combat_power = sortCharacters(data_table.cortege_list)"
+    },
+    {
+      "line": 59,
+      "text": "\tdisplayLineupInfo.cheerCharacters = createCheerCharacters(data_table.cheer_cortege)"
+    },
+    {
+      "line": 60,
+      "text": "\tdisplayLineupInfo.allUsedItems = sortTargetItems(data_table.skill_list, data_table.equip_list)"
+    },
+    {
+      "line": 61,
+      "text": "\tdisplayLineupInfo.cortege_count = #data_table.cortege_list"
+    },
+    {
+      "line": 62,
+      "text": "\tdisplayLineupInfo.ext_skill_list = data_table.ext_skill_list or {}"
+    },
+    {
+      "line": 63,
+      "text": "\tdisplayLineupInfo.info = info"
+    },
+    {
+      "line": 64,
+      "text": ""
+    },
+    {
+      "line": 65,
+      "text": "\tif data_table.client_flag == 1 then"
+    },
+    {
+      "line": 66,
+      "text": "\t\tshowInfoOnMainSence(displayLineupInfo)"
+    },
+    {
+      "line": 67,
+      "text": "\telseif data_table.client_flag == 2 then"
+    },
+    {
+      "line": 68,
+      "text": "\t\td_ms.d_fightInfoUI.close()"
+    },
+    {
+      "line": 69,
+      "text": "\t\tshowInfoOnFightSence(displayLineupInfo)"
+    },
+    {
+      "line": 70,
+      "text": "\telseif data_table.client_flag == 3 then"
+    },
+    {
+      "line": 71,
+      "text": "\t\tshowLineUpInfoOnAdventureSence(displayLineupInfo)"
+    },
+    {
+      "line": 72,
+      "text": "\telseif data_table.client_flag == 10 then"
+    },
+    {
+      "line": 73,
+      "text": "\t\tshowLineUpInfoInLand(displayLineupInfo)"
+    },
+    {
+      "line": 128,
+      "text": "end"
+    },
+    {
+      "line": 129,
+      "text": ""
+    },
+    {
+      "line": 130,
+      "text": "function sortCharacters(cortege_list)"
+    },
+    {
+      "line": 131,
+      "text": "\tlocal usedCharacters = {}"
+    },
+    {
+      "line": 132,
+      "text": "\tlocal sumCombat = 0"
+    },
+    {
+      "line": 133,
+      "text": ""
+    },
+    {
+      "line": 134,
+      "text": "\td_ms.d_lineupUI.getCharacterCSVConfig()"
+    },
+    {
+      "line": 135,
+      "text": ""
+    },
+    {
+      "line": 136,
+      "text": "\tfor i = 1, #cortege_list do"
+    },
+    {
+      "line": 137,
+      "text": "\t\tusedCharacters[i] = {"
+    },
+    {
+      "line": 138,
+      "text": "\t\t\tcharacter = cortege_list[i]"
+    },
+    {
+      "line": 139,
+      "text": "\t\t}"
+    },
+    {
+      "line": 140,
+      "text": "\t\tusedCharacters[i].character.csvInfo = d_ms.d_lineupUI.g_characterAttrTable[cortege_list[i].type_id]"
+    },
+    {
+      "line": 141,
+      "text": "\t\tusedCharacters[i].character.order = i"
+    },
+    {
+      "line": 142,
+      "text": "\t\tusedCharacters[i].character.type = cortege_list[i].type_id"
+    },
+    {
+      "line": 143,
+      "text": "\t\tsumCombat = sumCombat + (cortege_list[i].combat_power or 0)"
+    },
+    {
+      "line": 144,
+      "text": "\tend"
+    },
+    {
+      "line": 145,
+      "text": ""
+    },
+    {
+      "line": 146,
+      "text": "\treturn usedCharacters, sumCombat"
+    },
+    {
+      "line": 147,
+      "text": "end"
+    },
+    {
+      "line": 148,
+      "text": ""
+    },
+    {
+      "line": 149,
+      "text": "function createCheerCharacters(cortege_list)"
+    },
+    {
+      "line": 150,
+      "text": "\tlocal cheerCharacters = {}"
+    },
+    {
+      "line": 151,
+      "text": ""
+    },
+    {
+      "line": 152,
+      "text": "\td_ms.d_lineupUI.getCharacterCSVConfig()"
+    },
+    {
+      "line": 153,
+      "text": ""
+    },
+    {
+      "line": 154,
+      "text": "\tfor k, v in pairs(cortege_list) do"
+    },
+    {
+      "line": 155,
+      "text": "\t\tcheerCharacters[k] = {"
+    },
+    {
+      "line": 156,
+      "text": "\t\t\tcharacter = v"
+    },
+    {
+      "line": 157,
+      "text": "\t\t}"
+    },
+    {
+      "line": 158,
+      "text": "\t\tcheerCharacters[k].character.csvInfo = d_ms.d_lineupUI.g_characterAttrTable[v.type_id]"
+    },
+    {
+      "line": 159,
+      "text": "\t\tcheerCharacters[k].character.cheer_order = k"
+    },
+    {
+      "line": 160,
+      "text": "\t\tcheerCharacters[k].character.type = v.type_id"
+    },
+    {
+      "line": 161,
+      "text": "\tend"
+    }
+  ],
+  "lua/ui/playerInfoUI.lua": [
+    {
+      "line": 629,
+      "text": ""
+    },
+    {
+      "line": 630,
+      "text": "\treturn timeStr"
+    },
+    {
+      "line": 631,
+      "text": "end"
+    },
+    {
+      "line": 632,
+      "text": ""
+    },
+    {
+      "line": 633,
+      "text": "function getNumList(num)"
+    },
+    {
+      "line": 634,
+      "text": "\tlocal nums = {}"
+    },
+    {
+      "line": 635,
+      "text": "\tlocal tmp = nil"
+    },
+    {
+      "line": 636,
+      "text": ""
+    },
+    {
+      "line": 637,
+      "text": "\twhile num > 0 do"
+    },
+    {
+      "line": 638,
+      "text": "\t\ttmp = math.floor(num / 10)"
+    },
+    {
+      "line": 639,
+      "text": ""
+    },
+    {
+      "line": 640,
+      "text": "\t\ttable.insert(nums, 1, num - tmp * 10)"
+    },
+    {
+      "line": 641,
+      "text": ""
+    },
+    {
+      "line": 642,
+      "text": "\t\tnum = tmp"
+    },
+    {
+      "line": 643,
+      "text": "\tend"
+    },
+    {
+      "line": 644,
+      "text": ""
+    },
+    {
+      "line": 645,
+      "text": "\treturn nums"
+    },
+    {
+      "line": 646,
+      "text": "end"
+    },
+    {
+      "line": 647,
+      "text": ""
+    },
+    {
+      "line": 648,
+      "text": "function getNumSprite(num)"
+    },
+    {
+      "line": 678,
+      "text": ""
+    },
+    {
+      "line": 679,
+      "text": "\treturn node"
+    },
+    {
+      "line": 680,
+      "text": "end"
+    },
+    {
+      "line": 681,
+      "text": ""
+    },
+    {
+      "line": 682,
+      "text": "function showCortegeCombatLayer(parentLayer, pos, power)"
+    },
+    {
+      "line": 683,
+      "text": "\tlocal layer = CCLayer:create()"
+    },
+    {
+      "line": 684,
+      "text": "\tlocal combat_bkg = CCSprite:create(\"v2/playerInfoUI/com_bkg2.png\")"
+    },
+    {
+      "line": 685,
+      "text": ""
+    },
+    {
+      "line": 686,
+      "text": "\td_ms.d_u.setStyles(combat_bkg, {"
+    },
+    {
+      "line": 687,
+      "text": "\t\tx = pos.x,"
+    },
+    {
+      "line": 688,
+      "text": "\t\ty = pos.y,"
+    },
+    {
+      "line": 689,
+      "text": "\t\tanchor = {"
+    },
+    {
+      "line": 690,
+      "text": "\t\t\t0,"
+    },
+    {
+      "line": 691,
+      "text": "\t\t\t1"
+    },
+    {
+      "line": 692,
+      "text": "\t\t}"
+    },
+    {
+      "line": 693,
+      "text": "\t})"
+    },
+    {
+      "line": 694,
+      "text": "\tlayer:addChild(combat_bkg)"
+    },
+    {
+      "line": 695,
+      "text": ""
+    },
+    {
+      "line": 696,
+      "text": "\tlocal w, h = d_ms.d_u.getRealScale(combat_bkg)"
+    },
+    {
+      "line": 697,
+      "text": "\tlocal combat_label = d_ms.d_u.createByStyle({"
+    },
+    {
+      "line": 733,
+      "text": "\t})"
+    },
+    {
+      "line": 734,
+      "text": "\tparentLayer:addChild(layer)"
+    },
+    {
+      "line": 735,
+      "text": "end"
+    },
+    {
+      "line": 736,
+      "text": ""
+    },
+    {
+      "line": 737,
+      "text": "function showCombatLayer(parent, tag, zorder, combat)"
+    },
+    {
+      "line": 738,
+      "text": "\tif not parent then"
+    },
+    {
+      "line": 739,
+      "text": "\t\treturn"
+    },
+    {
+      "line": 740,
+      "text": "\tend"
+    },
+    {
+      "line": 741,
+      "text": ""
+    },
+    {
+      "line": 742,
+      "text": "\tparent:removeChildByTag(tag, true)"
+    },
+    {
+      "line": 743,
+      "text": ""
+    },
+    {
+      "line": 744,
+      "text": "\tzorder = zorder or 2"
+    },
+    {
+      "line": 745,
+      "text": "\tlocal scrSize = CCDirector:sharedDirector():getVisibleSize()"
+    },
+    {
+      "line": 746,
+      "text": "\tlocal mx = 0.18"
+    },
+    {
+      "line": 747,
+      "text": "\tlocal my = 1 - 88 / scrSize.height"
+    },
+    {
+      "line": 748,
+      "text": "\tlocal layer = CCLayer:create()"
+    },
+    {
+      "line": 749,
+      "text": ""
+    },
+    {
+      "line": 750,
+      "text": "\tlayer:addChild(d_ms.d_u.createByStyle({"
+    },
+    {
+      "line": 751,
+      "text": "\t\tpic = \"v2/playerInfoUI/com_label.png\","
+    },
+    {
+      "line": 752,
+      "text": "\t\tx = mx,"
+    },
+    {
+      "line": 801,
+      "text": ""
+    },
+    {
+      "line": 802,
+      "text": "\treturn true"
+    },
+    {
+      "line": 803,
+      "text": "end"
+    },
+    {
+      "line": 804,
+      "text": ""
+    },
+    {
+      "line": 805,
+      "text": "function showCombatAnim(parent, old, new)"
+    },
+    {
+      "line": 806,
+      "text": "\tif not parent or not old or not new then"
+    },
+    {
+      "line": 807,
+      "text": "\t\treturn"
+    },
+    {
+      "line": 808,
+      "text": "\tend"
+    },
+    {
+      "line": 809,
+      "text": ""
+    },
+    {
+      "line": 810,
+      "text": "\tlocal layer = CCLayer:create()"
+    },
+    {
+      "line": 811,
+      "text": ""
+    },
+    {
+      "line": 812,
+      "text": "\tlocal function dismiss()"
+    },
+    {
+      "line": 813,
+      "text": "\t\td_ms.d_u.remove(layer)"
+    },
+    {
+      "line": 814,
+      "text": "\tend"
+    },
+    {
+      "line": 815,
+      "text": ""
+    },
+    {
+      "line": 816,
+      "text": "\tlocal fade_time = 1"
+    },
+    {
+      "line": 817,
+      "text": "\tlocal combat_bkg = CCSprite:create(\"v2/playerInfoUI/com_bkg.png\")"
+    },
+    {
+      "line": 818,
+      "text": ""
+    },
+    {
+      "line": 819,
+      "text": "\td_ms.d_u.setStyles(combat_bkg, {"
+    },
+    {
+      "line": 820,
+      "text": "\t\tx = 0.5,"
+    }
+  ],
+  "lua/ui/lineupUI.lua": [
+    {
+      "line": 167,
+      "text": ""
+    },
+    {
+      "line": 168,
+      "text": "\tcclog(\"getDateFormServer:1034 end\")"
+    },
+    {
+      "line": 169,
+      "text": "end"
+    },
+    {
+      "line": 170,
+      "text": ""
+    },
+    {
+      "line": 171,
+      "text": "function updateCharacterInfo(msg_table)"
+    },
+    {
+      "line": 172,
+      "text": "\tif g_characterInfo == nil then"
+    },
+    {
+      "line": 173,
+      "text": "\t\tg_characterInfo = {}"
+    },
+    {
+      "line": 174,
+      "text": "\tend"
+    },
+    {
+      "line": 175,
+      "text": ""
+    },
+    {
+      "line": 176,
+      "text": "\tlocal characterInfo = g_characterInfo"
+    },
+    {
+      "line": 177,
+      "text": "\tlocal updateCharacter = nil"
+    },
+    {
+      "line": 178,
+      "text": ""
+    },
+    {
+      "line": 179,
+      "text": "\tfor i = 1, #characterInfo do"
+    },
+    {
+      "line": 180,
+      "text": "\t\tif msg_table.id == characterInfo[i].id then"
+    },
+    {
+      "line": 181,
+      "text": "\t\t\tupdateCharacter = characterInfo[i]"
+    },
+    {
+      "line": 182,
+      "text": ""
+    },
+    {
+      "line": 183,
+      "text": "\t\t\tbreak"
+    },
+    {
+      "line": 184,
+      "text": "\t\tend"
+    },
+    {
+      "line": 185,
+      "text": "\tend"
+    },
+    {
+      "line": 186,
+      "text": ""
+    }
+  ],
+  "lua/ui/fightrecordUI.lua": [
+    {
+      "line": 334,
+      "text": "\t\tg_fight_record[i].fightInfo.fight_result_msg.fight_round = #g_fight_record[i].fightInfo.fight_result_msg.fight_result"
+    },
+    {
+      "line": 335,
+      "text": "\t\tg_fight_record[i].rolename = data[i].fight_data.src_info.name"
+    },
+    {
+      "line": 336,
+      "text": "\t\tg_fight_record[i].vip = data[i].fight_data.src_info.vip_level"
+    },
+    {
+      "line": 337,
+      "text": "\t\tg_fight_record[i].dao = math.floor(data[i].fight_data.src_info.tao_point)"
+    },
+    {
+      "line": 338,
+      "text": "\t\tg_fight_record[i].fightpower = math.floor(data[i].fight_data.src_info.role_combat_power)"
+    },
+    {
+      "line": 339,
+      "text": "\t\tlocal fightstatus_logtime = os.date(\"*t\", data[i].fight_data.logtime)"
+    },
+    {
+      "line": 340,
+      "text": "\t\tg_fight_record[i].fightstatus = string.format(\"%02d\", fightstatus_logtime.hour) .. \":\" .. string.format(\"%02d\", fightstatus_logtime.min) .. \":\" .. string.format(\"%02d\", fightstatus_logtime.sec)"
+    },
+    {
+      "line": 341,
+      "text": ""
+    },
+    {
+      "line": 342,
+      "text": "\t\tif data[i].fight_data.elite_logic then"
+    },
+    {
+      "line": 343,
+      "text": "\t\t\tdata[i].fight_data.elite_logic.fight_id = g_fight_index + 1"
+    },
+    {
+      "line": 344,
+      "text": "\t\tend"
+    },
+    {
+      "line": 345,
+      "text": ""
+    },
+    {
+      "line": 346,
+      "text": "\t\tg_fight_record[i].extra_logic = data[i].fight_data.elite_logic"
+    },
+    {
+      "line": 347,
+      "text": "\tend"
+    },
+    {
+      "line": 348,
+      "text": "end"
+    }
+  ],
+  "lua/event_mgr.lua": [
+    {
+      "line": 1463,
+      "text": ""
+    },
+    {
+      "line": 1464,
+      "text": "\t\t\t\td_ms.d_shopUI.g_self.call_back = nil"
+    },
+    {
+      "line": 1465,
+      "text": ""
+    },
+    {
+      "line": 1466,
+      "text": "\t\t\t\td_ms.d_shopUI.getGoodsList()"
+    },
+    {
+      "line": 1467,
+      "text": "\t\t\telseif msg_table.attr_list[i].type == r_p.role_combat_power then"
+    },
+    {
+      "line": 1468,
+      "text": "\t\t\t\td_ms.d_mainUI.g_playerInfo.role_combat_power = math.floor(msg_table.attr_list[i].value)"
+    },
+    {
+      "line": 1469,
+      "text": ""
+    },
+    {
+      "line": 1470,
+      "text": "\t\t\t\td_ms.d_mainUI.showCombat()"
+    },
+    {
+      "line": 1471,
+      "text": "\t\t\telseif msg_table.attr_list[i].type == r_p.monthcard_unact_count then"
+    },
+    {
+      "line": 1472,
+      "text": "\t\t\t\t-- Nothing"
+    },
+    {
+      "line": 1473,
+      "text": "\t\t\telseif msg_table.attr_list[i].type == r_p.first_charge_gift then"
+    },
+    {
+      "line": 1474,
+      "text": "\t\t\t\td_ms.d_mainUI.g_playerInfo.first_charge_gift = msg_table.attr_list[i].value"
+    },
+    {
+      "line": 1475,
+      "text": ""
+    },
+    {
+      "line": 1476,
+      "text": "\t\t\t\td_ms.d_u.delay_node(0.1, d_ms.d_bonusUI.checkFirstRecharge)"
+    },
+    {
+      "line": 1477,
+      "text": "\t\t\telse"
+    },
+    {
+      "line": 1478,
+      "text": "\t\t\t\tlocal has_find_value = false"
+    },
+    {
+      "line": 1479,
+      "text": ""
+    },
+    {
+      "line": 1480,
+      "text": "\t\t\t\tfor t_name, t_number in pairs(r_p) do"
+    },
+    {
+      "line": 1481,
+      "text": "\t\t\t\t\tif t_number == msg_table.attr_list[i].type then"
+    },
+    {
+      "line": 1482,
+      "text": "\t\t\t\t\t\thas_find_value = true"
+    },
+    {
+      "line": 1483,
+      "text": ""
+    }
+  ],
+  "lua/ui/runeUI.lua": {
+    "error": "AssertionError"
+  },
+  "lua/ui/landUI.lua": [
+    {
+      "line": 1960,
+      "text": "\tlabel2 = d_ms.d_u.createByStyle({"
+    },
+    {
+      "line": 1961,
+      "text": "\t\tfont = \"arial\","
+    },
+    {
+      "line": 1962,
+      "text": "\t\ttype = \"label\","
+    },
+    {
+      "line": 1963,
+      "text": "\t\tfontsize = 26,"
+    },
+    {
+      "line": 1964,
+      "text": "\t\tstring = tostring(d_ms.d_mainUI.g_playerInfo.role_combat_power),"
+    },
+    {
+      "line": 1965,
+      "text": "\t\tcolor = Colors.brown"
+    },
+    {
+      "line": 1966,
+      "text": "\t})"
+    },
+    {
+      "line": 1967,
+      "text": ""
+    },
+    {
+      "line": 1968,
+      "text": "\td_ms.d_u.layoutSprites({"
+    },
+    {
+      "line": 1969,
+      "text": "\t\tlabel1,"
+    },
+    {
+      "line": 1970,
+      "text": "\t\tlabel2"
+    },
+    {
+      "line": 1971,
+      "text": "\t}, {"
+    },
+    {
+      "line": 1972,
+      "text": "\t\tx = towerx,"
+    },
+    {
+      "line": 1973,
+      "text": "\t\ty = downy - 0.03 * h"
+    },
+    {
+      "line": 1974,
+      "text": "\t})"
+    },
+    {
+      "line": 1975,
+      "text": "\tlayer:addChild(label1)"
+    },
+    {
+      "line": 1976,
+      "text": "\tlayer:addChild(label2)"
+    },
+    {
+      "line": 1977,
+      "text": ""
+    },
+    {
+      "line": 1978,
+      "text": "\tlocal function dismiss()"
+    },
+    {
+      "line": 1979,
+      "text": "\t\td_ms.d_u.remove(layer)"
+    }
+  ]
+}

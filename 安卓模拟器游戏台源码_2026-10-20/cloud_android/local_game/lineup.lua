@@ -181,6 +181,7 @@ local function main()
         return
     end
     character(h)
+    label('战斗力 '..(type(h.combat_power)=='number' and tostring(h.combat_power) or '—'),258,422,18,GOLD,nil,true)
     local e=entry(h.id)
     local equipped={}
     for _,item in ipairs((state.inventory or {}).entries or {}) do

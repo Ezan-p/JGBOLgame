@@ -4,9 +4,12 @@ local M = {active=false}
 local W,H=960,540
 local P={{.1,.2,1200},{.35,.2,1200},{.23,.35,1100},{.22,.05,1300}}
 local E={{.9,.2,1200},{.65,.2,1200},{.77,.35,1100},{.78,.05,1300}}
-local root,world,fx,overlay,hud,ui,report,actors,teamBars,controls
+local root,world,fx,passiveLayer,overlay,hud,ui,report,actors,teamBars,controls
 local time,index,current,clock,finished,paused,muted=0,0,nil,0,false,false,false
 local transient,soundQueue,effects={},{},{}
+local PT=D.passiveTiming
+local passiveLength=PT.grow+PT.hold+PT.fade
+local openingUntil=0
 -- 1x / 2x speeds follow the original fightUI speed_1 / speed_2 buttons.
 local SPEED_STEPS={1,2}
 local speedIndex,speed=1,1
@@ -60,15 +63,51 @@ local function ccbi(file,x,y,scale,lifetime,parent,modern,flip)
     soundEvent(file)
     return n
 end
-local function showPassives(a)
-    if a.buffsShown then return end
-    a.buffsShown=true
-    for i,buff in ipairs(a.unit.passives or {}) do
-        local spec=D.skills[buff.id] or {}
-        ccbi(spec.passive_effect,a.x,a.foot,1.4,1.1,fx,true)
-        local n=label(buff.name,fx,a.x,a.y+35+(i-1)*23,17,{255,228,138},45)
-        table.insert(transient,{node=n,untilTime=clock+1.25})
+-- Original skill_22: center on the body, not the feet or the name/blood row.
+-- Each unit owns a serial queue; units on opposite sides may animate together.
+local function passiveList(a)
+    local list={}
+    for _,buff in ipairs(a.unit.passives or {}) do
+        if (D.skills[buff.id] or {}).passive_effect then table.insert(list,buff) end
     end
+    return list
+end
+local function queuePassives(a,enteredAt)
+    if a.buffsShown then return end
+    a.buffsShown=true;a.passiveList=passiveList(a);a.passiveIndex=0
+    if #a.passiveList>0 then a.nextPassive=enteredAt+PT.delay end
+end
+local function castPassive(a,buff)
+    local spec=D.skills[buff.id]
+    local effect=ccbi(spec.passive_effect,a.x,a.y,spec.passive_scale*a.height/H,PT.effect,passiveLayer,false)
+    if effect then
+        -- CCBI roots are 1280x752 CCLayers here. Their unscaled anchor offset
+        -- is NOT our logical 960x540 canvas; compensate with the actual size.
+        local es,ea=effect:getContentSize(),effect:getAnchorPoint()
+        local k=effect:getScale()
+        effect:setPosition(CCPointMake(a.x-es.width*(ea.x+(.5-ea.x)*k),
+                                       a.y-es.height*(ea.y+(.5-ea.y)*k)))
+        passiveLayer:reorderChild(effect,a.z+1)
+    end
+    local n
+    if spec.title then n=sprite(spec.title,passiveLayer,a.x,a.y,1,a.z+2)
+    else n=label(buff.name,passiveLayer,a.x,a.y,60,{255,0,0},a.z+2) end
+    local scale=PT.width*W/math.max(1,n:getContentSize().width)
+    n:setScale(scale)
+    a.passiveID=buff.id
+    table.insert(transient,{node=n,untilTime=clock+passiveLength,born=clock,passiveScale=scale})
+end
+local function updatePassives(a)
+    if not a.nextPassive or clock<a.nextPassive then return end
+    a.passiveIndex=a.passiveIndex+1
+    local buff=a.passiveList[a.passiveIndex]
+    if buff then
+        castPassive(a,buff);a.nextPassive=clock+passiveLength
+    else a.nextPassive=nil;a.passiveID=nil end
+end
+local function passivesPending()
+    for _,a in pairs(actors) do if a.nextPassive then return true end end
+    return false
 end
 local function updateHP()
     local totals={{0,0},{0,0}}
@@ -146,8 +185,9 @@ local function cycleSpeed()
     refreshSpeed()
 end
 local function clearEffects()
-    fx:removeAllChildrenWithCleanup(true);overlay:removeAllChildrenWithCleanup(true)
+    fx:removeAllChildrenWithCleanup(true);passiveLayer:removeAllChildrenWithCleanup(true);overlay:removeAllChildrenWithCleanup(true)
     transient={};soundQueue={};current=nil;stopEffects()
+    for _,a in pairs(actors) do a.nextPassive=nil;a.passiveID=nil end
     world:setPosition(CCPointMake(0,0))
 end
 local function finish()
@@ -181,9 +221,10 @@ function M.preview(skill) return skill and D.skill_demo or D.demo end
 function M.show(context,data)
     M.stop();ui=context;root=ui.root;report=data
     root:removeAllChildrenWithCleanup(true);ui.clearButtons()
-    world=node(root,0);fx=node(root,2);overlay=node(root,3);hud=node(root,4);controls=node(root,5)
+    world=node(root,0);fx=node(root,2);overlay=node(root,3);passiveLayer=node(root,3);hud=node(root,4);controls=node(root,5)
     actors={};teamBars={};transient={};soundQueue={}
     time=0;clock=0;index=0;current=nil;finished=false;paused=false;M.active=true
+    openingUntil=PT.entry+1
     local stage=D.stages[report.stage.id] or {}
     local bg=sprite(report.stage.background or stage.background or 'map/special/xmz.jpg',world,W/2,H/2,1,-1)
     bg:setScaleX(W/bg:getContentSize().width);bg:setScaleY(H/bg:getContentSize().height)
@@ -203,7 +244,7 @@ function M.show(context,data)
         local slot=unit.slot or tonumber(string.sub(unit.uid,3))+1
         local p=(unit.side==0 and P or E)[(slot-1)%4+1]
         local a={unit=unit,hp=unit.hp,maxHp=unit.max_hp,shield=0,x=p[1]*W,foot=p[2]*H,inField=unit.in_field~=false and slot<=4}
-        a.container=node(world,p[3]);a.body=sprite(unit.sprite,a.container,a.x,0,1)
+        a.z=p[3];a.container=node(world,p[3]);a.body=sprite(unit.sprite,a.container,a.x,0,1)
         a.scale=.57*H/512;a.height=a.body:getContentSize().height*a.scale;a.y=a.foot+a.height/2
         a.body:setFlipX(unit.side==1);pose(a)
         a.info=node(a.container,20)
@@ -216,7 +257,13 @@ function M.show(context,data)
         a.bar:setAnchorPoint(CCPointMake(0,.5));a.barScale=W*.12/a.bar:getContentSize().width
         a.bar:setScaleY(.75);a.hpLabel=label(unit.hp,a.info,a.x,by-1,14,nil,4)
         a.statusLabel=label('',a.info,a.x,by-19,13,{125,230,255},5)
-        a.body:setVisible(a.inField);a.info:setVisible(a.inField)
+        a.present=false
+        a.body:setVisible(false);a.info:setVisible(false)
+        if a.inField then
+            a.entryAt=PT.entry
+            local count=#passiveList(a)
+            if count>0 then openingUntil=math.max(openingUntil,PT.entry+PT.delay+count*passiveLength+PT.after) end
+        end
         actors[unit.uid]=a
     end
     updateHP()
@@ -299,10 +346,11 @@ local function playEvent(dt)
         c.fall:setPosition(CCPointMake(a.x+direction*W*.4*(1-q),a.foot+H*.8*(1-q)))
         c.fall:setVisible(t>=.6 and t<1)
         if t>=1 and not c.cast then
-            c.cast=true;a.inField=true;a.body:setVisible(true);a.info:setVisible(true)
-            ccbi('105_1.ccbi',a.x+W*.12,a.foot,4,1.5);showPassives(a)
+            c.cast=true;a.inField=true;a.present=true;a.body:setVisible(true);a.info:setVisible(true)
+            ccbi('105_1.ccbi',a.x+W*.12,a.foot,4,1.5);queuePassives(a,clock)
+            c.duration=math.max(c.duration,t+PT.delay+#a.passiveList*passiveLength+PT.after)
         end
-        if t>=c.duration then
+        if t>=c.duration and not a.nextPassive then
             remove(c.fall);overlay:removeAllChildrenWithCleanup(true);current=nil
             if index>=#report.events then finish() end
         end
@@ -384,6 +432,14 @@ function M.update(dt)
     for i=#transient,1,-1 do
         local v=transient[i]
         if clock>=v.untilTime then remove(v.node);table.remove(transient,i)
+        elseif v.passiveScale then
+            local t=clock-v.born
+            local k=t<PT.grow and mix(1,PT.grow_factor,t/PT.grow) or PT.grow_factor
+            if t>=PT.grow+PT.hold then
+                local q=(t-PT.grow-PT.hold)/PT.fade;k=k*mix(1,PT.fade_factor,q)
+                v.node:setOpacity(math.floor(255*(1-clamp(q,0,1))))
+            end
+            v.node:setScale(v.passiveScale*k)
         elseif v.ghostScale then
             local q=(clock-v.born)/v.life;v.node:setScale(v.ghostScale*mix(1,v.expand,q));v.node:setOpacity(math.floor(170*(1-q)))
         elseif v.floatY then
@@ -392,8 +448,11 @@ function M.update(dt)
     end
     world:setPosition(CCPointMake(0,0))
     for _,a in pairs(actors) do
-        if a.inField and a.hp>0 and clock>.2 then showPassives(a) end
-        if not a.inField then
+        if a.inField and a.hp>0 and a.entryAt and clock>=a.entryAt and not a.present then
+            a.present=true;a.body:setVisible(true);a.info:setVisible(true);queuePassives(a,a.entryAt)
+        end
+        if a.present and a.hp>0 then updatePassives(a) end
+        if not a.inField or not a.present then
             a.body:setVisible(false);a.info:setVisible(false)
         elseif a.deadAt then
             local q=clamp((clock-a.deadAt)/.65,0,1);pose(a,a.x+(a.unit.side==0 and -28 or 28)*q,a.y,1,0,math.floor(255*(1-q)));a.info:setVisible(false)
@@ -409,11 +468,18 @@ function M.update(dt)
     if current then playEvent(dt)
     else
         time=time+dt
-        local entryDelay=report.preview and report.stage.background=='map/special/xmz.jpg' and 2.6 or 1.1
-        if time>(index==0 and entryDelay or .12) then
+        if (index>0 and time>.12) or (index==0 and clock>=openingUntil and not passivesPending()) then
             index=index+1
             if report.events[index] then beginEvent(report.events[index]) else finish() end
         end
     end
+end
+function M.inspect()
+    local result={clock=clock,index=index,openingUntil=openingUntil,finished=finished,paused=paused,speed=speed,units={}}
+    for id,a in pairs(actors or {}) do
+        result.units[id]={hp=a.hp,present=a.present,inField=a.inField,passive=a.passiveID,
+            passiveIndex=a.passiveIndex or 0,pending=a.nextPassive~=nil}
+    end
+    return result
 end
 return M
