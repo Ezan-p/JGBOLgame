@@ -79,9 +79,23 @@ lvLimit = {
     返回“提升至 N 级 / 当前 x/y / 浪费 N”提示。
   - `hero()`：`cur_exp` 从 `state["hero_exp"]` 读取，`next_exp` 由经验表计算；
     按 `基础属性 + 基础成长 × (等级−1)` 计算四维。
-- `local_game/exp_book.lua` + `local_game/inventory.lua`：包裹“使用”经验书 →
-  打开经验书面板。只列出 `level < floor(主角*3)` 的神仙；可对多个书堆加减数量，
-  实时预览预计等级 / 经验 / 浪费；确认后发送 `use_exp_book`。
+- `local_game/exp_book.lua`：严格按 `ui/expbookUI.lua` 布局重建，原版 1280×720
+  坐标统一 ×0.75 映射到本地 960×540：
+  - `v2/expbookUI/bkg.png` 全屏底板；左侧人物卡为品质光
+    （`inheritUI/three|four|five_star.jpg`）+ 立绘（390×326 等比缩放）+ 星级
+    （`introUI/stars.png`）+ 竖排名 + 四维（`trainingUI/stats_bkg.png`）+
+    经验条（`expbookUI/exp_bkg.png` + `exp.png` + `vip/<数字>.png`）。
+  - 右侧为逐本卷轴列表（`expbookUI/item_bkg.png`，图标 15% 宽、名称 166/685、
+    等级 186/685、经验 280/685、勾选框 85%），用 `CCScrollView` 裁剪滚动。
+  - 底部 `expbookUI/ensure1.png`（使用）、`buttons/choose_all1.png`（全选）、
+    右上 `introUI/close1.png`；左下显示实际获得经验与
+    `Lv1 → Lv2`（`expbookUI/arrow.png`）。
+  - 点击左侧人物卡打开 `v2/common/frame3.png` 神仙选择层（4×2 头像格、分页、
+    `buttons/ensure1.png` 确认），只列出 `level < floor(主角*3)` 的神仙。
+  - 经验会浪费时弹出 `v2/rechargeUI/tip.png` 确认框：
+    `expbook_tip1/2/3`（消耗仙佛密卷经验 / 实际获得经验 / 是否继续）。
+  - `local_game/inventory.lua`：包裹“使用”经验书 → 打开该面板；draw/touch/back/
+    afterUpdate/close 全部接管。
 - `local_game/lineup.lua`、`local_game/hero_detail.lua`、`local_game/training.lua`、
   `local_game/cheer.lua`：经验条统一为原版样式——等级数字在左，`expbar1` 底条 +
   `expbar2` 进度（按 `cur_exp/next_exp` 裁切、向左锚定），条内文字为
