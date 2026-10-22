@@ -102,6 +102,14 @@ class Game:
         heroes, support = self.roster(state)
         result["heroes"] = list(heroes.values())
         if support is not None:
+            for slot in support["slots"]:
+                hero = heroes.get(slot.get("hero"))
+                if hero:
+                    slot["cheer_level"] = hero.get("cheer_level", 0)
+                    slot["cheer_rate"] = hero.get("cheer_rate", 1)
+                    slot["hero_level"] = hero.get("level", 1)
+                    slot["hero_exp"] = hero.get("exp", 0)
+                    slot["hero_next_exp"] = hero.get("next_exp", 0)
             result["support"] = support
         if self.catalog.get("inventory"):
             result["inventory"] = inventory.view(state, self.catalog["inventory"],

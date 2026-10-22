@@ -134,3 +134,59 @@ class SynergyTests(unittest.TestCase):
         armor_fate=next(f for f in self.hero(5002)['fates'] if f['name']=='黄金甲')
         self.assertFalse(armor_fate['active'])
         self.assertFalse(armor_fate['applicable'])
+
+    def test_refine_only_at_level_ten_and_accept_cancel_are_atomic(self):
+        self.call('support_assign',slot=1,hero=5002);self.call('support_target',slot=1,target=1)
+        self.give('i1015',10)
+        before=self.raw()
+        with self.assertRaises(GameError):self.call('support_refine',slot=1)
+        self.assertEqual(self.raw(),before)
+        for _ in range(9):self.give('i1015',500);self.call('support_upgrade',slot=1)
+        s=self.raw();s['gold']=1000;self.save(s)
+        self.give('i1015',500)
+        before=self.raw();bonus=self.hero()['support_bonus']
+        result=self.call('support_refine',slot=1)
+        slot=result['state']['support']['slots'][0]
+        self.assertTrue(slot['can_refine'])
+        self.assertIn(slot['refine']['gain'],('hp','attack','defense','magic'))
+        self.assertNotEqual(slot['refine']['gain'],slot['refine']['lose'])
+        self.assertGreater(slot['refine']['rate'],0)
+        self.assertEqual(sum(slot['dynamic'].values()),0)
+        self.assertEqual(self.raw()['gold'],before['gold']-10)
+        self.assertEqual(self.call('state')['state']['support']['slots'][0]['refine'],slot['refine'])
+        after_roll=self.raw()
+        with self.assertRaises(GameError):self.call('support_refine',slot=1)
+        self.assertEqual(self.raw(),after_roll)
+        accepted=self.call('support_refine_accept',slot=1)
+        got=accepted['state']['support']['slots'][0]
+        self.assertIsNone(got['refine'])
+        self.assertEqual(got['dynamic'][slot['refine']['gain']],slot['refine']['rate'])
+        self.assertEqual(got['dynamic'][slot['refine']['lose']],-slot['refine']['rate'])
+        self.assertEqual(sum(got['dynamic'].values()),0)
+        self.assertAlmostEqual(got['ratios'][slot['refine']['gain']],
+            got['base_ratios'][slot['refine']['gain']]+slot['refine']['rate']/100000)
+        self.assertGreaterEqual(self.hero()['support_bonus'][slot['refine']['gain']],bonus[slot['refine']['gain']])
+        held=dict(got['dynamic'])
+        rolled=self.call('support_refine',slot=1)['state']['support']['slots'][0]
+        cancelled=self.call('support_refine_cancel',slot=1)['state']['support']['slots'][0]
+        self.assertIsNone(cancelled['refine'])
+        self.assertEqual(cancelled['dynamic'],held)
+        self.assertEqual(cancelled['ratios'],got['ratios'])
+        self.assertIn(rolled['refine']['gain'],('hp','attack','defense','magic'))
+        resumed=Game(self.game.db,self.catalog).view(self.raw())
+        self.assertEqual(resumed['support']['slots'][0]['dynamic'],held)
+
+    def test_refine_dynamic_stays_inside_original_recover_caps(self):
+        self.call('support_assign',slot=1,hero=5002);self.call('support_target',slot=1,target=1)
+        for _ in range(9):self.give('i1015',500);self.call('support_upgrade',slot=1)
+        s=self.raw();s['gold']=10000;self.save(s);self.give('i1015',999)
+        config=self.catalog['synergy']['slots']['1']['levels']['10']
+        cap=int(float(config['recover_caps']['hp'])*100000)
+        self.assertEqual(cap,7500)
+        for _ in range(40):
+            self.call('support_refine',slot=1)
+            self.call('support_refine_accept',slot=1)
+        slot=self.raw()['support']['slots']['1']
+        self.assertTrue(all(-cap<=value<=cap for value in slot['dynamic'].values()))
+        self.assertEqual(sum(slot['dynamic'].values()),0)
+        self.assertEqual(slot['level'],10)

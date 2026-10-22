@@ -394,6 +394,8 @@ def hero_with_inventory(hero, state, catalog):
     native_level=learned.get('native_level',1)
     hero['battle_training']=dict(native_level=native_level,awaken=learned.get('awaken',0),cheer_level=learned.get('cheer_level',0))
     cheer_rate=float(rules.get('cheer',{}).get(str(learned.get('cheer_level',0)),{}).get('plus_rate',.5)) if hero['id'] in support_ids(state) else 1
+    hero['cheer_level']=learned.get('cheer_level',0)
+    hero['cheer_rate']=cheer_rate
     hero["traits"] = []
     hero["stars"] = []
     hero["spells"] = [{"id": hero.get("skill_id", 1), "level": native_level, "position": 1, "awaken": learned.get("awaken",0)}]

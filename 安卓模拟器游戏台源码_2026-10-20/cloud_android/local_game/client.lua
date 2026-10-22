@@ -14,6 +14,8 @@ local enhanceOK, enhance = pcall(require,"local_enhance")
 if not enhanceOK then CCLuaLog("LOCAL_ENHANCE_LOAD_ERROR: "..tostring(enhance)); error(enhance) end
 local lineupOK, lineup = pcall(require,"local_lineup")
 if not lineupOK then CCLuaLog("LOCAL_LINEUP_LOAD_ERROR: "..tostring(lineup)); error(lineup) end
+local cheerOK, cheer = pcall(require,"local_cheer")
+if not cheerOK then CCLuaLog("LOCAL_CHEER_LOAD_ERROR: "..tostring(cheer)); error(cheer) end
 local training = require("local_training")
 local journeyOK, journey = pcall(require,"local_journey")
 if not journeyOK then CCLuaLog("LOCAL_JOURNEY_LOAD_ERROR: "..tostring(journey)); error(journey) end
@@ -165,6 +167,47 @@ local function header()
     end
 end
 
+local function goFromCheer(target)
+    if target=="heroes" then handbook.open() end
+    if target=="cortege" then cortege.open() end
+    if target=="lineup" then lineup.open() end
+    if target=="inventory" then inventory.open() end
+    if target=="stages" then journey.open() end
+    if target=="summon" then summon.open() end
+    page=target; homeInfo=nil; render()
+end
+
+local function cheerPage()
+    -- cheerSquadUI is full-screen; draw it first and keep the original bottom menu above it.
+    cheer.draw({
+        root=root, text=text, render=render, send=send, busy=busy, failed=failed,
+        error=lastError, notice=notice,
+        clearHits=function() buttons={} end,
+        hit=function(x,y,w,h,action,enabled,node,retry)
+            table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node,retry=retry})
+        end,
+        navigate=function(target) goFromCheer(target) end,
+    },state)
+    if not cheer.isPanelOpen() then
+        home.draw({
+            root=root,text=text,menuOnly=true,hideHeader=true,
+            hit=function(x,y,w,h,action,node)
+                table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=true,node=node})
+            end
+        },state,function(target)
+            if target=="heroes" then handbook.open() end
+            if target=="cortege" then cortege.open() end
+            if target=="lineup" then lineup.open() end
+            if target=="inventory" then inventory.open() end
+            if target=="stages" then journey.open() end
+            if target=="summon" then summon.open() end
+            page=target; homeInfo=nil; render()
+        end,function(title,lines)
+            homeInfo={title=title,lines=lines}; render()
+        end)
+    end
+end
+
 render = function()
     if not root then return end
     combat.stop()
@@ -174,6 +217,7 @@ render = function()
     pressed=nil
     if page=="recruit" then page="summon"; if state then summon.open() end end
     if page=="battle" and battle then showBattle(); return end
+    if state and page=="cheer" then cheerPage(); return end
     if state and page=="battle_hall" then
         battleHall.draw({root=root,render=render,send=send,busy=busy,failed=failed,error=lastError,notice=notice,
             clearHits=function() buttons={} end,
@@ -520,6 +564,7 @@ local function navigateBack()
     elseif page=="cortege" then cortege.back()
     elseif page=="stages" then journey.back()
     elseif page=="lineup" then lineup.back()
+    elseif page=="cheer" then cheer.back()
     elseif page=="battle_hall" then battleHall.back()
     elseif page=="inventory" then inventory.back()
     elseif page=="summon" then summon.back()

@@ -222,7 +222,7 @@ local function main()
     label('战斗演示',867,111,14,{178,136,83},nil,true)
     hit(867,111,100,26,ui.demo)
     local cheer=image('v2/cheerUI/cheer_head1.png',867,470,83,83)
-    hit(867,470,86,86,function() M.mode='support';M.supportSlot=M.supportSlot or 1;ui.render() end,cheer)
+    hit(867,470,86,86,function() ui.navigate('cheer') end,cheer)
     hit(484,135,350,35,function() openDetail(h) end)
 end
 local function formation()
