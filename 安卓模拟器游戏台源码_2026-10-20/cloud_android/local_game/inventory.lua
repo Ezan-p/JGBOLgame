@@ -1,10 +1,17 @@
 -- Original packageUI art and proportions; persistent local inventory actions.
 local data=require("local_inventory_data")
 local enhance=require("local_enhance")
-local M={tab=1,offset=0,page=1,catalog=false}
+local stoneOK,stone=pcall(require,"local_stone")
+if not stoneOK then CCLuaLog("LOCAL_STONE_LOAD_ERROR: "..tostring(stone));stone=nil end
+local upgradeOK,stoneUpgrade=pcall(require,"local_stone_upgrade")
+if not upgradeOK then CCLuaLog("LOCAL_STONE_UPGRADE_LOAD_ERROR: "..tostring(stoneUpgrade));stoneUpgrade=nil end
+local M={tab=1,offset=0,page=1,catalog=false,intro=nil,introScroll=nil,socketPos=1,alert=nil,
+    buttons={},hoverKey=nil,pressKey=nil}
+local VIEW_X,VIEW_Y=235,121
 local ui,state,root,scroll,gesture
 local GOLD={255,224,164}
 local MUTED={204,180,148}
+local OWNER={186,169,157}
 local names={"武器","防具","法宝","法术","灵石","道具"}
 local tabs={"Label_weapon","Label_armor","Label_magic-item","Label_spell","stone","Label_props"}
 
@@ -29,6 +36,11 @@ end
 local function fill(x,y,w,h,color,parent)
     local n=CCLayerColor:create(ccc4(unpack(color)))
     n:setContentSize(CCSizeMake(w,h)); n:setPosition(CCPointMake(x,y)); (parent or root):addChild(n)
+    return n
+end
+local function anchoredImage(file,x,y,w,h,ax,ay,parent)
+    local n=image(file,x,y,w,h,parent)
+    if n then n:setAnchorPoint(CCPointMake(ax or .5,ay or .5)); n:setPosition(CCPointMake(x,y)) end
     return n
 end
 local function button(title,x,y,w,action,enabled,file)
@@ -61,6 +73,17 @@ local function icon(item,x,y,w,parent,level)
     if info.text then label(info.text,sw/2,sh/2,38,{0,0,0},n,true) end
     if item.main_type==19 then label(level or 1,sw*.8,sh*.2,26,GOLD,n,true) end
     if item.main_type==14 then image("map/parts.png",x,y,w,w,parent) end
+    -- data.getStoneSprite appends "+level" at the top-right of every stone cell.
+    if item.category==5 then
+        local value="+"..(level or 1)
+        local shadow=CCLabelTTF:create(value,"Arial",26)
+        shadow:setAnchorPoint(CCPointMake(1,1));shadow:setPosition(CCPointMake(sw*.9+1,sh*.9-1))
+        shadow:setColor(ccc3(0,0,0));n:addChild(shadow,1)
+        local text=CCLabelTTF:create(value,"Arial",26)
+        text:setAnchorPoint(CCPointMake(1,1));text:setPosition(CCPointMake(sw*.9,sh*.9))
+        text:setColor(ccc3(255,128,0));n:addChild(text,2)
+    end
+    return n
 end
 local function own(uid)
     if type(uid)~="number" then return end
@@ -69,6 +92,42 @@ end
 local function heroName(id)
     for _,h in ipairs(state.heroes) do if h.id==id then return h.name end end
     return "未装备"
+end
+local SLOTS={[1]=1,[2]=1,[3]=1,[4]=2,[5]=3}
+local STAT_ICON={[1]="damage",[2]="defence",[3]="health"}
+local STAT_FIELD={[1]="gongji_plus",[2]="fangyu_plus",[3]="maxhp_plus"}
+local STAT_NAME={[1]="攻击",[2]="防御",[3]="生命"}
+local STONE_STAT_ICON={[1]="CHAR_gong",[2]="CHAR_fang",[3]="CHAR_ming"}
+local function stoneBase(category,level)
+    local row=(data.stones or {})[tostring(category)..":"..tostring(level or 1)]
+    return tonumber(row and row.base or 0) or 0
+end
+local function stoneAt(entry,pos)
+    for _,s in ipairs(entry and entry.stones or {}) do
+        if (s.pos or 0)==pos then return s end
+    end
+end
+local function stoneSum(entry,category)
+    local total=0
+    for i=1,3 do local s=stoneAt(entry,i);if s then total=total+stoneBase(category,s.level) end end
+    return total
+end
+local function baseValue(item,level)
+    local b=item.original or {}
+    local field=STAT_FIELD[item.category]
+    if not field then return 0 end
+    return math.floor((tonumber(b[field]) or 0)+(tonumber(level or 1)-1)*(tonumber(b.upgrade_plus) or 0))
+end
+local function maxSockets(item) return SLOTS[item.quality] or 1 end
+local function fateLines(item)
+    local rows=(data.fates or {})[tostring(item.id)] or {}
+    if #rows==0 then return "无仙缘" end
+    local names,seen={},{}
+    for _,f in ipairs(rows) do
+        if not seen[f.hero] then seen[f.hero]=true;table.insert(names,f.hero_name or tostring(f.hero)) end
+    end
+    local effect=rows[1] and (rows[1].description or "") or ""
+    return "羁绊："..table.concat(names,"、").."\n羁绊效果："..effect
 end
 local function perform(op,args)
     M.confirm=nil; M.choice=nil
@@ -81,10 +140,49 @@ end
 local function confirm(message,op,args)
     M.confirm={message=message,op=op,args=args}; ui.render()
 end
+local function notify(message)
+    M.alert=message; ui.render()
+end
 local function reset()
     M.selected=nil; M.choice=nil; M.confirm=nil; M.reading=false; M.offset=0; M.page=1; M.preview=nil; gesture=nil
+    M.intro=nil; M.introScroll=nil; M.alert=nil; M.introHits={}
+    M.buttons={};M.hoverKey=nil;M.pressKey=nil
+    if stone then stone.close() end
+    if stoneUpgrade then stoneUpgrade.close() end
 end
-local function upgrade(e)
+local upgrade
+local function registerButton(key,kind,uid,x,y,w,h,node)
+    local rect={key=key,kind=kind,uid=uid,
+        x=VIEW_X+x-w/2,y=VIEW_Y+M.offset+y-h/2,w=w,h=h}
+    table.insert(M.buttons,rect)
+    if node then
+        if M.pressKey==key then node:setColor(ccc3(255,213,145))
+        elseif M.hoverKey==key then node:setColor(ccc3(255,238,185)) end
+    end
+    return rect
+end
+local function buttonAt(x,y)
+    for i=#M.buttons,1,-1 do
+        local b=M.buttons[i]
+        if x>=b.x and x<=b.x+b.w and y>=b.y and y<=b.y+b.h then return b end
+    end
+end
+local function performButton(b)
+    if not b then return end
+    if b.kind=="stone" then
+        if stone then stone.open(ui,state,b.uid) end
+    elseif b.kind=="stoneupgrade" then
+        if stoneUpgrade then stoneUpgrade.open(ui,state,b.uid) end
+    else
+        local e=own(b.uid)
+        if e then
+            local item=data.items[e.key]
+            if M.equipHero and item and item.category==4 then replaceSpell(e)
+            else upgrade(e) end
+        end
+    end
+end
+function upgrade(e)
     local item=data.items[e.key]
     if e.level>=item.top_level then return end
     if item.category<=3 then enhance.open(ui,state,e.uid);ui.render();return end
@@ -126,14 +224,18 @@ local function frame()
 end
 local function rule(item)
     local a=item.action
-    if a=="equip" then return "强化增加装备属性；每件装备可镶嵌1颗同类灵石。装备后参与战斗。" end
+    if a=="equip" then
+        return "装备强化提升基础属性。孔位由品质决定（1/1/1/2/3）；打孔消耗1颗金刚钻，镶嵌同类灵石后按灵石等级百分比提升该装备属性。"
+    end
     if a=="spell" then
         return "自带法术不可替换。第2、3格可装配法术，不限主动或被动；同一神仙不可重复装备同名法术。"
     end
     if a=="star" then return "原生法术觉醒后可在演武堂装备，最多五颗，同类不重复。" end
     if a=="trait" then return "每位神仙最多四项特技，同类不能重复；前往阵容的演武堂可兑换、装备和升级。" end
     if a=="cheer_material" then return "在演武堂修炼页，用于助阵法术进修。" end
-    if a=="gem" then return "3颗同类同级灵石合成1颗高一级灵石，最高10级。镶嵌提升对应装备属性，卸下完整归还。" end
+    if a=="gem" then
+        return "灵石1至13级，数值读取stone_cost_worth。升级需同名同类灵石作材料并消耗银两，成功率=材料价值/需求+补偿；失败消耗材料。"
+    end
     if a=="fragment" then return "10个同名碎片合成1件对应装备。" end
     if a=="energy" then return "使用恢复 "..item.original.strength_plus.." 点体力，上限60。体力已满时不消耗。" end
     if a=="experience" then return "使用增加行者经验 "..item.original.experience_plus.."。" end
@@ -141,6 +243,179 @@ local function rule(item)
     if a=="material" then return "熔炼装备或法术获得；每颗可兑换20银两。" end
     if a=="support_material" then return "在阵容的助阵页面消耗乾坤符箓，为八卦阵位进阶。" end
     return "所属系统尚未接入。可查阅原版资料，暂不提供兑换和使用。"
+end
+local INTRO_TOTAL=760
+local INTRO_W,INTRO_H=524,420
+local function introHit(x,y,w,h,action)
+    table.insert(M.introHits,{x=x,y=y,w=w,h=h,action=action})
+end
+local function setIntroOffset(value)
+    local s=M.introScroll
+    if not s then return end
+    s.offset=math.max(0,math.min(s.max,value))
+    s.node:setPositionY(INTRO_H-INTRO_TOTAL+s.offset)
+end
+local function drawIntro(item,e)
+    M.introHits={}
+    fill(0,0,960,540,{0,0,0,180})
+    image("v2/introUI/introBkg.png",480,270,560,486)
+    image("v2/introUI/intro_label.png",480,487,90,50)
+    image("v2/introUI/close1.png",732,489,50,47)
+    local c=CCLayer:create(); c:setContentSize(CCSizeMake(INTRO_W,INTRO_TOTAL))
+    local v=CCScrollView:create(CCSizeMake(INTRO_W*root:getScaleX(),INTRO_H*root:getScaleY()),c)
+    v:setTouchEnabled(false); v:setPosition(CCPointMake(218,48)); root:addChild(v)
+    local key=tostring(M.selected or M.preview or "")
+    if not M.introScroll or M.introScroll.key~=key then
+        M.introScroll={node=c,key=key,max=INTRO_TOTAL-INTRO_H}
+        setIntroOffset(0)
+    else
+        M.introScroll.node=c; setIntroOffset(M.introScroll.offset)
+    end
+    local panelW,panelH=500,275
+    local left,bottom=(INTRO_W-panelW)/2,INTRO_TOTAL-panelH
+    image("v2/newIntroUI/big_bkg.png",left+panelW/2,bottom+panelH/2,panelW,panelH,c)
+    local level=e and e.level or 1
+    local node=icon(item,left+0.207*panelW,bottom+0.703*panelH,0.49*panelH,c,level)
+    if node and item.category~=5 then
+        local size=node:getContentSize()
+        local empty=CCSprite:create("v2/newIntroUI/star_bkg.png")
+        local es=empty:getContentSize()
+        empty:setAnchorPoint(CCPointMake(0,0));empty:setPosition(CCPointMake(size.width*.1,size.height*.1))
+        empty:setScale(.8*size.width/es.width);node:addChild(empty)
+        local quality=tonumber(item.quality) or 0
+        if quality>0 then
+            local stars=CCSprite:create("v2/introUI/stars.png")
+            local ss=stars:getContentSize()
+            stars:setTextureRect(CCRectMake(0,0,ss.width*math.min(1,quality/5),ss.height))
+            stars:setAnchorPoint(CCPointMake(0,0));stars:setPosition(CCPointMake(size.width*.1,size.height*.1))
+            stars:setScale(.8*size.width/ss.width);node:addChild(stars)
+        end
+    end
+    label(item.name,left+0.716*panelW,bottom+0.888*panelH,25,PALE,c)
+    local attrX=left+0.552*panelW
+    local attrY=bottom+0.774*panelH
+    anchoredImage("v2/introUI/"..STAT_ICON[item.category]..".png",attrX,attrY,28,28,1,.5,c)
+    local base=e and tonumber(e.base_value) or baseValue(item,level)
+    local percent=e and tonumber(e.stone_percent) or 0
+    local power=" "..math.floor(base)
+    if percent>0 then
+        power=power.." + "..math.floor(base*percent).." ("..string.format("%.1f",percent*100).."%)"
+    end
+    label(power,attrX,attrY,17,PALE,c)
+    local levelY=bottom+0.58*panelH
+    anchoredImage("v2/introUI/level.png",attrX,levelY,28,28,1,.5,c)
+    label(" "..level,attrX,levelY,17,PALE,c)
+    local curY=bottom+0.25*panelH
+    local valueY=bottom+0.085*panelH
+    local leftX=left+0.113*panelW
+    local offsetX=0.2*panelW
+    local valueOffset=0.03*panelW
+    local drill=e and tonumber(e.drill) or 0
+    local maximum=e and tonumber(e.max_sockets) or maxSockets(item)
+    local stoneItem=data.items["i"..tostring(1089+item.category)]
+    for i=1,3 do
+        local x=leftX+(i-1)*offsetX
+        if i<=maximum then
+            image("v2/stoneUI/unsee.png",x,curY,0.2*panelH,0.2*panelH*137/135,c)
+            local stone=stoneAt(e,i)
+            if stone then
+                icon(stoneItem,x,curY,0.2*panelH,c,stone.level)
+                image("v2/newIntroUI/stone_value_bkg.png",x,valueY,98,39,c)
+                anchoredImage("v2/introUI/"..STAT_ICON[item.category]..".png",x-valueOffset,valueY,20,20,1,.5,c)
+                label(string.format(" %.1f%%",stoneBase(item.category,stone.level)*100),x-valueOffset,valueY,15,PALE,c)
+            elseif i>drill then
+                image("v2/stoneUI/lock.png",x,curY,0.2*panelH,0.2*panelH*110/131,c)
+            end
+        end
+    end
+    local descTop=bottom-16
+    if e and stone then
+        local bx=218+left+0.825*panelW
+        local by=48+(INTRO_H-INTRO_TOTAL+M.introScroll.offset)+bottom+0.2*panelH
+        image("v2/stoneUI/putin1.png",left+0.825*panelW,bottom+0.2*panelH,90,50,c)
+        introHit(bx-45,by-25,90,50,function()
+            M.intro=nil;M.introScroll=nil
+            stone.open(ui,state,e.uid)
+        end)
+    end
+    local desc=label(item.description or "",12,descTop,17,MUTED,c,false,500)
+    local descHeight=desc:getContentSize().height
+    local headTop=descTop-descHeight-14
+    anchoredImage("v2/newIntroUI/head_bkg.png",panelW/2,headTop,panelW,panelW*100/600,.5,1,c)
+    image("v2/introUI/yuanfen_label.png",panelW/2,headTop-52,100,61,c)
+    local innerTop=headTop-panelW*100/600
+    local innerHeight=132
+    local capHeight=panelW*59/609
+    image("v2/newIntroUI/big_bkg1.png",panelW/2,innerTop-capHeight/2,panelW,capHeight,c)
+    image("v2/newIntroUI/big_bkg2.png",panelW/2,innerTop-capHeight-(innerHeight-2*capHeight)/2,
+        panelW,innerHeight-2*capHeight,c)
+    local bottomCap=image("v2/newIntroUI/big_bkg1.png",panelW/2,innerTop-innerHeight+capHeight/2,panelW,capHeight,c)
+    if bottomCap then bottomCap:setFlipY(true) end
+    label(fateLines(item),24,innerTop-18,16,MUTED,c,false,476)
+end
+local function drawStoneIntro(item,e)
+    M.introHits={};M.introScroll=nil
+    fill(0,0,960,540,{0,0,0,180})
+    image("v2/messageUI/frame1.png",480,297,652,469)
+    image("v2/introUI/intro_label.png",480,486,116,65)
+    image("v2/introUI/close1.png",700.8,502.2,63,60)
+    icon(item,345.6,367.2,172.8,nil,e.level)
+    image("v2/newIntroUI/bkg1.png",556.8,367.2,400,212)
+    label(item.name,556.8,415.8,30,PALE,nil,true)
+    image("v2/introUI/level.png",499.2,378,41,41)
+    label(tostring(e.level or 1),518.4,378,26,PALE)
+    image("v2/packageUI/"..STAT_ICON[item.sub_type]..".png",595.2,378,41,41)
+    label(string.format("%.1f%%",stoneBase(item.sub_type,e.level)*100),614.4,378,26,PALE)
+    label(item.description or "",480,247,26,{254,235,192},nil,true,384)
+    local upgradeX,upgradeY=556.8,324
+    local node=image("v2/newIntroUI/upgrade1.png",upgradeX,upgradeY,120,67)
+    local enabled=tonumber(e.level or 1)<tonumber(e.max_level or 13) and (tonumber(state.level) or 1)>=10
+    if not enabled and node then node:setColor(ccc3(120,110,100)) end
+    introHit(upgradeX-60,upgradeY-33.5,120,67,function()
+        if not enabled then
+            M.alert=(tonumber(e.level or 1)>=tonumber(e.max_level or 13)) and "灵石已达最高等级" or "灵石系统需要行者等级达到 10 级"
+            ui.render();return
+        end
+        M.intro=nil;M.introScroll=nil
+        if stoneUpgrade then stoneUpgrade.open(ui,state,e.uid) end
+    end)
+end
+
+local function introTouch(event,x,y)
+    if not M.intro then return false end
+    if event==CCTOUCHBEGAN or event=="began" then
+        for i=#(M.introHits or {}),1,-1 do
+            local h=M.introHits[i]
+            if x>=h.x and x<=h.x+h.w and y>=h.y and y<=h.y+h.h then h.action();return true end
+        end
+        if x<200 or x>760 or y<27 or y>513 then
+            M.intro=nil;M.selected=nil;M.introScroll=nil;M.introGesture=nil;M.introClosePressed=nil
+            ui.render();return true
+        end
+        if x>=700 and x<=765 and y>=455 and y<=520 then
+            M.intro=nil;M.selected=nil;M.introScroll=nil;M.introGesture=nil;M.introClosePressed=nil
+            ui.render();return true
+        end
+        if x>=218 and x<=742 and y>=48 and y<=468 then
+            M.introGesture={x=x,y=y,offset=M.introScroll and M.introScroll.offset or 0,dragged=false}
+        end
+        return true
+    elseif event==CCTOUCHMOVED or event=="moved" then
+        local g=M.introGesture
+        if g then
+            if math.abs(y-g.y)>4 or math.abs(x-g.x)>4 then g.dragged=true end
+            if g.dragged then setIntroOffset(g.offset+y-g.y) end
+        end
+        return true
+    elseif event==CCTOUCHENDED or event=="ended" then
+        if M.introClosePressed and x>=705 and x<=760 and y>=462 and y<=515 then
+            M.intro=nil;M.selected=nil;M.introScroll=nil;M.introGesture=nil;M.introClosePressed=nil
+        else
+            M.introGesture=nil;M.introClosePressed=nil
+        end
+        ui.render();return true
+    end
+    return true
 end
 local function detail()
     local e=M.catalog and nil or own(M.selected)
@@ -189,10 +464,11 @@ local function detail()
         button("卸下",405,135,100,function() perform("bag_equip",{uid=e.uid,hero=0}) end,e.hero~=0)
         button(item.category==4 and "升级" or "强化",515,135,112,function() upgrade(e) end,e.level<item.top_level)
         if item.category<=3 then
-            button(e.gem>0 and ("卸石 · "..e.gem.."级") or "镶嵌",637,135,130,function()
-                if e.gem>0 then perform("bag_unsocket",{uid=e.uid})
-                else M.choice="gem";M.page=1;ui.render() end
-            end)
+            local worn=#(e.stones or {})
+            button(worn>0 and ("灵石 · "..worn.."/"..(e.max_sockets or maxSockets(item))) or "打孔 / 镶嵌",
+                637,135,130,function()
+                    if stone then stone.open(ui,state,e.uid) end
+                end)
         end
         if item.category==4 then
             local rule=require('local_combat_rules').advance[tostring(item.id)]
@@ -203,12 +479,11 @@ local function detail()
         button("熔炼",777,135,115,function()
             confirm("熔炼将移除「"..item.name.."」，获得 "..math.max(1,item.quality)*e.level.." 颗精魄石。",
                 "bag_smelt",{uid=e.uid})
-        end,item.category<=4 and e.hero==0 and e.gem==0)
-    elseif item.category==5 or item.action=="fragment" then
+        end,item.category<=4 and e.hero==0 and #(e.stones or {})==0)
+    elseif item.action=="fragment" then
         button("合成",260,135,220,function()
-            confirm(item.category==5 and "消耗3颗同类同级灵石，合成1颗高一级灵石？"
-                or "消耗10个同名碎片，合成对应装备？","bag_compose",{uid=e.uid})
-        end,e.count>=(item.category==5 and 3 or 10) and (item.category~=5 or e.level<10))
+            confirm("消耗10个同名碎片，合成对应装备？","bag_compose",{uid=e.uid})
+        end,e.count>=10)
     else
         button(item.action=="material" and "兑换20银两" or "使用",260,135,220,function()
             if item.action=="train" then M.choice="train";M.page=1;ui.render()
@@ -237,7 +512,7 @@ local function choices()
         local title=M.choice=="gem" and (data.items[choice.key].name.."  "..choice.level.."级  ×"..choice.count) or M.choice=="spellSlot" and choice.name or (choice.name.."  "..choice.level.."级")
         label(title,280,y,22)
         button("选择",740,y-17,130,function()
-            if M.choice=="gem" then perform("bag_socket",{uid=e.uid,gem=choice.uid})
+            if M.choice=="gem" then M.intro=true;perform("bag_socket",{uid=e.uid,gem=choice.uid,pos=M.socketPos or 1})
             elseif M.choice=="train" then confirm("消耗1颗魂缘丹，让"..choice.name.."提升1级？","bag_use",{uid=e.uid,hero=choice.id})
             elseif M.choice=="spellSlot" then perform("bag_equip",{uid=e.uid,hero=M.targetHero,equip_pos=choice.id})
             elseif item.category==4 then M.targetHero=choice.id;M.choice="spellSlot";M.page=1;ui.render()
@@ -250,6 +525,7 @@ local function choices()
     button("下一页",720,135,130,function() M.page=M.page+1;ui.render() end,M.page<max)
 end
 local function listView()
+    M.buttons={}
     local list={}
     if M.catalog then
         for _,item in pairs(data.items) do if item.category==M.tab then table.insert(list,{key=item.key,level=1}) end end
@@ -266,11 +542,19 @@ local function listView()
                 end
                 if e.hero==M.equipHero then allowed=false end
             end
-            if allowed and b.category==M.tab and (not M.smelt or b.category<=4 and e.hero==0 and e.gem==0) then table.insert(list,e) end
+            if allowed and b.category==M.tab and (not M.smelt or b.category<=4 and e.hero==0 and #(e.stones or {})==0) then table.insert(list,e) end
         end
     end
     table.sort(list,function(a,b)
         local x,y=data.items[a.key],data.items[b.key]
+        if x.category==5 and y.category==5 then
+            local ae=(a.owner_uid or 0)>0
+            local be=(b.owner_uid or 0)>0
+            if ae~=be then return ae end
+            if (a.level or 1)~=(b.level or 1) then return (a.level or 1)>(b.level or 1) end
+            if x.sub_type~=y.sub_type then return x.sub_type<y.sub_type end
+            return (a.uid or 0)<(b.uid or 0)
+        end
         if x.quality~=y.quality then return x.quality>y.quality end
         if x.id~=y.id then return x.id<y.id end
         return (a.uid or 0)<(b.uid or 0)
@@ -285,40 +569,75 @@ local function listView()
     button("›",803,490,46,function() M.page=M.page+1;M.offset=0;ui.render() end,M.page<max)
     local shown={}
     for i=(M.page-1)*20+1,math.min(#list,M.page*20) do table.insert(shown,list[i]) end
-    local c=area(#shown*98,function(x,y,offset)
-        local i=math.floor((370-(y-121-offset))/98)+1
+    local stoneList=shown[1] and data.items[shown[1].key].category==5 or false
+    local pitch=stoneList and 92 or 98
+    local top=stoneList and 383 or 370
+    local c=area(#shown*pitch,function(x,y,offset)
+        local i=math.floor((top-(y-121-offset))/pitch)+1
         local e=shown[i];if not e then return end
         local item=data.items[e.key]
-        local rowY=370-(i-1)*98
-        local localY=y-121-offset
-        if not M.catalog and not M.smelt and item.category<=4 and x>764 and localY<rowY-42 then
-            if M.equipHero and item.category==4 then
-                replaceSpell(e)
-            else upgrade(e) end
-        elseif not M.catalog and not M.smelt and item.category<=3 and x>624 and localY<rowY-42 then
-            M.selected=e.uid;M.choice="gem";M.page=1;M.offset=0;ui.render()
-        else
-            M.selected=M.catalog and e.key or e.uid;M.offset=0;M.reading=false;ui.render()
+        if item.category==5 then
+            M.selected=e.uid;M.offset=0;M.reading=false;M.intro=not M.catalog
+            if M.catalog then M.intro=nil end
+            M.introScroll=nil
+            ui.render();return
         end
+        if e.socketed and stone then
+            stone.open(ui,state,e.owner_uid);return
+        end
+        M.selected=M.catalog and e.key or e.uid;M.offset=0;M.reading=false
+        M.intro=M.catalog==false and item.category<=3
+        if not M.intro then M.introScroll=nil end
+        ui.render()
     end)
     for i,e in ipairs(shown) do
-        local item=data.items[e.key];local y=370-(i-1)*98-46
-        image("v2/packageUI/xinxilan.png",342,y,680,92,c)
-        icon(item,49,y,74,c,e.level)
-        label(item.name,108,y+23,22,GOLD,c)
-        if item.category<=4 then
-            label(string.rep("★",item.quality),315,y+25,18,{255,194,51},c)
-            label(M.catalog and ("等级上限 "..item.top_level) or (e.hero==0 and "未装备" or "装备于"..heroName(e.hero)),475,y+25,16,MUTED,c)
-            label("级 "..e.level,108,y-20,21,{242,191,49},c)
-            local attr=({"攻 ","防 ","命 ","效果 "})[item.category]
-            label(M.catalog and "点击查看介绍" or (attr..e.value..(item.category==4 and not item.active and "%" or "")),217,y-20,20,{242,191,49},c)
-            if not M.catalog then
-                if item.category<=3 then image("v2/stoneUI/putin_btn1.png",452,y-20,125,33,c) end
-                image(M.equipHero and item.category==4 and "v2/charPositionUI/change1.png" or item.category==4 and "v2/enhanceUI/up1.png" or "v2/packageUI/enhance1.png",594,y-20,125,33,c)
+        local item=data.items[e.key];local y=top-(i-1)*pitch-46
+        if item.category==5 then
+            image("v2/packageUI/xinxilan.png",342,y,680,100,c)
+            icon(item,64,y,74,c,e.level)
+            label(item.name,124,y+18,27,GOLD,c)
+            image("v2/packageUI/level.png",124,y-18,34,34,c)
+            label(tostring(e.level or 1),156,y-18,26,{242,191,49},c)
+            image("v2/packageUI/"..(STONE_STAT_ICON[item.sub_type] or "CHAR_gong")..".png",
+                286,y-18,34,34,c)
+            label(string.format("%.1f%%",(tonumber(e.percent) or 0)*100),
+                318,y-18,26,{242,191,49},c)
+            if M.catalog then
+                label("点击查看介绍",590,y+18,20,OWNER,c,true)
+            else
+                if e.owner_hero_name and e.owner_hero_name~="" then
+                    label("装备于"..e.owner_hero_name,590,y+22,20,OWNER,c,true)
+                end
+                local canUpgrade=(e.level or 1)<(e.max_level or 13) and (tonumber(state.level) or 1)>=10
+                local n=image("v2/enhanceUI/up1.png",590,y-20,132,56,c)
+                if not canUpgrade and n then n:setColor(ccc3(120,110,100)) end
+                registerButton("upgrade"..e.uid,"stoneupgrade",e.uid,590,y-20,132,56,n)
             end
         else
-            label(M.catalog and (item.action=="reference" and "原版资料" or "可兑换") or ("数量: "..e.count..(item.category==5 and ("    "..e.level.."级") or "")),108,y-20,21,{242,191,49},c)
-            label(item.category==5 and "合成 / 镶嵌" or item.action=="fragment" and "合成" or "查看",550,y,19,GOLD,c)
+            image("v2/packageUI/xinxilan.png",342,y,680,92,c)
+            icon(item,49,y,74,c,e.level)
+            label(item.name,108,y+23,22,GOLD,c)
+            if item.category<=4 then
+                label(string.rep("★",item.quality),315,y+25,18,{255,194,51},c)
+                label(M.catalog and ("等级上限 "..item.top_level) or (e.hero==0 and "未装备" or "装备于"..heroName(e.hero)),475,y+25,16,MUTED,c)
+                label("级 "..e.level,108,y-20,21,{242,191,49},c)
+                local attr=({"攻 ","防 ","命 ","效果 "})[item.category]
+                label(M.catalog and "点击查看介绍" or (attr..e.value..(item.category==4 and not item.active and "%" or "")),217,y-20,20,{242,191,49},c)
+                if not M.catalog then
+                    if item.category<=3 then
+                        local n=image("v2/stoneUI/putin_btn1.png",452,y-20,125,47,c)
+                        registerButton("stone"..e.uid,"stone",e.uid,452,y-20,125,47,n)
+                    end
+                    local n=image(M.equipHero and item.category==4 and "v2/charPositionUI/change1.png" or item.category==4 and "v2/enhanceUI/up1.png" or "v2/packageUI/enhance1.png",594,y-20,125,33,c)
+                    registerButton("enhance"..e.uid,"enhance",e.uid,594,y-20,125,33,n)
+                end
+            else
+                label(M.catalog and (item.action=="reference" and "原版资料" or "可兑换")
+                    or (e.socketed and ("已镶嵌于 "..(e.owner_name or "装备"))
+                        or ("数量: "..e.count)),
+                    108,y-20,21,{242,191,49},c)
+                label(item.action=="fragment" and "合成" or "查看",550,y,19,GOLD,c)
+            end
         end
     end
     if #list==0 then
@@ -333,26 +652,62 @@ local function listView()
     end
 end
 function M.draw(context,player)
-    ui,state,root=context,player,context.root;scroll=nil
+    ui,state,root=context,player,context.root;scroll=nil;M.buttons={}
     if M.selected and not M.catalog and type(M.selected)=="number" and not own(M.selected) then
-        M.selected=nil;M.choice=nil;M.offset=0
+        M.selected=nil;M.choice=nil;M.offset=0;M.intro=nil;M.introScroll=nil
     end
     frame()
-    if M.choice then choices() elseif M.selected or M.preview then detail() else listView() end
+    local stoneOpen=stone and stone.isOpen()
+    if not stoneOpen and M.selected and not M.catalog and type(M.selected)=="number" and not M.choice and not M.reading then
+        local selectedEntry=own(M.selected)
+        local selectedItem=selectedEntry and data.items[selectedEntry.key]
+        if selectedItem and (selectedItem.category<=3 or selectedItem.category==5) then M.intro=true end
+    end
+    local introEntry=(not stoneOpen) and M.intro and not M.choice and not M.reading and own(M.selected)
+    local introItem=introEntry and data.items[introEntry.key]
+    if M.choice then choices()
+    elseif introItem then listView()
+    elseif M.selected or M.preview then detail()
+    else listView() end
     label("银两 "..state.silver.."    "..(ui.busy and "正在保存…" or ui.error or ui.notice or ""),241,103,13,MUTED)
     if ui.failed then
         ui.hit(235,90,650,28,function() ui.send("state",{}) end,true,nil,true)
     end
-    if M.confirm then
+    if introItem then
+        if introItem.category==5 then drawStoneIntro(introItem,introEntry)
+        else drawIntro(introItem,introEntry) end
+    end
+    if M.alert then
+        scroll=nil;ui.clearHits()
+        fill(0,0,960,540,{0,0,0,170})
+        image("v2/packageUI/board_bkg.png",480,295,650,250)
+        label(M.alert,190,375,22,GOLD,nil,false,580)
+        button("确定",390,190,180,function() M.alert=nil;ui.render() end)
+    elseif M.confirm then
         scroll=nil;ui.clearHits()
         fill(0,0,960,540,{0,0,0,170})
         image("v2/packageUI/board_bkg.png",480,295,650,270)
         label(M.confirm.message,190,385,23,GOLD,nil,false,580)
         label("银两 "..state.silver,190,235,18,MUTED)
-        button("取消",220,170,180,function() M.confirm=nil;ui.render() end)
-        button("确定",560,170,180,function() perform(M.confirm.op,M.confirm.args) end)
+        if M.confirm.op then
+            button("取消",220,170,180,function() M.confirm=nil;ui.render() end)
+            button("确定",560,170,180,function() perform(M.confirm.op,M.confirm.args) end)
+        else
+            button("确定",390,170,180,function() M.confirm=nil;ui.render() end)
+        end
     end
     if enhance.isOpen() then enhance.draw(ui,state) end
+    if stone and stone.isOpen() then stone.draw(ui,state) end
+    if stoneUpgrade and stoneUpgrade.isOpen() and not (stone and stone.isOpen()) then
+        stoneUpgrade.draw(ui,state)
+    end
+end
+function M.afterUpdate(player)
+    state=player
+    if stone and stone.isOpen() then stone.afterUpdate(player) end
+    if stoneUpgrade and stoneUpgrade.isOpen() and not (stone and stone.isOpen()) then
+        stoneUpgrade.afterUpdate(player)
+    end
 end
 function M.open()
     M.returnPage=nil;M.equipHero=nil;M.equipPos=nil;M.equipPending=nil;M.tab=1;M.catalog=false;M.smelt=false;M.reading=false;reset()
@@ -360,7 +715,11 @@ end
 function M.back()
     gesture=nil
     if enhance.isOpen() then enhance.close();ui.render();return end
-    if M.confirm then M.confirm=nil
+    if stone and stone.isOpen() then stone.back();ui.render();return end
+    if stoneUpgrade and stoneUpgrade.isOpen() then stoneUpgrade.back();ui.render();return end
+    if M.alert then M.alert=nil
+    elseif M.confirm then M.confirm=nil
+    elseif M.intro then M.intro=nil;M.selected=nil;M.introScroll=nil
     elseif M.reading then M.reading=false;M.offset=0
     elseif M.choice then M.choice=nil
     elseif M.preview then M.preview=nil;ui.navigate(M.returnPage or "home");return
@@ -370,20 +729,46 @@ function M.back()
 end
 function M.touch(event,x,y)
     if enhance.isOpen() then return false end
+    if stone and stone.isOpen() then return stone.touch(event,x,y) end
+    if stoneUpgrade and stoneUpgrade.isOpen() then return stoneUpgrade.touch(event,x,y) end
+    if M.intro then return introTouch(event,x,y) end
     if not scroll then return false end
-    if event==CCTOUCHBEGAN or event=="began" then
+    local began=event==CCTOUCHBEGAN or event=="began"
+    local moved=event==CCTOUCHMOVED or event=="moved"
+    local ended=event==CCTOUCHENDED or event=="ended"
+    local button=buttonAt(x,y)
+    if began then
+        if button then
+            M.pressKey=button.key;M.hoverKey=button.key;ui.render();return true
+        end
+        M.hoverKey=nil
         -- Detail controls are outside the draggable text region.
         local minY=M.selected and not M.reading and 190 or 121
         local maxY=M.selected and not M.reading and 390 or 490
         if x>=235 and x<=919 and y>=minY and y<=maxY then
             gesture={x=x,y=y,offset=M.offset,dragged=false};return true
         end
+    elseif M.pressKey then
+        if moved then
+            M.hoverKey=(button and button.key==M.pressKey) and M.pressKey or nil
+            ui.render();return true
+        elseif ended then
+            local key=M.pressKey;M.pressKey=nil;M.hoverKey=nil
+            if button and button.key==key then performButton(button) end
+            ui.render();return true
+        else
+            M.pressKey=nil;M.hoverKey=nil;ui.render();return true
+        end
+    elseif moved and not gesture then
+        local key=button and button.key or nil
+        if key~=M.hoverKey then M.hoverKey=key;ui.render() end
+        return key~=nil
     elseif gesture then
         local g=gesture
-        if event==CCTOUCHMOVED or event=="moved" then
+        if moved then
             if math.abs(y-g.y)>7 or math.abs(x-g.x)>7 then g.dragged=true end
             if g.dragged then setOffset(g.offset+y-g.y) end
-        elseif event==CCTOUCHENDED or event=="ended" then
+        elseif ended then
             gesture=nil
             if not g.dragged and y>=121 and y<=491 and x>=235 and x<=919 and scroll.tap then scroll.tap(x,y,M.offset) end
         else gesture=nil end

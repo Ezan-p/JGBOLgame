@@ -104,7 +104,8 @@ class Game:
         if support is not None:
             result["support"] = support
         if self.catalog.get("inventory"):
-            result["inventory"] = inventory.view(state, self.catalog["inventory"])
+            result["inventory"] = inventory.view(state, self.catalog["inventory"],
+                                                 self.catalog.get("heroes"))
             result["owned"] = inventory.owned(state)
         result["summon"] = summon_rules.view(state, self.catalog)
         for hero in result["heroes"]:
@@ -182,6 +183,8 @@ class Game:
         state.setdefault("souls", {})
         summon_rules.ensure(state, self.catalog, now)
         training.ensure(state, self.catalog.get("inventory", self.catalog))
+        if self.catalog.get("inventory"):
+            inventory.migrate(state)
         elapsed = max(0, (now - state["energy_time"]) // 300)
         if elapsed:
             state["energy"] = min(60, state["energy"] + elapsed)

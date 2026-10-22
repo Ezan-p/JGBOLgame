@@ -7,6 +7,115 @@ from local_game.handbook import atlas, UI_RESOURCES
 
 CATEGORIES = {1: "武器", 2: "防具", 3: "法宝", 4: "法术", 5: "灵石", 6: "道具"}
 EXCLUDED_PROPS = {10, 11, 13, 15}
+# ui/stoneUI.lua g_self.Slots: quality 1..5 -> maximum drilled sockets.
+SOCKET_SLOTS = {1: 1, 2: 1, 3: 1, 4: 2, 5: 3}
+# ui/stoneUI.lua g_self.StoneTypeID: weapon/armour/talisman stones.
+STONE_ITEMS = {1: "i1090", 2: "i1091", 3: "i1092"}
+DRILL_ITEM = "i1093"  # 金刚钻, g_self.DrillMaterial.type_id
+STONE_LEVEL_LIMIT = 10  # ui/stoneUI.lua g_self.Lvlimit
+STONE_MAX_MATERIALS = 250  # stoneUpgradeUI.lua MAX
+INVENTORY_SCHEMA = 4
+
+
+def stone_row(catalog, category, level):
+    """stone_cost_worth.csv row; base is a fraction of the equipped stat."""
+    return catalog.get("stones", {}).get(f"{category}:{int(level or 1)}", {})
+
+
+def stone_base(catalog, category, level):
+    return float(stone_row(catalog, category, level).get("base", 0))
+
+
+def is_stone(entry):
+    return entry.get("key") in STONE_ITEMS.values()
+
+
+def bag_stones(bag):
+    return [e for e in bag.get("entries", [])
+            if is_stone(e) and int(e.get("count", 1)) > 0]
+
+
+def stones_for(bag, equip_uid):
+    """Original owner_id/equip_pos lookup, one stone object per socket."""
+    result = [e for e in bag_stones(bag)
+              if int(e.get("owner_uid", 0) or 0) == equip_uid
+              and 1 <= int(e.get("equip_pos", 0) or 0) <= 3]
+    return sorted(result, key=lambda e: int(e["equip_pos"]))
+
+
+def stone_at(bag, equip_uid, pos):
+    for stone in stones_for(bag, equip_uid):
+        if int(stone["equip_pos"]) == pos:
+            return stone
+    return None
+
+
+def stone_percent(catalog, category, stones):
+    return sum(stone_base(catalog, category, int(s["level"])) for s in stones)
+
+
+def equipment_key_category(key):
+    if key.startswith("i2"):
+        return 1
+    if key.startswith("i3"):
+        return 2
+    if key.startswith("i4"):
+        return 3
+    return 0
+
+
+def new_stone_entry(bag, key, level, prob_compen=0, owner_uid=0, equip_pos=0):
+    entry = dict(uid=bag["next"], key=key, count=1, level=int(level),
+                 prob_compen=int(prob_compen), owner_uid=int(owner_uid),
+                 equip_pos=int(equip_pos), hero=0)
+    bag["next"] += 1
+    bag["entries"].append(entry)
+    return entry
+
+
+def migrate_stones(bag):
+    """Schema v3 -> v4: stacked stacks and socket copies become stone objects."""
+    if int(bag.get("schema", 1) or 1) >= INVENTORY_SCHEMA:
+        return bag
+    entries = bag.setdefault("entries", [])
+    bag["next"] = max(int(bag.get("next", 1) or 1),
+                      max((int(e.get("uid", 0)) for e in entries), default=0) + 1)
+    # Equipment copies written by the previous local model.
+    for equip in list(entries):
+        key = str(equip.get("key", ""))
+        if not key.startswith("i") or is_stone(equip):
+            continue
+        copies = list(equip.pop("stones", []) or [])
+        gem = int(equip.pop("gem", 0) or 0)
+        if gem > 0 and not any(copies):
+            copies = [dict(level=gem, prob_compen=0)]
+        category = equipment_key_category(key)
+        if not category:
+            continue
+        highest = 0
+        for index, stone in enumerate(copies[:3]):
+            if not stone or int(stone.get("level", 0) or 0) <= 0:
+                continue
+            highest = index + 1
+            new_stone_entry(bag, STONE_ITEMS[category], stone["level"],
+                            int(stone.get("prob_compen", 0) or 0),
+                            equip["uid"], index + 1)
+        if highest:
+            equip["drill"] = max(int(equip.get("drill", 0) or 0), highest)
+    # Split any old stack; only the first copy may keep a socket owner.
+    for stone in list(bag_stones(bag)):
+        count = int(stone.get("count", 1) or 1)
+        stone["count"] = 1
+        stone.setdefault("prob_compen", 0)
+        stone["owner_uid"] = int(stone.get("owner_uid", 0) or 0)
+        stone["equip_pos"] = int(stone.get("equip_pos", 0) or 0)
+        stone.pop("gem", None)
+        for _ in range(max(0, count - 1)):
+            new_stone_entry(bag, stone["key"], stone["level"],
+                            stone.get("prob_compen", 0), 0, 0)
+    bag["schema"] = INVENTORY_SCHEMA
+    return bag
+
 
 
 def build_inventory(game_root):
@@ -26,13 +135,44 @@ def build_inventory(game_root):
     items = {}
     dependencies = set(UI_RESOURCES)
     dependencies.update(n for n in r.names() if n.startswith("v2/packageUI/"))
-    dependencies.update(["v2/smithUI/smith1.png", "v2/smithUI/smith2.png",
-                         "v2/stoneUI/putin_btn1.png", "v2/enhanceUI/up1.png", "map/parts.png",
-                         "v2/common/frame1.png", "v2/common/frame2.png",
-                         "v2/common/small_label.png", "v2/common/close1.png",
-                         "v2/enhanceUI/equipEnhance.png", "v2/enhanceUI/mid2.png",
-                         "v2/enhanceUI/mid3.png", "v2/enhanceUI/en_1.png",
-                         "v2/enhanceUI/continue_1.png", "v2/newIntroUI/star_bkg.png"])
+    dependencies.update([
+        "v2/smithUI/smith1.png", "v2/smithUI/smith2.png",
+        "v2/stoneUI/putin_btn1.png", "v2/stoneUI/putin_btn2.png", "v2/enhanceUI/up1.png",
+        "map/parts.png", "v2/common/frame1.png", "v2/common/frame2.png",
+        "v2/common/small_label.png", "v2/common/close1.png",
+        "v2/enhanceUI/equipEnhance.png", "v2/enhanceUI/mid2.png",
+        "v2/enhanceUI/mid3.png", "v2/enhanceUI/en_1.png",
+        "v2/enhanceUI/continue_1.png", "v2/newIntroUI/star_bkg.png",
+        # packageUI.createItemIntroLayer art.
+        "v2/messageUI/frame1.png", "v2/introUI/intro_label.png",
+        "v2/introUI/introBkg.png",
+        "v2/introUI/yuanfen_label.png", "v2/introUI/level.png",
+        "v2/introUI/damage.png", "v2/introUI/defence.png", "v2/introUI/health.png",
+        "v2/introUI/stars.png", "v2/introUI/close1.png", "v2/introUI/close2.png",
+        "v2/newIntroUI/big_bkg.png", "v2/newIntroUI/big_bkg1.png",
+        "v2/newIntroUI/big_bkg2.png", "v2/newIntroUI/head_bkg.png",
+        "v2/newIntroUI/stone_value_bkg.png",
+        # stoneUI sockets and stone upgrade dialog.
+        "v2/stoneUI/bkg.png", "v2/stoneUI/unsee.png", "v2/stoneUI/lock.png",
+        "v2/stoneUI/putin1.png", "v2/stoneUI/putin2.png",
+        "v2/stoneUI/slot1.png", "v2/stoneUI/slot2.png",
+        "v2/stoneUI/takeout1.png", "v2/stoneUI/takeout2.png",
+        "v2/stoneUI/stone_choose1.png", "v2/stoneUI/stone_choose2.png",
+        "v2/stoneUI/stone_upgrade1.png", "v2/stoneUI/stone_upgrade2.png",
+        "v2/stoneUI/title_stone_up.png", "v2/stoneUI/slot_material.png",
+        "v2/common/frame3.png", "v2/charPositionUI/item_bkg.png",
+        "v2/buttons/cancel1.png", "v2/buttons/cancel2.png",
+        "v2/buttons/choose_all1.png", "v2/buttons/choose_all2.png",
+        "v2/buttons/cancel_choose1.png", "v2/buttons/cancel_choose2.png",
+        "v2/multi-selectUI/check_frame.png", "v2/multi-selectUI/check.png",
+        "v2/batchBuyUI/cancel1.png", "v2/batchBuyUI/cancel2.png",
+        "v2/batchBuyUI/ensure1.png", "v2/batchBuyUI/ensure2.png",
+        "v2/packageUI/CHAR_gong.png", "v2/packageUI/CHAR_fang.png",
+        "v2/packageUI/CHAR_ming.png", "v2/common/close2.png",
+        "v2/introUI/close2.png", "v2/enhanceUI/pick1.png", "v2/enhanceUI/pick2.png",
+        "v2/enhanceUI/confirm_en1.png", "v2/enhanceUI/confirm_en2.png",
+        "v2/soulExchangeUI/btn_bkg1.png",
+    ])
     for b in rows("item_base"):
         ident, kind, resource = int(b["type_id"]), int(b["main_type"]), int(b["resource"])
         category = kind if kind <= 3 else 5 if kind == 9 else 6
@@ -67,6 +207,8 @@ def build_inventory(game_root):
             action = "cheer_material"
         if ident == 1015:
             action = "support_material"
+        if ident == 1093:
+            action = "drill"
         if kind == 14 and ident-5000 in names:
             action = "fragment"
         items[f"i{ident}"] = dict(key=f"i{ident}", id=ident, category=category,
@@ -117,30 +259,60 @@ def build_inventory(game_root):
     for n in dependencies:
         r.read(n)
     native_skills = {x["type_id"]: int(x["chushijineng"]) for x in r.rows("csv_config/cortege/cortege_base_0.csv")}
-    return dict(schema=2, combat_rules=combat_rules, items=items, categories=CATEGORIES, native_skills=native_skills,
+    hero_names = {int(x["type_id"]): x["name"] for x in r.rows("csv_config/cortege/cortege_name_0.csv")}
+    item_fates = {}
+    for row in r.rows("csv_config/fate_config.csv"):
+        def field(prefix):
+            return next(v for k, v in row.items() if k.startswith(prefix))
+        if int(field("tartege_type")) != 5:
+            continue
+        hero = int(field("cortege_type"))
+        fate = dict(hero=hero, hero_name=hero_names.get(hero, str(hero)),
+                    name=row["fate_name"], description=row["fate_desc"],
+                    percent=int(row["effect_value"]), effect_field=int(field("effect_field")))
+        for ident in field("target_object_type").split("/"):
+            if ident:
+                item_fates.setdefault(ident, []).append(fate)
+    sources.append(r.source("csv_config/fate_config.csv"))
+    sources.append(r.source("csv_config/cortege/cortege_name_0.csv"))
+    return dict(schema=3, combat_rules=combat_rules, items=items, categories=CATEGORIES, native_skills=native_skills,
         enhance_cost={x["level"]: x for x in costs},
         stones={f'{x["stone_type"]}:{x["level"]}': x for x in stones},
+        fates=item_fates,
         raw_tables=raw_tables, sources=sources, missing_icons=missing, resources=sorted(dependencies))
 
 
 def migrate(state):
-    """Only add empty storage; old balances, team and progression remain intact."""
-    state.setdefault("inventory", {"version": 1, "next": 1, "claimed": False, "entries": []})
-    return state["inventory"]
+    """Add empty storage and migrate stones to one-object-per-stone (schema 4)."""
+    bag = state.setdefault("inventory", {"version": 1, "schema": INVENTORY_SCHEMA,
+                                        "next": 1, "claimed": False, "entries": []})
+    bag.setdefault("entries", [])
+    bag.setdefault("next", 1)
+    migrate_stones(bag)
+    for entry in bag["entries"]:
+        entry.setdefault("count", 1)
+    return bag
 
 
 def grant(state, key, count=1, level=1, catalog=None):
     bag = migrate(state)
     item = catalog["items"][key]
-    stack = item["category"] in (5, 6) and item["action"] not in ("trait","star")
+    if item["category"] == 5:
+        for _ in range(count):
+            new_stone_entry(bag, key, level, 0, 0, 0)
+        return
+    stack = item["category"] == 6 and item["action"] not in ("trait", "star")
     if stack:
         for entry in bag["entries"]:
             if entry["key"] == key and entry["level"] == level:
                 entry["count"] += count
                 return
     for _ in range(1 if stack else count):
-        bag["entries"].append(dict(uid=bag["next"], key=key, count=count if stack else 1,
-                                   level=level, hero=0, gem=0))
+        entry = dict(uid=bag["next"], key=key, count=count if stack else 1,
+                     level=level, hero=0)
+        if item["category"] <= 3:
+            entry["drill"] = 0
+        bag["entries"].append(entry)
         bag["next"] += 1
 
 
@@ -206,6 +378,7 @@ def spell_positions(state, catalog):
 
 def hero_with_inventory(hero, state, catalog):
     hero = copy.deepcopy(hero)
+    bag = state.get("inventory", {})
     bonuses = {"attack": 0, "defense": 0, "hp": 0, "magic": 0}
     percent = {"attack": 0, "defense": 0, "hp": 0, "magic": 0}
     positions = spell_positions(state, catalog)
@@ -246,8 +419,9 @@ def hero_with_inventory(hero, state, catalog):
         elif item["category"] <= 3:
             stat = {1: "attack", 2: "defense", 3: "hp"}[item["category"]]
             bonus = value(item, entry["level"])
-            stone = catalog["stones"].get(f'{item["category"]}:{entry["gem"]}', {})
-            bonuses[stat] += round(bonus * (1 + float(stone.get("base", 0))))
+            percent_bonus = stone_percent(catalog, item["category"],
+                                          stones_for(bag, entry["uid"]))
+            bonuses[stat] += round(bonus * (1 + percent_bonus))
         elif item["category"] == 4:
             position = positions.get(entry['uid'], 0)
             if not position:
@@ -269,18 +443,60 @@ def hero_with_inventory(hero, state, catalog):
     return hero
 
 
-def view(state, catalog):
-    bag = state.get("inventory", {"claimed": False, "entries": []})
+def view(state, catalog, heroes=None):
+    bag = migrate(state)
     entries = []
     positions = spell_positions(state, catalog)
+    equip_by_uid = {e["uid"]: e for e in bag["entries"]
+                    if catalog["items"][e["key"]]["category"] <= 3}
     for entry in bag["entries"]:
         item = catalog["items"][entry["key"]]
         shown_value = value(item, entry["level"])
-        if item["category"] <= 3 and entry["gem"]:
-            stone = catalog["stones"].get(f'{item["category"]}:{entry["gem"]}', {})
-            shown_value = round(shown_value * (1 + float(stone.get("base", 0))))
-        entries.append({**entry, "equip_pos": positions.get(entry["uid"], 0), "value": shown_value,
-                        "upgrade_cost": upgrade_cost(catalog, item, entry["level"])})
+        row = {**entry, "equip_pos": positions.get(entry["uid"], 0), "value": shown_value,
+               "upgrade_cost": upgrade_cost(catalog, item, entry["level"])}
+        if item["category"] <= 3:
+            row["stones_list"] = stones_for(bag, entry["uid"])
+            percent = stone_percent(catalog, item["category"], row["stones_list"])
+            row.update(base_value=shown_value, stone_percent=percent,
+                       stone_bonus=int(shown_value * percent),
+                       stones=[dict(uid=s["uid"], key=s["key"], level=int(s["level"]),
+                                    prob_compen=int(s.get("prob_compen", 0) or 0),
+                                    pos=int(s["equip_pos"]))
+                               for s in row["stones_list"]],
+                       drill=int(entry.get("drill", 0)),
+                       max_sockets=SOCKET_SLOTS.get(int(item["quality"]), 1))
+            del row["stones_list"]
+            shown_value = round(shown_value * (1 + percent))
+            row["value"] = shown_value
+        elif item["category"] == 5:
+            level = int(entry.get("level", 1))
+            config = stone_row(catalog, item["sub_type"], level)
+            owner_uid = int(entry.get("owner_uid", 0) or 0)
+            owner = equip_by_uid.get(owner_uid)
+            owner_name = ""
+            owner_hero_name = ""
+            if owner:
+                owner_item = catalog["items"][owner["key"]]
+                owner_name = owner_item["name"]
+                hero_level = state.get("heroes", {}).get(str(owner.get("hero", 0)))
+                if hero_level:
+                    hero = (heroes or {}).get(str(owner["hero"]))
+                    if hero:
+                        owner_hero_name = hero["name"]
+                        owner_name += "（" + hero["name"] + "）"
+            row.update(percent=stone_base(catalog, item["sub_type"], level),
+                       worth=float(config.get("worth", 0)),
+                       cost=float(config.get("cost", 0)),
+                       silver_cost=int(config.get("silver_cost", 0)),
+                       prob_compen=int(entry.get("prob_compen", 0) or 0),
+                       owner_uid=owner_uid,
+                       socket_pos=int(entry.get("equip_pos", 0) or 0),
+                       socketed=bool(owner_uid),
+                       owner_name=owner_name,
+                       owner_hero_name=owner_hero_name,
+                       max_level=max(int(k.split(":")[1]) for k in catalog["stones"]
+                                     if k.startswith(str(item["sub_type"]) + ":")))
+        entries.append(row)
     return {"claimed": bag["claimed"], "entries": entries}
 
 
@@ -305,11 +521,21 @@ def apply(state, op, args, catalog, error):
         if entry["count"] == 0:
             bag["entries"].remove(entry)
 
+    def player_level():
+        return max(int(state.get("level", 1) or 1), 1 + int(state.get("experience", 0)) // 200)
+
+    def check_stone_open():
+        check(player_level() >= STONE_LEVEL_LIMIT,
+              f"灵石系统需要行者等级达到 {STONE_LEVEL_LIMIT} 级")
+
+    def material_of(key):
+        return next((e for e in bag["entries"] if e["key"] == key and e["count"] > 0), None)
+
     if op == "bag_claim":
         check(not bag["claimed"], "入门包裹已领取")
         for key, count in (("i2006", 1), ("i3002", 1), ("i4002", 1), ("i4012", 1),
                            ("i4013", 1), ("s202", 1), ("s22", 1), ("s42", 1), ("s43", 1), ("i1090", 3),
-                           ("i1091", 3), ("i1092", 3), ("i1020", 3), ("i1024", 2),
+                           ("i1091", 3), ("i1092", 3), ("i1093", 3), ("i1020", 3), ("i1024", 2),
                            ("i10000", 10), ("i7006", 10), ("i1001", 169)):
             grant(state, key, count, catalog=catalog)
         bag["claimed"] = True
@@ -387,29 +613,83 @@ def apply(state, op, args, catalog, error):
         spend(upgrade_cost(catalog, item, entry["level"]))
         entry["level"] += 1
         return "强化成功" if category <= 3 else "法术升级成功"
+    if op == "bag_drill":
+        check(category <= 3, "只有装备可以打孔")
+        check_stone_open()
+        maximum = SOCKET_SLOTS.get(int(item["quality"]), 1)
+        check(entry.get("drill", 0) < maximum, "该装备孔位已全部开启")
+        drill = material_of(DRILL_ITEM)
+        check(drill is not None, "需要1颗金刚钻")
+        consume(drill)
+        entry["drill"] = int(entry.get("drill", 0)) + 1
+        return f"已开启第 {entry['drill']} 个孔位"
     if op == "bag_socket":
         check(category <= 3, "只有装备可以镶嵌")
+        check_stone_open()
+        pos = integer("pos")
+        maximum = SOCKET_SLOTS.get(int(item["quality"]), 1)
+        check(1 <= pos <= maximum, "孔位无效")
+        check(pos <= entry.get("drill", 0), "该孔位尚未打孔")
+        check(stone_at(bag, entry["uid"], pos) is None, "该孔位已有灵石")
         gem = next((e for e in bag["entries"] if e["uid"] == integer("gem")), None)
-        check(gem is not None, "灵石不存在")
+        check(gem is not None and is_stone(gem), "灵石不存在")
+        check(int(gem.get("owner_uid", 0) or 0) == 0, "该灵石已镶嵌")
         gem_item = catalog["items"][gem["key"]]
         check(gem_item["category"] == 5 and gem_item["sub_type"] == category, "灵石类型不匹配")
-        check(not entry["gem"], "请先卸下已镶嵌的灵石")
-        entry["gem"] = gem["level"]
-        consume(gem)
-        return "镶嵌成功，装备属性已提升"
+        gem["owner_uid"] = entry["uid"]
+        gem["equip_pos"] = pos
+        percent = stone_base(catalog, category, int(gem["level"]))
+        return f"镶嵌成功，装备属性提升 {percent * 100:.1f}%"
     if op == "bag_unsocket":
-        check(category <= 3 and entry["gem"] > 0, "没有已镶嵌的灵石")
-        grant(state, f"i{1089+category}", level=entry["gem"], catalog=catalog)
-        entry["gem"] = 0
+        check(category <= 3, "只有装备可以卸石")
+        pos = integer("pos")
+        stone = stone_at(bag, entry["uid"], pos)
+        check(stone is not None, "该孔位没有灵石")
+        stone["owner_uid"] = 0
+        stone["equip_pos"] = 0
         return "灵石已归还包裹"
+    if op == "bag_stone_upgrade":
+        check(category == 5, "只有灵石可以升级")
+        check_stone_open()
+        level = int(entry["level"])
+        config = stone_row(catalog, item["sub_type"], level)
+        max_level = max(int(k.split(":")[1]) for k in catalog["stones"]
+                        if k.startswith(str(item["sub_type"]) + ":"))
+        check(level < max_level, "灵石已达最高等级")
+        materials = args.get("materials")
+        check(type(materials) is list and 1 <= len(materials) <= STONE_MAX_MATERIALS,
+              "请选择1至250颗同类灵石")
+        check(all(type(m) is int for m in materials), "升级材料无效")
+        check(len(set(materials)) == len(materials), "升级材料重复")
+        check(entry["uid"] not in materials, "目标灵石不能作为材料")
+        selected = []
+        for material_uid in materials:
+            material = next((e for e in bag["entries"] if e["uid"] == material_uid), None)
+            check(material is not None and is_stone(material), "升级材料不存在")
+            check(int(material.get("owner_uid", 0) or 0) == 0, "已镶嵌灵石不能作为材料")
+            material_item = catalog["items"][material["key"]]
+            check(material_item["category"] == 5 and material_item["sub_type"] == item["sub_type"],
+                  "升级材料必须是同类灵石")
+            selected.append(material)
+        total_cost = float(config.get("cost", 0))
+        worth = sum(float(stone_row(catalog, item["sub_type"], int(m["level"])).get("worth", 0))
+                    for m in selected)
+        check(total_cost > 0, "灵石升级配置缺失")
+        prob = min(1.0, worth / total_cost + int(entry.get("prob_compen", 0) or 0) / 100)
+        silver_cost = int(config.get("silver_cost", 0))
+        spend(silver_cost)
+        for material in selected:
+            consume(material)
+        bag["rolls"] = int(bag.get("rolls", 0)) + 1
+        roll = ((bag["rolls"] * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff
+        if roll < prob:
+            entry["level"] = level + 1
+            entry["prob_compen"] = 0
+            return f"灵石升级成功（成功率 {prob * 100:.1f}%），当前 {level + 1} 级"
+        return f"灵石升级失败（成功率 {prob * 100:.1f}%），材料已消耗"
     if op == "bag_compose":
         if category == 5:
-            check(entry["level"] < 10, "本地灵石最高10级")
-            check(entry["count"] >= 3, "需要3颗同类同级灵石")
-            level = entry["level"] + 1
-            consume(entry, 3)
-            grant(state, item["key"], level=level, catalog=catalog)
-            return "已合成更高一级灵石"
+            raise error("灵石升级需在灵石详情中消耗同类灵石，不再使用3合1规则")
         check(item["action"] == "fragment", "该物品没有本地合成配方")
         check(entry["count"] >= 10, "需要10个同名装备碎片")
         consume(entry, 10)
@@ -417,7 +697,7 @@ def apply(state, op, args, catalog, error):
         return "已合成对应装备"
     if op == "bag_smelt":
         check(category <= 4, "只能熔炼装备和法术")
-        check(not entry["hero"] and not entry["gem"], "请先卸下装备和灵石")
+        check(not entry["hero"] and not stones_for(bag, entry["uid"]), "请先卸下装备和灵石")
         consume(entry)
         grant(state, "i10000", max(1, item["quality"])*entry["level"], catalog=catalog)
         return "熔炼成功，获得精魄石"

@@ -486,6 +486,7 @@ local function tick(dt)
                 lastError=nil
                 state=response.state
                 if enhance.isOpen() then enhance.afterUpdate(state) end
+                if page=="inventory" and inventory.afterUpdate then inventory.afterUpdate(state) end
                 if page=="inventory" and inventory.equipPending then page="lineup" end
                 notice=response.notice or "已连接本地服务 · 进度已保存"
                 if response.battle then battle=response.battle; page="battle" end

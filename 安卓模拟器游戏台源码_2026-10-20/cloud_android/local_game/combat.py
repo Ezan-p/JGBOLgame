@@ -2,6 +2,22 @@
 import copy
 import random
 
+# Formation slots: 1 后 / 2 前 / 3 上 / 4 下; 5-8 are the paired reserves.
+LANES = {1: 'back', 2: 'front', 3: 'top', 4: 'bottom',
+         5: 'back', 6: 'front', 7: 'top', 8: 'bottom'}
+# Target chain per attacker position. Front(2) and its reserve(6) must both be
+# gone before back(1)/back reserve(5) can be hit; a cleared side lane falls back
+# to the middle, and a cleared middle sweeps the top lane before the bottom lane.
+TARGET_PRIORITY = {
+    'back': (2, 6, 1, 5, 3, 7, 4, 8),
+    'front': (2, 6, 1, 5, 3, 7, 4, 8),
+    'top': (3, 7, 2, 6, 1, 5, 4, 8),
+    'bottom': (4, 8, 2, 6, 1, 5, 3, 7),
+}
+# Attacker acts 后→前→上→下, defender acts 前→后→下→上, paired alternately.
+ACTOR_ORDER = (1, 2, 3, 4)
+DEFENDER_ORDER = (2, 1, 4, 3)
+
 
 def spell_value(skill, level=1):
     row = {k.split('(')[0]: v for k, v in skill.get('original', {}).items()}
@@ -72,6 +88,37 @@ class Battle:
 
     def units(self): return self.teams[0]+self.teams[1]
     def living(self, side): return [u for u in self.teams[side] if u['in_field'] and u['hp']>0]
+    def position(self, u):
+        """1 后 / 2 前 / 3 上 / 4 下; reserves 5-8 inherit their paired position."""
+        return (u['slot']-1)%4+1
+    def lane(self, u): return LANES[u['slot']]
+    def action_order(self):
+        """Attacker 后→前→上→下 interleaved with defender 前→后→下→上.
+
+        The list is fixed at round start: a reserve that fills a slot during the
+        round joins the order from the next round.
+        """
+        sequences={self.first_side:ACTOR_ORDER,1-self.first_side:DEFENDER_ORDER}
+        living={side:{self.position(u):u for u in self.living(side)} for side in (0,1)}
+        order=[]
+        for i in range(4):
+            for side in (self.first_side,1-self.first_side):
+                u=living[side].get(sequences[side][i])
+                if u:order.append(u)
+        return order
+    def select_targets(self, u, multi=False):
+        """Walk the explicit slot chain: front(2,6) → back(1,5) → top → bottom.
+
+        No lowest-slot tie-break: each step names one exact enemy slot, so the
+        back position can only be hit after the front position and its reserve
+        are both gone.
+        """
+        targets=self.living(1-u['side'])
+        if multi:return targets
+        by_slot={t['slot']:t for t in targets}
+        for slot in TARGET_PRIORITY[self.lane(u)]:
+            if slot in by_slot:return [by_slot[slot]]
+        return targets[:1]
     def trait(self,u,family): return u['_traits'].get(family)
     def params(self,u,family):
         t=self.trait(u,family);return t['params'] if t else []
@@ -305,16 +352,13 @@ class Battle:
                     t['hp']+=value;hits.append(dict(target=t['uid'],damage=-value,hp=t['hp'],max_hp=t['max_hp'],shield=t['shield']))
                 self.emit(u,spec.get('name','治疗'),kind='heal',hits=hits,skill_id=6,skill=True);return
             s,spec=dict(id=1,level=1,position=0),{}
-        targets=self.living(1-u['side'])
-        if not spec.get('multi'):targets=targets[:1]
+        targets=self.select_targets(u,bool(spec.get('multi')))
         self.strike(u,targets,s,spec,roll=round(roll,6),chances=chances)
     def run(self):
         for self.turn in range(1,31):
             self.wait_for_entrance();self.round_start();self.wait_for_entrance()
-            # Interleaved positions avoid granting the entire opening round to one side.
-            one,two=self.living(self.first_side),self.living(1-self.first_side)
-            order=[u for i in range(max(len(one),len(two))) for team in (one,two) for u in team[i:i+1]]
-            for u in order:
+            # Fixed formation order keeps the opening round from being a full team sweep.
+            for u in self.action_order():
                 self.enter()
                 if u['hp']>0 and self.living(1-u['side']):self.act(u);self.step+=1
             self.wait_for_entrance()

@@ -7,6 +7,10 @@ local E={{.9,.2,1200},{.65,.2,1200},{.77,.35,1100},{.78,.05,1300}}
 local root,world,fx,overlay,hud,ui,report,actors,teamBars,controls
 local time,index,current,clock,finished,paused,muted=0,0,nil,0,false,false,false
 local transient,soundQueue,effects={},{},{}
+-- 1x / 2x speeds follow the original fightUI speed_1 / speed_2 buttons.
+local SPEED_STEPS={1,2}
+local speedIndex,speed=1,1
+local speedBkg,speedIcon1,speedIcon2,speedLabel
 local function clamp(x,a,b) return math.max(a,math.min(b,x)) end
 local function mix(a,b,t) return a+(b-a)*clamp(t,0,1) end
 local function node(parent,z)
@@ -130,6 +134,17 @@ local function control(title,x,y,w,action)
     ui.hit(x,y,w,30,action,true,n)
     return n
 end
+local function refreshSpeed()
+    if speedBkg then speedBkg:setVisible(speed>1) end
+    if speedIcon1 then speedIcon1:setVisible(speed<=1) end
+    if speedIcon2 then speedIcon2:setVisible(speed>1) end
+    if speedLabel then speedLabel:setString('×'..speed) end
+end
+local function cycleSpeed()
+    speedIndex=speedIndex%#SPEED_STEPS+1
+    speed=SPEED_STEPS[speedIndex]
+    refreshSpeed()
+end
 local function clearEffects()
     fx:removeAllChildrenWithCleanup(true);overlay:removeAllChildrenWithCleanup(true)
     transient={};soundQueue={};current=nil;stopEffects()
@@ -211,7 +226,15 @@ function M.show(context,data)
         if paused then CCDirector:sharedDirector():pause() else CCDirector:sharedDirector():resume() end
         pauseLabel:setString(paused and '继续' or '暂停')
     end)
-    control('跳过',866,8,76,finish)
+    local skipButton=sprite('v2/skip_fight.png',controls,480,30,.5,1)
+    if skipButton then ui.hit(405,8,150,44,finish,true,skipButton)
+    else control('跳过战斗',420,8,120,finish) end
+    speedBkg=sprite('v2/speed_bkg.png',controls,886,32,.55,1)
+    speedIcon1=sprite('v2/speed_1.png',controls,886,32,.5,2)
+    speedIcon2=sprite('v2/speed_2.png',controls,886,32,.5,2)
+    speedLabel=label('×'..speed,controls,921,32,17,{255,225,177},2)
+    ui.hit(856,10,88,44,cycleSpeed,true,speedIcon2 or speedLabel)
+    refreshSpeed()
     local audioLabel
     audioLabel=control(muted and '音效关' or '音效开',99,8,88,function()
         muted=not muted;audioLabel:setString(muted and '音效关' or '音效开')
@@ -353,6 +376,7 @@ local function playEvent(dt)
 end
 function M.update(dt)
     if not M.active or finished or paused then return end
+    dt=dt*speed
     clock=clock+dt
     for i=#soundQueue,1,-1 do
         if clock>=soundQueue[i].at then sound(soundQueue[i].file);table.remove(soundQueue,i) end

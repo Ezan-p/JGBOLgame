@@ -33,7 +33,7 @@ def build_battle(game_root):
         'map/special/pty.png', 'blood_5.ccbi', 'blood_5_inv.ccbi', 'splash_eye.ccbi',
         'splash_light.ccbi', '127_2.ccbi', '128_2.ccbi', '130_2.ccbi', '105_1.ccbi', 'v2/enterSence.png', '123_2_1.ccbi', '204_1.ccbi', '204_2.ccbi', '106_1.ccbi',
         'number/all_number_white.fnt', 'number/all_number_white.png', 'music/fight.mp3',
-        'v2/skip_fight.png', 'v2/speed_1.png', 'v2/speed_2.png',
+        'v2/skip_fight.png', 'v2/speed_1.png', 'v2/speed_2.png', 'v2/speed_bkg.png',
     }
     dependencies.update(n for n in names if n.startswith('v2/fightUI/'))
     status_effects={

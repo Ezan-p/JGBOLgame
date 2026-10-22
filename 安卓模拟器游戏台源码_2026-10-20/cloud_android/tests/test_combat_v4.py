@@ -54,6 +54,63 @@ class CombatV4Tests(unittest.TestCase):
         self.assertGreater(damage_formula(100,100,1000,0,150,True),damage_formula(100,100,100,0,150,True))
         self.assertLess(damage_formula(100,100,1000,1000,150,True),damage_formula(100,100,1000,0,150,True))
 
+    def test_formation_action_order_attacker_back_front_top_bottom(self):
+        allies=[self.unit(hp=1000000,attack=5,lineup_slot=s) for s in (1,2,3,4)]
+        enemies=[self.unit(hp=1000000,attack=5,lineup_slot=s) for s in (1,2,3,4)]
+        report=self.run_report(allies,enemies)
+        first=[e['actor'] for e in report['events'] if e['turn']==1 and e['kind'] in ('attack','skill')]
+        self.assertEqual(first,['0-0','1-1','0-1','1-0','0-2','1-3','0-3','1-2'])
+        mirrored=resolve(allies,enemies,self.c['skills'],seed=1,rules=self.rules,first_side=1)
+        first=[e['actor'] for e in mirrored['events'] if e['turn']==1 and e['kind'] in ('attack','skill')]
+        self.assertEqual(first,['1-0','0-1','1-1','0-0','1-2','0-3','1-3','0-2'])
+
+    def test_lanes_target_front_then_back_then_top_before_bottom(self):
+        allies=[self.unit(hp=1000000,attack=100,lineup_slot=s) for s in (1,2,3,4)]
+        enemies=[self.unit(hp=1000000,attack=1,lineup_slot=s) for s in (1,2,3,4)]
+        b=self.battle(allies,enemies)
+        by_slot={u['slot']:u for u in b.teams[0]}
+        back,front,top,bottom=(by_slot[s] for s in (1,2,3,4))
+        enemy={u['slot']:u for u in b.teams[1]}
+        self.assertEqual([b.lane(u) for u in (back,front,top,bottom)],['back','front','top','bottom'])
+        self.assertEqual([b.position(u) for u in (back,front,top,bottom)],[1,2,3,4])
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[2])
+        self.assertEqual([t['slot'] for t in b.select_targets(front)],[2])
+        self.assertEqual([t['slot'] for t in b.select_targets(top)],[3])
+        self.assertEqual([t['slot'] for t in b.select_targets(bottom)],[4])
+        enemy[3]['hp']=0
+        self.assertEqual([t['slot'] for t in b.select_targets(top)],[2])
+        enemy[1]['hp']=enemy[2]['hp']=0
+        self.assertEqual([t['slot'] for t in b.select_targets(top)],[4])
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[4])
+        enemy[3]['hp']=enemy[4]['hp']=100
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[3])
+        enemy[3]['hp']=0
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[4])
+
+    def test_front_and_its_reserve_shield_back_until_both_die(self):
+        allies=[self.unit(hp=1000000,attack=100,lineup_slot=s) for s in (1,2,3,4)]
+        enemies=[self.unit(hp=1000000,attack=1,lineup_slot=s) for s in range(1,7)]
+        b=self.battle(allies,enemies)
+        enemy={u['slot']:u for u in b.teams[1]}
+        back=next(u for u in b.teams[0] if u['slot']==1)
+        self.assertFalse(enemy[6]['in_field']);self.assertFalse(enemy[5]['in_field'])
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[2])
+        enemy[2]['hp']=0;enemy[2]['_dead']=True;b.enter()
+        self.assertTrue(enemy[6]['in_field'])
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[6])
+        enemy[6]['hp']=0;enemy[6]['_dead']=True;b.enter()
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[1])
+        enemy[1]['hp']=0;enemy[1]['_dead']=True;b.enter()
+        self.assertTrue(enemy[5]['in_field'])
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[5])
+        enemy[5]['hp']=0;enemy[5]['_dead']=True;b.enter()
+        self.assertEqual([t['slot'] for t in b.select_targets(back)],[3])
+
+    def test_group_spell_still_hits_every_living_enemy(self):
+        caster=self.unit(hp=1000000,attack=10,lineup_slot=1)
+        b=self.battle([caster],[self.unit(hp=1000000,lineup_slot=s) for s in (1,2,3,4)])
+        self.assertEqual(len(b.select_targets(b.teams[0][0],multi=True)),4)
+
     def test_original_parameters_and_all_38_traits_are_live(self):
         self.assertEqual(len(self.rules['traits']),38)
         self.assertEqual(self.rules['traits']['10216']['levels'][1][-1],.125)

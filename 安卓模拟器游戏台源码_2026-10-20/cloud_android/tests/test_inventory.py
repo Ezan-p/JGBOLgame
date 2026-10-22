@@ -43,6 +43,9 @@ class InventoryTests(unittest.TestCase):
     def entry(self, key):
         return next(e for e in self.raw()["inventory"]["entries"] if e["key"] == key)
 
+    def entries(self, key):
+        return [e for e in self.raw()["inventory"]["entries"] if e["key"] == key]
+
     def test_extraction_counts_icons_and_reference_examples(self):
         items = self.inventory["items"]
         self.assertEqual(Counter(x["category"] for x in items.values()),
@@ -56,6 +59,9 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(items["i10301"]["icon"]["file"], "v2/wakeUI/icon/301.png")
         self.assertEqual(items["i1142"]["icon"]["file"], "v2/destinyUI/card.png")
         self.assertEqual(items["i1094"]["icon"]["file"], "v2/CardUI/card_bkg.png")
+        self.assertEqual(len(self.inventory["fates"]), 98)
+        self.assertEqual(self.inventory["fates"]["4005"][0]["hero_name"], "金吒")
+        self.assertEqual(self.inventory["fates"]["4005"][0]["description"], "装备乾坤圈，攻击提升15%")
 
     def test_original_equip_enhance_cost_by_level_and_star(self):
         from local_game.inventory import upgrade_cost
@@ -91,16 +97,30 @@ class InventoryTests(unittest.TestCase):
         resumed = Game(self.game.db, self.catalog)
         self.assertEqual(resumed.view(after)["inventory"], results[0]["state"]["inventory"])
 
+    def unlock_stones(self, silver=None):
+        state = self.raw()
+        state["experience"] = 1800
+        if silver is not None:
+            state["silver"] = silver
+        self.save(state)
+
     def test_equipment_upgrade_socket_combat_and_unload(self):
         self.call("bag_claim")
+        self.unlock_stones()
         weapon = self.entry("i2006")
         gem = self.entry("i1090")
         base = self.game.hero(5022, 1)
+        self.call("bag_drill", uid=weapon["uid"])
         state = self.call("bag_equip", uid=weapon["uid"], hero=5022)["state"]
         equipped = next(h for h in state["heroes"] if h["id"] == 5022)
         self.assertGreater(equipped["attack"], base["attack"])
         self.call("bag_upgrade", uid=weapon["uid"])
-        self.call("bag_socket", uid=weapon["uid"], gem=gem["uid"])
+        self.call("bag_socket", uid=weapon["uid"], gem=gem["uid"], pos=1)
+        socketed = next(e for e in self.entries("i1090") if e["uid"] == gem["uid"])
+        self.assertEqual((socketed["owner_uid"], socketed["equip_pos"]), (weapon["uid"], 1))
+        socketed_view = next(e for e in self.game.view(self.raw())["inventory"]["entries"]
+                             if e["uid"] == gem["uid"])
+        self.assertEqual(socketed_view["owner_hero_name"], self.catalog["heroes"]["5022"]["name"])
         upgraded = self.game.hero(5022, 1, self.raw())
         self.assertGreater(upgraded["attack"], equipped["attack"])
         shown = next(e for e in self.game.view(self.raw())["inventory"]["entries"] if e["uid"] == weapon["uid"])
@@ -108,8 +128,9 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(upgraded["attack"], round((raw_attack+shown["value"])*1.065))
         report = self.call("battle", stage=1)["battle"]
         self.assertEqual(report["units"][0]["attack"], upgraded["attack"])
-        self.call("bag_unsocket", uid=weapon["uid"])
-        self.assertEqual(self.entry("i1090")["count"], 3)
+        self.call("bag_unsocket", uid=weapon["uid"], pos=1)
+        gem = next(e for e in self.entries("i1090") if e["uid"] == gem["uid"])
+        self.assertEqual((gem["owner_uid"], gem["equip_pos"]), (0, 0))
         self.call("bag_equip", uid=weapon["uid"], hero=0)
         self.assertEqual(self.game.hero(5022, 1, self.raw())["attack"], base["attack"])
 
@@ -165,11 +186,26 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(self.raw(),s)
         self.assertEqual(next(h for h in v["heroes"] if h["id"]==5022)["skill_id"],self.catalog["heroes"]["5022"]["skill_id"])
 
-    def test_compose_use_smelt_and_purchase(self):
+    def test_stone_upgrade_materials_cost_and_atomic_compose(self):
         self.call("bag_claim")
-        gem = self.entry("i1090")
-        self.call("bag_compose", uid=gem["uid"])
-        self.assertEqual((self.entry("i1090")["count"], self.entry("i1090")["level"]), (1, 2))
+        self.unlock_stones(silver=50000)
+        stones = self.entries("i1090")
+        self.assertEqual(len(stones), 3)
+        target, materials = stones[0], stones[1:3]
+        state = self.raw()
+        for e in state["inventory"]["entries"]:
+            if e["uid"] == target["uid"]:
+                e["prob_compen"] = 100
+        self.save(state)
+        before_silver = self.raw()["silver"]
+        self.call("bag_stone_upgrade", uid=target["uid"],
+                  materials=[m["uid"] for m in materials])
+        upgraded = next(e for e in self.entries("i1090") if e["uid"] == target["uid"])
+        self.assertEqual(upgraded["level"], 2)
+        self.assertEqual(len(self.entries("i1090")), 1)
+        self.assertEqual(self.raw()["silver"], before_silver - 10000)
+        with self.assertRaises(GameError):
+            self.call("bag_compose", uid=upgraded["uid"])
         self.call("bag_compose", uid=self.entry("i7006")["uid"])
         self.assertEqual(len([e for e in self.raw()["inventory"]["entries"] if e["key"] == "i2006"]), 2)
         before = self.raw()
@@ -189,9 +225,106 @@ class InventoryTests(unittest.TestCase):
         self.call("bag_use", uid=self.entry("i10000")["uid"])
         self.assertEqual(self.raw()["silver"], old+20)
 
+    def test_original_three_socket_numbers_and_stone_gate(self):
+        from local_game.inventory import SOCKET_SLOTS, stone_base
+        self.assertEqual(SOCKET_SLOTS, {1: 1, 2: 1, 3: 1, 4: 2, 5: 3})
+        self.assertEqual(stone_base(self.inventory, 3, 5), .049)
+        self.assertEqual(stone_base(self.inventory, 3, 4), .036)
+        self.call("bag_claim")
+        state = self.raw()
+        grant(state, "i4005", catalog=self.inventory)
+        self.save(state)
+        state = self.raw()
+        equip = next(e for e in state["inventory"]["entries"] if e["key"] == "i4005")
+        equip.update(level=69, drill=3)
+        next_uid = state["inventory"]["next"]
+        for pos, level in ((1, 5), (2, 5), (3, 4)):
+            state["inventory"]["entries"].append(dict(
+                uid=next_uid, key="i1092", count=1, level=level, prob_compen=0,
+                owner_uid=equip["uid"], equip_pos=pos, hero=0))
+            next_uid += 1
+        state["inventory"]["next"] = next_uid
+        self.save(state)
+        shown = next(e for e in self.game.view(self.raw())["inventory"]["entries"] if e["key"] == "i4005")
+        self.assertEqual(shown["base_value"], 3011)
+        self.assertEqual(shown["stone_percent"], .134)
+        self.assertEqual(shown["stone_bonus"], 403)
+        self.assertEqual(shown["value"], 3414)
+        self.assertEqual([s["pos"] for s in shown["stones"]], [1, 2, 3])
+        self.assertEqual([s["level"] for s in shown["stones"]], [5, 5, 4])
+        weapon = self.entry("i2006")
+        before = self.raw()
+        with self.assertRaises(GameError):
+            self.call("bag_drill", uid=weapon["uid"])
+        self.assertEqual(self.raw(), before)
+
+    def test_old_single_socket_save_migrates_to_first_socket(self):
+        self.call("bag_claim")
+        state = self.raw()
+        state["inventory"]["schema"] = 3
+        weapon = next(e for e in state["inventory"]["entries"] if e["key"] == "i2006")
+        weapon.pop("stones", None); weapon.pop("drill", None); weapon["gem"] = 5
+        self.save(state)
+        view = self.call("state")["state"]
+        shown = next(e for e in view["inventory"]["entries"]
+                     if e["uid"] == weapon["uid"])
+        self.assertEqual(shown["drill"], 1)
+        self.assertEqual([(s["pos"], s["level"]) for s in shown["stones"]], [(1, 5)])
+        self.assertEqual(shown["stone_percent"], .049)
+        owned = [e for e in view["inventory"]["entries"]
+                 if e["key"] == "i1090" and e["owner_uid"] == weapon["uid"]]
+        self.assertEqual(len(owned), 1)
+        self.assertEqual(owned[0]["socket_pos"], 1)
+
+    def test_stacked_stones_split_and_socketed_stone_upgrade(self):
+        self.call("bag_claim")
+        self.unlock_stones(silver=90000)
+        state = self.raw()
+        state["inventory"]["schema"] = 3
+        stack = next(e for e in state["inventory"]["entries"] if e["key"] == "i1091")
+        stack["count"] = 4
+        weapon = next(e for e in state["inventory"]["entries"] if e["key"] == "i3002")
+        weapon["drill"] = 1
+        self.save(state)
+        view = self.call("state")["state"]
+        stones = [e for e in view["inventory"]["entries"] if e["key"] == "i1091"]
+        self.assertEqual(len(stones), 6)
+        self.assertTrue(all(e["count"] == 1 for e in stones))
+        target, materials = stones[0], stones[1:3]
+        weapon = next(e for e in view["inventory"]["entries"] if e["uid"] == weapon["uid"])
+        self.call("bag_socket", uid=weapon["uid"], gem=target["uid"], pos=1)
+        state = self.raw()
+        for e in state["inventory"]["entries"]:
+            if e["uid"] == target["uid"]:
+                e["prob_compen"] = 100
+        self.save(state)
+        self.call("bag_stone_upgrade", uid=target["uid"],
+                  materials=[m["uid"] for m in materials])
+        view = self.call("state")["state"]
+        socketed = next(e for e in view["inventory"]["entries"] if e["uid"] == target["uid"])
+        self.assertEqual(socketed["level"], 2)
+        self.assertEqual((socketed["owner_uid"], socketed["socket_pos"]), (weapon["uid"], 1))
+        equipped = next(e for e in view["inventory"]["entries"] if e["uid"] == weapon["uid"])
+        self.assertEqual(equipped["stones"][0]["level"], 2)
+
+    def test_socketed_stone_cannot_be_upgrade_material(self):
+        self.call("bag_claim")
+        self.unlock_stones(silver=90000)
+        weapon = self.entry("i2006")
+        stones = self.entries("i1090")
+        self.call("bag_drill", uid=weapon["uid"])
+        self.call("bag_socket", uid=weapon["uid"], gem=stones[0]["uid"], pos=1)
+        before = self.raw()
+        with self.assertRaises(GameError):
+            self.call("bag_stone_upgrade", uid=stones[1]["uid"],
+                      materials=[stones[0]["uid"]])
+        self.assertEqual(self.raw(), before)
+
     def test_rejected_mutations_are_atomic_and_cross_player_safe(self):
         self.call("bag_claim")
+        self.unlock_stones()
         weapon, gem = self.entry("i2006"), self.entry("i1091")
+        self.call("bag_drill", uid=weapon["uid"])
         for op, args in [
             ("bag_socket", dict(uid=weapon["uid"], gem=gem["uid"])),
             ("bag_equip", dict(uid=weapon["uid"], hero=999999)),

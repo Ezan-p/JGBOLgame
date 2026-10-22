@@ -75,7 +75,7 @@ class BattleTests(unittest.TestCase):
         def unit(slot, hp, attack=1):
             return dict(self.catalog['heroes']['5022'], skill_id=1, lineup_slot=slot,
                         hp=hp, attack=attack, defense=0)
-        report = resolve([unit(1, 10), unit(2, 1000), unit(5, 1000), unit(6, 1000)],
+        report = resolve([unit(1, 1000), unit(2, 10), unit(5, 1000), unit(6, 1000)],
                          [unit(1, 100000, 30)], self.catalog['skills'])
         field = {u['uid'] for u in report['units'] if u['in_field']}
         deaths = set()
@@ -90,8 +90,8 @@ class BattleTests(unittest.TestCase):
                     self.assertIn(h['target'], field-deaths)
                     if not h['hp']: deaths.add(h['target'])
         entries = [e['actor'] for e in report['events'] if e['kind']=='enter']
-        self.assertIn('0-4', entries)
-        self.assertNotIn('0-5', entries)
+        self.assertIn('0-5', entries)
+        self.assertNotIn('0-4', entries)
 
     def test_group_kill_enters_all_four_reserves_before_next_attack(self):
         skills = copy.deepcopy(self.catalog['skills'])
