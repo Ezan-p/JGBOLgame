@@ -138,6 +138,7 @@ def build_inventory(game_root):
     dependencies.update([
         "v2/smithUI/smith1.png", "v2/smithUI/smith2.png",
         "v2/stoneUI/putin_btn1.png", "v2/stoneUI/putin_btn2.png", "v2/enhanceUI/up1.png",
+        "v2/enhanceUI/up_2.png",
         "map/parts.png", "v2/common/frame1.png", "v2/common/frame2.png",
         "v2/common/small_label.png", "v2/common/close1.png",
         "v2/enhanceUI/equipEnhance.png", "v2/enhanceUI/mid2.png",
@@ -149,6 +150,8 @@ def build_inventory(game_root):
         "v2/introUI/yuanfen_label.png", "v2/introUI/level.png",
         "v2/introUI/damage.png", "v2/introUI/defence.png", "v2/introUI/health.png",
         "v2/introUI/stars.png", "v2/introUI/close1.png", "v2/introUI/close2.png",
+        "v2/introUI/skill_strong.png", "v2/newIntroUI/upgrade1.png",
+        "v2/newIntroUI/upgrade2.png",
         "v2/newIntroUI/big_bkg.png", "v2/newIntroUI/big_bkg1.png",
         "v2/newIntroUI/big_bkg2.png", "v2/newIntroUI/head_bkg.png",
         "v2/newIntroUI/stone_value_bkg.png",
@@ -264,7 +267,9 @@ def build_inventory(game_root):
     for row in r.rows("csv_config/fate_config.csv"):
         def field(prefix):
             return next(v for k, v in row.items() if k.startswith(prefix))
-        if int(field("tartege_type")) != 5:
+        # packageUI.createItemIntroLayer reads the same item fate table for
+        # equipment (5) and spells (6); both are keyed by target_object_type.
+        if int(field("tartege_type")) not in (5, 6):
             continue
         hero = int(field("cortege_type"))
         fate = dict(hero=hero, hero_name=hero_names.get(hero, str(hero)),

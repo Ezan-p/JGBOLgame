@@ -131,7 +131,7 @@ node --check web/app.js
 .runtime/venv/bin/python scripts/check_browser.py
 ```
 
-浏览器检查需要 Chrome 和已启动的网页服务，生成 `.runtime/browser-check.json` / `.png` 和手机布局截图。当前 115 项自动测试通过，覆盖本地存档、重复结算保护、十关推进、全部角色招募、召唤池与免费/付费结算、原版魂魄转化、幻魂与五法界魂转化、图鉴数据与素材。此前实机完成战斗、培养与招募，正式安装包及本地服务重启后进度保留；浏览器画面传输正常，无 JavaScript 错误、无移动端横向溢出。本地版初始验收记录在 `.runtime/local_game/validation.json`，神仙模块验收在 `.runtime/local_game/handbook-validation/`，原渠道版的镜像验证截图和日志另存于 `.runtime/compat32/game-screen.png`、`game-logcat.txt`。这些验证不代表原服功能已完整恢复。原 Noctilucent MOD 文件保留作历史资料，未接入金箍棒网页。
+浏览器检查需要 Chrome 和已启动的网页服务，生成 `.runtime/browser-check.json` / `.png` 和手机布局截图。当前 123 项自动测试通过，覆盖本地存档、重复结算保护、十关推进、全部角色招募、召唤池与免费/付费结算、原版魂魄转化、幻魂与五法界魂转化、图鉴数据与素材。此前实机完成战斗、培养与招募，正式安装包及本地服务重启后进度保留；浏览器画面传输正常，无 JavaScript 错误、无移动端横向溢出。本地版初始验收记录在 `.runtime/local_game/validation.json`，神仙模块验收在 `.runtime/local_game/handbook-validation/`，原渠道版的镜像验证截图和日志另存于 `.runtime/compat32/game-screen.png`、`game-logcat.txt`。这些验证不代表原服功能已完整恢复。原 Noctilucent MOD 文件保留作历史资料，未接入金箍棒网页。
 
 - 开机慢：ARM32 使用软件仿真；查看 `doctor` 的 `booted`，不要删除数据或反复重装 APK。
 - 引擎或镜像缺失：运行 `setup_compat32.py`，不要只改 `abi.type`。

@@ -2,6 +2,7 @@
 local data=require('local_lineup_data')
 local heroDetail=require('local_hero_detail')
 local enhance=require('local_enhance')
+local inventoryUI=require('local_inventory')
 local M={mode='main',slot=1,offset=0}
 local inventoryData=require("local_inventory_data")
 local rulesOK,combatRules=pcall(require,"local_combat_rules")
@@ -365,9 +366,16 @@ local function spellIntro()
         end
     end,canAdvance and 67.5 or 60)
     popupButton(cx,P..'detail1.png',cy-57,function()
-        local uid=equip and equip.uid
         M.spellIntro=nil;M.info=nil
-        if uid then ui.openBag(4,uid) else ui.openBag(4,nil,nil,nil,'s'..ident) end
+        local key='s'..ident
+        local opts={tab=4,key=key,uid=equip and equip.uid or nil}
+        if equip then
+            opts.entry=equip
+        else
+            opts.entry={key=key,level=level,count=1,hero=h.id}
+        end
+        inventoryUI.openDetailOverlay(ui,state,opts)
+        ui.render()
     end)
     if pos>1 then
         popupButton(cx,P..'change1.png',cy-114,function()
@@ -407,7 +415,8 @@ local function equipIntro()
     end)
     popupButton(cx,P..'detail1.png',cy-57,function()
         M.equipIntro=nil;M.info=nil
-        ui.openBag(pos,equip.uid)
+        inventoryUI.openDetailOverlay(ui,state,{tab=pos,uid=equip.uid})
+        ui.render()
     end)
     popupButton(cx,P..'change1.png',cy-114,function()
         M.equipIntro=nil;M.info=nil
@@ -597,11 +606,13 @@ function M.draw(context,player)
         hit(480,150,180,48,function() M.info=nil;ui.render() end,n)
         if M.info[3] then control('确认',680,150,150,function() local action=M.info[3];M.info=nil;action() end) end
     end
+    if inventoryUI.overlayOpen() then inventoryUI.drawOverlay(ui,state) end
     if enhance.isOpen() then enhance.draw(ui,state) end
 end
-function M.open() M.mode='main';M.info=nil;M.pick=nil;M.offset=0;M.detailHero=nil;M.spellIntro=nil;M.equipIntro=nil;enhance.close();heroDetail.reset() end
+function M.open() M.mode='main';M.info=nil;M.pick=nil;M.offset=0;M.detailHero=nil;M.spellIntro=nil;M.equipIntro=nil;inventoryUI.closeOverlay();enhance.close();heroDetail.reset() end
 function M.back()
     if enhance.isOpen() then enhance.close();ui.render();return end
+    if inventoryUI.overlayOpen() then inventoryUI.backOverlay();return end
     if M.spellIntro then M.spellIntro=nil
     elseif M.equipIntro then M.equipIntro=nil
     elseif heroDetail.closeInfo() then ui.render()
@@ -617,7 +628,9 @@ local function spot(x,y)
 end
 function M.touch(event,x,y)
     if M.mode=='detail' then return heroDetail.touch(event,x,y) end
-    if M.info or M.spellIntro or M.equipIntro or enhance.isOpen() then return false end
+    if enhance.isOpen() then return false end
+    if inventoryUI.overlayOpen() then return inventoryUI.touchOverlay(event,x,y) end
+    if M.info or M.spellIntro or M.equipIntro then return false end
     local began=event==CCTOUCHBEGAN or event=='began'
     local moved=event==CCTOUCHMOVED or event=='moved'
     local ended=event==CCTOUCHENDED or event=='ended'

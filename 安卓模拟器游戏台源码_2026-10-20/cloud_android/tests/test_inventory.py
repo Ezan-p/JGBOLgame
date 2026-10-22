@@ -59,9 +59,15 @@ class InventoryTests(unittest.TestCase):
         self.assertEqual(items["i10301"]["icon"]["file"], "v2/wakeUI/icon/301.png")
         self.assertEqual(items["i1142"]["icon"]["file"], "v2/destinyUI/card.png")
         self.assertEqual(items["i1094"]["icon"]["file"], "v2/CardUI/card_bkg.png")
-        self.assertEqual(len(self.inventory["fates"]), 98)
+        self.assertEqual(len(self.inventory["fates"]), 132)
         self.assertEqual(self.inventory["fates"]["4005"][0]["hero_name"], "金吒")
         self.assertEqual(self.inventory["fates"]["4005"][0]["description"], "装备乾坤圈，攻击提升15%")
+        # fate_config tartege_type=6 is the spell fate table used by the
+        # original 法术详情 page (掌心雷 -> 羊力大仙 / 雷公).
+        self.assertEqual([f["hero_name"] for f in self.inventory["fates"]["223"]],
+                         ["羊力大仙", "雷公"])
+        self.assertEqual(self.inventory["fates"]["223"][0]["effect_field"], 3)
+        self.assertEqual(self.inventory["fates"]["223"][0]["percent"], 15)
 
     def test_original_equip_enhance_cost_by_level_and_star(self):
         from local_game.inventory import upgrade_cost

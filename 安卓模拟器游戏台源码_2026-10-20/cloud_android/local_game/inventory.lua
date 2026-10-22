@@ -6,7 +6,8 @@ if not stoneOK then CCLuaLog("LOCAL_STONE_LOAD_ERROR: "..tostring(stone));stone=
 local upgradeOK,stoneUpgrade=pcall(require,"local_stone_upgrade")
 if not upgradeOK then CCLuaLog("LOCAL_STONE_UPGRADE_LOAD_ERROR: "..tostring(stoneUpgrade));stoneUpgrade=nil end
 local M={tab=1,offset=0,page=1,catalog=false,intro=nil,introScroll=nil,socketPos=1,alert=nil,
-    buttons={},hoverKey=nil,pressKey=nil}
+    spellIntro=nil,spellScroll=nil,spellHits={},buttons={},hoverKey=nil,pressKey=nil,
+    overlayFrom=nil,overlayEntry=nil}
 local VIEW_X,VIEW_Y=235,121
 local ui,state,root,scroll,gesture
 local GOLD={255,224,164}
@@ -146,6 +147,8 @@ end
 local function reset()
     M.selected=nil; M.choice=nil; M.confirm=nil; M.reading=false; M.offset=0; M.page=1; M.preview=nil; gesture=nil
     M.intro=nil; M.introScroll=nil; M.alert=nil; M.introHits={}
+    M.spellIntro=nil; M.spellScroll=nil; M.spellHits={}
+    M.overlayFrom=nil;M.overlayEntry=nil
     M.buttons={};M.hoverKey=nil;M.pressKey=nil
     if stone then stone.close() end
     if stoneUpgrade then stoneUpgrade.close() end
@@ -381,6 +384,162 @@ local function drawStoneIntro(item,e)
     end)
 end
 
+-- Original packageUI.createItemIntroLayer skill branch, redrawn on the
+-- 仙缘 (fate) artwork used by the client's 法术详情 page.
+local SPELL_TEXT={254,235,192}
+local SPELL_STAT={[1]="生命",[2]="法力",[3]="攻击",[4]="防御"}
+local function spellFateData(item)
+    local rows=(data.fates or {})[tostring(item.id)] or {}
+    local names,seen={},{}
+    for _,f in ipairs(rows) do
+        if not seen[f.hero] then
+            seen[f.hero]=true
+            table.insert(names,f.hero_name or tostring(f.hero))
+        end
+    end
+    local effect=""
+    local first=rows[1]
+    if first then
+        effect=(SPELL_STAT[tonumber(first.effect_field)] or "属性").."提升"..
+            (tonumber(first.percent) or 0).."%"
+    end
+    return table.concat(names,"、"),effect
+end
+local function spellPower(item,level)
+    local o=item.original or {}
+    local base=tonumber(o.intensity) or 0
+    local plus=tonumber(o.upgrade_plus) or 0
+    return math.floor(base+plus*((tonumber(level) or 1)-1))
+end
+local function spellPanel(x,top,w,h,parent)
+    local cap=w*59/609
+    image("v2/newIntroUI/big_bkg1.png",x,top-cap/2,w,cap,parent)
+    image("v2/newIntroUI/big_bkg2.png",x,top-cap-(h-2*cap)/2,w,h-2*cap,parent)
+    local down=image("v2/newIntroUI/big_bkg1.png",x,top-h+cap/2,w,cap,parent)
+    if down then down:setFlipY(true) end
+end
+local function drawSpellIntro(item,e)
+    M.spellHits={};M.introHits={};M.introScroll=nil
+    local level=tonumber(e and e.level) or 1
+    local entry=(e and e.uid) and e or nil
+    local owns=entry~=nil
+    local top=tonumber(item.top_level) or 10
+    local advance=require('local_combat_rules').advance[tostring(item.id)]
+    local canAdvance=owns and advance and tonumber(item.quality)==5 and not e.advanced
+    local canUpgrade=owns and not canAdvance and level<top
+    local function close()
+        M.spellIntro=nil;M.spellScroll=nil;M.spellHits={}
+        M.selected=nil
+        if M.preview then
+            M.preview=nil;ui.navigate(M.returnPage or "home");return
+        end
+        ui.render()
+    end
+    local function hit(x,y,w,h,action)
+        table.insert(M.spellHits,{x=x,y=y,w=w,h=h,action=action})
+    end
+
+    fill(0,0,960,540,{0,0,0,180})
+    image("v2/messageUI/frame1.png",480,275,600,520)
+
+    image("v2/introUI/close1.png",747,500,52,50)
+    hit(721,474,52,50,close)
+
+    label(item.name,480,498,30,SPELL_TEXT,nil,true)
+
+    local node=icon(item,280,412,120,nil,level)
+    if node then
+        local size=node:getContentSize()
+        local empty=CCSprite:create("v2/newIntroUI/star_bkg.png")
+        local es=empty:getContentSize()
+        empty:setAnchorPoint(CCPointMake(0,0))
+        empty:setPosition(CCPointMake(size.width*.1,size.height*.1))
+        empty:setScale(.8*size.width/es.width)
+        node:addChild(empty)
+        local quality=tonumber(item.quality) or 0
+        if quality>0 then
+            local stars=CCSprite:create("v2/introUI/stars.png")
+            local ss=stars:getContentSize()
+            stars:setTextureRect(CCRectMake(0,0,ss.width*math.min(1,quality/5),ss.height))
+            stars:setAnchorPoint(CCPointMake(0,0))
+            stars:setPosition(CCPointMake(size.width*.1,size.height*.1))
+            stars:setScale(.8*size.width/ss.width)
+            node:addChild(stars)
+        end
+    end
+
+    image("v2/introUI/level.png",390,450,36,36)
+    label(tostring(level),411,450,24,SPELL_TEXT)
+    image("v2/introUI/skill_strong.png",480,450,36,36)
+    label(tostring(spellPower(item,level)),501,450,24,SPELL_TEXT)
+
+    local buttonPic=canAdvance and "v2/enhanceUI/up_2.png" or "v2/newIntroUI/upgrade1.png"
+    local buttonNode=image(buttonPic,680,410,140,70)
+    local advanceReady=canAdvance and level>=tonumber(advance.min_level)
+    if (canAdvance and not advanceReady) or (not canAdvance and not canUpgrade) then
+        if buttonNode then buttonNode:setColor(ccc3(120,110,100)) end
+    end
+    hit(610,375,140,70,function()
+        if canAdvance then
+            if not advanceReady then
+                M.alert="法术达到"..advance.min_level.."级后才能进阶。"
+                ui.render();return
+            end
+            confirm("进阶将消耗未装备材料："..advance.material_list.."。装备后增加 "..
+                advance.hp_plus.."%生命。","bag_advance",{uid=entry.uid})
+            return
+        end
+        if not canUpgrade then
+            M.alert=not owns and "拥有该法术后才能升级。" or "该法术已满级。"
+            ui.render();return
+        end
+        upgrade(entry)
+    end)
+
+    local descLabel=label(item.description or "",210,345,22,SPELL_TEXT,nil,false,560)
+    local descHeight=descLabel and descLabel:getContentSize().height or 26
+
+    local bandTop=345-descHeight-6
+    image("v2/newIntroUI/head_bkg.png",480,bandTop-34,560,68)
+    image("v2/introUI/yuanfen_label.png",480,bandTop-35,100,61)
+    local panelTop=bandTop-73
+    spellPanel(480,panelTop,545,panelTop-16,nil)
+
+    local names,effect=spellFateData(item)
+    if names=="" then
+        label("暂无仙缘",225,panelTop-11,22,{253,190,37})
+    else
+        local namesTop=panelTop-30
+        label("与以下神仙有缘：",225,panelTop-11,22,{253,190,37})
+        local nameLabel=label(names,225,namesTop,21,SPELL_TEXT,nil,false,500)
+        local used=nameLabel and nameLabel:getContentSize().height or 24
+        local effectTop=namesTop-used-16
+        label("配缘效果：",225,effectTop,22,{253,190,37})
+        label(effect~="" and effect or "无",225,effectTop-28,21,SPELL_TEXT)
+    end
+end
+
+local function spellTouch(event,x,y)
+    if not M.spellIntro then return false end
+    if event==CCTOUCHBEGAN or event=="began" then
+        for i=#(M.spellHits or {}),1,-1 do
+            local h=M.spellHits[i]
+            if x>=h.x and x<=h.x+h.w and y>=h.y and y<=h.y+h.h then h.action();return true end
+        end
+        if x<180 or x>780 or y<15 or y>535 then
+            M.spellIntro=nil;M.spellScroll=nil;M.spellHits={};M.selected=nil
+            if M.preview then M.preview=nil;ui.navigate(M.returnPage or "home");return true end
+            ui.render()
+        end
+        return true
+    elseif event==CCTOUCHMOVED or event=="moved" then
+        return true
+    elseif event==CCTOUCHENDED or event=="ended" then
+        return true
+    end
+    return true
+end
+
 local function introTouch(event,x,y)
     if not M.intro then return false end
     if event==CCTOUCHBEGAN or event=="began" then
@@ -421,8 +580,13 @@ local function detail()
     local e=M.catalog and nil or own(M.selected)
     local item=M.catalog and data.items[M.selected] or e and data.items[e.key] or M.preview and data.items[M.preview]
     if not item then return end
+    if item.category==4 then
+        -- 法术详情完全交给原版独立页面，不再绘制包裹右侧的本地详情。
+        M.spellIntro=item.key
+        return
+    end
     if M.reading then
-        local textBody=item.name.."\n\n"..item.description.."\n\n原版获取途径\n"..(item.obtain or "")..(item.category==4 and "\n\n装配规则\n" or "\n\n本地玩法\n")..rule(item)
+        local textBody=item.name.."\n\n"..item.description.."\n\n原版获取途径\n"..(item.obtain or "").."\n\n本地玩法\n"..rule(item)
         local temp=label(textBody,12,0,19,MUTED,nil,false,650)
         local height=math.max(370,temp:getContentSize().height+30)
         root:removeChild(temp,true)
@@ -434,7 +598,7 @@ local function detail()
     label(item.name,345,465,25)
     label(string.rep("★",item.quality),345,431,20,{255,194,51})
     label(e and ("等级 "..e.level.."    数量 "..e.count.."    "..heroName(e.hero))
-        or M.preview and "自带法术 · 已装配" or "原版资源图录",345,403,18)
+        or M.preview and "已装备" or "原版资源图录",345,403,18)
     local c=area(370,nil)
     -- Detail body uses the lower portion, keeping controls and heading unobstructed.
     local preview={};local count=0
@@ -443,7 +607,7 @@ local function detail()
         table.insert(preview,ch)
     end
     label(table.concat(preview),12,268,18,MUTED,c,false,650)
-    label(item.category==4 and "装配规则" or "本地玩法",12,185,20,GOLD,c)
+    label("本地玩法",12,185,20,GOLD,c)
     label(rule(item),12,160,17,MUTED,c,false,650)
     button("完整介绍",745,448,154,function() M.reading=true;M.offset=0;ui.render() end)
     if M.catalog then
@@ -456,13 +620,12 @@ local function detail()
         button("返回阵容",360,135,240,function() M.preview=nil;M.back() end)
         return
     end
-    if item.category<=4 or (item.action=="trait" or item.action=="star") then
+    if item.category<=3 or (item.action=="trait" or item.action=="star") then
         button("装备 / 更换",250,135,145,function()
-            if M.equipHero and item.category==4 then replaceSpell(e)
-            else M.choice="hero";M.page=1;ui.render() end
+            M.choice="hero";M.page=1;ui.render()
         end)
         button("卸下",405,135,100,function() perform("bag_equip",{uid=e.uid,hero=0}) end,e.hero~=0)
-        button(item.category==4 and "升级" or "强化",515,135,112,function() upgrade(e) end,e.level<item.top_level)
+        button("强化",515,135,112,function() upgrade(e) end,e.level<item.top_level)
         if item.category<=3 then
             local worn=#(e.stones or {})
             button(worn>0 and ("灵石 · "..worn.."/"..(e.max_sockets or maxSockets(item))) or "打孔 / 镶嵌",
@@ -470,16 +633,10 @@ local function detail()
                     if stone then stone.open(ui,state,e.uid) end
                 end)
         end
-        if item.category==4 then
-            local rule=require('local_combat_rules').advance[tostring(item.id)]
-            if rule then button(e.advanced and '已进阶' or '进阶',637,135,130,function()
-                confirm('进阶将消耗未装备材料：'..rule.material_list..'。装备后增加 '..rule.hp_plus..'%生命。','bag_advance',{uid=e.uid})
-            end,not e.advanced and e.level>=tonumber(rule.min_level)) end
-        end
         button("熔炼",777,135,115,function()
             confirm("熔炼将移除「"..item.name.."」，获得 "..math.max(1,item.quality)*e.level.." 颗精魄石。",
                 "bag_smelt",{uid=e.uid})
-        end,item.category<=4 and e.hero==0 and #(e.stones or {})==0)
+        end,e.hero==0 and #(e.stones or {})==0)
     elseif item.action=="fragment" then
         button("合成",260,135,220,function()
             confirm("消耗10个同名碎片，合成对应装备？","bag_compose",{uid=e.uid})
@@ -586,8 +743,20 @@ local function listView()
             stone.open(ui,state,e.owner_uid);return
         end
         M.selected=M.catalog and e.key or e.uid;M.offset=0;M.reading=false
-        M.intro=M.catalog==false and item.category<=3
-        if not M.intro then M.introScroll=nil end
+        if item.category==4 then
+            if M.smelt and e.uid then
+                -- 熔炼模式不再经过旧法术详情，直接确认，保留原熔炼产出。
+                M.selected=e.uid
+                confirm("熔炼将移除「"..item.name.."」，获得 "..
+                    math.max(1,item.quality)*e.level.." 颗精魄石。","bag_smelt",{uid=e.uid})
+                return
+            end
+            -- 法术使用原版独立详情页，不再进入包裹右侧的本地详情布局。
+            M.spellIntro=item.key;M.intro=false;M.introScroll=nil
+        else
+            M.intro=M.catalog==false and item.category<=3
+            if not M.intro then M.introScroll=nil end
+        end
         ui.render()
     end)
     for i,e in ipairs(shown) do
@@ -651,32 +820,7 @@ local function listView()
         else label("可在资源图录中使用银两兑换",570,275,20,MUTED,nil,true) end
     end
 end
-function M.draw(context,player)
-    ui,state,root=context,player,context.root;scroll=nil;M.buttons={}
-    if M.selected and not M.catalog and type(M.selected)=="number" and not own(M.selected) then
-        M.selected=nil;M.choice=nil;M.offset=0;M.intro=nil;M.introScroll=nil
-    end
-    frame()
-    local stoneOpen=stone and stone.isOpen()
-    if not stoneOpen and M.selected and not M.catalog and type(M.selected)=="number" and not M.choice and not M.reading then
-        local selectedEntry=own(M.selected)
-        local selectedItem=selectedEntry and data.items[selectedEntry.key]
-        if selectedItem and (selectedItem.category<=3 or selectedItem.category==5) then M.intro=true end
-    end
-    local introEntry=(not stoneOpen) and M.intro and not M.choice and not M.reading and own(M.selected)
-    local introItem=introEntry and data.items[introEntry.key]
-    if M.choice then choices()
-    elseif introItem then listView()
-    elseif M.selected or M.preview then detail()
-    else listView() end
-    label("银两 "..state.silver.."    "..(ui.busy and "正在保存…" or ui.error or ui.notice or ""),241,103,13,MUTED)
-    if ui.failed then
-        ui.hit(235,90,650,28,function() ui.send("state",{}) end,true,nil,true)
-    end
-    if introItem then
-        if introItem.category==5 then drawStoneIntro(introItem,introEntry)
-        else drawIntro(introItem,introEntry) end
-    end
+local function drawModal()
     if M.alert then
         scroll=nil;ui.clearHits()
         fill(0,0,960,540,{0,0,0,170})
@@ -696,11 +840,127 @@ function M.draw(context,player)
             button("确定",390,170,180,function() M.confirm=nil;ui.render() end)
         end
     end
+end
+function M.draw(context,player)
+    ui,state,root=context,player,context.root;scroll=nil;M.buttons={}
+    M.overlayFrom=nil;M.overlayEntry=nil
+    if M.selected and not M.catalog and type(M.selected)=="number" and not own(M.selected) then
+        M.selected=nil;M.choice=nil;M.offset=0;M.intro=nil;M.introScroll=nil
+    end
+    if M.preview and data.items[M.preview] and data.items[M.preview].category==4 then
+        M.spellIntro=M.preview
+    end
+    if M.spellIntro and not data.items[M.spellIntro] then M.spellIntro=nil end
+    frame()
+    local stoneOpen=stone and stone.isOpen()
+    if not stoneOpen and M.selected and not M.catalog and type(M.selected)=="number" and not M.choice and not M.reading then
+        local selectedEntry=own(M.selected)
+        local selectedItem=selectedEntry and data.items[selectedEntry.key]
+        if selectedItem and (selectedItem.category<=3 or selectedItem.category==5) then M.intro=true end
+    end
+    local introEntry=(not stoneOpen) and M.intro and not M.choice and not M.reading and own(M.selected)
+    local introItem=introEntry and data.items[introEntry.key]
+    if M.choice then choices()
+    elseif M.spellIntro then listView()
+    elseif introItem then listView()
+    elseif M.selected or M.preview then detail()
+    else listView() end
+    label("银两 "..state.silver.."    "..(ui.busy and "正在保存…" or ui.error or ui.notice or ""),241,103,13,MUTED)
+    if ui.failed then
+        ui.hit(235,90,650,28,function() ui.send("state",{}) end,true,nil,true)
+    end
+    if introItem then
+        if introItem.category==5 then drawStoneIntro(introItem,introEntry)
+        else drawIntro(introItem,introEntry) end
+    end
+    if M.spellIntro then
+        local spellItem=data.items[M.spellIntro]
+        local spellEntry
+        if M.selected and type(M.selected)=="number" then spellEntry=own(M.selected) end
+        if not spellEntry and not M.catalog then
+            for _,entry in ipairs(state.inventory.entries) do
+                if entry.key==M.spellIntro then spellEntry=entry;break end
+            end
+        end
+        if not spellEntry then
+            spellEntry={key=M.spellIntro,level=1,count=0,hero=0}
+        end
+        drawSpellIntro(spellItem,spellEntry)
+    end
+    drawModal()
     if enhance.isOpen() then enhance.draw(ui,state) end
     if stone and stone.isOpen() then stone.draw(ui,state) end
     if stoneUpgrade and stoneUpgrade.isOpen() and not (stone and stone.isOpen()) then
         stoneUpgrade.draw(ui,state)
     end
+end
+function M.openDetailOverlay(context,player,opts)
+    ui,state,root=context,player,context.root
+    if stone then stone.close() end
+    if stoneUpgrade then stoneUpgrade.close() end
+    M.overlayFrom="lineup";M.overlayEntry=opts.entry
+    M.catalog=false;M.choice=nil;M.confirm=nil;M.alert=nil;M.reading=false;M.offset=0
+    M.tab=opts.tab or 1;M.equipHero=nil;M.equipPos=nil
+    M.introScroll=nil;M.spellScroll=nil;M.spellHits={};M.introHits={}
+    if opts.key then
+        M.spellIntro=opts.key;M.selected=opts.uid;M.preview=nil;M.intro=false
+    else
+        M.spellIntro=nil;M.selected=opts.uid;M.preview=nil;M.intro=true
+    end
+end
+function M.overlayOpen() return M.overlayFrom~=nil end
+function M.closeOverlay()
+    M.overlayFrom=nil;M.overlayEntry=nil
+    M.spellIntro=nil;M.intro=nil;M.selected=nil;M.preview=nil
+    M.spellScroll=nil;M.spellHits={};M.introScroll=nil;M.introHits={}
+    M.alert=nil;M.confirm=nil;M.choice=nil;M.reading=false
+    if stone then stone.close() end
+    if stoneUpgrade then stoneUpgrade.close() end
+end
+function M.backOverlay()
+    if stone and stone.isOpen() then stone.back();ui.render();return end
+    if stoneUpgrade and stoneUpgrade.isOpen() then stoneUpgrade.back();ui.render();return end
+    if M.alert then M.alert=nil
+    elseif M.confirm then M.confirm=nil
+    else M.closeOverlay();ui.render();return end
+    ui.render()
+end
+function M.drawOverlay(context,player)
+    if not M.overlayFrom then return end
+    ui,state,root=context,player,context.root;scroll=nil
+    local entry=M.selected and own(M.selected)
+    if M.spellIntro then
+        local item=data.items[M.spellIntro]
+        if not item then M.closeOverlay();return end
+        local e=entry or M.overlayEntry
+        if not e then
+            for _,x in ipairs(state.inventory.entries) do
+                if x.key==M.spellIntro then e=x;break end
+            end
+        end
+        if not e then e={key=M.spellIntro,level=1,count=0,hero=0} end
+        drawSpellIntro(item,e)
+    elseif M.intro then
+        local item=entry and data.items[entry.key]
+        if not item then M.closeOverlay();return end
+        if item.category==5 then drawStoneIntro(item,entry) else drawIntro(item,entry) end
+    else
+        M.overlayFrom=nil;return
+    end
+    drawModal()
+    if stone and stone.isOpen() then stone.draw(ui,state) end
+    if stoneUpgrade and stoneUpgrade.isOpen() and not (stone and stone.isOpen()) then
+        stoneUpgrade.draw(ui,state)
+    end
+end
+function M.touchOverlay(event,x,y)
+    if M.confirm or M.alert then return false end
+    if enhance.isOpen() then return false end
+    if stone and stone.isOpen() then return stone.touch(event,x,y) end
+    if stoneUpgrade and stoneUpgrade.isOpen() then return stoneUpgrade.touch(event,x,y) end
+    if M.spellIntro then return spellTouch(event,x,y) end
+    if M.intro then return introTouch(event,x,y) end
+    return false
 end
 function M.afterUpdate(player)
     state=player
@@ -719,6 +979,9 @@ function M.back()
     if stoneUpgrade and stoneUpgrade.isOpen() then stoneUpgrade.back();ui.render();return end
     if M.alert then M.alert=nil
     elseif M.confirm then M.confirm=nil
+    elseif M.spellIntro then
+        M.spellIntro=nil;M.spellScroll=nil;M.spellHits={};M.selected=nil
+        if M.preview then M.preview=nil;ui.navigate(M.returnPage or "home");return end
     elseif M.intro then M.intro=nil;M.selected=nil;M.introScroll=nil
     elseif M.reading then M.reading=false;M.offset=0
     elseif M.choice then M.choice=nil
@@ -728,9 +991,11 @@ function M.back()
     ui.render()
 end
 function M.touch(event,x,y)
+    if M.confirm or M.alert then return false end
     if enhance.isOpen() then return false end
     if stone and stone.isOpen() then return stone.touch(event,x,y) end
     if stoneUpgrade and stoneUpgrade.isOpen() then return stoneUpgrade.touch(event,x,y) end
+    if M.spellIntro then return spellTouch(event,x,y) end
     if M.intro then return introTouch(event,x,y) end
     if not scroll then return false end
     local began=event==CCTOUCHBEGAN or event=="began"
