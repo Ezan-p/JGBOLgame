@@ -195,19 +195,22 @@ local function drawLeft(opts)
     label(level, 58, 166, 16, GOLD, nil, true)
     local bx, bw = 82, 332
     image("v2/CharaterUI/expbar1.png", bx + bw / 2, 166, bw, 14)
-    local ratio = hero and math.min(1, level / 20) or 0
+    local curExp = hero and (tonumber(hero.cur_exp) or 0) or 0
+    local nextExp = hero and (tonumber(hero.next_exp) or 0) or 0
+    local ratio = nextExp > 0 and math.min(1, curExp / nextExp) or 0
     if ratio > 0 then
         local fillNode = CCSprite:create("v2/CharaterUI/expbar2.png")
         if fillNode then
             local size = fillNode:getContentSize()
+            fillNode:setTextureRect(CCRectMake(0, 0, size.width * ratio, size.height))
             fillNode:setAnchorPoint(CCPointMake(0, .5))
-            fillNode:setScaleX(bw * ratio / size.width)
+            fillNode:setScaleX(bw / size.width)
             fillNode:setScaleY(14 / size.height)
             fillNode:setPosition(CCPointMake(bx, 166))
             root:addChild(fillNode)
         end
     end
-    label("等级 " .. level .. " / 20", bx + bw / 2, 166, 11, PALE, nil, true)
+    label(curExp .. "/" .. nextExp, bx + bw / 2, 166, 11, PALE, nil, true)
 
     local function artButton(file, x, w, action, enabled, h)
         h = h or 40

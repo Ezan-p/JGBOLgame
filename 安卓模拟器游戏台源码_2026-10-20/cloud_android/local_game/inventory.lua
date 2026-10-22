@@ -5,6 +5,8 @@ local stoneOK,stone=pcall(require,"local_stone")
 if not stoneOK then CCLuaLog("LOCAL_STONE_LOAD_ERROR: "..tostring(stone));stone=nil end
 local upgradeOK,stoneUpgrade=pcall(require,"local_stone_upgrade")
 if not upgradeOK then CCLuaLog("LOCAL_STONE_UPGRADE_LOAD_ERROR: "..tostring(stoneUpgrade));stoneUpgrade=nil end
+local expBookOK,expBook=pcall(require,"local_exp_book")
+if not expBookOK then CCLuaLog("LOCAL_EXP_BOOK_LOAD_ERROR: "..tostring(expBook));expBook=nil end
 local M={tab=1,offset=0,page=1,catalog=false,intro=nil,introScroll=nil,socketPos=1,alert=nil,
     spellIntro=nil,spellScroll=nil,spellHits={},buttons={},hoverKey=nil,pressKey=nil,
     overlayFrom=nil,overlayEntry=nil}
@@ -152,6 +154,7 @@ local function reset()
     M.buttons={};M.hoverKey=nil;M.pressKey=nil
     if stone then stone.close() end
     if stoneUpgrade then stoneUpgrade.close() end
+    if expBook then expBook.close() end
 end
 local upgrade
 local function registerButton(key,kind,uid,x,y,w,h,node)
@@ -241,7 +244,7 @@ local function rule(item)
     end
     if a=="fragment" then return "10个同名碎片合成1件对应装备。" end
     if a=="energy" then return "使用恢复 "..item.original.strength_plus.." 点体力，上限60。体力已满时不消耗。" end
-    if a=="experience" then return "使用增加行者经验 "..item.original.experience_plus.."。" end
+    if a=="experience" then return "对选中的神仙使用，增加神仙经验 "..item.original.experience_plus.."。受主角等级限制：低于2.5倍全额，2.5~3倍仅20%，3倍封顶；药灵丹不属于神仙经验书。" end
     if a=="train" then return "选择一名神仙提升1级，最高20级。" end
     if a=="material" then return "熔炼装备或法术获得；每颗可兑换20银两。" end
     if a=="support_material" then return "在阵容的助阵页面消耗乾坤符箓，为八卦阵位进阶。" end
@@ -644,6 +647,7 @@ local function detail()
     else
         button(item.action=="material" and "兑换20银两" or "使用",260,135,220,function()
             if item.action=="train" then M.choice="train";M.page=1;ui.render()
+            elseif item.action=="experience" and expBook then expBook.open(ui,state,e.uid)
             else confirm("消耗1个「"..item.name.."」？\n"..rule(item),"bag_use",{uid=e.uid}) end
         end,item.action~="reference" and item.action~="support_material" and item.action~="cheer_material")
     end
@@ -893,11 +897,13 @@ function M.draw(context,player)
     if stoneUpgrade and stoneUpgrade.isOpen() and not (stone and stone.isOpen()) then
         stoneUpgrade.draw(ui,state)
     end
+    if expBook and expBook.isOpen() then expBook.draw(ui,state) end
 end
 function M.openDetailOverlay(context,player,opts)
     ui,state,root=context,player,context.root
     if stone then stone.close() end
     if stoneUpgrade then stoneUpgrade.close() end
+    if expBook then expBook.close() end
     M.overlayFrom="lineup";M.overlayEntry=opts.entry
     M.catalog=false;M.choice=nil;M.confirm=nil;M.alert=nil;M.reading=false;M.offset=0
     M.tab=opts.tab or 1;M.equipHero=nil;M.equipPos=nil
@@ -916,8 +922,10 @@ function M.closeOverlay()
     M.alert=nil;M.confirm=nil;M.choice=nil;M.reading=false
     if stone then stone.close() end
     if stoneUpgrade then stoneUpgrade.close() end
+    if expBook then expBook.close() end
 end
 function M.backOverlay()
+    if expBook and expBook.isOpen() then expBook.back();ui.render();return end
     if stone and stone.isOpen() then stone.back();ui.render();return end
     if stoneUpgrade and stoneUpgrade.isOpen() then stoneUpgrade.back();ui.render();return end
     if M.alert then M.alert=nil
@@ -952,10 +960,12 @@ function M.drawOverlay(context,player)
     if stoneUpgrade and stoneUpgrade.isOpen() and not (stone and stone.isOpen()) then
         stoneUpgrade.draw(ui,state)
     end
+    if expBook and expBook.isOpen() then expBook.draw(ui,state) end
 end
 function M.touchOverlay(event,x,y)
     if M.confirm or M.alert then return false end
     if enhance.isOpen() then return false end
+    if expBook and expBook.isOpen() then return expBook.touch(event,x,y) end
     if stone and stone.isOpen() then return stone.touch(event,x,y) end
     if stoneUpgrade and stoneUpgrade.isOpen() then return stoneUpgrade.touch(event,x,y) end
     if M.spellIntro then return spellTouch(event,x,y) end
@@ -964,6 +974,7 @@ function M.touchOverlay(event,x,y)
 end
 function M.afterUpdate(player)
     state=player
+    if expBook and expBook.isOpen() then expBook.afterUpdate(player) end
     if stone and stone.isOpen() then stone.afterUpdate(player) end
     if stoneUpgrade and stoneUpgrade.isOpen() and not (stone and stone.isOpen()) then
         stoneUpgrade.afterUpdate(player)
@@ -975,6 +986,7 @@ end
 function M.back()
     gesture=nil
     if enhance.isOpen() then enhance.close();ui.render();return end
+    if expBook and expBook.isOpen() then expBook.back();ui.render();return end
     if stone and stone.isOpen() then stone.back();ui.render();return end
     if stoneUpgrade and stoneUpgrade.isOpen() then stoneUpgrade.back();ui.render();return end
     if M.alert then M.alert=nil
@@ -993,6 +1005,7 @@ end
 function M.touch(event,x,y)
     if M.confirm or M.alert then return false end
     if enhance.isOpen() then return false end
+    if expBook and expBook.isOpen() then return expBook.touch(event,x,y) end
     if stone and stone.isOpen() then return stone.touch(event,x,y) end
     if stoneUpgrade and stoneUpgrade.isOpen() then return stoneUpgrade.touch(event,x,y) end
     if M.spellIntro then return spellTouch(event,x,y) end

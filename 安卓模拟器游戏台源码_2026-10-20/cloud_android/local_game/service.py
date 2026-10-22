@@ -8,6 +8,7 @@ import copy
 import hashlib
 import hmac
 import json
+import math
 import re
 import sqlite3
 import time
@@ -57,9 +58,156 @@ class Game:
             "schema": 1, "name": "本地行者", "silver": 1200, "gold": 500, "experience": 0,
             "energy": 60, "energy_time": int(time.time()), "unlocked": 1,
             "heroes": {"5022": 1, "5004": 1}, "lineup": [5022, 5004],
-            "souls": {}, "wins": {}, "battle_count": 0,
+            "hero_exp": {}, "souls": {}, "wins": {}, "battle_count": 0,
             "summon": summon_rules.initial_state(self.catalog),
         }
+
+
+    def exp_table(self):
+        return self.catalog.get("exp_table") or {}
+
+    def next_exp(self, quality, level):
+        """下一级所需经验 = cortege_experience.csv[quality][level]。
+
+        ``assets.catalog()`` 用整数键；落盘成 catalog.json 再读回后 JSON 的键会变成
+        字符串，所以这里同时接受 int/str 两种键。
+        """
+        tables = self.exp_table()
+        table = tables.get(quality) or tables.get(str(quality)) or {}
+        if not table:
+            return 0
+        value = table.get(level)
+        if value is None:
+            value = table.get(str(level))
+        if value is not None:
+            return value
+        try:
+            top = max(table, key=lambda key: int(key))
+        except (TypeError, ValueError):
+            return 0
+        return table.get(top, 0)
+
+    def role_level(self, state):
+        """主角(行者)等级，用于原版 expbookUI 的 lvLimit 分档。"""
+        return 1 + int(state.get("experience", 0)) // 200
+
+    def level_cap(self, state, quality):
+        """原版硬上限：min(floor(主角等级*3), 品质经验表最高级)。"""
+        table = self.exp_table().get(quality) or self.exp_table().get(str(quality)) or {}
+        top = max((int(key) for key in table), default=0)
+        return min(self.role_level(state) * 3, top) if top else self.role_level(state) * 3
+
+    def apply_hero_exp(self, state, ident, amount):
+        """Original ui/expbookUI.lua getExpResult.
+
+        lvLimit = {{lv=0, rate=1}, {lv=2.5, rate=0.2}, {lv=3, rate=0}}:
+        below floor(主角*2.5) full exp, from floor(主角*2.5) to floor(主角*3)
+        20% efficiency, at/above floor(主角*3) no exp.  Overshoot carries over
+        to the next level and is never silently dropped except at the hard cap.
+        """
+        ident = str(ident)
+        base = self.catalog["heroes"].get(ident)
+        if not base or amount <= 0:
+            return int(state["heroes"].get(ident, 1)), 0, 0, 0, 0
+        quality = int(base.get("quality", 1))
+        table = self.exp_table().get(quality) or self.exp_table().get(str(quality)) or {}
+        if not table:
+            return int(state["heroes"].get(ident, 1)), 0, 0, 0, 0
+        role = self.role_level(state)
+        normal = int(role * 2.5)
+        maximum = role * 3
+        top = max((int(key) for key in table), default=0)
+        cap = min(maximum, top) if top else maximum
+        level = int(state["heroes"][ident])
+        hero_exp = state.setdefault("hero_exp", {})
+        cur = float(hero_exp.get(ident, 0) or 0)
+        rest = float(amount)
+        added = 0.0
+        levels = 0
+        eps = 1e-9
+        while rest > eps and level < cap:
+            rate = 1.0 if level < normal else (0.2 if level < maximum else 0.0)
+            if rate <= 0:
+                break
+            need = float(self.next_exp(quality, level) or 1)
+            gap = need - cur
+            if gap <= 0:
+                cur = 0.0
+                level += 1
+                levels += 1
+                continue
+            raw_needed = gap / rate
+            if rest + eps >= raw_needed:
+                added += gap
+                cur = 0.0
+                rest -= raw_needed
+                level += 1
+                levels += 1
+            else:
+                gain = rest * rate
+                cur += gain
+                added += gain
+                rest = 0.0
+        if cur > 0:
+            hero_exp[ident] = int(math.floor(cur))
+        else:
+            hero_exp.pop(ident, None)
+        state["heroes"][ident] = level
+        return level, int(math.floor(cur)), levels, int(math.floor(added)), int(math.floor(rest))
+
+    def use_exp_book(self, state, args):
+        """Feed 仙佛密卷/培元丹 to one 神仙, exactly like the original client."""
+        hero_id = self.integer(args, "hero")
+        ident = str(hero_id)
+        if ident not in state.get("heroes", {}):
+            raise GameError("尚未拥有该神仙")
+        base = self.catalog["heroes"].get(ident)
+        if not base:
+            raise GameError("神仙不存在")
+        quality = int(base.get("quality", 1))
+        if int(state["heroes"][ident]) >= self.level_cap(state, quality):
+            raise GameError("该神仙已达到主角等级限制的等级上限")
+        items = args.get("items")
+        if not isinstance(items, list) or not items:
+            raise GameError("请选择经验书")
+        bag = inventory.migrate(state)
+        catalog_items = self.catalog.get("inventory", {}).get("items", {})
+        wanted = {}
+        for raw in items:
+            if not isinstance(raw, dict):
+                raise GameError("经验书参数无效")
+            uid, count = raw.get("uid"), raw.get("count")
+            if type(uid) is not int or type(count) is not int or count <= 0:
+                raise GameError("经验书参数无效")
+            wanted[uid] = wanted.get(uid, 0) + count
+        picked, total = [], 0
+        for uid, count in wanted.items():
+            entry = next((e for e in bag["entries"] if e.get("uid") == uid), None)
+            if entry is None:
+                raise GameError("经验书不存在")
+            item = catalog_items.get(entry["key"])
+            if not item or item.get("action") != "experience":
+                raise GameError("该物品不是神仙经验书")
+            if int(entry.get("count", 0)) < count:
+                raise GameError("经验书数量不足")
+            total += int(item["original"]["experience_plus"]) * count
+            picked.append((entry, count))
+        if total <= 0:
+            raise GameError("经验书经验为 0")
+        for entry, count in picked:
+            entry["count"] -= count
+            if entry["count"] <= 0:
+                bag["entries"].remove(entry)
+        level, cur, levels, added, wasted = self.apply_hero_exp(state, hero_id, total)
+        name = self.catalog["heroes"][ident]["name"]
+        next_exp = self.next_exp(quality, level)
+        if levels:
+            notice = "%s 提升至 %d 级（神仙经验 +%d，当前 %d/%d）" % (name, level, added, cur, next_exp)
+        else:
+            notice = "%s 获得神仙经验 +%d（当前 %d/%d）" % (name, added, cur, next_exp)
+        if wasted:
+            notice += "；超出等级上限浪费 %d 点" % wasted
+        return notice
 
     def hero(self, ident, level, state=None, resolve_synergy=True):
         if state is not None and resolve_synergy and self.catalog.get("synergy"):
@@ -69,9 +217,21 @@ class Game:
             raise GameError("角色不存在")
         result = dict(base)
         result["level"] = level
+        # Original inheritUI/expbookUI stat formula: base + growth * (level - 1),
+        # where the four growth values are the fixed per-level increments from
+        # cortege_base_0.csv (base_*_plus).  This replaces the old local
+        # "base * (1 + 0.14 * (level - 1))" placeholder.
+        growth = base.get("growth", {})
         for key in ("hp", "attack", "defense", "magic"):
-            result[key] = round(base.get(key, 0) * (1 + .14 * (level - 1)))
+            result[key] = int(math.floor(base.get(key, 0) + float(growth.get(key, 0)) * (level - 1)))
         result["upgrade_cost"] = 80 * level
+        # 经验条严格按原版：cur_exp 为当前经验，next_exp 为该级升到下一级所需经验。
+        result["cur_exp"] = 0
+        result["next_exp"] = self.next_exp(base.get("quality", 1), level)
+        result["exp_ratio"] = 0.0
+        if state is not None:
+            result["cur_exp"] = int((state.get("hero_exp") or {}).get(str(ident), 0) or 0)
+            result["exp_ratio"] = min(1.0, result["cur_exp"] / max(1, result["next_exp"]))
         learned = None
         if state is not None:
             learned = training.read(state, int(ident), level)
@@ -108,7 +268,7 @@ class Game:
                     slot["cheer_level"] = hero.get("cheer_level", 0)
                     slot["cheer_rate"] = hero.get("cheer_rate", 1)
                     slot["hero_level"] = hero.get("level", 1)
-                    slot["hero_exp"] = hero.get("exp", 0)
+                    slot["hero_exp"] = hero.get("cur_exp", 0)
                     slot["hero_next_exp"] = hero.get("next_exp", 0)
             result["support"] = support
         if self.catalog.get("inventory"):
@@ -128,7 +288,7 @@ class Game:
             for i in self.catalog["recruitable"] if str(i) not in state["heroes"]
         ]
         result["combat_modes"] = battle_modes.MODES
-        result["level"] = 1 + state["experience"] // 200
+        result["level"] = self.role_level(state)
         return result
 
     @staticmethod
@@ -297,6 +457,8 @@ class Game:
             extra['notice']=battle_training.apply(state,op,args,self.catalog,GameError)
         elif op == "battle":
             extra["battle"] = self.battle(state, self.integer(args, "stage"))
+        elif op == "use_exp_book":
+            extra["notice"] = self.use_exp_book(state, args)
         elif op.startswith("bag_") and self.catalog.get("inventory"):
             extra["notice"] = inventory.apply(state, op, args, self.catalog["inventory"], GameError)
         else:

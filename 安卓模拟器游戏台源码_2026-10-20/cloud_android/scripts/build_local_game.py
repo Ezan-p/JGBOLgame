@@ -70,6 +70,8 @@ def main():
         "lua/local_cheer.lua": (ROOT / "local_game/cheer.lua").read_bytes(),
         "lua/local_hero_detail.lua": (ROOT / "local_game/hero_detail.lua").read_bytes(),
         "lua/local_training.lua": (ROOT / "local_game/training.lua").read_bytes(),
+        "lua/local_exp_book.lua": (ROOT / "local_game/exp_book.lua").read_bytes(),
+        "lua/local_exp_data.lua": ("return " + lua_literal({"exp_table": assets["exp_table"]})).encode(),
         "lua/local_lineup_data.lua": ("return " + lua_literal({k: v for k, v in lineup.items()
             if k not in ("resources", "sources")})).encode(),
         "lua/local_battle.lua": (ROOT / "local_game/battle.lua").read_bytes(),

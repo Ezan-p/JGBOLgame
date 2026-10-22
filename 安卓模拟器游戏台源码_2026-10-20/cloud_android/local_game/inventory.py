@@ -201,7 +201,9 @@ def build_inventory(game_root):
         if kind == 5 and int(b["strength_plus"]) > 0:
             action = "energy"
         if kind == 5 and int(b["experience_plus"]) > 0:
-            action = "experience"
+            # 原版 expbookUI 只接受“神仙经验”道具：仙佛密卷(sub_type 99) /
+            # 培元丹(sub_type 100)。药灵丹(101)属于炼药系统，不能给神仙吃。
+            action = "experience" if int(b["sub_type"]) in (99, 100) else "reference"
         if ident == 1024:
             action = "train"
         if ident == 10000:
@@ -714,7 +716,8 @@ def apply(state, op, args, catalog, error):
             check(state["energy"] < 60, "体力已满，不消耗道具")
             state["energy"] = min(60, state["energy"] + int(item["original"]["strength_plus"]))
         elif action == "experience":
-            state["experience"] += int(item["original"]["experience_plus"])
+            # 神仙经验书不再加行者经验；必须走 use_exp_book 选择神仙。
+            raise error("神仙经验书需要先在经验书界面选择神仙")
         elif action == "train":
             hero = str(integer("hero"))
             check(hero in state["heroes"], "尚未拥有该神仙")

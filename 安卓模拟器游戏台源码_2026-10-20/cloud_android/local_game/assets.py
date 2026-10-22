@@ -166,6 +166,15 @@ def catalog(game_root):
         })
     from .battle_rules import build_rules
     from .battle_modes import build_modes
+    # Original ui/data.lua getCharacterExperienceCSVConfig: csv_config/cortege_experience.csv
+    # stores, per quality, the exp required to advance from `level` to `level + 1`
+    # (the value shown as `next_exp` for that level).
+    exp_table = {}
+    for r in rows("csv_config/cortege_experience.csv"):
+        quality = int(r["quality"])
+        level = int(r["level"])
+        value = int(r["experience"])
+        exp_table.setdefault(quality, {})[level] = value
     return {"schema": 2, "combat_rules": build_rules(resources), "battle_modes": build_modes(resources), "heroes": heroes, "stages": stages,
-            "recruitable": recruitable,
+            "recruitable": recruitable, "exp_table": exp_table,
             "skills": skill_config, "rules": "local-v4", "source": "Original APK 1061 + installed update 1263; local combat/reward rules"}

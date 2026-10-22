@@ -106,7 +106,22 @@ local function drawLeft()
         image('v2/charPositionUI/level_bkg.png',170,248,44,27)
         label(h.level or 1,170,248,18,GOLD,nil,true)
         image('v2/CharaterUI/expbar1.png',328,248,238,16)
-        label('等级 '..(h.level or 1)..' / 20',328,248,11,GOLD,nil,true)
+        local curExp=tonumber(h.cur_exp) or 0
+        local nextExp=tonumber(h.next_exp) or 0
+        local ratio=nextExp>0 and math.min(1,curExp/nextExp) or 0
+        if ratio>0 then
+            local fill=CCSprite:create('v2/CharaterUI/expbar2.png')
+            if fill then
+                local size=fill:getContentSize()
+                fill:setTextureRect(CCRectMake(0,0,size.width*ratio,size.height))
+                fill:setAnchorPoint(CCPointMake(0,.5))
+                fill:setScaleX(238/size.width)
+                fill:setScaleY(16/size.height)
+                fill:setPosition(CCPointMake(328-119,248))
+                root:addChild(fill)
+            end
+        end
+        label(curExp..'/'..nextExp,328,248,11,GOLD,nil,true)
         hit(312,345.6,190,190,function() M.panel='hero';M.tab='position';ui.render() end)
     else
         image('v2/cheerUI/head_bkg.png',298,345.6,100,102)

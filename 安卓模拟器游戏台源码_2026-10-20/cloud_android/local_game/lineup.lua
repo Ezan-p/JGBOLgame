@@ -130,10 +130,30 @@ local function stats(h,x,y,w,parent)
         image('v2/introUI/'..pics[i]..'.png',xx,y,28,28,parent)
         label(h[k] or 0,xx+17,y,18,GOLD,parent)
     end
-    image(P..'level_bkg.png',x-w/2-31,y-27,48,29,parent)
-    label(h.level,x-w/2-31,y-27,20,GOLD,parent,true)
+    -- Original charPositionUI layout: level number on the left, then the exp
+    -- bar (expbar1 background + expbar2 fill) immediately to its right.
+    local lvX=x-w/2-31
+    image(P..'level_bkg.png',lvX,y-27,48,29,parent)
+    label(h.level,lvX,y-27,20,GOLD,parent,true)
     image('v2/CharaterUI/expbar1.png',x,y-27,w,15,parent)
-    label('等级 '..h.level..' / 20',x,y-27,11,GOLD,parent,true)
+    local curExp=tonumber(h.cur_exp) or 0
+    local nextExp=tonumber(h.next_exp) or 0
+    local ratio=nextExp>0 and math.min(1,curExp/nextExp) or 0
+    if ratio>0 then
+        local fill=CCSprite:create('v2/CharaterUI/expbar2.png')
+        if fill then
+            local fs=fill:getContentSize()
+            local tw,th=fs.width,fs.height
+            fill:setTextureRect(CCRectMake(0,0,tw*ratio,th))
+            fill:setAnchorPoint(CCPointMake(0,.5))
+            fill:setScaleX(w/tw)
+            fill:setScaleY(15/th)
+            fill:setPosition(CCPointMake(x-w/2,y-27))
+            local target=parent or root
+            target:addChild(fill)
+        end
+    end
+    label(curExp..'/'..nextExp,x,y-27,11,GOLD,parent,true)
 end
 local function character(h,compact,parent)
     if not h then return end

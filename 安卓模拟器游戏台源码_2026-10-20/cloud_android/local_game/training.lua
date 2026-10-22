@@ -160,19 +160,22 @@ local function drawLeft(entry, hero, pending)
     label(level, 58, 166, 16, GOLD, nil, true)
     local bx, bw = 82, 332
     image('v2/CharaterUI/expbar1.png', bx + bw / 2, 166, bw, 14)
-    local ratio = math.min(1, level / 20)
+    local curExp = hero and (tonumber(hero.cur_exp) or 0) or 0
+    local nextExp = hero and (tonumber(hero.next_exp) or 0) or 0
+    local ratio = nextExp > 0 and math.min(1, curExp / nextExp) or 0
     if ratio > 0 then
         local exp = CCSprite:create('v2/CharaterUI/expbar2.png')
         if exp then
             local size = exp:getContentSize()
+            exp:setTextureRect(CCRectMake(0, 0, size.width * ratio, size.height))
             exp:setAnchorPoint(CCPointMake(0, .5))
-            exp:setScaleX(bw * ratio / size.width)
+            exp:setScaleX(bw / size.width)
             exp:setScaleY(14 / size.height)
             exp:setPosition(CCPointMake(bx, 166))
             root:addChild(exp)
         end
     end
-    label('等级 ' .. level .. ' / 20', bx + bw / 2, 166, 11, PALE, nil, true)
+    label(curExp .. '/' .. nextExp, bx + bw / 2, 166, 11, PALE, nil, true)
 
     local potential = hero.culture_point or 0
     if pending and pending.potential_used then
