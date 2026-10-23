@@ -25,6 +25,8 @@ class JourneyTests(unittest.TestCase):
         self.assertEqual(stage["three_star"][0]["name"], "楮白枪")
         self.assertEqual(stage["boss"], 2)
         self.assertEqual(stage["sprite"], "chars/5/5_18.png")
+        self.assertEqual(stage["formation"][0]["name"], "猪八戒")
+        self.assertEqual(stage["formation"][4]["name"], "无名氏")
 
     def test_complete_chapter_chains_and_local_save_mapping(self):
         chapters = self.data["chapters"]
@@ -41,9 +43,9 @@ class JourneyTests(unittest.TestCase):
                 self.assertEqual(s["next"], c["stages"][i+1]["id"] if i+1 < len(c["stages"]) else 0)
         # UI must map by original IDs, never reinterpret persisted local 1..10 IDs.
         local = catalog(self.root)["stages"]
-        self.assertEqual(len(local), 10)
+        self.assertEqual(len(local), 597)
         self.assertTrue(all(s["original_id"] in ids for s in local))
-        self.assertEqual([s["id"] for s in local], list(range(1, 11)))
+        self.assertEqual([s["id"] for s in local], list(range(1, 598)))
 
     def test_all_art_and_reward_atlas_bounds(self):
         resources = Resources(self.root)

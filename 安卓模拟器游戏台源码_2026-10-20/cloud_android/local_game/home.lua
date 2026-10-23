@@ -84,7 +84,7 @@ function M.draw(ui, state, navigate, info)
     hit(127,290,102,160,explain("试炼",{
         "原版试炼入口已还原。",
         "试炼排行及专属奖励尚未接入本地服务。",
-        "可从「旅途」进入当前十个 PvE 关卡。"}))
+        "可从「旅途」进入全部 597 个旅途关卡。"}))
     hit(355,351,91,141,explain("名人山",{
         "原版名人山入口已还原。",
         "跨服排名和玩家记录需要对应的服务端数据。",
@@ -93,8 +93,8 @@ function M.draw(ui, state, navigate, info)
         "原版仙盟入口已还原。",
         "仙盟成员、捐献与联盟战尚未实现。"}))
     hit(475,116,93,134,explain("活动",{
-        "当前已开放：两章十关本地取经。",
-        "首通银两翻倍，已通关关卡可以重复挑战。",
+        "当前已开放：67 章 597 关旅途。",
+        "首次三星银两翻倍，已通关关卡可以重复挑战。",
         "角色培养、招募与阵容调整均会自动保存。"}))
 
     end
@@ -116,15 +116,15 @@ function M.draw(ui, state, navigate, info)
     shadow(state.silver,hx+hw*.87,hy+hh*.60,16)
     local exp=sprite("v2/exp_bar2.png",hx+hw*.51-335*S/2,hy+hh*.30,S,0,.5)
     local size=exp:getContentSize()
-    exp:setTextureRect(CCRectMake(0,0,size.width*((state.experience%200)/200),size.height))
-    shadow((state.experience%200).."/200",hx+hw*.50,hy+hh*.35,14,nil,true)
+    exp:setTextureRect(CCRectMake(0,0,size.width*math.min(1,state.role_cur_exp/state.role_next_exp),size.height))
+    shadow(state.role_cur_exp.."/"..state.role_next_exp,hx+hw*.50,hy+hh*.35,14,nil,true)
     local level=tostring(state.level)
     for i=1,#level do
         sprite("v2/vip/"..level:sub(i,i)..".png",hx+hw*.335+(i-(#level+1)/2)*17,hy+hh*.32,.70)
     end
     local portrait=sprite("v2/namingUI/head_201.png",37.44,502.2,76.8/94)
     hit(0,463,80,77,explain("本地行者",{
-        "等级 "..state.level.." · 已解锁关卡 "..state.unlocked.."/10",
+        "等级 "..state.level.." · 已解锁关卡 "..state.unlocked.."/"..#state.stages,
         "银两 "..state.silver.." · 元宝 "..(state.gold or 0).." · 体力 "..state.energy.."/60",
         "本地存档自动保存，免账号登录。",
         "元宝用于召唤，VIP 与精力系统尚未启用。"}),portrait)
@@ -144,10 +144,10 @@ function M.draw(ui, state, navigate, info)
     shadow("经验加成",39.36,390,16,{248,222,142},true)
     hit(7,379,68,77,explain("经验加成",{
         "原版入口已还原，当前没有额外经验增益。",
-        "挑战旅途关卡可获得经验，累计每 200 经验升一级。"}),buff)
+        "旅途分别结算神仙经验与行者修为，按原表升级。"}),buff)
 
     local side={
-        {"sign","日常",{"本地旅途：已解锁 "..state.unlocked.."/10 关。","通关、培养与招募功能已开放。","原服签到与每日任务尚未接入。"}},
+        {"sign","日常",{"本地旅途：已解锁 "..state.unlocked.."/"..#state.stages.." 关。","通关、培养与招募功能已开放。","原服签到与每日任务尚未接入。"}},
         {"vip","VIP",{"本地版无需充值或 VIP 即可体验已开放内容。","当前 VIP 等级为 0，没有付费入口。"}},
         {"month","月卡",{"原版月卡入口已还原。","本地版未启用月卡购买与每日领取。"}},
         {"recharge","福利",{"旅途首次通关获得双倍银两。","原服礼包、充值返利与兑换码未接入。"}},

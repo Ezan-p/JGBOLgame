@@ -1,0 +1,21 @@
+{
+  "tests": 158,
+  "result": "passed",
+  "apk_signature": "verified",
+  "device_launch": "passed",
+  "visual_checked": [
+    "home",
+    "characters",
+    "empty essence inventory"
+  ],
+  "not_visual_checked": [
+    "owned essence detail",
+    "conversion confirmation"
+  ],
+  "incomplete": [
+    "original inscription RNG",
+    "original upgrade settlement",
+    "hunt acquisition",
+    "multi-target transform probabilities"
+  ]
+}

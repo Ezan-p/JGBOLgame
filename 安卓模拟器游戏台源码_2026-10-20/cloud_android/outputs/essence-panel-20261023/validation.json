@@ -1,0 +1,30 @@
+{
+  "reference_images": [
+    "IMG_3411.JPG",
+    "IMG_3427.JPG"
+  ],
+  "canvas": [
+    960,
+    540
+  ],
+  "panel": [
+    834,
+    498
+  ],
+  "lineup_slots": 5,
+  "inscription_rows": 4,
+  "level_gate_enabled": false,
+  "tests": "5 essence tests passed",
+  "apk": "built, signature verified, installed and launched",
+  "device_checks": [
+    "level-12 player opens inscription from lineup",
+    "five-slot strip visible",
+    "four locked rows and original art visible",
+    "empty selection opens",
+    "Android back returns to inscription"
+  ],
+  "not_checked": [
+    "populated rows on device; current save has no essence"
+  ],
+  "save_resources_modified": false
+}

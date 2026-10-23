@@ -232,19 +232,14 @@ class CombatProgressionTests(unittest.TestCase):
         with self.game.connect() as c:c.execute('update players set state=? where id=?',(json.dumps(s),self.player))
     def give(self,key,level=1,count=1):
         s=self.raw();grant(s,key,count=count,level=level,catalog=self.c['inventory']);self.save(s);return s['inventory']['entries'][-1]['uid']
-    def test_traits_purchase_upgrade_equip_reject_duplicates_and_retry(self):
-        self.call('bag_buy',key='i10103');uid=self.raw()['inventory']['entries'][-1]['uid']
-        first=self.game.request(self.player,'same-trait','bag_equip',dict(uid=uid,hero=5022))
-        self.assertEqual(first,self.game.request(self.player,'same-trait','bag_equip',dict(uid=uid,hero=5022)))
-        self.call('bag_upgrade',uid=uid)
-        hero=self.game.hero(5022,20,self.raw());self.assertEqual(hero['traits'],[dict(id=10103,level=2)])
-        other=self.give('i10203');before=self.raw()
-        with self.assertRaises(GameError):self.call('bag_equip',uid=other,hero=5022)
-        self.assertEqual(before,self.raw())
-        for ident in (10101,10102,10105):self.call('bag_equip',uid=self.give('i'+str(ident)),hero=5022)
-        uid=self.give('i10106');before=self.raw()
-        with self.assertRaises(GameError):self.call('bag_equip',uid=uid,hero=5022)
-        self.assertEqual(before,self.raw())
+    def test_essence_rejects_local_purchase_free_equip_and_silver_upgrade(self):
+        uid=self.give('i10103');before=self.raw()
+        for op,args in [('bag_buy',dict(key='i10103')),('bag_equip',dict(uid=uid,hero=5022)),('bag_upgrade',dict(uid=uid))]:
+            with self.assertRaises(GameError):self.call(op,**args)
+            self.assertEqual(before,self.raw())
+        # Legacy equipped saves retain their combat effect, without claiming original acquisition.
+        s=self.raw();s['inventory']['entries'][-1]['hero']=5022;self.save(s)
+        self.assertEqual(self.game.hero(5022,20,self.raw())['traits'],[dict(id=10103,level=1)])
     def test_native_level_awaken_materials_and_stats_only_once(self):
         for _ in range(9):self.call('battle_native_upgrade',hero=5022)
         before=self.raw()

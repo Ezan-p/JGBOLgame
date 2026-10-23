@@ -1,4 +1,4 @@
-"""Extract the original journey design; keep it separate from local PvE rules."""
+"""Lossless original journey configuration and native artwork metadata."""
 import json
 from pathlib import Path
 
@@ -40,9 +40,12 @@ def build_journey(game_root):
     skills = {int(v["type_id"]): v for v in rows("csv_config/skill_base.csv")}
     skill_names = {int(v["type_id"]): v for v in rows("csv_config/skill_name.csv")}
     bases = {}
+    enemy_names = {}
     for n in sorted(available):
         if n.startswith("csv_config/cortege/cortege_base_") and n.endswith(".csv"):
             bases.update({int(v["type_id"]): v for v in rows(n)})
+        if n.startswith("csv_config/cortege/cortege_name_") and n.endswith(".csv"):
+            enemy_names.update({int(v["type_id"]): v["name"] for v in rows(n)})
 
     def prizes(raw):
         result = []
@@ -123,7 +126,28 @@ def build_journey(game_root):
                      background=background, drops=prizes(row["random_prize"]),
                      three_star=prizes(row["com_win_prize"]),
                      first_drops=prizes(row["first_random_prize"]),
-                     first_exp=row["first_win_prize"])
+                     first_exp=row["first_win_prize"],
+                     first_win=(dict(zip(("exp_count", "rate"),
+                                         map(int, row["first_win_prize"].split("|"))))
+                                if row["first_win_prize"] else None),
+                     skill_level=int(row["skill_level"]),
+                     daily_reset_limit=int(row["day_flush_count"]),
+                     recommend_level=int(row["recommend_level"]),
+                     level=int(row["level"]), addition=int(row["addition"]),
+                     genius_prob=int(row["genius_prob"]),
+                     formation=[dict(slot=slot, id=int(parts[0]), level=int(parts[1]),
+                                     extra_skills=[int(v) for v in parts[2].split("+") if v]
+                                     if len(parts)>2 else [])
+                                for slot, token in enumerate(row["cortege_list"].split("/"), 1)
+                                if token for parts in [token.split("|")]],
+                     raw_config=row)
+        for unit in stage["formation"]:
+            enemy = bases[unit["id"]]
+            unit.update(name=enemy_names.get(unit["id"], enemy["name"]), native_skill=int(enemy["chushijineng"]),
+                        skill_level=stage["skill_level"], sprite=character_sprite(enemy),
+                        base_stats={stat: int(enemy[field]) for stat, field in
+                                    (("hp", "base_max_hp"), ("attack", "base_gongji"),
+                                     ("defense", "base_fangyu"), ("magic", "base_max_magic"))})
         by_id[mid]["stages"].append(stage)
     for chapter in chapters:
         chapter["stages"].sort(key=lambda s: s["id"])
@@ -131,6 +155,7 @@ def build_journey(game_root):
         "map/mingzidi1.png", "map/mingzidi2.png", "map/mingzidi3.png",
         "v2/subLevelUI/BOSS_bkg.png", "v2/subLevelUI/BOSS_bkg2.png",
         "v2/subLevelUI/char_bkg.png", "v2/subLevelUI/nameBkg.png",
+        "v2/forgeUI/choose_up.png", "v2/forgeUI/choose_mid.png",
         "v2/subLevelUI/start_fight1.png", "v2/subLevelUI/map_mask.png",
         "v2/subLevelUI/head_mid_bkg.png", "v2/introUI/close1.png",
         "v2/packageUI/board_edge1.png", "v2/packageUI/board_edge2.png",
@@ -139,6 +164,10 @@ def build_journey(game_root):
     dependencies.update(ui_files)
     for name in dependencies:
         r.read(name)
-    return dict(schema=1, chapters=chapters, resources=sorted(dependencies),
+    for name in ("csv_config/role_level_config.csv", "csv_config/newbie_content1.csv", "csv_config/newbie_content3.csv",
+                 "lua/ui/fightUI.lua", "lua/ui/mainUI.lua", "lua/ui/mapUI.lua",
+                 "lua/ui/subLevelUI.lua", "lua/common/msg_def.lua"):
+        sources.append(r.source(name))
+    return dict(schema=2, chapters=chapters, resources=sorted(dependencies),
                 sources=[layout["source"], *sources], missing_art=missing_art,
                 notes="Original client reference data. Rate fields are not verified server probabilities.")

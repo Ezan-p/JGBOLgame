@@ -71,7 +71,7 @@ lvLimit = {
   `reference`。神仙经验书不再加行者经验。
 - `local_game/service.py`：
   - `next_exp(quality, level)`：读 `cortege_experience.csv`，得到该级升到下一级所需经验。
-  - `role_level(state)`：主角等级（`1 + 累计修为 // 200`），用于 `lvLimit` 分档。
+  - `role_level(state)`：主角等级（2026-10-23 起按原版 `role_level_config.upgrade_exp` 逐级计算），用于 `lvLimit` 分档。旧存档转换及旅途经验推测见 [JOURNEY.md](JOURNEY.md)。
   - `level_cap(state, quality)`：`min(floor(主角*3), 品质经验表最高级)`。
   - `apply_hero_exp()`：完整复刻 `expbookUI.getExpResult` 的
     `rate 1 / 0.2 / 0`、逐级进位、经验不丢失（仅在硬上限处浪费）。

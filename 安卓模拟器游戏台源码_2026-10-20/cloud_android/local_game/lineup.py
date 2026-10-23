@@ -12,6 +12,7 @@ def build_lineup(game_root):
         hero["name_icon"] = {**hero["icon"], "file": hero["icon"]["file"].replace("_head", "_name")}
         heroes[str(hero["id"])] = hero
     files = {n for n in r.names() if n.startswith("v2/charPositionUI/") and n.endswith(".png")}
+    files.update(n for n in r.names() if n.startswith(("v2/jpmkUI/", "v2/jpUI/")) and n.endswith(".png"))
     files.update([
         "v2/CharaterUI/stars.png", "v2/introUI/stars.png", "v2/CharaterUI/xiaguang.png",
         "v2/CharaterUI/expbar1.png", "v2/CharaterUI/expbar2.png",
@@ -38,6 +39,8 @@ def build_lineup(game_root):
         "v2/trainingUI/giveup1.png", "v2/trainingUI/giveup2.png",
         "v2/trainingUI/up.png", "v2/trainingUI/down.png",
         "v2/introUI/left_scroll.png", "v2/introUI/right_scroll.png",
+        "v2/playerInfoUI/com_bkg2.png", "v2/playerInfoUI/com_label.png", "v2/playerInfoUI/com_num.png",
+        "v2/cheerUI/cheer_head1.png", *[f"v2/cheerUI/{i}4.png" for i in range(1, 9)],
         "v2/playerInfoUI/bkg_mid.png", "v2/playerInfoUI/bkg_frame.png",
         "v2/money_gold.png",
         "v2/buttons/inherit1.png", "v2/buttons/inherit2.png",
@@ -50,7 +53,7 @@ def build_lineup(game_root):
     for file in files:
         if not r.read(file).startswith(b"\x89PNG"):
             raise ValueError("Invalid lineup image: " + file)
-    sources = ["lua/ui/charPositionUI.lua", "lua/data.lua", "csv_config/fate_config.csv"]
+    sources = ["lua/ui/playerInfoUI.lua", "lua/ui/cheerSquadUI.lua", "lua/common/utils.lua", "lua/ui/charPositionUI.lua", "lua/data.lua", "csv_config/fate_config.csv"]
     return {
         "heroes": heroes, "growth_max": book["growth_max"], "spells": book["spells"],
         "positions": [[-.3, .02], [.37, .02], [.03, .37], [.03, -.34],

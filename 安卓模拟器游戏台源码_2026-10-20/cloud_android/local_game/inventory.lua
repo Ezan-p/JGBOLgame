@@ -237,7 +237,7 @@ local function rule(item)
         return "自带法术不可替换。第2、3格可装配法术，不限主动或被动；同一神仙不可重复装备同名法术。"
     end
     if a=="star" then return "原生法术觉醒后可在演武堂装备，最多五颗，同类不重复。" end
-    if a=="trait" then return "每位神仙最多四项特技，同类不能重复；前往阵容的演武堂可兑换、装备和升级。" end
+    if a=="trait" then return "阵容下方可打开精魄铭刻；在神仙→精魄中查看持有精魄、分解与转换。" end
     if a=="cheer_material" then return "在演武堂修炼页，用于助阵法术进修。" end
     if a=="gem" then
         return "灵石1至13级，数值读取stone_cost_worth。升级需同名同类灵石作材料并消耗银两，成功率=材料价值/需求+补偿；失败消耗材料。"
@@ -246,7 +246,7 @@ local function rule(item)
     if a=="energy" then return "使用恢复 "..item.original.strength_plus.." 点体力，上限60。体力已满时不消耗。" end
     if a=="experience" then return "对选中的神仙使用，增加神仙经验 "..item.original.experience_plus.."。受主角等级限制：低于2.5倍全额，2.5~3倍仅20%，3倍封顶；药灵丹不属于神仙经验书。" end
     if a=="train" then return "选择一名神仙提升1级，最高20级。" end
-    if a=="material" then return "熔炼装备或法术获得；每颗可兑换20银两。" end
+    if a=="material" then return "用于精魄升级；不能兑换银两。" end
     if a=="support_material" then return "在阵容的助阵页面消耗乾坤符箓，为八卦阵位进阶。" end
     return "所属系统尚未接入。可查阅原版资料，暂不提供兑换和使用。"
 end
@@ -613,6 +613,10 @@ local function detail()
     label("本地玩法",12,185,20,GOLD,c)
     label(rule(item),12,160,17,MUTED,c,false,650)
     button("完整介绍",745,448,154,function() M.reading=true;M.offset=0;ui.render() end)
+    if item.action=="trait" then
+        label("请在神仙 → 精魄页面管理",480,135,20,MUTED,nil,true)
+        return
+    end
     if M.catalog then
         button(item.price>0 and ("兑换 · "..item.price.." 银两") or "暂未接入",260,135,240,function()
             confirm("花费 "..item.price.." 银两兑换「"..item.name.."」？","bag_buy",{key=item.key})
@@ -645,11 +649,11 @@ local function detail()
             confirm("消耗10个同名碎片，合成对应装备？","bag_compose",{uid=e.uid})
         end,e.count>=10)
     else
-        button(item.action=="material" and "兑换20银两" or "使用",260,135,220,function()
+        button(item.action=="material" and "精魄升级材料" or "使用",260,135,220,function()
             if item.action=="train" then M.choice="train";M.page=1;ui.render()
             elseif item.action=="experience" and expBook then expBook.open(ui,state,e.uid)
             else confirm("消耗1个「"..item.name.."」？\n"..rule(item),"bag_use",{uid=e.uid}) end
-        end,item.action~="reference" and item.action~="support_material" and item.action~="cheer_material")
+        end,item.action~="material" and item.action~="reference" and item.action~="support_material" and item.action~="cheer_material")
     end
 end
 local function choices()
@@ -805,7 +809,7 @@ local function listView()
                     registerButton("enhance"..e.uid,"enhance",e.uid,594,y-20,125,33,n)
                 end
             else
-                label(M.catalog and (item.action=="reference" and "原版资料" or "可兑换")
+                label(M.catalog and ((item.action=="reference" or item.action=="trait") and "原版资料" or "可兑换")
                     or (e.socketed and ("已镶嵌于 "..(e.owner_name or "装备"))
                         or ("数量: "..e.count)),
                     108,y-20,21,{242,191,49},c)

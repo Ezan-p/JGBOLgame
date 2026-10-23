@@ -36,7 +36,7 @@ def main():
         keyfile.chmod(0o600)
     key = keyfile.read_text().strip()
     assets = catalog(game)
-    inventory = build_inventory(game)
+    inventory = assets["inventory"]
     assets["inventory"] = inventory
     synergy = build_synergy(game)
     assets["synergy"] = synergy
@@ -66,6 +66,7 @@ def main():
         "lua/local_stone_upgrade.lua": (ROOT / "local_game/stone_upgrade.lua").read_bytes(),
         "lua/local_enhance.lua": (ROOT / "local_game/enhance.lua").read_bytes(),
         "lua/local_inventory_data.lua": ("return " + lua_literal({"items": inventory["items"], "stones": inventory["stones"], "fates": inventory["fates"]})).encode(),
+        "lua/local_essence.lua": (ROOT / "local_game/essence.lua").read_bytes(),
         "lua/local_lineup.lua": (ROOT / "local_game/lineup.lua").read_bytes(),
         "lua/local_cheer.lua": (ROOT / "local_game/cheer.lua").read_bytes(),
         "lua/local_hero_detail.lua": (ROOT / "local_game/hero_detail.lua").read_bytes(),
@@ -158,7 +159,7 @@ def main():
         "package": PACKAGE, "activity": ACTIVITY, "apk": str(apk),
         "sha256": hashlib.sha256(apk.read_bytes()).hexdigest(),
         "rules": "local-v4", "original_game_modified": False,
-        "features": ["38-live-traits", "75-awakening-stars", "native-awakening-and-spell-advance", "rulai-shield-and-sharing", "elite-arena-guild-story-modes", "uncompressed-native-audio", "original-inventory-ui", "inventory-equip-upgrade-socket-stone-upgrade-use-smelt", "original-equipment-intro-and-stone-detail", "original-spell-intro-and-fates", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "equipped-spell-intro-panel", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "support-level10-refine", "support-passive-tab", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-cortege-module", "original-handbook-ui", "original-journey-ui", "original-summon-ui", "summon-free-timers-and-news", "summon-result-reveal", "local-save", "roster", "upgrade", "all-heroes-recruit", "10-stage-pve"],
+        "features": ["38-live-traits", "75-awakening-stars", "native-awakening-and-spell-advance", "rulai-shield-and-sharing", "elite-arena-guild-story-modes", "uncompressed-native-audio", "original-inventory-ui", "inventory-equip-upgrade-socket-stone-upgrade-use-smelt", "original-equipment-intro-and-stone-detail", "original-spell-intro-and-fates", "original-lineup-ui", "formation-drag-and-replace", "lineup-equipment-picker", "equipped-spell-intro-panel", "original-eight-trigram-support-ui", "support-upgrade-and-stat-transfer", "support-level10-refine", "support-passive-tab", "character-equipment-spell-fates", "original-battle-art-and-ccbi", "eight-slot-paired-reinforcements", "native-and-equipped-spell-procs", "original-home-ui", "original-cortege-module", "original-handbook-ui", "original-journey-ui", "original-summon-ui", "summon-free-timers-and-news", "summon-result-reveal", "local-save", "roster", "upgrade", "all-heroes-recruit", "597-stage-original-journey-config"],
         "journey_counts": {"chapters": len(journey["chapters"]),
                            "stages": sum(len(c["stages"]) for c in journey["chapters"]),
                            "map_positions": sum("x" in c for c in journey["chapters"])},

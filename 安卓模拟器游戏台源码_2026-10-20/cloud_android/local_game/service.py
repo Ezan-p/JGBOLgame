@@ -23,7 +23,7 @@ PORT = 8770
 import sys
 sys.path.insert(0, str(ROOT))
 from local_game.combat import resolve, apply_passives
-from local_game import cortege, power
+from local_game import cortege, power, journey_runtime, role_progression
 from local_game import inventory
 from local_game import synergy
 from local_game import summon as summon_rules
@@ -88,8 +88,8 @@ class Game:
         return table.get(top, 0)
 
     def role_level(self, state):
-        """主角(行者)等级，用于原版 expbookUI 的 lvLimit 分档。"""
-        return 1 + int(state.get("experience", 0)) // 200
+        """Original role thresholds after an explicit legacy-save migration."""
+        return role_progression.info(state, self.catalog["role_levels"])[0]
 
     def level_cap(self, state, quality):
         """原版硬上限：min(floor(主角等级*3), 品质经验表最高级)。"""
@@ -258,6 +258,10 @@ class Game:
         return {h["id"]: h for h in heroes}, None
 
     def view(self, state):
+        # Inventory/formation helpers may normalize their input. A read-only
+        # projection must not mutate the caller's save (including legacy saves).
+        state = copy.deepcopy(state)
+        journey_runtime.restore_progress(state, self.catalog["stages"])
         result = copy.deepcopy(state)
         heroes, support = self.roster(state)
         result["heroes"] = list(heroes.values())
@@ -285,17 +289,15 @@ class Game:
         result["summon"] = summon_rules.view(state, self.catalog)
         for hero in result["heroes"]:
             hero["active"] = hero["id"] in state["lineup"]
-        result["stages"] = [
-            {**s, "unlocked": s["id"] <= state["unlocked"],
-             "cleared": str(s["id"]) in state["wins"]}
-            for s in self.catalog["stages"]
-        ]
+        result["stages"] = journey_runtime.stage_views(state, self.catalog["stages"])
+        result["journey"] = {"rules": "journey-inferred-v1",
+                             "settlement_status": "client_config_inferred_rules_v1"}
         result["recruits"] = [
             {**self.hero(i, 1), "cost": 600}
             for i in self.catalog["recruitable"] if str(i) not in state["heroes"]
         ]
         result["combat_modes"] = battle_modes.MODES
-        result["level"] = self.role_level(state)
+        result["level"], result["role_cur_exp"], result["role_next_exp"] = role_progression.info(state, self.catalog["role_levels"])
         return result
 
     @staticmethod
@@ -320,40 +322,35 @@ class Game:
 
     def battle(self, state, stage_id):
         stages = self.catalog["stages"]
+        journey_runtime.restore_progress(state, stages)
         if not 1 <= stage_id <= len(stages) or stage_id > state["unlocked"]:
             raise GameError("关卡尚未解锁")
-        if state["energy"] < 2:
-            raise GameError("体力不足，每五分钟恢复一点")
+        role_progression.migrate(state, self.catalog["role_levels"])
+        stage = stages[stage_id - 1]
+        if self.role_level(state) < stage["require_level"]:
+            raise GameError("等级不足，需要等级 " + str(stage["require_level"]))
+        if state["energy"] < stage["energy"]:
+            raise GameError("体力不足，需要 " + str(stage["energy"]) + " 点体力")
         if not any(state["lineup"]):
             raise GameError("请至少安排一名角色出战")
-        stage = stages[stage_id - 1]
+        journey = journey_runtime.ensure(state)
+        if journey["daily"].get(str(stage["original_id"]), 0) >= stage["daily_limit"]:
+            raise GameError("今日挑战次数已用完")
         roster, _ = self.roster(state)
         allies = [dict(roster[i], lineup_slot=slot) for slot, i in enumerate(state["lineup"], 1) if i]
-        enemies = copy.deepcopy(self.catalog.get("battle_modes", {}).get("pve", {}).get(str(stage["original_id"])))
-        original_enemies = bool(enemies)
-        enemies = enemies or [self.hero(i, 1) for i in stage["enemies"]]
-        scale = .75 + stage_id * .11
-        for unit in ([] if original_enemies else enemies):
-            for stat in ("hp", "attack", "defense"):
-                unit[stat] = round(unit[stat] * scale)
-        report = resolve(allies, enemies, self.catalog.get("skills", {}), seed=state["battle_count"] * 1009 + stage_id, rules=self.catalog.get("combat_rules"))
-        won = report["won"]
-        first = won and str(stage_id) not in state["wins"]
-        reward = stage["silver"] * (2 if first else 1) if won else 20
-        experience = stage["exp"] if won else 0
-        state["silver"] += reward
-        state["experience"] += experience
-        state["energy"] -= 2
-        state["battle_count"] += 1
-        if won:
-            state["wins"][str(stage_id)] = state["wins"].get(str(stage_id), 0) + 1
-            state["unlocked"] = min(len(stages), max(state["unlocked"], stage_id + 1))
-        return {**report, "stage": stage,
-                "silver": reward, "experience": experience, "first_clear": first,
-                "number": state["battle_count"]}
+        enemies = copy.deepcopy(self.catalog["battle_modes"]["pve"][str(stage["original_id"])])
+        report = resolve(allies, enemies, self.catalog.get("skills", {}),
+                         seed=state["battle_count"] * 1009 + stage_id,
+                         rules=self.catalog.get("combat_rules"))
+        settlement = journey_runtime.settle(self, state, stage, report, self.catalog, allies)
+        return {**report, "stage": stage, **settlement}
 
     def apply(self, state, op, args):
         now = int(time.time())
+        role_progression.migrate(state, self.catalog["role_levels"])
+        state["level"] = self.role_level(state)
+        journey_runtime.ensure(state)
+        journey_runtime.restore_progress(state, self.catalog["stages"])
         state.setdefault("gold", 500)
         state.setdefault("souls", {})
         summon_rules.ensure(state, self.catalog, now)
@@ -498,6 +495,10 @@ class Game:
             if not row and op != "login":
                 raise GameError("请先进入本地存档")
             state = json.loads(row["state"]) if row else self.initial()
+            if state.get("journey", {}).get("star_history_version") != 1:
+                history = con.execute("SELECT response FROM requests WHERE player=?", (player,))
+                journey_runtime.restore_star_history(
+                    state, self.catalog["stages"], (json.loads(r[0]) for r in history))
             response = self.apply(state, op, args)
             con.execute("INSERT OR REPLACE INTO players VALUES (?,?)",
                         (player, json.dumps(state, ensure_ascii=False)))

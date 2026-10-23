@@ -230,12 +230,40 @@ local function rowList()
         end)
         return list
     elseif M.tab=="jp" then
-        return data.essence
+        local list={}
+        for _,e in ipairs((state.inventory and state.inventory.entries) or {}) do
+            for _,meta in ipairs(data.essence) do
+                if e.key=="i"..meta.id then
+                    local row={}; for k,v in pairs(meta) do row[k]=v end
+                    row.instance=e; row.level=e.level; row.count=e.count
+                    list[#list+1]=row
+                end
+            end
+        end
+        table.sort(list,function(a,b)
+            if (a.instance.hero>0)~=(b.instance.hero>0) then return a.instance.hero>0 end
+            if a.quality~=b.quality then return a.quality>b.quality end
+            if a.level~=b.level then return a.level>b.level end
+            if a.id~=b.id then return a.id<b.id end
+            return a.instance.uid<b.instance.uid
+        end)
+        return list
     end
     return data.spirits
 end
 
 local function showItem(entry)
+    if M.tab=="jp" and entry.instance then
+        local e=entry.instance; local info=e.essence or {}
+        local owner=own(e.hero)
+        local body="等级 "..e.level.." / 5  · 数量 "..e.count.."  · "..(owner and owner.name or "未铭刻")
+        body=body.."\n\n"..(info.description or entry.description or "")
+        body=body.."\n\n升级进度："..(info.progress or 0).." / "..(info.progress_target or 0)
+        body=body.."\n升级使用精魄石，单次最多500颗。"
+        body=body.."\n铭刻与升级结算尚待原服证据，当前不会扣除资源。"
+        M.modal={title=entry.name,body=body,essence=e}
+        ui.render(); return
+    end
     local body="品质："..entry.quality.." 星"
     if entry.category then body=body.." · "..entry.category.."界" end
     body=body.."\n数量："..itemCount(entry.id).."\n\n"..(entry.description or "暂无说明")
@@ -243,7 +271,7 @@ local function showItem(entry)
         body=body.."\n\n转化：1 个"..entry.name.."可化为同阵营 "..entry.quality..
               " 星神仙的 1 个魂魄。\n点击右侧「转化」选择神仙。"
     else
-        body=body.."\n\n精魄可在包裹中装配给神仙，提供对应被动属性。"
+        body=body.."\n\n精魄通过38级开启的铭刻系统生效。"
     end
     M.modal={title=entry.name,body=body}
     ui.render()
@@ -268,7 +296,7 @@ local function drawRow(row,index,y,parent)
     elseif M.tab=="souls" then
         count=row.count
     else
-        count=itemCount(row.id); dim=count<=0
+        count=row.count or itemCount(row.id); dim=count<=0
     end
     icon(row,RX0+54,y,92,parent,dim)
     label(row.name,RX0+104,y+23,21,GOLD,parent)
@@ -280,7 +308,7 @@ local function drawRow(row,index,y,parent)
         bottom="数量: "..count
     elseif M.tab=="jp" then
         bottom="数量: "..count
-        local level=itemLevel(row.id)
+        local level=row.level or itemLevel(row.id)
         if level>0 then bottom=bottom.." · 等级 "..level end
     else
         bottom="数量: "..count
@@ -368,7 +396,14 @@ local function drawModal()
     body:setPosition(CCPointMake(170,410))
     body:setColor(ccc3(unpack(PALE)))
     root:addChild(body)
-    label("点击任意处关闭",480,132,14,MUTED,nil,true)
+    if M.modal.essence then
+        local e=M.modal.essence; local info=e.essence or {}
+        label("分解 · 1000银两",330,174,18,e.hero==0 and e.level==1 and GOLD or MUTED,nil,true)
+        label("转换 · 1扭转丹",630,174,18,info.transform_available and e.hero==0 and GOLD or MUTED,nil,true)
+    elseif M.modal.confirmAction then
+        label("确认",480,174,20,GOLD,nil,true)
+    end
+    label("点击其他位置关闭",480,132,14,MUTED,nil,true)
 end
 
 local function candidates(item)
@@ -466,7 +501,20 @@ function M.touch(event,x,y)
     if M.selected then return heroDetail.touch(event,x,y) end
     if M.modal then
         if event==CCTOUCHENDED or event=="ended" then
-            M.modal=nil; ui.render()
+            local modal=M.modal
+            if y>=153 and y<=195 and modal.confirmAction then
+                M.modal=nil; ui.send(modal.confirmAction,{uid=modal.uid})
+            elseif y>=153 and y<=195 and modal.essence then
+                local e=modal.essence; local info=e.essence or {}
+                if e.hero==0 and e.level==1 and (info.progress or 0)==0 and x>=200 and x<=450 then
+                    M.modal={title="确认分解",body="消耗此精魄×1和1000银两，获得 "..(info.decompose_stones or 0).." 颗精魄石。",confirmAction="bag_essence_decompose",uid=e.uid}
+                elseif e.hero==0 and info.transform_available and (info.progress or 0)==0 and x>=510 and x<=750 then
+                    local name=tostring(info.transform_targets[1])
+                    for _,t in ipairs(data.essence) do if t.id==info.transform_targets[1] then name=t.name end end
+                    M.modal={title="确认转换",body="消耗此精魄×1和精魄扭转丹×1，获得 "..name.."×1。",confirmAction="bag_essence_transform",uid=e.uid}
+                else M.modal=nil end
+                ui.render()
+            else M.modal=nil; ui.render() end
         end
         return true
     end

@@ -203,14 +203,26 @@ local function finish()
     applyChanges({changes=report.final_units or {}})
     for _,a in pairs(actors) do pose(a);a.body:setColor(ccc3(255,255,255));a.body:setVisible(a.hp>0 and a.inField);a.info:setVisible(a.hp>0 and a.inField) end
     updateHP();shade(overlay,150)
-    local result=sprite(report.won and 'v2/fightUI/succ2.png' or 'v2/fightUI/fail2.png',overlay,480,340,.7,1)
+    local result=sprite(report.won and ('v2/fightUI/succ'..(report.stars or 2)..'.png') or 'v2/fightUI/fail2.png',overlay,480,340,.7,1)
     if result then result:setScale(math.min(420/result:getContentSize().width,190/result:getContentSize().height)) end
     label(report.preview and '演武结束' or report.result=='draw' and '回合结束 · 平局' or report.won and '战斗胜利' or '战斗结束',overlay,480,232,30,{255,219,146},3)
-    label(report.preview and '演示不消耗体力，不改变存档' or ('银两 +'..report.silver..'    经验 +'..report.experience),overlay,480,190,21,nil,3)
-    if not report.preview then label(report.first_clear and '首通奖励已保存' or '战斗结果已保存',overlay,480,157,16,nil,3) end
-    control('重放战报',240,100,140,function() M.show(ui,report) end)
-    control('返回关卡',580,100,140,function() ui.navigate('stages') end)
-    if report.preview then control('龙腾滔天',410,100,140,function() M.show(ui,D.skill_demo) end) end
+    label(report.preview and '演示不消耗体力，不改变存档' or ('银两 +'..report.silver..'    修为 +'..report.experience..(report.stars and ('    '..string.rep('★',report.stars)) or '')),overlay,480,190,21,nil,3)
+    if not report.preview then
+        local message=report.settlement_status and '结算已保存 · 使用客户端推测规则' or '战斗结果已保存'
+        label(message,overlay,480,157,16,nil,3)
+        local exp={}
+        for _,h in ipairs(report.hero_exp or {}) do table.insert(exp,h.name..' +'..h.gained) end
+        if #exp>0 then
+            local n=label('神仙经验：'..table.concat(exp,' · '),overlay,480,107,15,nil,3)
+            if n:getContentSize().width>850 then n:setScale(850/n:getContentSize().width) end
+        end
+        local rewards={}
+        for _,p in ipairs(report.awarded or {}) do table.insert(rewards,p.name..' ×'..p.count) end
+        if #rewards>0 then label(table.concat(rewards,' · '),overlay,480,130,15,{255,219,146},3) end
+    end
+    control('重放战报',240,64,140,function() M.show(ui,report) end)
+    control('返回关卡',580,64,140,function() ui.navigate('stages') end)
+    if report.preview then control('龙腾滔天',410,64,140,function() M.show(ui,D.skill_demo) end) end
 end
 function M.stop()
     M.active=false

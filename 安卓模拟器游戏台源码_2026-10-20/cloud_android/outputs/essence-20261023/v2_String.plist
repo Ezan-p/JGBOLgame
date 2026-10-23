@@ -1,0 +1,1913 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+       <key>the_new_string_plist</key>
+       <string>此文件已经拆分，请在下面直接添加新文字</string>
+    <key>equip_recycle4</key>
+    <string>轮回获取</string>
+
+    <key>equip_recycle5</key>
+    <string>返还材料</string>
+
+    <key>equip_recycle6</key>
+    <string>暂无可轮回装备</string>
+
+    <key>equip_recycle7</key>
+    <string>轮回材料中包括高价值装备，是否继续</string>
+
+    <key>equip_recycle8</key>
+    <string>请先选择轮回装备</string>
+
+    <key>material_forge1</key>
+    <string>五星灵器是装备6~10阶进阶必备材料</string>
+
+    <key>material_forge2</key>
+    <string>上古水晶是装备3~5阶进阶必备材料</string>
+
+    <key>material_forge3</key>
+    <string>远古水晶是装备6~8阶进阶必备材料</string>
+
+    <key>month_active</key>
+    <string>恭喜您已成功了激活月卡功能</string>
+
+    <key>month_warn</key>
+    <string>月卡快到期了哦~</string>
+
+    <key>month_full</key>
+    <string>您还有充足的月卡时间，暂时不需要续费</string>
+
+    <key>month_exp</key>
+    <string>三天月卡</string>
+
+    <key>month_sale</key>
+    <string>当前无月卡，是否购买月卡</string>
+
+    <key>richman1</key>
+    <string>可兑换数量</string>
+
+    <key>richman2</key>
+    <string>接引佛祖 魂魄X40</string>
+
+    <key>richman3</key>
+    <string>消耗里程</string>
+
+    <key>richman4</key>
+    <string>里程记录</string>
+
+    <key>richman5</key>
+    <string>无剩余兑换次数</string>
+
+    <key>richman6</key>
+    <string>需要更多的里程兑换该奖励</string>
+
+    <key>richman7</key>
+    <string>第%d次</string>
+
+    <key>richman8</key>
+    <string>兑换</string>
+
+    <key>richman9</key>
+    <string>现有元宝</string>
+
+		<key>richman10</key>
+    <string>是否确定兑换%s?</string>
+    
+    <key>richman_desc1</key>
+    <string>蓬莱海岛寻仙去，夹道桃林迎客来</string>
+
+    <key>richman_desc2</key>
+    <string>访客观景赞盈口，杏仙送礼抱满怀</string>
+
+    <key>richman_desc3</key>
+    <string>仙阁坊前谦问道，天官福星笑应门</string>
+
+    <key>richman_desc4</key>
+    <string>驻足半步身暂缓，品茗一杯心净闲</string>
+
+    <key>richman_desc5</key>
+    <string>来者问药求不老，寿星指路赠长生</string>
+
+    <key>advance13</key>
+    <string>缺少</string>
+
+    <key>advance14</key>
+	<string>装备注灵达到七星后即可升阶</string>
+
+    <key>banshu1</key>
+    <string>召唤符数量不足，请前往集市购买</string>
+
+	<key>cross_doom_total_free</key>
+	<string>今天渡劫的免费刷新次数已经用完。</string>
+
+	<key>sec_shop_jifen</key>
+	<string>当前积分：</string>
+
+    <key>devolve1</key>
+	<string>无空闲已飞升五星神仙</string>
+
+    <key>devolve2</key>
+	<string>化凡后的神仙，等级保持不变，已培养的飞升潜能点将根据神仙自身培养情况按比例扣除</string>
+
+    <key>devolve3</key>
+	<string>化凡将飞升等级置为0，返还相应类型的五星界魂</string>
+
+    <key>devolve4</key>
+	<string>请选择已飞升五星神仙</string>
+
+    <key>sec_shop_jifen_time</key>
+	<string>积分重置时间：</string>
+
+	<key>getScoreTripe</key>
+	<string>下次探宝积分将翻三倍！</string>
+
+	<key>getSecJifenOK</key>
+	<string>你获得了10点秘境探宝积分。</string>
+
+	<key>coupon_ret_code_unknow</key>	<string>领取礼包卡失败，错误码：</string>
+	<key>coupon_ret_code_0</key> 	    <string>不能使用自己产生的礼包卡号</string>
+    <key>coupon_ret_code_2</key> 	    <string>该礼包卡号不存在</string>
+	<key>coupon_ret_code_4</key> 	    <string>该礼包卡还没有被领取</string>
+	<key>coupon_ret_code_5</key> 	    <string>该礼包卡号已被使用了</string>
+	<key>coupon_ret_code_6</key> 	    <string>该礼包卡号只能被指定的账号使用</string>
+	<key>coupon_ret_code_7</key> 	    <string>该礼包卡号只能被指定的角色使用</string>
+	<key>coupon_ret_code_8</key> 	    <string>该礼包卡号只能在指定的服务器使用</string>
+	<key>coupon_ret_code_9</key> 	    <string>该礼包卡号只能在指定的平台内使用</string>
+	<key>coupon_ret_code_10</key> 	    <string>该礼包卡号只能在指定的服务器使用</string>
+	<key>coupon_ret_code_12</key> 	    <string>你已经使用过一次该类型的礼包卡了</string>
+	<key>coupon_ret_code_13</key> 	    <string>你已经领取过该类型的礼包卡，不能重复领取</string>
+	<key>coupon_ret_code_14</key> 	    <string>该礼包卡号已过期</string>
+
+    <key>transform1</key>
+	<string>无其他材料可选择</string>
+
+	<key>jy_tollgate_tink1</key> 	    <string>关卡简介：</string>
+	<key>jy_tollgate_tink2</key> 	    <string>释厄总挑战次数：</string>
+	<key>jy_fight_day_limit</key> 	    <string>每天只能挑战释厄30次</string>
+
+	<key>skill_add_65</key> 	                <string>生命增加</string>
+	<key>skill_add_66</key> 	                <string>法力增加</string>
+	<key>skill_add_67</key> 	                <string>攻击力增加</string>
+	<key>skill_add_68</key> 	                <string>防御增加</string>
+	<key>skill_add_all</key> 	                <string>全属性上升</string>
+
+	<key>fight_id_bigger_jy_not_pass</key> 	 <string>请先通过此关卡旅途难度</string>
+
+    <key>black1</key>
+	<string>该玩家已被你拉黑</string>
+
+    <key>black2</key>
+	<string>玩家不在取经或不能被拦截</string>
+
+    <key>black3</key>
+	<string>花费%d元宝可开启云遮雾罩效果</string>
+
+    <key>black4</key>
+	<string>开启后运送经书1小时内仅5分钟可见，且可见时间随机不定</string>
+
+    <key>black5</key>
+	<string>成功拉黑玩家</string>
+
+    <key>black6</key>
+	<string>仙雾迷茫，无法找到目标，只有当云雾散去，方可拦截</string>
+
+    <key>black7</key>
+	<string>运送紫书结束后可获得最高级别的“圣尊的经书袋”</string>
+
+    <key>black8</key>
+	<string>正在</string>
+
+    <key>black9</key>
+	<string>取经中</string>
+
+    <key>black10</key>
+	<string>不能查看自己的阵容</string>
+
+    <key>ask_update_w32</key>
+	<string>与server_list版本不匹配，但win32直接跳过更新!</string>
+
+    <key>rice1</key>
+	<string>包任意粽子都有可能获得神秘的五星粽子哦~</string>
+
+    <key>rice2</key>
+	<string>粽子的材料可以通过旅途、天命之战、蟠桃会获得</string>
+
+    <key>rice3</key>
+	<string>手法超绝</string>
+
+    <key>rice4</key>
+	<string>意外包出了</string>
+
+    <key>rice5</key>
+	<string>材料不足</string>
+
+    <key>eTrans1</key>
+	<string>请选择要重铸的五星装备</string>
+
+    <key>eTrans2</key>
+	<string>请指定重铸后的装备类型</string>
+
+    <key>eTrans3</key>
+	<string>重铸后装备等级、打孔数、升阶等级保留，灵石自动卸下到包裹</string>
+
+    <key>eTrans4</key>
+	<string>无空闲可重铸五星装备</string>
+
+    <key>eTrans4</key>
+	<string>无空闲可重铸五星装备</string>
+
+    <key>eTransTip2</key>
+	<string>请选择空闲五星装备</string>
+
+    <key>eTransTip3</key>
+	<string>只能重铸五星装备</string>
+
+    <key>eTransTip4</key>
+	<string>元宝不足</string>
+
+    <key>crossRank1</key>
+	<string>王者组</string>
+
+    <key>crossRank2</key>
+	<string>本次更换对手花费</string>
+
+    <key>crossRank3</key>
+	<string>免费次数已用尽，付费挑战花费</string>
+
+    <key>crossRank4</key>
+	<string>王者挑战最后阶段: 押金</string>
+
+    <key>crossRank5</key>
+	<string>押金胜利后返还</string>
+
+    <key>crossRank6</key>
+	<string>不能挑战该玩家</string>
+
+    <key>crossRank7</key>
+	<string>当前排名</string>
+
+    <key>crossRank8</key>
+	<string>距离王者争霸赛结束</string>
+
+    <key>crossRank9</key>
+	<string>当前积分</string>
+
+    <key>crossRank10</key>
+	<string>挑战次数</string>
+
+    <key>crossRank11</key>
+	<string>距离比赛结束10分钟内将花费元宝才能挑战玩家，挑战成功则元宝返回，失败不返还</string>
+
+
+	<key>not_act_notice</key>	    <string>当前还没有福利可以领取</string>
+	<key>act_all_tink_botton</key>	<string>达成条件的奖励请在活动结束前领取哦</string>
+
+    <key>crossRank12</key>
+	<string>王者组</string>
+
+    <key>crossRank13</key>
+	<string>普通组</string>
+
+    <key>crossRank14</key>
+	<string>刷新次数已用完，请等待系统刷新对手</string>
+
+    <key>crossRank15</key>
+	<string>普通组</string>
+
+    <key>crossRank16</key>
+	<string>已刷新次数</string>
+
+	<key>haveAccepted</key>
+	<string>已接受邀请</string>
+
+    <key>crossRank17</key>
+	<string>您在本次跨服争霸赛排名第</string>
+
+    <key>crossRank18</key>
+	<string>押金返还</string>
+	
+	<key>crossRank19</key>
+	<string>王者组决赛倒计时</string>
+	
+	<key>crossRank20</key>
+	<string>周六晚上24点排行榜前30名可参与全新赛制的王者组决赛，普通组赛制不变。</string>
+	
+    <key>first_charge_tink1</key>	<string>超值首充，双倍赠送！</string>
+	<key>first_charge_tink2</key>	<string>活动剩余时间：永久</string>
+	<key>first_charge_tink3</key>	<string>翻倍的元宝将在充值成功后直接发放</string>
+	<key>first_charge_tink4</key>	<string>购买月卡可领取额外奖励但不会占用元宝双倍哦</string>
+
+
+	<key>act_name_7</key>	<string>新手成长计划</string>
+	<key>act_name_20</key>	<string>首充送双倍</string>
+	<key>act_name_22</key>	<string>成长基金</string>
+
+	<key>act_name_23</key>	<string>即时充值狂放送</string>
+	<key>act_name_16</key>	<string>上线即有礼</string>
+	<key>act_name_21</key>	<string>VIP嘉年华</string>
+	<key>act_name_2</key>	<string>角逐封神榜</string>
+    <key>act_name_24</key>	<string>团购礼包</string>
+    <key>act_name_32</key>	<string>兑换有礼</string>
+    <key>act_name_33</key>	<string>幸运轮盘</string>
+    <key>act_name_34</key>	<string>回归充值特惠</string>
+    <key>act_name_35</key>	<string>登录送豪礼</string>
+    <key>act_name_36</key>	<string>群雄集结</string>
+    <key>act_name_48</key>	<string>年年有羊</string>
+	<key>grow_fund_title1</key>	<string>成长基金！最高性价比的基金！</string>
+
+    <key>grow_fund_tink11</key>	<string>可累计获得超过</string>
+    <key>grow_fund_tink12</key>	<string>元宝</string>
+
+	<key>fund_not_reach_time</key>	<string>活动进行中，现在还不能领取奖励</string>
+	<key>fund_not_reach_lvl</key>	<string>未能达到活动要求等级，无法领取该奖励</string>
+	<key>fund_not_time_lvl</key>	<string>活动时间内未能达到要求的等级，无法领取该奖励</string>
+
+	<key>grow_fund_tink21</key>	<string>可累计</string>
+	<key>grow_fund_tink22</key>	<string>额度</string>
+
+    <key>grow_fund_tink3</key>	<string>可领首充奖励</string>
+    <key>grow_fund_tink4</key>	<string>不占首充双倍</string>
+    <key>grow_fund_tink5</key>	<string>一人只可购买一次</string>
+
+    <key>grow_fund_right1</key>	<string>级</string>
+	<key>grow_fund_right2</key>	<string>即可领取</string>
+
+    <key>fund_full</key>	<string>你已经购买了成长基金</string>
+	<key>noOpponentList</key>	<string>暂无对手信息</string>
+
+    <key>upgrade_role_t1</key>	<string>等级越高，奖励越好！</string>
+	<key>upgrade_role_t2</key>	<string>活动剩余时间：</string>
+    <key>upgrade_role_t3</key>	<string>天</string>
+    <key>upgrade_role_t4</key>	<string>小时</string>
+    <key>upgrade_role_t5</key>	<string>分钟</string>
+	<key>upgrade_role_t6</key>	<string>活动已结束</string>
+
+
+
+    <key>upgrade_role_t11</key>	<string>最终达到</string>
+    <key>upgrade_role_t12</key>	<string>级，可获得</string>
+
+
+    <key>upgrade_role_t21</key>	<string>玩家当前等级：</string>
+    <key>upgrade_role_t22</key>	<string>最终达成等级：</string>
+    <key>upgrade_role_t23</key>	<string>下级所需经验：</string>
+
+
+    <key>spring_charge_t1</key>	<string>敢充，就敢送！拿到你手软！</string>
+    <key>spring_charge_t2</key>	<string>已累积：%d元</string>
+    <key>spring_charge_t3</key>	<string>充值满</string>
+    <key>spring_charge_t4</key>	<string>即可获赠</string>
+    <key>spring_charge_t5</key>	<string>元</string>
+
+	<key>login_gift_t1</key>	<string>来就送，完全停不下来！</string>
+	<key>login_gift_t2</key>	<string>登录</string>
+	<key>login_gift_t3</key>	<string>第%s天</string>
+	<key>login_gift_t4</key>	<string>即可获赠</string>
+
+	<key>vip_can_t1</key>	<string>一人充值，全民福利！</string>
+	<key>vip_can_t2</key>	<string>VIP等级</string>
+	<key>vip_can_t3</key>	<string>现有人数</string>
+	<key>vip_can_t4</key>	<string>大狂欢</string>
+
+
+
+    <key>cheer_tip5</key>
+	<string>该阵位尚未开启</string>
+
+    <key>cheer_tip6</key>
+	<string>开启该阵位需要</string>
+
+    <key>cheer_tip7</key>
+	<string>是否使用%s开启该阵位</string>
+
+    <key>cheer_tip8</key>
+	<string>阵位尚未开发，此地危险，请速速退去</string>
+
+    <key>cheer_tip9</key>
+	<string>请先开启前方阵位</string>
+
+    <key>smith1</key>
+    <string>随机%s星%s</string>
+
+    <key>smith2</key>
+    <string>请点击左侧空格选择合成材料</string>
+
+    <key>smith3</key>
+    <string>灵器</string>
+
+    <key>smith4</key>
+    <string>水晶</string>
+
+    <key>smith5</key>
+    <string>没有可更换的材料</string>
+
+    <key>smith6</key>
+    <string>技能</string>
+
+    <key>smith7</key>
+    <string>被动</string>
+
+    <key>smith8</key>
+    <string>精魄</string>
+
+    <key>smith9</key>
+    <string>金色精魄</string>
+
+    <key>smith10</key>
+    <string>紫色精魄</string>
+
+    <key>smith11</key>
+    <string>随机%s%s</string>
+
+    <key>mystery1</key>
+    <string>藏宝楼消失时间</string>
+
+    <key>mystery2</key>
+    <string>拥有藏宝图数量</string>
+
+    <key>mystery3</key>
+    <string>限购次数</string>
+
+    <key>mystery4</key>
+    <string>温馨提示: 成功购买物品可以获得同等数额的藏宝阁积分，积分可以在活动区兑换珍贵道具</string>
+
+    <key>mystery5</key>
+    <string>天赐机缘，从藏宝楼购买了</string>
+
+    <key>mystery6</key>
+    <string>可兑换次数</string>
+
+    <key>mystery7</key>
+    <string>我的积分</string>
+
+    <key>mystery8</key>
+    <string>使用后藏宝楼所有物品将全部刷新,是否使用</string>
+
+    <key>sloton</key>
+    <string>镶嵌于</string>
+
+    <key>percent_overflow</key>
+    <string>你选择的灵石升级价值过高，请不要浪费，重新选择！</string>
+
+    <key>check_ensure</key>
+    <string>此操作不可撤回，请勾选再确认</string>
+
+    <key>mystery_result1</key>
+    <string>操作失败</string>
+
+    <key>mystery_result2</key>
+    <string>元宝不足</string>
+
+    <key>mystery_result3</key>
+    <string>银币不足</string>
+
+    <key>mystery_result4</key>
+    <string>积分不足</string>
+
+    <key>mystery_result5</key>
+    <string>商店已经关闭</string>
+
+    <key>mystery_result6</key>
+    <string>购买次数不足</string>
+
+    <key>mystery_result7</key>
+    <string>缺少藏宝图</string>
+
+    <key>mystery_result8</key>
+    <string>只有月卡用户才能购买</string>
+
+	<key>crossReamFightTip</key>
+    <string>上届对阵信息已清除，本届尚未确定八强阵容</string>
+
+    <key>groupon1</key>
+    <string>团购有礼，你买我打折!</string>
+
+    <key>groupon2</key>
+    <string>折</string>
+
+    <key>groupon3</key>
+    <string>已购买</string>
+
+    <key>groupon4</key>
+    <string>份</string>
+
+    <key>groupon5</key>
+    <string>将返还</string>
+
+    <key>groupon6</key>
+    <string>一人一份，送完即止!</string>
+
+    <key>groupon7</key>
+    <string>点击可预览礼包内容</string>
+
+    <key>groupon8</key>
+    <string>礼包即时发放，活动结束后将根据最终价格，邮件返还元宝差价</string>
+
+    <key>groupon9</key>
+    <string>已送完!</string>
+
+    <key>groupon10</key>
+    <string>现已售出</string>
+
+    <key>friends_all_1</key>
+    <string>共计：</string>
+
+    <key>click_enter</key>
+    <string>点击进入</string>
+
+    <key>bonus_plus</key>
+    <string>额外赠送</string>
+
+    <key>sales1</key>
+    <string>每周二、四开启：</string>
+
+    <key>sales2</key>
+    <string>午市 (12:00 - 13:00)</string>
+
+    <key>sales3</key>
+    <string>晚市 (18:00 - 19:00)</string>
+
+    <key>sales4</key>
+    <string>距离下次打折还有</string>
+
+    <key>sales5</key>
+    <string>本轮抢购已结束</string>
+
+    <key>sales6</key>
+    <string>最低成交价</string>
+
+    <key>sales7</key>
+    <string>被抢购完后可购买</string>
+
+    <key>sales8</key>
+    <string>每十分钟进行一次打折，限量供应</string>
+
+    <key>sales9</key>
+    <string>仅剩</string>
+
+    <key>sales10</key>
+    <string>特价</string>
+
+    <key>sales11</key>
+    <string>该出手时就出手!</string>
+
+    <key>sales12</key>
+    <string>限购</string>
+
+    <key>sales13</key>
+    <string>活动开始时间: </string>
+
+    <key>sales14</key>
+    <string>再过%d秒才能再次购买</string>
+
+    <key>sales15</key>
+    <string>自动获取最新信息成功，win32适用</string>
+
+    <key>boss_rank1</key>
+    <string>第%d名</string>
+
+    <key>boss_rank2</key>
+    <string>被赞</string>
+
+    <key>combatHZ</key>
+    <string>战斗力</string>
+
+    <key>monday16</key>
+	<string>本阁将在</string>
+
+    <key>monday17</key>
+	<string>周一</string>
+
+    <key>monday18</key>
+	<string>开业，届时可用玉圭兑换物品，敬请期待~</string>
+
+    <key>monday19</key>
+	<string>今日目标</string>
+
+    <key>monday20</key>
+	<string>未完成</string>
+
+    <key>monday21</key>
+	<string>已完成</string>
+
+    <key>monday22</key>
+	<string>歇业期间，每天可对所有不满的物品申请更换，每件物品限一次</string>
+
+    <key>monday_type_strength</key>
+	<string>消耗1点体力</string>
+
+    <key>monday_type_energy</key>
+	<string>消耗1点精力</string>
+
+    <key>monday_type_duty_fight</key>
+	<string>天命挑战1次</string>
+
+    <key>monday_type_rape_fight</key>
+	<string>渡劫挑战1次</string>
+
+    <key>monday_type_rape_flush</key>
+	<string>渡劫刷新1次</string>
+
+    <key>monday_type_train</key>
+	<string>神仙培养1次</string>
+
+    <key>monday_type_sanxing</key>
+	<string>三星赐福1次</string>
+
+    <key>monday_type_convert</key>
+	<string>天缘召唤1次</string>
+
+    <key>monday_type_tollgate</key>
+	<string>旅途挑战1次</string>
+
+    <key>lub_tink1</key>	<string>新手期间每天可以领取大量极品游戏道具哦！</string>
+	<key>lub_tink2</key>	<string>还可以再领取         天奖励！</string>
+	<key>lub_tink3</key>	<string>经验加成有效期： %d 天</string>
+	<key>lub_tink4</key>	<string>该经验加成将在玩家达到 %d 级时失效，每日限制%d点体力内有效</string>
+	<key>lub_tink5</key>	<string>超过经验加成等级，请领取每天奖励</string>
+	<key>lub_tink6</key>	<string>该经验加成每日限制%d点体力内有效</string>
+	<key>lub_tink_add1</key>	<string>经验加成</string>
+	<key>lub_tink_add2</key>	<string>银两和经验加成:%d%%</string>
+	<key>lub_tink_add3</key>	<string>(其中VIP加成%d%%)</string>
+    <key>hefu_tink_add1</key>	<string>经验加成:%d%%</string>
+
+	<key>hefu_tink1</key>	<string>合服期间每天可以领取大量极品游戏道具哦！</string>
+
+
+    <key>above</key>
+	<string>以上</string>
+
+    <key>choose_one_level</key>
+	<string>请选择一种等级</string>
+
+    <key>extraChallenge</key>
+    <string>可付费挑战次数</string>
+
+    <key>already_changed</key>
+    <string>今日已更换过该物品</string>
+
+    <key>choose_companion</key>
+    <string>请先选择护送令申请对象</string>
+
+    <key>choose_companion_success</key>
+    <string>护送令申请发送成功,请等待对方同意</string>
+
+    <key>praise_limit</key>
+    <string>今天已经赞过该玩家</string>
+
+    <key>need_modify_name</key>
+    <string>请为你的角色取一个新的名字吧。</string>
+
+    <key>need_modify_xm_name</key>
+    <string>请为你的仙盟取一个新的名字吧。</string>
+
+
+    <key>land_name1</key>
+    <string>凡俗之地</string>
+
+    <key>land_name2</key>
+    <string>妖异荒原</string>
+
+    <key>land_name3</key>
+    <string>仙风林谷</string>
+
+    <key>land_name4</key>
+    <string>万佛净土</string>
+
+    <key>plus_name1</key>
+    <string>攻</string>
+
+    <key>plus_name2</key>
+    <string>防</string>
+
+    <key>plus_name3</key>
+    <string>血</string>
+
+    <key>plus_name4</key>
+    <string>法</string>
+
+    <key>land1</key>
+    <string>魂力</string>
+
+    <key>land2</key>
+    <string>更换符咒消耗%d魂力，被替换的符咒不会消失</string>
+
+    <key>land3</key>
+    <string>下一格开启条件：</string>
+
+    <key>land4</key>
+    <string>击杀第%d层BOSS</string>
+
+    <key>land5</key>
+    <string>游荡次数</string>
+
+    <key>land6</key>
+    <string>预计魂力收益</string>
+
+    <key>land7</key>
+    <string>敌人</string>
+
+    <key>land8</key>
+    <string>翻开全部牌可获得额外奖励</string>
+
+    <key>land9</key>
+    <string>本次翻牌消耗为</string>
+
+    <key>land_tower1</key>
+    <string>铁戟堡垒</string>
+
+    <key>land_tower2</key>
+    <string>天风之塔</string>
+
+    <key>land_tower3</key>
+    <string>地渊之塔</string>
+
+    <key>land_tower4</key>
+    <string>千魂之塔</string>
+
+    <key>beiHZ</key>
+    <string>被</string>
+
+    <key>land10</key>
+    <string>击败</string>
+
+    <key>land11</key>
+    <string>掠夺了</string>
+
+    <key>land13</key>
+    <string>带来魂力收益</string>
+
+    <key>land14</key>
+    <string>失去</string>
+
+    <key>land15</key>
+    <string>并损失</string>
+
+    <key>land16</key>
+    <string>抢得对方</string>
+
+    <key>land17</key>
+    <string>失败，被对方反抢</string>
+
+    <key>resourceHZ</key>
+    <string>资源</string>
+
+    <key>land18</key>
+    <string>每两分钟获得: </string>
+
+    <key>land19</key>
+    <string>点击离开将放弃当前资源塔</string>
+
+    <key>land20</key>
+    <string>剩余攻塔次数</string>
+
+    <key>land21</key>
+    <string>已获得魂力</string>
+
+    <key>land22</key>
+    <string>符咒加成效果对玩家无效</string>
+
+    <key>land23</key>
+    <string>点击神仙头像开始挑战</string>
+
+    <key>land24</key>
+    <string>挑战胜利</string>
+
+    <key>land25</key>
+    <string>符咒</string>
+
+    <key>land26</key>
+    <string>前往</string>
+
+    <key>land27</key>
+    <string>已开启全部将位</string>
+
+    <key>land29</key>
+    <string>无可用符咒</string>
+
+    <key>land30</key>
+    <string>游荡次数</string>
+
+    <key>land31</key>
+    <string>攻塔次数</string>
+
+    <key>land32</key>
+    <string>进驻人数</string>
+
+    <key>land33</key>
+    <string>有空余资源点，可直接入驻</string>
+
+    <key>land34</key>
+    <string>无空余资源点，点击挑战占领</string>
+
+    <key>land_menu1</key>
+    <string>本周排行</string>
+
+    <key>land_menu2</key>
+    <string>上周排行</string>
+
+    <key>land_menu3</key>
+    <string>排行奖励</string>
+
+    <key>land35</key>
+    <string>魂力不足</string>
+
+    <key>land36</key>
+    <string>人阵</string>
+
+    <key>land37</key>
+    <string>可贴符</string>
+
+    <key>land38</key>
+    <string>后自动</string>
+
+    <key>land39</key>
+    <string>第%d层</string>
+
+    <key>land40</key>
+    <string>开启</string>
+
+    <key>land41</key>
+    <string>解锁</string>
+
+    <key>land42</key>
+    <string>未开启</string>
+
+    <key>land43</key>
+    <string>已开启</string>
+
+    <key>land44</key>
+    <string>当前地图</string>
+
+    <key>land45</key>
+    <string>解锁第%s号神将位</string>
+
+    <key>land46</key>
+    <string>解锁第%s号符咒位</string>
+
+    <key>land47</key>
+    <string>未知</string>
+
+    <key>land48</key>
+    <string>返还</string>
+
+    <key>land49</key>
+    <string>层数相同，按总魂力排名</string>
+
+    <key>land50</key>
+    <string>每日更新一次，每周结算</string>
+
+    <key>land_tip1</key>
+    <string>游荡次数不足</string>
+
+    <key>land_tip2</key>
+    <string>攻塔次数不足</string>
+
+    <key>land_tip3</key>
+    <string>请先放弃已占领的塔</string>
+
+    <key>land_tip4</key>
+    <string>请先放弃%s的资源塔</string>
+
+    <key>land_tip5</key>
+    <string>需通关第%d层镇魂塔</string>
+
+    <key>land_tip6</key>
+    <string>是否放弃未翻开的奖励进入下一层</string>
+
+    <key>land_tip7</key>
+    <string>占塔期间不能切换地图</string>
+
+    <key>land_tip8</key>
+    <string>攻塔成功，已占领的塔标记为小红旗</string>
+
+    <key>land_tip9</key>
+    <string>攻塔失败</string>
+
+    <key>land_tip10</key>
+    <string>本塔资源已耗尽</string>
+
+    <key>land_tip11</key>
+    <string>建造剩余时间%d秒</string>
+
+    <key>land_tip12</key>
+    <string>恭喜你已通关镇魂塔</string>
+
+    <key>land_tip13</key>
+    <string>今日已扫荡</string>
+
+    <key>land12</key>
+    <string>魂力不足%d,无法更换符咒</string>
+
+    <key>land_tip14</key>
+    <string>组队状态不能切换地图</string>
+
+    <key>land_tip15</key>
+    <string>组队状态只能攻占铁戟堡垒</string>
+
+    <key>land_tip16</key>
+    <string>只有队长才能攻塔</string>
+
+    <key>land_tip17</key>
+    <string>无队伍不能攻占铁戟堡垒</string>
+    <key>jpmk2</key>         <string>已锁定</string>
+    <key>jpmk_name1</key>         <string>反击无效</string>
+
+    <key>jpmk_no_38</key>         <string>等级达到38级才能开启精魄铭刻</string>
+	<key>jpmk_no_38_win32</key>   <string>等级达到38级才能开启精魄铭刻，【win32只进行提示】</string>
+    <key>jpmk_update</key>        <string>升级进度:</string>
+    <key>jpmk_confirm_info</key>  <string>将随机顶掉任意位置精魄(包括紫色精魄)，是否继续</string>
+    <key>jpmk_luck_point</key>    <string>幸运值：</string>
+    <key>jpmk_no_mat</key>        <string>当前没有可以铭刻的精魄</string>
+    <key>jpmk_no_mat2</key>       <string>材料不足，至少需要50个精魄石才能够进行升级</string>
+		<key>jpmk_no_mat3</key>       <string>精魄石不足</string>
+		<key>jpmk_no_target</key>       <string>请先选择铭刻的精魄</string>	
+
+    <key>jpmk_tink1</key>         <string>每次铭刻会随机顶掉一个已装备的精魄(紫色精魄优先顶掉同类型金色精魄)或开启新的格子，开启格子失败会提升幸运值，幸运值越高开启下个格子的概率越高。</string>
+    <key>jpmk_tink2</key>         <string>开启条件：铭刻随机开启或者神仙飞升%d次自动开启。</string>
+    <key>jpmk_tink3</key>         <string>开启条件：铭刻随机开启。</string>
+
+    <key>jpmk_tink4</key>         <string>不可铭刻同品质同类型的精魄</string>
+
+    <key>jpmk_tink5</key>         <string>铭刻将会覆盖同类型低级技能，是否继续</string>
+    <key>jpmk_tink6</key>         <string>紫色精魄可锁定，锁定后该精魄不会被顶掉</string>
+    <key>jpmk_tink7</key>         <string>最多可锁定%d个精魄</string>
+    <key>jpmk_tink8</key>         <string>精魄锁定只对本次铭刻有效</string>
+    <key>jpmk_tink9</key>         <string>有未锁定的紫色精魄，是否继续</string>
+    <key>andSign</key>
+    <string>、</string>
+
+    <key>mainType15HZ</key>
+    <string>精魄</string>
+
+    <key>qColor4</key>
+    <string>金色</string>
+
+    <key>qColor5</key>
+    <string>紫色</string>
+
+    <key>guess1</key>
+    <string>%d年%d月%d日</string>
+
+    <key>guess2</key>
+    <string>今日猜谜次数已用完</string>
+
+    <key>guess3</key>
+    <string>点击文字放入谜底框，答案正确可以获得道具奖励，还有机会获得灯谜锦囊</string>
+
+    <key>exchange1</key>
+    <string>每日6点、12点、18点物品刷新，刷新后可再次兑换</string>
+
+    <key>exchange2</key>
+    <string>兑换信息已过期，正在获取新的兑换信息</string>
+
+    <key>landui_tink1</key>
+    <string>预攻塔期，可以攻占资源塔。魂力收益将在正式攻塔开始后产出</string>
+
+    <key>no_expbook</key>
+    <string>无仙佛密卷可选择</string>
+
+    <key>endless_fight_tink1</key>
+    <string>如前日有额外属性加成且进入排行榜，今日选择继续闯关会扣除额外属性加成</string>
+
+    <key>turn1</key>
+    <string>每日首充可获得</string>
+
+    <key>turn2</key>
+    <string>连续%d日充值可获得</string>
+
+    <key>turn3</key>
+    <string>点击图标查看奖励预览</string>
+
+    <key>turn4</key>
+    <string>星档</string>
+
+    <key>turn5</key>
+    <string>当日充值满%d元(还差%d元)</string>
+
+    <key>turn6</key>
+    <string>不满足轮盘开启条件，是否前往充值？</string>
+
+    <key>turn7</key>
+    <string>点击开始你的转盘</string>
+
+    <key>turn8</key>
+    <string>点击停止你的转盘</string>
+
+    <key>turn9</key>
+    <string>已领取该档奖励</string>
+
+    <key>turn10</key>
+    <string>当日充值任何金额</string>
+
+    <key>team1</key>
+    <string>入队申请已经提交，请等待队长通过</string>
+
+    <key>team2</key>
+    <string>无申请者</string>
+
+    <key>team3</key>
+    <string>请选择操作对象</string>
+
+    <key>team4</key>
+    <string>权限不足</string>
+
+    <key>team5</key>
+    <string>不在可组队时间</string>
+
+    <key>team6</key>
+    <string>不在队伍中</string>
+
+    <key>team7</key>
+    <string>已经在队伍中</string>
+
+    <key>team8</key>
+    <string>最多可接收%d份申请</string>
+
+    <key>team9</key>
+    <string>当前状态不能进行该操作</string>
+
+    <key>team10</key>
+    <string>玩家已加入其他队伍</string>
+
+    <key>hunt1</key>
+    <string>魂值</string>
+
+    <key>hunt2</key>
+    <string>消耗%d摄魂能量</string>
+
+    <key>hunt3</key>
+    <string>弹射%d次</string>
+
+    <key>hunt4</key>
+    <string>请选择兑换摄魂能量的数量:</string>
+
+    <key>hunt5</key>
+    <string>魂值不足</string>
+
+    <key>hunt6</key>
+    <string>物品自动刷新时间为6点</string>
+
+    <key>hunt7</key>
+    <string>达到兑换上限</string>
+
+    <key>hunt8</key>
+    <string>无剩余刷新次数</string>
+
+    <key>hunt9</key>
+    <string>能量不足</string>
+
+    <key>hunt10</key>
+    <string>无剩余发射次数</string>
+
+    <key>hunt11</key>
+    <string>能量已达上限</string>
+
+    <key>hunt12</key>
+    <string>额外奖励</string>
+
+    <key>hunt13</key>
+    <string>不在活动时间</string>
+
+    <key>hunt14</key>
+    <string>您获得%d点魂值</string>
+
+    <key>hunt15</key>
+    <string>兑换</string>
+
+    <key>hunt16</key>
+    <string>单价</string>
+
+    <key>hunt17</key>
+    <string>是否确定刷新?</string>
+
+    <key>hunt18</key>
+    <string>刷新将把捕魂区上所有的神魂重置</string>
+
+    <key>recharge_need_check</key>
+    <string>订单处理中，请稍后查询订单状态</string>
+
+    <key>advance16</key>
+	<string>该技能已参悟</string>
+
+    <key>skillupHighLevel</key>
+    <string>材料中有等级大于1的技能，是否继续？</string>
+
+    <key>qiankunnizhuan_tip</key>
+	<string>该技能已参悟,转换后不保留参悟状态，会返还参悟消耗的材料(1级)</string>
+    <key>info1</key>
+	<string>成就</string>
+
+    <key>info2</key>
+	<string>战力</string>
+
+    <key>info3</key>
+	<string>VIP升级所需(%s): </string>
+
+    <key>info4</key>
+	<string>仙盟</string>
+
+    <key>info5</key>
+	<string>月卡剩余时间: </string>
+
+    <key>info6</key>
+	<string>境界</string>
+
+    <key>qiankunnizhuan_tip</key>
+	<string>该技能已参悟,转换后不保留参悟状态，会返还参悟消耗的材料(1级)</string>
+
+    <key>hunt_guide1</key>
+    <string>1. 点击可选择摄魂珠</string>
+
+    <key>hunt_guide2</key>
+    <string>2. 点击选择摄魂珠发射方向，点击后摄魂珠显示高亮</string>
+
+    <key>hunt_guide3</key>
+    <string>3. 点击此区域可以发射</string>
+
+    <key>hunt_guide4</key>
+    <string>详细了解请点击</string>
+
+    <key>hunt_guide5</key>
+    <string>点击任意地方关闭引导</string>
+
+    <key>collect1</key>
+    <string>组合说明</string>
+
+    <key>collect2</key>
+    <string>无该神仙</string>
+
+    <key>collect3</key>
+    <string>人参果不足</string>
+
+    <key>collect4</key>
+    <string>是否消耗人参果激活该神仙?</string>
+
+    <key>mini1</key>
+    <string>请输入密码</string>
+
+    <key>mini2</key>
+    <string>本关团队可获得分数: %d分</string>
+
+    <key>mini3</key>
+    <string>团队总分: %d分</string>
+
+    <key>mini4</key>
+    <string>答题数: %d</string>
+
+    <key>mini5</key>
+    <string>答对题数: %d</string>
+
+    <key>mini6</key>
+    <string>回合数: %d/%d</string>
+
+    <key>mini7</key>
+    <string>BOSS剩余血量: %d</string>
+
+    <key>mini8</key>
+    <string>猜测次数: %d次</string>
+
+    <key>mini9</key>
+    <string>正确次数: %d次</string>
+
+    <key>mini10</key>
+    <string>本关剩余时间: %d秒</string>
+
+    <key>mini11</key>
+    <string>完成关数: %d关</string>
+
+    <key>mini12</key>
+    <string>通过关数: %d关</string>
+
+    <key>mini13</key>
+    <string>失败关数: %d关</string>
+
+    <key>mini14</key>
+    <string>团队点数</string>
+
+    <key>mini15</key>
+    <string>今日幸运点数</string>
+
+    <key>mini16</key>
+    <string>投掷点数: %d点</string>
+
+    <key>left</key>
+    <string>【</string>
+
+    <key>right</key>
+    <string>】</string>
+
+    <key>mini17</key>
+    <string>规则说明</string>
+
+    <key>mini_name1</key>
+    <string>玩法简介</string>
+
+    <key>mini_name2</key>
+    <string>命运之手</string>
+
+    <key>mini_name3</key>
+    <string>明辨是非</string>
+
+    <key>mini_name4</key>
+    <string>千里仙缘一线牵</string>
+
+    <key>mini18</key>
+    <string>回答正确</string>
+
+    <key>mini19</key>
+    <string>错，请再接再厉</string>
+
+    <key>mini20</key>
+    <string>正确</string>
+
+    <key>mini21</key>
+    <string>错误</string>
+
+    <key>mini22</key>
+    <string>正确答案</string>
+
+    <key>mini23</key>
+    <string>团队答对人数</string>
+
+    <key>mini24</key>
+    <string>团队本题结果</string>
+
+    <key>mini25</key>
+    <string>队伍答案</string>
+
+    <key>mini_mark1</key>
+    <string>呆萌傻</string>
+
+    <key>mini_mark2</key>
+    <string>何弃疗</string>
+
+    <key>mini_mark3</key>
+    <string>酱油党</string>
+
+    <key>mini_mark4</key>
+    <string>你爸妈造么</string>
+
+    <key>mini_mark5</key>
+    <string>坑队友</string>
+
+    <key>mini_mark6</key>
+    <string>狂霸酷炫拽</string>
+
+    <key>mini_mark7</key>
+    <string>么么哒</string>
+
+    <key>mini_mark8</key>
+    <string>人艰不拆</string>
+
+    <key>mini_mark9</key>
+    <string>神操作</string>
+
+    <key>mini_mark10</key>
+    <string>药不能停</string>
+
+    <key>mini_tip1</key>
+    <string>队伍已开始闯关，无法加入</string>
+
+    <key>mini_tip2</key>
+    <string>密码错误</string>
+
+    <key>ann1</key>
+    <string>充值金额活动结束后再赠送等金额元宝</string>
+
+    <key>ann2</key>
+    <string>当前已累计充值</string>
+
+    <key>ann3</key>
+    <string>排%d名</string>
+
+    <key>ann4</key>
+    <string>可额外获得 </string>
+
+    <key>ann5</key>
+    <string>充值满</string>
+
+    <key>ann6</key>
+    <string>活动结束后领取</string>
+	
+	<key>ann6_2</key>
+  <string>通过邮件发放</string>
+  
+  <key>ann6_3</key>
+  <string>已通过邮件发放</string>
+    
+    <key>ann7</key>
+    <string>充值</string>
+
+    <key>ann8</key>
+    <string>前%d名</string>
+
+    <key>ann9</key>
+    <string>已登录%d天</string>
+
+    <key>ann10</key>
+    <string>现有魂魄数量</string>
+
+    <key>ann11</key>
+    <string>每日登录即可免费领取</string>
+
+    <key>ann12</key>
+    <string>每日限购一次，剩余%d天</string>
+
+    <key>ann13</key>
+    <string>老玩家登录送大礼</string>
+
+    <key>ann14</key>
+    <string>等级≥%d级可获得密友码,好友在呼朋唤友界面激活可获得密友礼包一个</string>
+
+    <key>ann15</key>
+    <string>老玩家专属,在%d年%d月%d日后的新服使用可获得专属礼包一个</string>
+
+    <key>ann16</key>
+    <string>我的密友码</string>
+
+    <key>ann17</key>
+    <string>(点击复制礼包码)</string>
+
+    <key>ann_task1</key>
+    <string>每日登录可领取</string>
+
+    <key>ann_task2</key>
+    <string>完成大闹蟠桃会%d次</string>
+
+    <key>ann18</key>
+    <string></string>
+
+    <key>ann_gift1</key>
+    <string>密友礼包</string>
+
+    <key>ann_gift2</key>
+    <string>老兵礼包</string>
+
+    <key>ann_gift3</key>
+    <string>已使用</string>
+
+    <key>ann_gift4</key>
+    <string>回归好友达25级可获密友码，我方填写兑换礼包（需满足群雄集结条件）</string>
+
+    <key>ann_gift5</key>
+    <string>仅最新服务器允许使用，可兑换老兵礼包1个（需满足群雄集结条件）</string>
+
+    <key>ann19</key>
+    <string>我的老兵码</string>
+
+    <key>ann20</key>
+    <string>(最高%d)</string>
+
+    <key>ann21</key>
+    <string>达到最大使用次数</string>
+
+    <key>ann22</key>
+    <string>该服务器无法使用老兵礼包</string>
+
+    <key>tower1</key>
+    <string>天星</string>
+
+    <key>tower2</key>
+    <string>残星</string>
+
+    <key>tower3</key>
+    <string>合计</string>
+
+    <key>tower4</key>
+    <string>选择兑换数量，可兑换 %d / %d</string>
+
+    <key>tower5</key>
+    <string>可使用卡片数量</string>
+
+    <key>tower6</key>
+    <string>本次可购买:</string>
+
+    <key>tower7</key>
+    <string>下次天宫开启:</string>
+
+    <key>tower8</key>
+    <string>免费: %d次</string>
+
+    <key>tower9</key>
+    <string>天星不足</string>
+
+    <key>tower10</key>
+    <string>残星不足</string>
+
+    <key>tower11</key>
+    <string>减%d天星卡</string>
+
+    <key>tower12</key>
+    <string>免费骰子</string>
+
+    <key>tower13</key>
+    <string>在九重天宫处可购买天星卡</string>
+
+    <key>tower14</key>
+    <string>已选择: %d / %d</string>
+
+    <key>tower15</key>
+    <string>前进过程一定几率获得天星卡</string>
+
+    <key>tower16</key>
+    <string>卡片价值超过商品价值部分将会被回收</string>
+
+    <key>tower17</key>
+    <string>卡片价值已经达到商品价格</string>
+
+    <key>tower18</key>
+    <string>该卡片数量达到上限</string>
+		
+		<key>tower19</key>
+    <string>次数</string>
+    
+    <key>tower_desc1</key>
+    <string>正当你小心探秘时，天边类似流星的物品迅速向你飞来，你费了九牛二虎之力降服了流星，惊喜地发现了宝物。</string>
+
+    <key>tower_desc2</key>
+    <string>烈日当空，你寻了一处隐秘的地方进行休息，突然发现你所坐的地方土壤不同其他，你灵机一动，向下挖土，发现了一个宝箱。</string>
+
+    <key>tower_desc3</key>
+    <string>你探秘时发现了一处隐秘的洞穴，你小心翼翼地潜入，看着洞中的宝物震惊狂喜。古人诚不欺我。</string>
+
+    <key>tower_desc4</key>
+    <string>你被绊倒在地。你捡起害你绊倒的物品破口大骂，却突然发现这竟然是宝贝。</string>
+
+    <key>tower_tip1</key>
+    <string>玩家当前坐标</string>
+
+    <key>tower_tip2</key>
+    <string>下一重天传送阵坐标</string>
+
+    <key>tower_tip3</key>
+    <string>累计前进距离</string>
+
+    <key>tower_tip4</key>
+    <string>点击使用进行前进</string>
+
+    <key>tower_tip5</key>
+    <string>点击兑换物品</string>
+
+    <key>buy_amount_limit2</key>
+    <string>活动限售:  %d</string>
+
+    <key>ling1</key>
+    <string>该灵阵尚未可查看</string>
+
+    <key>ling2</key>
+    <string>激活技能:</string>
+
+    <key>ling3</key>
+    <string>开启该阵法需要技能:</string>
+
+    <key>ling4</key>
+    <string>(已达到)</string>
+
+    <key>ling5</key>
+    <string>(未达到)</string>
+
+    <key>ling6</key>
+    <string>激活需要灵石:</string>
+
+    <key>ling7</key>
+    <string>需在左侧灵阵上镶嵌对应灵石，才可激活</string>
+
+    <key>ling8</key>
+    <string>(%d级激活)</string>
+
+    <key>ling9</key>
+    <string>(满)</string>
+
+    <key>ling10</key>
+    <string>激活消耗%d级%s灵石</string>
+
+    <key>ling11</key>
+    <string>选择灵石等级过高，将返还%d个灵丹，是否继续？</string>
+
+    <key>ling12</key>
+    <string>返还灵丹</string>
+
+    <key>ling13</key>
+    <string>兑换灵丹</string>
+
+    <key>ling14</key>
+    <string>共可兑换灵丹</string>
+
+    <key>ling15</key>
+    <string>请先选择灵石</string>
+
+    <key>ling16</key>
+    <string>材料中包含高等级(7级或以上)灵石，是否继续?</string>
+
+    <key>ling17</key>
+    <string>该灵阵尚未开启</string>
+
+    <key>ling18</key>
+    <string>灵阵%d级开放</string>
+
+    <key>ling19</key>
+    <string>灵丹不足，是否使用灵石兑换？</string>
+
+    <key>ling20</key>
+    <string>当前灵阵技能满级可去激活下级灵阵</string>
+
+    <key>ling21</key>
+    <string>左侧灵阵可点击镶嵌灵石、选中技能，右侧显示相关信息以及技能升级。属性加成对所上阵8个神仙有效</string>
+
+    <key>yyb1</key>
+    <string>查询应用宝余额,请稍候</string>
+
+    <key>yyb2</key>
+    <string>余额充足，请求购买道具</string>
+
+    <key>yyb3</key>
+    <string>余额不足，前往充值</string>
+
+    <key>yyb4</key>
+    <string>查询余额失败，请稍后重试</string>
+
+    <key>yyb5</key>
+    <string>购买商品,编号: </string>
+
+    <key>yyb6</key>
+    <string>购买商品成功，请等待发货</string>
+
+    <key>yyb7</key>
+    <string>购买商品失败，请稍后重试</string>
+
+    <key>yyb8</key>
+    <string>票据过期，正在刷新，请稍后重试</string>
+
+    <key>yyb_error1</key>
+    <string>票据过期，正在刷新，请稍后重试</string>
+
+    <key>yyb_error3</key>
+    <string>手机QQ未安装或版本过低</string>
+
+    <key>yyb_error2</key>
+    <string>微信未安装或版本过低</string>
+
+    <key>yyb_error10</key>
+    <string>网络错误，请稍后重试</string>
+
+    <key>McardIntro0</key>
+    <string>每日登录可领取</string>
+
+    <key>land_p1</key>
+    <string>点击可合成或者转换所需符咒</string>
+
+    <key>land_p2</key>
+    <string>点击上方框中符咒进行符咒材料选择</string>
+
+    <key>land_p3</key>
+    <string>主材料决定合成符咒种类(攻防血法)</string>
+
+    <key>chanceHZ</key>
+    <string>概率</string>
+
+    <key>land_p4</key>
+    <string>点击选择符咒材料</string>
+
+    <key>land_p5</key>
+    <string>点击选择转换符咒种类(攻防血法)</string>
+
+    <key>land_p6</key>
+    <string>请先选择主材料</string>
+
+    <key>land_p7</key>
+    <string>%s+%2d%%  概率: %.1f%%</string>
+
+    <key>land_p8</key>
+    <string>至少需要1个副材料才能进行合成</string>
+
+    <key>land_p9</key>
+    <string>请先选择要转换的符咒</string>
+
+    <key>land_p10</key>
+    <string>请先选择转换符咒种类</string>
+
+    <key>land_p11</key>
+    <string>点击选择种类</string>
+
+    <key>land_p12</key>
+    <string>合成暴击，获得</string>
+
+    <key>land_p13</key>
+    <string>合成成功，获得</string>
+
+    <key>land_p14</key>
+    <string>合成失败</string>
+
+    <key>land_p15</key>
+    <string>转换成功，获得</string>
+
+    <key>land_p16</key>
+    <string>自动反击</string>
+
+    <key>land_p17</key>
+    <string>自动攻占千魂之塔</string>
+
+    <key>land_p18</key>
+    <string>被其他玩家攻塔成功时，自动挑战攻塔，消耗1次攻塔次数</string>
+
+    <key>land_p19</key>
+    <string>资源塔被攻下后，自动进入千魂之塔，不消耗攻塔次数</string>
+
+    <key>land_p20</key>
+    <string>需要选中自动反击</string>
+
+    <key>land_p21</key>
+    <string>%s+%d%%</string>
+
+    <key>land_p22</key>
+    <string>概率: %.1f%%</string>
+
+    <key>land_p23</key>
+    <string>每日6:00 - 19:00可组队</string>
+
+    <key>land_p24</key>
+    <string>点击“申请加入”加入已有队伍，点击“创建队伍”建立新队伍</string>
+
+    <key>land_p25</key>
+    <string>你确定要自建一支队伍进行攻塔吗？</string>
+
+    <key>land_p26</key>
+    <string>非组队时间，</string>
+
+    <key>land_p27</key>
+    <string>警告！警告！攻打玩家的资源塔，守方先手！</string>
+		
+		<key>kick1</key>
+    <string>当前积分</string>
+    
+    <key>kick2</key>
+    <string>法力充沛</string>
+    
+    <key>kick3</key>
+    <string>法力衰弱</string>
+    
+    <key>kick4</key>
+    <string>法力枯竭</string>
+    
+    <key>kick5</key>
+    <string>出现仙缘果概率较大</string>
+    
+    <key>kick6</key>
+    <string>出现仙缘果概率降低</string>
+    
+    <key>kick7</key>
+    <string>出现仙缘果概率为零</string>
+    
+    <key>kick8</key>
+    <string>每摘取一次获得一积分且随机获得以上一个物品</string>
+    
+    <key>kick9</key>
+    <string>积分不足，无法领取</string>
+    
+    <key>kick10</key>
+    <string>所需积分</string>
+    
+    <key>kick11</key>
+    <string>(且积分大于%d)</string>
+    
+    <key>kick12</key>
+    <string>积分排行</string>
+    
+    <key>kick13</key>
+    <string>当前积分: </string>
+    
+    <key>kick14</key>
+    <string>当前排行: </string>
+    
+    <key>kick15</key>
+    <string>转换数量选择</string>
+    
+    <key>kick16</key>
+    <string>仙缘果数量</string>
+		
+		<key>kick17</key>
+    <string>获得魂魄</string>
+    
+    <key>kick18</key>
+    <string>若选择的是已拥有的神仙，每次转换可获得魂魄%d个</string>
+    
+    <key>kick19</key>
+    <string>%s等奖（前%d名，且积分达到%d）</string>
+    
+    <key>kick20</key>
+    <string>需同时达到相应积分要求和排名才可获得对应奖励（只获得满足条件的最高档，不可累计），活动结束后以邮件方式发放。</string>
+    
+    <key>kick21</key>
+    <string>每次敲击消耗%d元宝</string>
+    
+		<key>gf_1</key>
+    <string>本盟未报名</string>
+    
+    <key>gf_2</key>
+    <string>本盟已报名</string>
+    
+    <key>gf_3</key>
+    <string>批量转换</string>
+    
+    <key>gf_4</key>
+    <string>跳过动画</string>
+    
+	<key>shop_limit_end_time</key>
+    <string>结束</string>
+    
+    <key>gotHZ</key>
+    <string>已拥有</string>
+    
+    <key>notGotHZ</key>
+    <string>未拥有</string>
+    
+    <key>snow1</key>
+    <string>正在进行“全民堆雪人”活动，目前进度是%d/%d</string>
+    
+    <key>snow2</key>
+    <string>如果你收集到了堆雪人的材料，可直接交给我哦%s，会有惊喜~</string>
+    
+    <key>snow3</key>
+    <string>点击后上交该类型全部材料</string>
+    
+    <key>snow4</key>
+    <string>每个获得%d雪魄</string>
+    
+    <key>snow5</key>
+    <string>当前雪魄</string>
+    
+    <key>snow6</key>
+    <string>我是天上掉下来的有“萌神”之称的圣诞兔，向我许愿可以获得好运，还可以得到奖励哦~快来膜拜萌神我吧！</string>
+    
+    <key>snow7</key>
+    <string>今日许愿次数已用完，期待明日与你相见！</string>
+    
+    <key>snow8</key>
+    <string>雪魄不足</string>
+    
+    <key>snow9</key>
+    <string>没有该类型材料</string>
+    
+    <key>snow10</key>
+    <string>上交%d个%s，共获得%d雪魄</string>
+    
+    <key>snow11</key>
+    <string>(现有：%d个)</string>
+    
+    <key>snow12</key>
+    <string>已经许过愿了哦，请下次再来</string>
+    
+    <key>dream1</key>
+    <string>玩家可获得：</string>
+    
+    <key>dream2</key>
+    <string>对方可获得：</string>
+    
+    <key>dream3</key>
+    <string>只需将图片拼成正确的样子，即可成功解梦。</string>
+    
+    <key>dream4</key>
+    <string>要开始么？</string>
+    
+    <key>dream5</key>
+    <string>已选择好友</string>
+    
+    <key>dream6</key>
+    <string>最多可祝福%d位好友</string>
+    
+    <key>dream7</key>
+    <string>还没有好友，现在去添加吧</string>
+    
+    <key>dream8</key>
+    <string>拼图错误</string>
+    
+		<key>dream9</key>
+    <string>通关，充值%d元</string>
+    
+    <key>dream14</key>
+    <string>请先选择要祝福的好友</string>
+    
+    <key>dream15</key>
+    <string>解梦成功</string>
+    
+    <key>dream16</key>
+    <string>活动已完成</string>
+    
+    <key>dream17</key>
+    <string>献上拳拳心意，助你绽放光华！</string>
+    
+		<key>dream18</key>
+    <string>活动期间充值已满</string>
+    
+    <key>dream19</key>
+    <string>元，点击领取</string>
+    
+    <key>dream20</key>
+    <string>随机开出一件五星装备</string>
+    
+    <key>dream21</key>
+    <string>活动期间充值满</string>
+    
+    <key>dream22</key>
+    <string>元，即可获得</string>
+    
+    <key>dream23</key>
+    <string>点击任意位置继续</string>
+    
+    <key>dream24</key>
+    <string>%s已经接受了%d份祝福，祝福其他的朋友吧</string>
+    
+    <key>dream_name1</key>
+    <string>梦·相遇</string>
+    <key>dream_name2</key>
+    <string>梦·相识</string>
+    <key>dream_name3</key>
+    <string>梦·相知</string>
+    <key>dream_name4</key>
+    <string>梦·相恋</string>
+    <key>dream_name5</key>
+    <string>梦·相爱</string>
+    <key>dream_name6</key>
+    <string>梦·相守</string>
+    
+    <key>dream_wish1</key>
+    <string>第一缕阳光是我对你的深深祝福，夕阳收起的最后一抹嫣红是我对你衷心的问候，在元旦来临之际，送上真挚的祝福：新年快乐！</string>
+    
+    <key>dream_wish2</key>
+    <string>请打开窗，让新春的风吹进你屋子，让新春的雪飞进你屋子，让我新春的祝愿，飘进你的心坎。</string>
+    
+    <key>dream_wish3</key>
+    <string>如果一滴水代表一个祝福，我送你一个东海；如果一颗星代表一份幸福，我送你一条银河；如果一棵树代表一份思念，我送你一片森林。新年快乐!</string>
+    
+    <key>dream_wish4</key>
+    <string>山脉能阻隔天高地远，却阻隔不住深深思念;经纬可以拉开距离，却挡不住真挚的情感;岁月可以流逝华年，朋友再远也会亲密无间。新年来临送去我的祝福片片!</string>
+    
+    <key>nian1</key>
+    <string>今日充值任意金额可获得(充值可增加多宝年兽出现几率)</string>
+    
+    <key>nian2</key>
+    <string>今日礼包</string>
+    
+    <key>nian3</key>
+    <string>额外赠送</string>
+    
+    <key>nian4</key>
+    <string>点击图标查看奖励预览，滑动查看每日充值奖励</string>
+    
+    <key>nian5</key>
+    <string>当日充值任意金额，可获得此奖励，奖励以邮件发送</string>
+    
+    <key>nian6</key>
+    <string>总排行</string>
+    
+    <key>nian7</key>
+    <string>奖励</string>
+    
+    <key>nian8</key>
+    <string>缺少该道具</string>
+    
+    <key>nian9</key>
+    <string>守卫奖励:</string>
+    
+    <key>nian10</key>
+    <string>威慑奖励(触发年兽逃跑):</string>
+    
+    <key>nian11</key>
+    <string>辞岁点</string>
+    
+    <key>nian12</key>
+    <string>炮仗奖励:</string>
+    
+    <key>nian13</key>
+    <string>辞岁点排行</string>
+    
+    <key>nian14</key>
+    <string>辞岁点奖励</string>
+    
+    <key>nian15</key>
+    <string>守卫村庄奖励</string>
+    
+    <key>nian16</key>
+    <string>剩余粮食满</string>
+    
+    <key>nian_name1</key>
+    <string>小年兽</string>
+    
+    <key>nian_name2</key>
+    <string>大年兽</string>
+    
+    <key>nian_name3</key>
+    <string>多宝年兽</string>
+    
+    <key>nian17</key>
+    <string>守卫村庄奖励每日发放，全服玩家均可获得</string>
+    
+    <key>year1</key>
+    <string>新年特惠，扫荡刷新免费</string>
+    
+    <key>year2</key>
+    <string>活动期间，无需攻塔，所有玩家均自动获得当前地图铁戟堡垒魂值</string>
+    
+    </dict>
+</plist>

@@ -85,7 +85,9 @@ local function traits()
             desc=string.gsub(desc,'%%s',string.format('%.2f',pct and value*100 or value)..(pct and '%%' or ''),1)
         else for _,values in ipairs(t.levels) do desc=string.gsub(desc,'%%s',string.format('%.1f',values[level]*100)..'%%',1) end end
         text(desc,105,y+31,15,480)
-        if own then
+        if M.tab~='stars' then
+            text('阵容下方可打开精魄铭刻',610,y+48,14,225)
+        elseif own then
             local e=own
             button(e.hero==h.id and '卸下' or '装备',610,y+25,105,function() request((e.hero==h.id and '卸下' or '装备')..t.name..'？','bag_equip',{uid=e.uid,hero=e.hero==h.id and 0 or h.id}) end)
             button('升级',730,y+25,105,function() request('花费 '..e.upgrade_cost..' 银两升级'..t.name..'？','bag_upgrade',{uid=e.uid}) end,e.level<t.max_level and state.silver>=e.upgrade_cost)

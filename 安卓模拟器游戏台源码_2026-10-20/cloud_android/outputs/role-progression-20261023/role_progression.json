@@ -1,0 +1,1060 @@
+{
+  "levels": {
+    "1": {
+      "level": 1,
+      "upgrade_exp": 40,
+      "win_exp": 5,
+      "lose_exp": 2,
+      "cortege_exp": 70,
+      "cortege_count": 2,
+      "energy_win_exp": 2,
+      "energy_lose_exp": 1
+    },
+    "2": {
+      "level": 2,
+      "upgrade_exp": 110,
+      "win_exp": 10,
+      "lose_exp": 5,
+      "cortege_exp": 100,
+      "cortege_count": 2,
+      "energy_win_exp": 5,
+      "energy_lose_exp": 2
+    },
+    "3": {
+      "level": 3,
+      "upgrade_exp": 120,
+      "win_exp": 15,
+      "lose_exp": 7,
+      "cortege_exp": 160,
+      "cortege_count": 2,
+      "energy_win_exp": 7,
+      "energy_lose_exp": 3
+    },
+    "4": {
+      "level": 4,
+      "upgrade_exp": 270,
+      "win_exp": 20,
+      "lose_exp": 10,
+      "cortege_exp": 200,
+      "cortege_count": 2,
+      "energy_win_exp": 10,
+      "energy_lose_exp": 5
+    },
+    "5": {
+      "level": 5,
+      "upgrade_exp": 325,
+      "win_exp": 25,
+      "lose_exp": 12,
+      "cortege_exp": 215,
+      "cortege_count": 2,
+      "energy_win_exp": 12,
+      "energy_lose_exp": 6
+    },
+    "6": {
+      "level": 6,
+      "upgrade_exp": 550,
+      "win_exp": 30,
+      "lose_exp": 15,
+      "cortege_exp": 267,
+      "cortege_count": 2,
+      "energy_win_exp": 15,
+      "energy_lose_exp": 7
+    },
+    "7": {
+      "level": 7,
+      "upgrade_exp": 750,
+      "win_exp": 35,
+      "lose_exp": 17,
+      "cortege_exp": 295,
+      "cortege_count": 3,
+      "energy_win_exp": 17,
+      "energy_lose_exp": 8
+    },
+    "8": {
+      "level": 8,
+      "upgrade_exp": 900,
+      "win_exp": 40,
+      "lose_exp": 20,
+      "cortege_exp": 307,
+      "cortege_count": 3,
+      "energy_win_exp": 20,
+      "energy_lose_exp": 10
+    },
+    "9": {
+      "level": 9,
+      "upgrade_exp": 1100,
+      "win_exp": 45,
+      "lose_exp": 22,
+      "cortege_exp": 312,
+      "cortege_count": 3,
+      "energy_win_exp": 22,
+      "energy_lose_exp": 11
+    },
+    "10": {
+      "level": 10,
+      "upgrade_exp": 1200,
+      "win_exp": 50,
+      "lose_exp": 25,
+      "cortege_exp": 325,
+      "cortege_count": 3,
+      "energy_win_exp": 25,
+      "energy_lose_exp": 12
+    },
+    "11": {
+      "level": 11,
+      "upgrade_exp": 1500,
+      "win_exp": 55,
+      "lose_exp": 27,
+      "cortege_exp": 335,
+      "cortege_count": 4,
+      "energy_win_exp": 27,
+      "energy_lose_exp": 13
+    },
+    "12": {
+      "level": 12,
+      "upgrade_exp": 2200,
+      "win_exp": 60,
+      "lose_exp": 30,
+      "cortege_exp": 350,
+      "cortege_count": 4,
+      "energy_win_exp": 30,
+      "energy_lose_exp": 15
+    },
+    "13": {
+      "level": 13,
+      "upgrade_exp": 3000,
+      "win_exp": 65,
+      "lose_exp": 32,
+      "cortege_exp": 396,
+      "cortege_count": 4,
+      "energy_win_exp": 32,
+      "energy_lose_exp": 16
+    },
+    "14": {
+      "level": 14,
+      "upgrade_exp": 4100,
+      "win_exp": 70,
+      "lose_exp": 35,
+      "cortege_exp": 465,
+      "cortege_count": 4,
+      "energy_win_exp": 35,
+      "energy_lose_exp": 17
+    },
+    "15": {
+      "level": 15,
+      "upgrade_exp": 5475,
+      "win_exp": 75,
+      "lose_exp": 37,
+      "cortege_exp": 511,
+      "cortege_count": 4,
+      "energy_win_exp": 37,
+      "energy_lose_exp": 18
+    },
+    "16": {
+      "level": 16,
+      "upgrade_exp": 6320,
+      "win_exp": 80,
+      "lose_exp": 40,
+      "cortege_exp": 618,
+      "cortege_count": 4,
+      "energy_win_exp": 40,
+      "energy_lose_exp": 20
+    },
+    "17": {
+      "level": 17,
+      "upgrade_exp": 6800,
+      "win_exp": 85,
+      "lose_exp": 42,
+      "cortege_exp": 750,
+      "cortege_count": 4,
+      "energy_win_exp": 42,
+      "energy_lose_exp": 21
+    },
+    "18": {
+      "level": 18,
+      "upgrade_exp": 7470,
+      "win_exp": 90,
+      "lose_exp": 45,
+      "cortege_exp": 878,
+      "cortege_count": 5,
+      "energy_win_exp": 45,
+      "energy_lose_exp": 22
+    },
+    "19": {
+      "level": 19,
+      "upgrade_exp": 8645,
+      "win_exp": 95,
+      "lose_exp": 47,
+      "cortege_exp": 948,
+      "cortege_count": 5,
+      "energy_win_exp": 47,
+      "energy_lose_exp": 23
+    },
+    "20": {
+      "level": 20,
+      "upgrade_exp": 9900,
+      "win_exp": 100,
+      "lose_exp": 50,
+      "cortege_exp": 1000,
+      "cortege_count": 5,
+      "energy_win_exp": 50,
+      "energy_lose_exp": 25
+    },
+    "21": {
+      "level": 21,
+      "upgrade_exp": 10710,
+      "win_exp": 105,
+      "lose_exp": 52,
+      "cortege_exp": 1070,
+      "cortege_count": 5,
+      "energy_win_exp": 52,
+      "energy_lose_exp": 26
+    },
+    "22": {
+      "level": 22,
+      "upgrade_exp": 11550,
+      "win_exp": 110,
+      "lose_exp": 55,
+      "cortege_exp": 1135,
+      "cortege_count": 5,
+      "energy_win_exp": 55,
+      "energy_lose_exp": 27
+    },
+    "23": {
+      "level": 23,
+      "upgrade_exp": 12190,
+      "win_exp": 115,
+      "lose_exp": 57,
+      "cortege_exp": 1214,
+      "cortege_count": 5,
+      "energy_win_exp": 57,
+      "energy_lose_exp": 28
+    },
+    "24": {
+      "level": 24,
+      "upgrade_exp": 13680,
+      "win_exp": 120,
+      "lose_exp": 60,
+      "cortege_exp": 1345,
+      "cortege_count": 6,
+      "energy_win_exp": 60,
+      "energy_lose_exp": 30
+    },
+    "25": {
+      "level": 25,
+      "upgrade_exp": 14625,
+      "win_exp": 125,
+      "lose_exp": 62,
+      "cortege_exp": 1490,
+      "cortege_count": 6,
+      "energy_win_exp": 62,
+      "energy_lose_exp": 31
+    },
+    "26": {
+      "level": 26,
+      "upgrade_exp": 15730,
+      "win_exp": 130,
+      "lose_exp": 65,
+      "cortege_exp": 1505,
+      "cortege_count": 6,
+      "energy_win_exp": 65,
+      "energy_lose_exp": 32
+    },
+    "27": {
+      "level": 27,
+      "upgrade_exp": 16740,
+      "win_exp": 135,
+      "lose_exp": 67,
+      "cortege_exp": 1594,
+      "cortege_count": 6,
+      "energy_win_exp": 67,
+      "energy_lose_exp": 33
+    },
+    "28": {
+      "level": 28,
+      "upgrade_exp": 17640,
+      "win_exp": 140,
+      "lose_exp": 70,
+      "cortege_exp": 1706,
+      "cortege_count": 6,
+      "energy_win_exp": 70,
+      "energy_lose_exp": 35
+    },
+    "29": {
+      "level": 29,
+      "upgrade_exp": 18995,
+      "win_exp": 145,
+      "lose_exp": 72,
+      "cortege_exp": 1766,
+      "cortege_count": 6,
+      "energy_win_exp": 72,
+      "energy_lose_exp": 36
+    },
+    "30": {
+      "level": 30,
+      "upgrade_exp": 20250,
+      "win_exp": 150,
+      "lose_exp": 75,
+      "cortege_exp": 1811,
+      "cortege_count": 7,
+      "energy_win_exp": 75,
+      "energy_lose_exp": 37
+    },
+    "31": {
+      "level": 31,
+      "upgrade_exp": 22165,
+      "win_exp": 155,
+      "lose_exp": 77,
+      "cortege_exp": 1928,
+      "cortege_count": 7,
+      "energy_win_exp": 77,
+      "energy_lose_exp": 38
+    },
+    "32": {
+      "level": 32,
+      "upgrade_exp": 24000,
+      "win_exp": 160,
+      "lose_exp": 80,
+      "cortege_exp": 2065,
+      "cortege_count": 7,
+      "energy_win_exp": 80,
+      "energy_lose_exp": 40
+    },
+    "33": {
+      "level": 33,
+      "upgrade_exp": 25575,
+      "win_exp": 165,
+      "lose_exp": 82,
+      "cortege_exp": 2125,
+      "cortege_count": 7,
+      "energy_win_exp": 82,
+      "energy_lose_exp": 41
+    },
+    "34": {
+      "level": 34,
+      "upgrade_exp": 26860,
+      "win_exp": 170,
+      "lose_exp": 85,
+      "cortege_exp": 2240,
+      "cortege_count": 7,
+      "energy_win_exp": 85,
+      "energy_lose_exp": 42
+    },
+    "35": {
+      "level": 35,
+      "upgrade_exp": 28175,
+      "win_exp": 175,
+      "lose_exp": 87,
+      "cortege_exp": 2300,
+      "cortege_count": 7,
+      "energy_win_exp": 87,
+      "energy_lose_exp": 43
+    },
+    "36": {
+      "level": 36,
+      "upgrade_exp": 32940,
+      "win_exp": 180,
+      "lose_exp": 90,
+      "cortege_exp": 2330,
+      "cortege_count": 8,
+      "energy_win_exp": 90,
+      "energy_lose_exp": 45
+    },
+    "37": {
+      "level": 37,
+      "upgrade_exp": 35890,
+      "win_exp": 185,
+      "lose_exp": 92,
+      "cortege_exp": 2494,
+      "cortege_count": 8,
+      "energy_win_exp": 92,
+      "energy_lose_exp": 46
+    },
+    "38": {
+      "level": 38,
+      "upgrade_exp": 42370,
+      "win_exp": 190,
+      "lose_exp": 95,
+      "cortege_exp": 2567,
+      "cortege_count": 8,
+      "energy_win_exp": 95,
+      "energy_lose_exp": 47
+    },
+    "39": {
+      "level": 39,
+      "upgrade_exp": 48750,
+      "win_exp": 195,
+      "lose_exp": 97,
+      "cortege_exp": 2706,
+      "cortege_count": 8,
+      "energy_win_exp": 97,
+      "energy_lose_exp": 48
+    },
+    "40": {
+      "level": 40,
+      "upgrade_exp": 54000,
+      "win_exp": 200,
+      "lose_exp": 100,
+      "cortege_exp": 3013,
+      "cortege_count": 8,
+      "energy_win_exp": 100,
+      "energy_lose_exp": 50
+    },
+    "41": {
+      "level": 41,
+      "upgrade_exp": 57400,
+      "win_exp": 205,
+      "lose_exp": 102,
+      "cortege_exp": 3379,
+      "cortege_count": 8,
+      "energy_win_exp": 102,
+      "energy_lose_exp": 51
+    },
+    "42": {
+      "level": 42,
+      "upgrade_exp": 61110,
+      "win_exp": 210,
+      "lose_exp": 105,
+      "cortege_exp": 3684,
+      "cortege_count": 8,
+      "energy_win_exp": 105,
+      "energy_lose_exp": 52
+    },
+    "43": {
+      "level": 43,
+      "upgrade_exp": 64930,
+      "win_exp": 215,
+      "lose_exp": 107,
+      "cortege_exp": 3928,
+      "cortege_count": 8,
+      "energy_win_exp": 107,
+      "energy_lose_exp": 53
+    },
+    "44": {
+      "level": 44,
+      "upgrade_exp": 67320,
+      "win_exp": 220,
+      "lose_exp": 110,
+      "cortege_exp": 4426,
+      "cortege_count": 8,
+      "energy_win_exp": 110,
+      "energy_lose_exp": 55
+    },
+    "45": {
+      "level": 45,
+      "upgrade_exp": 74250,
+      "win_exp": 225,
+      "lose_exp": 112,
+      "cortege_exp": 5115,
+      "cortege_count": 8,
+      "energy_win_exp": 112,
+      "energy_lose_exp": 56
+    },
+    "46": {
+      "level": 46,
+      "upgrade_exp": 77970,
+      "win_exp": 230,
+      "lose_exp": 115,
+      "cortege_exp": 5445,
+      "cortege_count": 8,
+      "energy_win_exp": 115,
+      "energy_lose_exp": 57
+    },
+    "47": {
+      "level": 47,
+      "upgrade_exp": 86480,
+      "win_exp": 235,
+      "lose_exp": 117,
+      "cortege_exp": 5776,
+      "cortege_count": 8,
+      "energy_win_exp": 117,
+      "energy_lose_exp": 58
+    },
+    "48": {
+      "level": 48,
+      "upgrade_exp": 92400,
+      "win_exp": 240,
+      "lose_exp": 120,
+      "cortege_exp": 6128,
+      "cortege_count": 8,
+      "energy_win_exp": 120,
+      "energy_lose_exp": 60
+    },
+    "49": {
+      "level": 49,
+      "upgrade_exp": 98000,
+      "win_exp": 245,
+      "lose_exp": 122,
+      "cortege_exp": 6501,
+      "cortege_count": 8,
+      "energy_win_exp": 122,
+      "energy_lose_exp": 61
+    },
+    "50": {
+      "level": 50,
+      "upgrade_exp": 101500,
+      "win_exp": 250,
+      "lose_exp": 125,
+      "cortege_exp": 6898,
+      "cortege_count": 8,
+      "energy_win_exp": 125,
+      "energy_lose_exp": 62
+    },
+    "51": {
+      "level": 51,
+      "upgrade_exp": 107865,
+      "win_exp": 255,
+      "lose_exp": 127,
+      "cortege_exp": 7318,
+      "cortege_count": 8,
+      "energy_win_exp": 127,
+      "energy_lose_exp": 63
+    },
+    "52": {
+      "level": 52,
+      "upgrade_exp": 113620,
+      "win_exp": 260,
+      "lose_exp": 130,
+      "cortege_exp": 7763,
+      "cortege_count": 8,
+      "energy_win_exp": 130,
+      "energy_lose_exp": 65
+    },
+    "53": {
+      "level": 53,
+      "upgrade_exp": 119780,
+      "win_exp": 265,
+      "lose_exp": 132,
+      "cortege_exp": 8478,
+      "cortege_count": 8,
+      "energy_win_exp": 132,
+      "energy_lose_exp": 66
+    },
+    "54": {
+      "level": 54,
+      "upgrade_exp": 125820,
+      "win_exp": 270,
+      "lose_exp": 135,
+      "cortege_exp": 9258,
+      "cortege_count": 8,
+      "energy_win_exp": 135,
+      "energy_lose_exp": 67
+    },
+    "55": {
+      "level": 55,
+      "upgrade_exp": 132825,
+      "win_exp": 275,
+      "lose_exp": 137,
+      "cortege_exp": 10038,
+      "cortege_count": 8,
+      "energy_win_exp": 137,
+      "energy_lose_exp": 68
+    },
+    "56": {
+      "level": 56,
+      "upgrade_exp": 139440,
+      "win_exp": 280,
+      "lose_exp": 140,
+      "cortege_exp": 10818,
+      "cortege_count": 8,
+      "energy_win_exp": 140,
+      "energy_lose_exp": 70
+    },
+    "57": {
+      "level": 57,
+      "upgrade_exp": 143640,
+      "win_exp": 285,
+      "lose_exp": 142,
+      "cortege_exp": 11598,
+      "cortege_count": 8,
+      "energy_win_exp": 142,
+      "energy_lose_exp": 71
+    },
+    "58": {
+      "level": 58,
+      "upgrade_exp": 150220,
+      "win_exp": 290,
+      "lose_exp": 145,
+      "cortege_exp": 12378,
+      "cortege_count": 8,
+      "energy_win_exp": 145,
+      "energy_lose_exp": 72
+    },
+    "59": {
+      "level": 59,
+      "upgrade_exp": 157825,
+      "win_exp": 295,
+      "lose_exp": 147,
+      "cortege_exp": 13158,
+      "cortege_count": 8,
+      "energy_win_exp": 147,
+      "energy_lose_exp": 73
+    },
+    "60": {
+      "level": 60,
+      "upgrade_exp": 163200,
+      "win_exp": 300,
+      "lose_exp": 150,
+      "cortege_exp": 13938,
+      "cortege_count": 8,
+      "energy_win_exp": 150,
+      "energy_lose_exp": 75
+    },
+    "61": {
+      "level": 61,
+      "upgrade_exp": 184220,
+      "win_exp": 305,
+      "lose_exp": 152,
+      "cortege_exp": 14718,
+      "cortege_count": 8,
+      "energy_win_exp": 152,
+      "energy_lose_exp": 76
+    },
+    "62": {
+      "level": 62,
+      "upgrade_exp": 187240,
+      "win_exp": 310,
+      "lose_exp": 155,
+      "cortege_exp": 15498,
+      "cortege_count": 8,
+      "energy_win_exp": 155,
+      "energy_lose_exp": 77
+    },
+    "63": {
+      "level": 63,
+      "upgrade_exp": 218610,
+      "win_exp": 315,
+      "lose_exp": 157,
+      "cortege_exp": 16278,
+      "cortege_count": 8,
+      "energy_win_exp": 157,
+      "energy_lose_exp": 78
+    },
+    "64": {
+      "level": 64,
+      "upgrade_exp": 222080,
+      "win_exp": 320,
+      "lose_exp": 160,
+      "cortege_exp": 17058,
+      "cortege_count": 8,
+      "energy_win_exp": 160,
+      "energy_lose_exp": 80
+    },
+    "65": {
+      "level": 65,
+      "upgrade_exp": 245050,
+      "win_exp": 325,
+      "lose_exp": 162,
+      "cortege_exp": 17838,
+      "cortege_count": 8,
+      "energy_win_exp": 162,
+      "energy_lose_exp": 81
+    },
+    "66": {
+      "level": 66,
+      "upgrade_exp": 248820,
+      "win_exp": 330,
+      "lose_exp": 165,
+      "cortege_exp": 18618,
+      "cortege_count": 8,
+      "energy_win_exp": 165,
+      "energy_lose_exp": 82
+    },
+    "67": {
+      "level": 67,
+      "upgrade_exp": 304180,
+      "win_exp": 335,
+      "lose_exp": 167,
+      "cortege_exp": 19398,
+      "cortege_count": 8,
+      "energy_win_exp": 167,
+      "energy_lose_exp": 83
+    },
+    "68": {
+      "level": 68,
+      "upgrade_exp": 308720,
+      "win_exp": 340,
+      "lose_exp": 170,
+      "cortege_exp": 20178,
+      "cortege_count": 8,
+      "energy_win_exp": 170,
+      "energy_lose_exp": 85
+    },
+    "69": {
+      "level": 69,
+      "upgrade_exp": 417450,
+      "win_exp": 345,
+      "lose_exp": 172,
+      "cortege_exp": 20958,
+      "cortege_count": 8,
+      "energy_win_exp": 172,
+      "energy_lose_exp": 86
+    },
+    "70": {
+      "level": 70,
+      "upgrade_exp": 635250,
+      "win_exp": 350,
+      "lose_exp": 175,
+      "cortege_exp": 21738,
+      "cortege_count": 8,
+      "energy_win_exp": 175,
+      "energy_lose_exp": 87
+    },
+    "71": {
+      "level": 71,
+      "upgrade_exp": 965955,
+      "win_exp": 355,
+      "lose_exp": 177,
+      "cortege_exp": 22518,
+      "cortege_count": 8,
+      "energy_win_exp": 177,
+      "energy_lose_exp": 88
+    },
+    "72": {
+      "level": 72,
+      "upgrade_exp": 979560,
+      "win_exp": 360,
+      "lose_exp": 180,
+      "cortege_exp": 23298,
+      "cortege_count": 8,
+      "energy_win_exp": 180,
+      "energy_lose_exp": 90
+    },
+    "73": {
+      "level": 73,
+      "upgrade_exp": 1324950,
+      "win_exp": 365,
+      "lose_exp": 182,
+      "cortege_exp": 24078,
+      "cortege_count": 8,
+      "energy_win_exp": 182,
+      "energy_lose_exp": 91
+    },
+    "74": {
+      "level": 74,
+      "upgrade_exp": 1343100,
+      "win_exp": 370,
+      "lose_exp": 185,
+      "cortege_exp": 24858,
+      "cortege_count": 8,
+      "energy_win_exp": 185,
+      "energy_lose_exp": 92
+    },
+    "75": {
+      "level": 75,
+      "upgrade_exp": 2040750,
+      "win_exp": 375,
+      "lose_exp": 187,
+      "cortege_exp": 25638,
+      "cortege_count": 8,
+      "energy_win_exp": 187,
+      "energy_lose_exp": 93
+    },
+    "76": {
+      "level": 76,
+      "upgrade_exp": 2067960,
+      "win_exp": 380,
+      "lose_exp": 190,
+      "cortege_exp": 26418,
+      "cortege_count": 8,
+      "energy_win_exp": 190,
+      "energy_lose_exp": 95
+    },
+    "77": {
+      "level": 77,
+      "upgrade_exp": 2619540,
+      "win_exp": 385,
+      "lose_exp": 192,
+      "cortege_exp": 27198,
+      "cortege_count": 8,
+      "energy_win_exp": 192,
+      "energy_lose_exp": 96
+    },
+    "78": {
+      "level": 78,
+      "upgrade_exp": 2653560,
+      "win_exp": 390,
+      "lose_exp": 195,
+      "cortege_exp": 27978,
+      "cortege_count": 8,
+      "energy_win_exp": 195,
+      "energy_lose_exp": 97
+    },
+    "79": {
+      "level": 79,
+      "upgrade_exp": 3583440,
+      "win_exp": 395,
+      "lose_exp": 197,
+      "cortege_exp": 28758,
+      "cortege_count": 8,
+      "energy_win_exp": 197,
+      "energy_lose_exp": 98
+    },
+    "80": {
+      "level": 80,
+      "upgrade_exp": 3628800,
+      "win_exp": 400,
+      "lose_exp": 200,
+      "cortege_exp": 29538,
+      "cortege_count": 8,
+      "energy_win_exp": 200,
+      "energy_lose_exp": 100
+    },
+    "81": {
+      "level": 81,
+      "upgrade_exp": 4592700,
+      "win_exp": 405,
+      "lose_exp": 202,
+      "cortege_exp": 30318,
+      "cortege_count": 8,
+      "energy_win_exp": 202,
+      "energy_lose_exp": 101
+    },
+    "82": {
+      "level": 82,
+      "upgrade_exp": 4649400,
+      "win_exp": 410,
+      "lose_exp": 205,
+      "cortege_exp": 31098,
+      "cortege_count": 8,
+      "energy_win_exp": 205,
+      "energy_lose_exp": 102
+    },
+    "83": {
+      "level": 83,
+      "upgrade_exp": 5647320,
+      "win_exp": 415,
+      "lose_exp": 207,
+      "cortege_exp": 31878,
+      "cortege_count": 8,
+      "energy_win_exp": 207,
+      "energy_lose_exp": 103
+    },
+    "84": {
+      "level": 84,
+      "upgrade_exp": 5715360,
+      "win_exp": 420,
+      "lose_exp": 210,
+      "cortege_exp": 32658,
+      "cortege_count": 8,
+      "energy_win_exp": 210,
+      "energy_lose_exp": 105
+    },
+    "85": {
+      "level": 85,
+      "upgrade_exp": 6747300,
+      "win_exp": 425,
+      "lose_exp": 212,
+      "cortege_exp": 33438,
+      "cortege_count": 8,
+      "energy_win_exp": 212,
+      "energy_lose_exp": 106
+    },
+    "86": {
+      "level": 86,
+      "upgrade_exp": 6826680,
+      "win_exp": 430,
+      "lose_exp": 215,
+      "cortege_exp": 34218,
+      "cortege_count": 8,
+      "energy_win_exp": 215,
+      "energy_lose_exp": 107
+    },
+    "87": {
+      "level": 87,
+      "upgrade_exp": 7892640,
+      "win_exp": 435,
+      "lose_exp": 217,
+      "cortege_exp": 34998,
+      "cortege_count": 8,
+      "energy_win_exp": 217,
+      "energy_lose_exp": 108
+    },
+    "88": {
+      "level": 88,
+      "upgrade_exp": 7983360,
+      "win_exp": 440,
+      "lose_exp": 220,
+      "cortege_exp": 35778,
+      "cortege_count": 8,
+      "energy_win_exp": 220,
+      "energy_lose_exp": 110
+    },
+    "89": {
+      "level": 89,
+      "upgrade_exp": 10092600,
+      "win_exp": 445,
+      "lose_exp": 222,
+      "cortege_exp": 36558,
+      "cortege_count": 8,
+      "energy_win_exp": 222,
+      "energy_lose_exp": 111
+    },
+    "90": {
+      "level": 90,
+      "upgrade_exp": 10206000,
+      "win_exp": 450,
+      "lose_exp": 225,
+      "cortege_exp": 37338,
+      "cortege_count": 8,
+      "energy_win_exp": 225,
+      "energy_lose_exp": 112
+    },
+    "91": {
+      "level": 91,
+      "upgrade_exp": 12383280,
+      "win_exp": 455,
+      "lose_exp": 227,
+      "cortege_exp": 38118,
+      "cortege_count": 8,
+      "energy_win_exp": 227,
+      "energy_lose_exp": 113
+    },
+    "92": {
+      "level": 92,
+      "upgrade_exp": 12519360,
+      "win_exp": 460,
+      "lose_exp": 230,
+      "cortege_exp": 38898,
+      "cortege_count": 8,
+      "energy_win_exp": 230,
+      "energy_lose_exp": 115
+    },
+    "93": {
+      "level": 93,
+      "upgrade_exp": 14764680,
+      "win_exp": 465,
+      "lose_exp": 232,
+      "cortege_exp": 39678,
+      "cortege_count": 8,
+      "energy_win_exp": 232,
+      "energy_lose_exp": 116
+    },
+    "94": {
+      "level": 94,
+      "upgrade_exp": 14923440,
+      "win_exp": 470,
+      "lose_exp": 235,
+      "cortege_exp": 40458,
+      "cortege_count": 8,
+      "energy_win_exp": 235,
+      "energy_lose_exp": 117
+    },
+    "95": {
+      "level": 95,
+      "upgrade_exp": 17236800,
+      "win_exp": 475,
+      "lose_exp": 237,
+      "cortege_exp": 41238,
+      "cortege_count": 8,
+      "energy_win_exp": 237,
+      "energy_lose_exp": 118
+    },
+    "96": {
+      "level": 96,
+      "upgrade_exp": 17418240,
+      "win_exp": 480,
+      "lose_exp": 240,
+      "cortege_exp": 42018,
+      "cortege_count": 8,
+      "energy_win_exp": 240,
+      "energy_lose_exp": 120
+    },
+    "97": {
+      "level": 97,
+      "upgrade_exp": 19799640,
+      "win_exp": 485,
+      "lose_exp": 242,
+      "cortege_exp": 42798,
+      "cortege_count": 8,
+      "energy_win_exp": 242,
+      "energy_lose_exp": 121
+    },
+    "98": {
+      "level": 98,
+      "upgrade_exp": 20003760,
+      "win_exp": 490,
+      "lose_exp": 245,
+      "cortege_exp": 43578,
+      "cortege_count": 8,
+      "energy_win_exp": 245,
+      "energy_lose_exp": 122
+    },
+    "99": {
+      "level": 99,
+      "upgrade_exp": 22453200,
+      "win_exp": 495,
+      "lose_exp": 247,
+      "cortege_exp": 44358,
+      "cortege_count": 8,
+      "energy_win_exp": 247,
+      "energy_lose_exp": 123
+    }
+  },
+  "sources": [
+    {
+      "resource": "csv_config/role_level_config.csv",
+      "version": "ver====1061====",
+      "filename": "7851377c4c4c1ed167cfb34ce2523576.data",
+      "sha256": "5e4fc1adcd1e7bd1858ac5441051215df3775d4fb68c03f0d913419c7861672a",
+      "export": "csv_config_role_level_config.csv"
+    },
+    {
+      "resource": "lua/ui/mainUI.lua",
+      "version": "ver====1061====",
+      "filename": "a33bc645b8130d51788cbf924f3d4373.data",
+      "sha256": "85fbce7b3cc35d01f3e0fbfe94197af942491cdf5b1104fe23c0c97f641208ac",
+      "export": "lua_ui_mainUI.lua"
+    },
+    {
+      "resource": "lua/ui/playerInfoUI.lua",
+      "version": "ver====1061====",
+      "filename": "0caea3e9e3c1ec0bc78b9040192dcb5a.data",
+      "sha256": "c51aa2b83e5e42e92697589007696ee9c131431fa092c70a73102171dd6ccd92",
+      "export": "lua_ui_playerInfoUI.lua"
+    },
+    {
+      "resource": "lua/ui/fightUI.lua",
+      "version": "ver====1263====",
+      "filename": "a2d4463e544fae37d9e2840657a2d557.data",
+      "sha256": "a6104c9674ef71fe6d0321656b05483d0b960e1e00ed640d37aaeddc36d2c33b",
+      "export": "lua_ui_fightUI.lua"
+    },
+    {
+      "resource": "lua/ui/saodangUI.lua",
+      "version": "ver====1061====",
+      "filename": "f90d00e2e9ae35fa3b1a9971236d8aa8.data",
+      "sha256": "daab49878cf6f1163834b1a7f012771e7e071ad43a0a5931640710afdc557894",
+      "export": "lua_ui_saodangUI.lua"
+    },
+    {
+      "resource": "lua/ui/snowmanUI.lua",
+      "version": "ver====1061====",
+      "filename": "34cb349fd4b47f0e730c96ee35b4bd18.data",
+      "sha256": "52b2c1a12f4a2171774e8a919455a9645a31030004cc4718efe92eaf109a387b",
+      "export": "lua_ui_snowmanUI.lua"
+    },
+    {
+      "resource": "lua/ui/levelUpBuffUI.lua",
+      "version": "ver====1061====",
+      "filename": "3da7e90f41db9cc8a00e957f1957526f.data",
+      "sha256": "337e7e76f77b1fe3444927bd0d87bb15510fb840e4bbe4f876a384a2eb41b254",
+      "export": "lua_ui_levelUpBuffUI.lua"
+    },
+    {
+      "resource": "lua/common/msg_def.lua",
+      "version": "ver====1263====",
+      "filename": "eed8397c035c76f1453edbfbadc57720.data",
+      "sha256": "1d5ab534f8619438a5680b0062da31bf38d8cf6eebd9e0324aee8b39695e4cd8",
+      "export": "lua_common_msg_def.lua"
+    },
+    {
+      "resource": "v2/String2.plist",
+      "version": "ver====1061====",
+      "filename": "463d76698bbe3b77b55189912fe0dc24.data",
+      "sha256": "e33c4ef6d9c9cdaf709f40e8f9b7e747a804f8d1ef5fefbf0c26ccd47c4ecf60",
+      "export": "v2_String2.plist"
+    }
+  ],
+  "settlement": "Original table values; local selection of reward columns; server formula unavailable"
+}

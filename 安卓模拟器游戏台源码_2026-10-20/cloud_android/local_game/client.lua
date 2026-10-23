@@ -331,6 +331,10 @@ render = function()
                 hit=function(x,y,w,h,action,enabled,node,retry)
                     table.insert(buttons,{x=x,y=y,w=w,h=h,action=action,enabled=enabled,node=node,retry=retry})
                 end,
+                openCheer=function(slot)
+                    cheer.open();if slot then cheer.slot=slot end
+                    page="cheer";homeInfo=nil;render()
+                end,
                 openTraining=function(ident)
                     training.open(ident,"lineup")
                     page="training"; render()

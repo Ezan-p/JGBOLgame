@@ -105,7 +105,7 @@ class InventoryTests(unittest.TestCase):
 
     def unlock_stones(self, silver=None):
         state = self.raw()
-        state["experience"] = 1800
+        state["experience"] = sum(v["upgrade_exp"] for k,v in self.catalog["role_levels"].items() if int(k)<10)
         if silver is not None:
             state["silver"] = silver
         self.save(state)
@@ -228,8 +228,10 @@ class InventoryTests(unittest.TestCase):
         self.call("bag_buy", key="i4002")
         self.assertEqual(self.entry("i4002")["level"], 1)
         old = self.raw()["silver"]
-        self.call("bag_use", uid=self.entry("i10000")["uid"])
-        self.assertEqual(self.raw()["silver"], old+20)
+        before = self.raw()
+        with self.assertRaises(GameError):
+            self.call("bag_use", uid=self.entry("i10000")["uid"])
+        self.assertEqual(self.raw(), before)
 
     def test_original_three_socket_numbers_and_stone_gate(self):
         from local_game.inventory import SOCKET_SLOTS, stone_base

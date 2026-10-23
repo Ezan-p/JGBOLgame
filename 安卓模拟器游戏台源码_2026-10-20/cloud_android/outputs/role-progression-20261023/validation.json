@@ -1,0 +1,24 @@
+{
+  "tests": {
+    "passed_in_sandbox": 146,
+    "passed_network_retry": 7,
+    "total": 153
+  },
+  "player_rows_unchanged": false,
+  "health": {
+    "ok": true,
+    "service": "jingubang-local",
+    "rules": "local-v4"
+  },
+  "apk_sha256": "c35d90b063d7f1c7100a3947fc54905958d4f0208cbfb213032c5ec9b0dbaf0c",
+  "apk_install": "Success",
+  "app_launch": "Status: ok",
+  "save_changes": {
+    "energy": [
+      59,
+      60
+    ],
+    "timestamps": "saved_at and energy_time advanced on login"
+  },
+  "progression_and_assets_unchanged": true
+}

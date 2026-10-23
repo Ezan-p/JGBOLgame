@@ -1,0 +1,408 @@
+{
+  "sources": [
+    {
+      "resource": "csv_config/ext_skill.csv",
+      "version": "ver====1263====",
+      "filename": "1e3c583e1fd996e302b5dc96362666be.data",
+      "sha256": "9549dd69e49c345e40428404d37421dc56b25a827f6878bb032cbcfafdf544e1",
+      "export": "csv_config_ext_skill.csv"
+    },
+    {
+      "resource": "csv_config/ext_skill_lock_cost.csv",
+      "version": "ver====1263====",
+      "filename": "d82fc3af8b1e2b0d124d83f475115b89.data",
+      "sha256": "fa345eee52a0623da36f1726952eff6ecff63082170fe43f5828f2a92e13183b",
+      "export": "csv_config_ext_skill_lock_cost.csv"
+    },
+    {
+      "resource": "csv_config/jingpo_transform.csv",
+      "version": "ver====1263====",
+      "filename": "f990f82e03176bec88e988bd69a6c6fa.data",
+      "sha256": "3cf2570a56f909926847cc097ab344e01c43579a324dd2b08ab21273aabd5b63",
+      "export": "csv_config_jingpo_transform.csv"
+    },
+    {
+      "resource": "csv_config/material_transform.csv",
+      "version": "ver====1263====",
+      "filename": "075b7c7280103a57990a3cefb7b2379d.data",
+      "sha256": "721600560fcd4919aabbb435df6ea1b65576201e3f6e4fcbb50ae27c01159936",
+      "export": "csv_config_material_transform.csv"
+    },
+    {
+      "resource": "csv_config/hunt_ball_config.csv",
+      "version": "ver====1061====",
+      "filename": "561da753f7904cd4d5a8ac3739721eea.data",
+      "sha256": "09a252037fbe39345530fc5df1efdc219de26f072c8d2e29856cf047e84caf21",
+      "export": "csv_config_hunt_ball_config.csv"
+    },
+    {
+      "resource": "csv_config/hunt_soul_config.csv",
+      "version": "ver====1061====",
+      "filename": "ad9e5ceeab298d3d4424d66e88999b36.data",
+      "sha256": "277baec0414df179efa4b23b379db34c0dadd511f62ab7977137d96cfaf2d689",
+      "export": "csv_config_hunt_soul_config.csv"
+    },
+    {
+      "resource": "csv_config/hunt_day_prize.csv",
+      "version": "ver====1061====",
+      "filename": "3ca6cfb83682974f862d9fc30da5b6ff.data",
+      "sha256": "b1cbcfd3c3efd4debca4045c9aca925d49de5fcfde1828db2cd10549099a668e",
+      "export": "csv_config_hunt_day_prize.csv"
+    },
+    {
+      "resource": "csv_config/hunt_week_prize.csv",
+      "version": "ver====1061====",
+      "filename": "9e4b79abba3c34a33f92b20618729341.data",
+      "sha256": "e9d45cf4893d8884c446dc7cd34428d8a0292145b9d45b0202e1dffd345dba3e",
+      "export": "csv_config_hunt_week_prize.csv"
+    },
+    {
+      "resource": "csv_config/item_base.csv",
+      "version": "ver====1263====",
+      "filename": "4eeb205ef86ae5b637b358873accb9ab.data",
+      "sha256": "3d221883ab4086aa384424e938241c96153687e232e8ab51e74cb2108fbfbfb5",
+      "export": "csv_config_item_base.csv"
+    },
+    {
+      "resource": "csv_config/item_name.csv",
+      "version": "ver====1263====",
+      "filename": "84e94b4428947157442b732280106228.data",
+      "sha256": "1d4252cbf90e24a39cd48a99d1613b4dfc65ef89e51761c0459225b83d2d38b5",
+      "export": "csv_config_item_name.csv"
+    },
+    {
+      "resource": "csv_config/skill_ext_base.csv",
+      "version": "ver====1061====",
+      "filename": "09fac8b225c4a684e5e4e738705adf88.data",
+      "sha256": "bdae33a78fce3b32a82e9760b57f92648aad8ce7405e39ec1c70131a6247584d",
+      "export": "csv_config_skill_ext_base.csv"
+    },
+    {
+      "resource": "csv_config/skill_ext_name.csv",
+      "version": "ver====1061====",
+      "filename": "2779e0113d5c457756fd2920d9a69087.data",
+      "sha256": "bdd71218bb57ba1737b65c9ee0f9ffd9e194f73afc1a999a803912221507392b",
+      "export": "csv_config_skill_ext_name.csv"
+    },
+    {
+      "resource": "lua/ui/jpUI.lua",
+      "version": "ver====1061====",
+      "filename": "92b424d2061c5b3105eaa301739f6fd3.data",
+      "sha256": "b9945572fde1796903120d60ab21c9afb89f67cea81dc1475714d494058a7c57",
+      "export": "lua_ui_jpUI.lua"
+    },
+    {
+      "resource": "lua/ui/jpUI.lua",
+      "export": "lua_ui_jpUI.decompiled.lua",
+      "sha256": "d05c1bb730e2261c2b209eac839586c6c37c5234c8e27c3330a503c580bc3044",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "lua/ui/jpmkUI.lua",
+      "version": "ver====1061====",
+      "filename": "1617901578f20a08c0d6ba17a018ad02.data",
+      "sha256": "0ca64fe47240813c57b9c23b7da950348c74c631fa124a99ebfe5521ec83737d",
+      "export": "lua_ui_jpmkUI.lua"
+    },
+    {
+      "resource": "lua/ui/jpmkUI.lua",
+      "export": "lua_ui_jpmkUI.decompiled.lua",
+      "sha256": "d24a4bf47aaa93b751b30df08fdacb05c34131b90bb9ef0bc5c33c62a654315a",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "lua/ui/lineupUI.lua",
+      "version": "ver====1263====",
+      "filename": "1581f9ded261ae0e45ea540c4ffec29e.data",
+      "sha256": "45e6c01b758344d001abd22d84bac729b6bca93f1c6a3553792bd06991c308de",
+      "export": "lua_ui_lineupUI.lua"
+    },
+    {
+      "resource": "lua/ui/lineupUI.lua",
+      "export": "lua_ui_lineupUI.decompiled.lua",
+      "sha256": "5ceee34cdb15f58f6cd894881d25f8f9d840c7fcf11f89c0528b557a949b5db1",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "lua/ui/smithUI.lua",
+      "version": "ver====1061====",
+      "filename": "6325d03fee313c8b9acbff7513167e6e.data",
+      "sha256": "225257a75700ec1ece1a9312155ef5a60e3d50d07f3db7dedfab016c00cba468",
+      "export": "lua_ui_smithUI.lua"
+    },
+    {
+      "resource": "lua/ui/smithUI.lua",
+      "export": "lua_ui_smithUI.decompiled.lua",
+      "sha256": "bedeafdd2fdb6ca52665e0efa7b4725bcc71235a399f4938b819a9ec573d2684",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "lua/ui/packageUI.lua",
+      "version": "ver====1263====",
+      "filename": "7217a84e47bd7209f3d40111fb0f906a.data",
+      "sha256": "a078d593faf73362826b0c83a0c565afaec9962b9f09f0da1e40e2800dba8cc8",
+      "export": "lua_ui_packageUI.lua"
+    },
+    {
+      "resource": "lua/ui/packageUI.lua",
+      "export": "lua_ui_packageUI.decompiled.lua",
+      "sha256": "7b1e7b729eaad9e195bb8ccca7ec1439531dd543b2de7850201457b2c50164da",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "lua/ui/formationUI.lua",
+      "version": "ver====1061====",
+      "filename": "3782148d6d2695efa262a58e04724c77.data",
+      "sha256": "b1ed12b8f73b4a5dfd0f79e7c833a9c79185c6e08634f49a26522dc8d1533469",
+      "export": "lua_ui_formationUI.lua"
+    },
+    {
+      "resource": "lua/ui/formationUI.lua",
+      "export": "lua_ui_formationUI.decompiled.lua",
+      "sha256": "d9c238454778503b6cdac16402e37636a9127467805a7de79d8c793f1a5ac3ce",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "lua/common/msg_def.lua",
+      "version": "ver====1263====",
+      "filename": "eed8397c035c76f1453edbfbadc57720.data",
+      "sha256": "1d5ab534f8619438a5680b0062da31bf38d8cf6eebd9e0324aee8b39695e4cd8",
+      "export": "lua_common_msg_def.lua"
+    },
+    {
+      "resource": "lua/common/msg_def.lua",
+      "export": "lua_common_msg_def.decompiled.lua",
+      "sha256": "8517555e389b5523419e7f91c4af502bf5a2e955055b68e4cdb89eb4523e1472",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "lua/skill/skillExt.lua",
+      "version": "ver====1263====",
+      "filename": "8ffaf0ac047166a2759e04ab67f379f4.data",
+      "sha256": "b19379db52975347c467fb20fc9a3bda27c6a07d52f5f2048f0976dea878b072",
+      "export": "lua_skill_skillExt.lua"
+    },
+    {
+      "resource": "lua/skill/skillExt.lua",
+      "export": "lua_skill_skillExt.decompiled.lua",
+      "sha256": "a667099e15c19be83e32cfedc7b82b53db932857236593f85672f6e2346b7b52",
+      "provenance": "Decompiled from resolved original bytes exported alongside"
+    },
+    {
+      "resource": "v2/String.plist",
+      "version": "ver====1061====",
+      "filename": "ca57c7d6d974d37a6b69a0b52f5937cd.data",
+      "sha256": "09454159dbd3286d25793ac13035798fe17949023fbb083a1bc532bd2fafc5dc",
+      "export": "v2_String.plist"
+    }
+  ],
+  "rules": {
+    "open_level": 38,
+    "max_level": 5,
+    "upgrade_progress": [
+      500,
+      1000,
+      1500,
+      3000
+    ],
+    "lock_cost": {
+      "1": 100,
+      "2": 300,
+      "3": 700,
+      "4": 1000
+    },
+    "decompose": {
+      "102": {
+        "category": "102",
+        "src_material": "5|10101|1|1/5|10102|1|1/5|10103|1|1/5|10104|1|1/5|10105|1|1/5|10106|1|1/5|10107|1|1/5|10108|1|1/5|10109|1|1/5|10110|1|1/5|10111|1|1/5|10112|1|1/5|10113|1|1/5|10114|1|1/5|10115|1|1/5|10116|1|1/5|10117|1|1/5|10118|1|1/5|10119|1|1",
+        "cost_material": "12|1|1|1000",
+        "is_random": "0",
+        "des_material": "5|10000|1|20",
+        "min_role_level": "0",
+        "desc": "精魄可分解成精魄石"
+      },
+      "103": {
+        "category": "103",
+        "src_material": "5|10201|1|1/5|10202|1|1/5|10203|1|1/5|10204|1|1/5|10205|1|1/5|10206|1|1/5|10207|1|1/5|10208|1|1/5|10209|1|1/5|10210|1|1/5|10211|1|1/5|10212|1|1/5|10213|1|1/5|10214|1|1/5|10215|1|1/5|10216|1|1/5|10217|1|1/5|10218|1|1/5|10219|1|1",
+        "cost_material": "12|1|1|1000",
+        "is_random": "0",
+        "des_material": "5|10000|1|100",
+        "min_role_level": "0",
+        "desc": "精魄可分解成精魄石"
+      }
+    },
+    "transforms": {
+      "10207": {
+        "category": "10207",
+        "src_material": "5|10207|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10211|1|1|0/5|10212|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10211": {
+        "category": "10211",
+        "src_material": "5|10211|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10207|1|1|0/5|10212|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10212": {
+        "category": "10212",
+        "src_material": "5|10212|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10207|1|1|0/5|10211|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10215": {
+        "category": "10215",
+        "src_material": "5|10215|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10202|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10202": {
+        "category": "10202",
+        "src_material": "5|10202|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10215|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10209": {
+        "category": "10209",
+        "src_material": "5|10209|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10216|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10216": {
+        "category": "10216",
+        "src_material": "5|10216|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10209|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10201": {
+        "category": "10201",
+        "src_material": "5|10201|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10218|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10218": {
+        "category": "10218",
+        "src_material": "5|10218|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10201|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10213": {
+        "category": "10213",
+        "src_material": "5|10213|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10214|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10214": {
+        "category": "10214",
+        "src_material": "5|10214|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10213|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10206": {
+        "category": "10206",
+        "src_material": "5|10206|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10210|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10210": {
+        "category": "10210",
+        "src_material": "5|10210|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10206|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10203": {
+        "category": "10203",
+        "src_material": "5|10203|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10208|1|1|0/5|10204|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10208": {
+        "category": "10208",
+        "src_material": "5|10208|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10203|1|1|0/5|10204|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10204": {
+        "category": "10204",
+        "src_material": "5|10204|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10203|1|1|0/5|10208|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10219": {
+        "category": "10219",
+        "src_material": "5|10219|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10217|1|1|0/5|10205|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10217": {
+        "category": "10217",
+        "src_material": "5|10217|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10219|1|1|0/5|10205|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      },
+      "10205": {
+        "category": "10205",
+        "src_material": "5|10205|1|1",
+        "cost_material": "5|1342|1|1",
+        "is_random": "1",
+        "des_material": "5|10219|1|1|0/5|10217|1|1|0",
+        "min_role_level": "38",
+        "desc": "精魄转换"
+      }
+    }
+  }
+}

@@ -19,9 +19,12 @@ def build_modes(r):
                 if not token:continue
                 parts=token.split('|');ident=int(parts[0]);level=int(parts[1]);b=bases[ident]
                 picture=character_sprite(b)
-                if picture not in available:continue
+                if picture not in available:
+                    raise ValueError(f"Missing encounter sprite: {path}:{row[key]}:{ident}")
                 native=int(b['chushijineng']);extra=[int(s) for s in parts[2].split('+') if s] if len(parts)>2 else []
-                spell_ids=list(dict.fromkeys([native]+extra))[:3]
+                spell_ids=list(dict.fromkeys([native]+extra))
+                if len(spell_ids)>3:
+                    raise ValueError(f"Encounter has more than three spells: {row[key]}:{ident}")
                 u=dict(id=ident,name=names.get(ident,names.get(int(b.get('base_type_id',0)),{})).get('name',b['name']),
                        sprite=picture,quality=int(b['quality']),category=CATEGORIES[int(b['category'])],
                        level=level,lineup_slot=slot,skill_id=native,skill_name=skillnames.get(native,'普通攻击'),
@@ -29,7 +32,9 @@ def build_modes(r):
                 for stat,base,growth in [('hp','base_max_hp','base_maxhp_plus'),('attack','base_gongji','base_gongji_plus'),('defense','base_fangyu','base_fangyu_plus'),('magic','base_max_magic','base_maxmagic_plus')]:
                     u[stat]=rounded(float(b[base])+float(b.get(growth,0))*(level-1))
                 units.append(u)
-            if units and len(units)<=8:result[row[key]]=units
+            if not units or len(units)>8:
+                raise ValueError(f"Invalid encounter: {path}:{row[key]}")
+            result[row[key]]=units
         return result
     return dict(pve=encounters('csv_config/tollgate_config.csv','id'),
                 elite=encounters('csv_config/elite/elite_tollgate_config.csv','tollgate_id'))
@@ -74,8 +79,10 @@ def fight(game,state,mode,error):
     first=0 if mode!='arena' or sum(u['magic'] for u in allies)>=sum(u['magic'] for u in enemies) else 1
     report=resolve(allies,enemies,game.catalog['skills'],seed=state['battle_count']*1009+sum(map(ord,mode)),rules=rules,mode=mode,first_side=first)
     reward=(min(600,20+report['total_damage'][0]//50) if mode=='guild' else (300 if report['won'] else 20))
-    exp=50 if report['won'] else 0
-    state['silver']+=reward;state['experience']+=exp;state['energy']-=rule['energy'];state['battle_count']+=1
+    from .role_progression import award_battle
+    # All current local modes spend the shared stamina (体力) pool.
+    exp=award_battle(state,game.catalog['role_levels'],report['won'])
+    state['silver']+=reward;state['energy']-=rule['energy'];state['battle_count']+=1
     record['attempts']+=1;record['wins']+=int(report['won']);record['score']+=report['total_damage'][0] if mode=='guild' else 20 if report['won'] else 0
     return {**report,'stage':dict(id=0,name=rule['name'],background='map/special/xmz.jpg' if mode in ('arena','guild') else 'map/special/pty.jpg'),
             'silver':reward,'experience':exp,'first_clear':False,'number':state['battle_count'],'score':record['score']}

@@ -8,12 +8,12 @@ local CREAM={239,211,156}
 local RED={188,106,81}
 local mapWidth=9000
 
-local function image(file,x,y,w,h,parent)
+local function image(file,x,y,w,h,parent,z)
     local n=CCSprite:create(file)
     if not n then return end
     local s=n:getContentSize()
     n:setScaleX(w/s.width); n:setScaleY((h or w*s.height/s.width)/s.height)
-    n:setPosition(CCPointMake(x,y)); local target=parent or root; target:addChild(n)
+    n:setPosition(CCPointMake(x,y)); local target=parent or root; target:addChild(n,z or 0)
     return n
 end
 local function text(value,x,y,size,color,parent,center,width)
@@ -128,14 +128,14 @@ local function header()
     text("0",608,526,18,GOLD,nil,true)
     image("v2/Stamina2.png",123,516,20); text(state.energy.."/60",140,516,16)
     image("v2/Energy2.png",222,516,20); text("—",239,516,16)
-    image("v2/money_gold.png",681,516,29); text("0",699,516,16)
+    image("v2/money_gold.png",681,516,29); text(state.gold or 0,699,516,16)
     image("v2/money_silver.png",778,516,26); text(state.silver,795,516,16)
     local exp=CCSprite:create("v2/exp_bar2.png")
     local size=exp:getContentSize()
-    exp:setTextureRect(CCRectMake(0,0,size.width*(state.experience%200)/200,size.height))
+    exp:setTextureRect(CCRectMake(0,0,size.width*math.min(1,state.role_cur_exp/state.role_next_exp),size.height))
     exp:setScaleX(240/size.width); exp:setScaleY(10/size.height)
     exp:setAnchorPoint(CCPointMake(0,.5)); exp:setPosition(CCPointMake(360,500)); root:addChild(exp)
-    text("Lv."..state.level.."     "..(state.experience%200).."/200",480,501,13,nil,nil,true)
+    text("Lv."..state.level.."     "..state.role_cur_exp.."/"..state.role_next_exp,480,501,13,nil,nil,true)
 end
 local function reward(entry,x,y)
     local colors={{115,110,99},{84,158,58},{40,134,220},{205,153,35},{178,69,196}}
@@ -169,9 +169,10 @@ local function detail()
     image(s.background,447,109,894,350,content)
     fill(0,0,894,218,{22,16,14,146},content)
     image("v2/subLevelUI/map_mask.png",480,299,894,27)
+    local current=localStage(s.id)
     local lines={
         "关卡:  "..s.name, "体力消耗:  "..s.energy, "限制等级:  "..s.require_level,
-        "神仙经验:  "..s.exp, "奖励银两:  "..s.silver, "每日挑战上限:  "..s.daily_limit,
+        "神仙经验:  "..s.exp, "奖励银两:  "..s.silver, "今日挑战:  "..(current and current.daily_used or 0).."/"..s.daily_limit,
     }
     for i,v in ipairs(lines) do text(v,47,474-(i-1)*32,19,RED) end
     text("有几率获得:",344,447,25,GOLD,nil,true)
@@ -207,15 +208,20 @@ local function detail()
         image("v2/subLevelUI/nameBkg.png",x,24,178,29,cards)
         text(stage.name,x,24,20,CREAM,cards,true)
         local ls=localStage(stage.id)
-        if ls and ls.cleared then text("已通关",x,67,16,GOLD,cards,true) end
+        if ls and (ls.stars or 0)>0 then
+            local stars=CCSprite:create("v2/introUI/stars.png")
+            local size=stars:getContentSize()
+            stars:setTextureRect(CCRectMake(0,0,size.width*ls.stars/5,size.height))
+            stars:setScale(1.5)
+            stars:setPosition(CCPointMake(x,90)); cards:addChild(stars,5)
+        end
         if i==M.selected then
             local bw=stage.boss>0 and 182 or 178
-            fill(x-bw/2,43,bw,3,{255,216,103,255},cards)
-            fill(x-bw/2,187,bw,3,{255,216,103,255},cards)
-            fill(x-bw/2,43,3,147,{255,216,103,255},cards)
-            fill(x+bw/2-3,43,3,147,{255,216,103,255},cards)
+            image("v2/forgeUI/choose_mid.png",x,115,bw,122,cards)
+            image("v2/forgeUI/choose_up.png",x,180,bw,22,cards)
+            image("v2/forgeUI/choose_up.png",x,50,bw,22,cards):setFlipY(true)
             if ls and ls.unlocked then
-                image("v2/subLevelUI/start_fight1.png",x,66,138,40,cards)
+                image("v2/subLevelUI/start_fight1.png",x,74,136.5,nil,cards,10)
             else
                 text(ls and "尚未解锁" or "关卡预览",x,66,16,CREAM,cards,true)
             end
@@ -252,19 +258,9 @@ local function popup()
     if p.reward then
         text(p.reward.name,480,382,28,GOLD,nil,true)
         text(p.reward.description,263,345,20,CREAM,nil,false,434)
-        text("数量 "..p.reward.count.." · 原版奖励预览",480,227,16,CREAM,nil,true)
+        text("数量 "..p.reward.count.." · 配置 rate="..p.reward.rate,480,227,16,CREAM,nil,true)
         button("返回关卡",389,174,182,36,function() M.popup=nil; ui.render() end)
-    else
-        local s=p.stage
-        text(s.name,480,382,27,GOLD,nil,true)
-        text("本地挑战",480,339,22,CREAM,nil,true)
-        text("消耗 2 体力 · 经验 "..s.exp,480,304,20,CREAM,nil,true)
-        text("银两 "..s.silver.." · 首通翻倍",480,271,20,CREAM,nil,true)
-        text("原版道具与三星奖励尚未接入结算",480,230,17,RED,nil,true)
-        button("返回",265,174,170,36,function() M.popup=nil; ui.render() end)
-        button("开战",525,174,170,36,function()
-            M.popup=nil; ui.send("battle",{stage=s.id})
-        end,state.energy>=2)
+
     end
 end
 function M.draw(context,player)
@@ -323,9 +319,9 @@ function M.touch(event,x,y)
                 local i=math.floor((x-30+M.cardOffset)/250)+1
                 if c.stages[i] then
                     local center=30+125+(i-1)*250-M.cardOffset
-                    if i==M.selected and math.abs(x-center)<69 and y>=146 and y<=186 then
+                    if i==M.selected and math.abs(x-center)<69 and y>=154 and y<=194 then
                         local ls=localStage(c.stages[i].id)
-                        if ls and ls.unlocked then M.popup={stage=ls} end
+                        if ls and ls.unlocked then ui.send("battle",{stage=ls.id}); return true end
                     else M.selected=i end
                     ui.render()
                 end

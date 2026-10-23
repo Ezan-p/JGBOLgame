@@ -2,6 +2,7 @@
 local data=require('local_lineup_data')
 local heroDetail=require('local_hero_detail')
 local enhance=require('local_enhance')
+local essence=require('local_essence')
 local inventoryUI=require('local_inventory')
 local M={mode='main',slot=1,offset=0}
 local inventoryData=require("local_inventory_data")
@@ -164,16 +165,45 @@ local function character(h,compact,parent)
     n:setAnchorPoint(CCPointMake(.5,0));n:setPosition(CCPointMake(x,158));(parent or root):addChild(n)
     local nx=compact and 46 or 258
     local cat={['神']=1,['妖']=2,['人']=3,['魔']=4,['佛']=5}
-    image(P..'type_'..cat[h.category]..'.png',nx,391,34,34,parent)
+    image(P..'type_'..cat[h.category]..'.png',nx,compact and 391 or 367.2,34,34,parent)
     atlas(e.name_icon,nx,282,44,176,parent)
     local stars=image('v2/CharaterUI/stars.png',nx+29,282,17,80,parent)
     stars:setTextureRect(CCRectMake(0,0,22,20*h.quality))
     stats(h,compact and 210 or 484,135,compact and 280 or 350,parent)
 end
+-- playerInfoUI.showCortegeCombatLayer: original title and 1..9,0 digit atlas.
+local function combatPower(h)
+    local x,top,w,height=241,410.4,160,24.8
+    local bg=image('v2/playerInfoUI/com_bkg2.png',x+w/2,top-height/2,w,height)
+    local title=image('v2/playerInfoUI/com_label.png',x+w*.25,top-height/2,height*102/41,height)
+    title:setColor(ccc3(225,225,225))
+    if type(h.combat_power)~='number' then label('—',x+w*.7,top-height/2,18,GOLD,nil,true);return end
+    local value=tostring(math.max(0,math.floor(h.combat_power)))
+    local dh=height*.8;local dw=dh*36/46
+    local left=math.max(x+72,x+w*.7-#value*dw/2)
+    for i=1,#value do
+        local digit=tonumber(value:sub(i,i))
+        local n=atlas({file='v2/playerInfoUI/com_num.png',columns=10,rows=1,index=digit==0 and 10 or digit},left+(i-.5)*dw,top-height/2,dw,dh)
+        n:setColor(ccc3(225,225,225))
+    end
+end
+local function supportBadge(h)
+    -- getBackUpIndex maps the beneficiary's combat order to a cheer position.
+    for _,s in ipairs((state.support or {}).slots or {}) do
+        if s.hero~=0 and s.target==M.slot and s.target_hero==h.id then
+            local order=s.slot
+            local n=image('v2/cheerUI/'..order..'4.png',313.92,179.7,67.2,67.8)
+            hit(313.92,179.7,67.2,67.8,function() ui.openCheer(order) end,n)
+            return
+        end
+    end
+end
 local function main()
     header()
     side(68,false,'position_label',function() M.mode='formation';M.pick=nil;ui.render() end)
     side(875,true,'changeHZ',function() M.mode='replace';M.offset=0;ui.render() end)
+    local cheer=image('v2/cheerUI/cheer_head1.png',836,470,83,83)
+    hit(836,470,83,83,function() ui.openCheer() end,cheer)
     local h=owned(state.lineup[M.slot])
     if not h then
         local n=image(P..'touch_enter.png',480,285,280,85)
@@ -181,7 +211,7 @@ local function main()
         return
     end
     character(h)
-    label('战斗力 '..(type(h.combat_power)=='number' and tostring(h.combat_power) or '—'),258,422,18,GOLD,nil,true)
+    combatPower(h)
     local e=entry(h.id)
     local equipped={}
     for _,item in ipairs((state.inventory or {}).entries or {}) do
@@ -242,8 +272,7 @@ local function main()
     hit(85,111,108,30,function() ui.navigate('battle_hall') end)
     label('战斗演示',867,111,14,{178,136,83},nil,true)
     hit(867,111,100,26,ui.demo)
-    local cheer=image('v2/cheerUI/cheer_head1.png',867,470,83,83)
-    hit(867,470,86,86,function() ui.navigate('cheer') end,cheer)
+    supportBadge(h)
     hit(484,135,350,35,function() openDetail(h) end)
 end
 local function formation()
@@ -608,6 +637,9 @@ function M.draw(context,player)
     elseif M.mode=='support' then support() elseif M.mode=='support_choose' then supportChoose()
     elseif M.mode=='support_target' then supportTarget() elseif M.mode=='equipment' then equipment()
     elseif M.mode=='fates' then fates() else main() end
+    if M.mode=='main' then
+        local h=owned(state.lineup[M.slot]);if h then essence.strip(ui,state,h) end
+    end
     edges()
     if M.spellIntro then spellIntro() end
     if M.equipIntro then equipIntro() end
@@ -629,9 +661,11 @@ function M.draw(context,player)
     end
     if inventoryUI.overlayOpen() then inventoryUI.drawOverlay(ui,state) end
     if enhance.isOpen() then enhance.draw(ui,state) end
+    if essence.isOpen() then essence.draw(ui,state) end
 end
-function M.open() M.mode='main';M.info=nil;M.pick=nil;M.offset=0;M.detailHero=nil;M.spellIntro=nil;M.equipIntro=nil;inventoryUI.closeOverlay();enhance.close();heroDetail.reset() end
+function M.open() essence.close();M.mode='main';M.info=nil;M.pick=nil;M.offset=0;M.detailHero=nil;M.spellIntro=nil;M.equipIntro=nil;inventoryUI.closeOverlay();enhance.close();heroDetail.reset() end
 function M.back()
+    if essence.isOpen() then essence.back();ui.render();return end
     if enhance.isOpen() then enhance.close();ui.render();return end
     if inventoryUI.overlayOpen() then inventoryUI.backOverlay();return end
     if M.spellIntro then M.spellIntro=nil
@@ -648,6 +682,7 @@ local function spot(x,y)
     for i,p in ipairs(M.spots or {}) do if math.abs(x-p.x)<45 and math.abs(y-p.y)<45 then return i end end
 end
 function M.touch(event,x,y)
+    if essence.isOpen() then return false end
     if M.mode=='detail' then return heroDetail.touch(event,x,y) end
     if enhance.isOpen() then return false end
     if inventoryUI.overlayOpen() then return inventoryUI.touchOverlay(event,x,y) end

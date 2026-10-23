@@ -282,7 +282,8 @@ def build_inventory(game_root):
                 item_fates.setdefault(ident, []).append(fate)
     sources.append(r.source("csv_config/fate_config.csv"))
     sources.append(r.source("csv_config/cortege/cortege_name_0.csv"))
-    return dict(schema=3, combat_rules=combat_rules, items=items, categories=CATEGORIES, native_skills=native_skills,
+    from .essence import build_rules as essence_rules
+    return dict(schema=3, essence=essence_rules(r), combat_rules=combat_rules, items=items, categories=CATEGORIES, native_skills=native_skills,
         enhance_cost={x["level"]: x for x in costs},
         stones={f'{x["stone_type"]}:{x["level"]}': x for x in stones},
         fates=item_fates,
@@ -359,6 +360,8 @@ def value(item, level):
 
 
 def upgrade_cost(catalog, item, level):
+    if item["action"] == "trait":
+        return 0  # Original uses essence stones, never silver.
     if item["category"] <= 3:
         return int(catalog["enhance_cost"].get(str(level), {}).get(f'star{item["quality"]}_money', 0))
     return 100 * max(1, item["quality"]) * level  # Explicit local spell silver cost.
@@ -505,12 +508,18 @@ def view(state, catalog, heroes=None):
                        owner_hero_name=owner_hero_name,
                        max_level=max(int(k.split(":")[1]) for k in catalog["stones"]
                                      if k.startswith(str(item["sub_type"]) + ":")))
+        if item["action"] == "trait":
+            from .essence import describe
+            row["essence"] = describe(item, entry, catalog)
         entries.append(row)
     return {"claimed": bag["claimed"], "entries": entries}
 
 
 def apply(state, op, args, catalog, error):
     bag = migrate(state)
+    if op.startswith("bag_essence_"):
+        from .essence import apply as essence_apply
+        return essence_apply(state, op, args, catalog, error)
 
     def check(test, message):
         if not test:
@@ -531,6 +540,8 @@ def apply(state, op, args, catalog, error):
             bag["entries"].remove(entry)
 
     def player_level():
+        if state.get("role_exp_schema"):
+            return int(state.get("level", 1))
         return max(int(state.get("level", 1) or 1), 1 + int(state.get("experience", 0)) // 200)
 
     def check_stone_open():
@@ -553,6 +564,7 @@ def apply(state, op, args, catalog, error):
         check(isinstance(args.get("key"), str), "请选择物品")
         item = catalog["items"].get(args["key"])
         check(item and item["action"] != "reference", "该物品仅供原版资料查阅")
+        check(item["action"] != "trait", "原版精魄不可直接用银两购买")
         count=args.get('count',1)
         check(type(count) is int and 1<=count<=999 and (count==1 or item['action']=='cheer_material'), '兑换数量无效')
         spend(item["price"]*count)
@@ -563,6 +575,8 @@ def apply(state, op, args, catalog, error):
     check(entry is not None, "物品已不存在，请刷新包裹")
     item = catalog["items"][entry["key"]]
     category = item["category"]
+    if item["action"] == "trait" and op in ("bag_equip", "bag_upgrade"):
+        raise error("精魄使用原版铭刻流程，不支持自由装卸或银两升级；结算规则尚缺失，未消耗")
     if op == "bag_equip":
         check(category <= 4 or item["action"] in ("trait","star"), "此物品不能装备")
         hero = integer("hero")
@@ -724,7 +738,7 @@ def apply(state, op, args, catalog, error):
             check(state["heroes"][hero] < 20, "神仙已达到本地等级上限")
             state["heroes"][hero] += 1
         elif action == "material":
-            state["silver"] += 20
+            raise error("精魄石用于精魄升级，不能兑换银两")
         else:
             raise error("该道具属于尚未接入的原版系统，未消耗")
         consume(entry)

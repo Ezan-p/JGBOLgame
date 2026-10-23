@@ -150,20 +150,15 @@ def catalog(game_root):
                        "defense": float(row["base_fangyu_plus"]),
                        "magic": float(row["base_maxmagic_plus"])},
         }
+    from .role_progression import read_levels
+    from .journey import build_journey
+    from .inventory import build_inventory
+    journey = build_journey(game_root)
     stages = []
-    map_names = {int(r["id"]): r["name"] for r in rows("csv_config/map_name.csv")}
-    for row in rows("csv_config/tollgate_name.csv"):
-        if int(row["map_id"]) not in (1, 2):
-            continue
-        number = len(stages) + 1
-        if number > 10:
-            break
-        stages.append({
-            "id": number, "original_id": int(row["id"]), "name": row["name"],
-            "chapter": map_names[int(row["map_id"])],
-            "enemies": [1020, 1021, 5003 if number % 5 == 0 else 1020],
-            "silver": 180 + number * 40, "exp": 30 + number * 10,
-        })
+    for chapter in journey["chapters"]:
+        for original in chapter["stages"]:
+            stages.append({**original, "id": len(stages) + 1,
+                           "original_id": original["id"], "chapter": chapter["name"]})
     from .battle_rules import build_rules
     from .battle_modes import build_modes
     # Original ui/data.lua getCharacterExperienceCSVConfig: csv_config/cortege_experience.csv
@@ -175,6 +170,9 @@ def catalog(game_root):
         level = int(r["level"])
         value = int(r["experience"])
         exp_table.setdefault(quality, {})[level] = value
-    return {"schema": 2, "combat_rules": build_rules(resources), "battle_modes": build_modes(resources), "heroes": heroes, "stages": stages,
+    return {"schema": 3, "role_levels": read_levels(resources), "inventory": build_inventory(game_root),
+            "journey_chapters": [{k: c[k] for k in ("id", "name", "previous", "next", "first", "prize")}
+                                 for c in journey["chapters"]],
+            "journey_sources": journey["sources"], "combat_rules": build_rules(resources), "battle_modes": build_modes(resources), "heroes": heroes, "stages": stages,
             "recruitable": recruitable, "exp_table": exp_table,
             "skills": skill_config, "rules": "local-v4", "source": "Original APK 1061 + installed update 1263; local combat/reward rules"}

@@ -38,7 +38,7 @@ class LocalGameTests(unittest.TestCase):
         resources = Resources(load_config()["game_root"])
         for hero in self.catalog["heroes"].values():
             self.assertTrue(resources.read(hero["sprite"]).startswith(b"\x89PNG"))
-        self.assertEqual(len(self.catalog["stages"]), 10)
+        self.assertEqual(len(self.catalog["stages"]), 597)
 
     def test_complete_updated_handbook_and_new_character(self):
         resources = Resources(load_config()["game_root"])
@@ -113,7 +113,7 @@ class LocalGameTests(unittest.TestCase):
         self.assertTrue(battle["won"])
         self.assertTrue(battle["events"])
         self.assertEqual(state["battle_count"], 1)
-        self.assertEqual(state["energy"], 58)
+        self.assertEqual(state["energy"], 59)
         self.assertEqual(state["unlocked"], 2)
         self.assertEqual(state["silver"], 1200 + battle["silver"])
         self.assertTrue(battle["first_clear"])
@@ -172,7 +172,7 @@ class LocalGameTests(unittest.TestCase):
             reply = self.game.request(self.player, f"campaign-battle-{stage}", "battle", {"stage": stage})
             self.assertTrue(reply["battle"]["won"], f"Stage {stage} should be playable")
         self.assertEqual(len(self.state()["wins"]), 10)
-        self.assertEqual(self.state()["energy"], 40)
+        self.assertEqual(self.state()["energy"], 50)
 
 
 if __name__ == "__main__":

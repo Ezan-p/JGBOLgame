@@ -70,7 +70,7 @@ class ExpBookTests(unittest.TestCase):
 
     def test_raise_role_level_unlocks_more_hero_levels(self):
         state = self.raw()
-        state["experience"] = 400  # role Lv.3 => normal=7, hard cap=9
+        state["experience"] = sum(v["upgrade_exp"] for k,v in self.catalog["role_levels"].items() if int(k)<3)  # role Lv.3
         state["heroes"]["5022"] = 2
         self.save(state)
         book = self.give("i1041")
