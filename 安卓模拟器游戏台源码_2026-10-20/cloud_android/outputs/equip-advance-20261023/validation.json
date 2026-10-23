@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-23",
+  "tests": {
+    "total": 168,
+    "passed": 168,
+    "advance_cases": 6,
+    "worth_states": 486,
+    "star_costs": 420
+  },
+  "apk_sha256": "a9b4050f60a13e74406159d71e43d8b583335eb15c7bedf2265e0d70b598b1bf",
+  "source_matches_apk": [
+    "lua/local_equip_advance.lua",
+    "lua/local_inventory.lua",
+    "lua/local_inventory_controls.lua"
+  ],
+  "original_player_rows_unchanged": true,
+  "original_request_history_unchanged": true,
+  "original_session_restored": true,
+  "isolated_player_removed": true,
+  "single_pour": {
+    "material_before": 300,
+    "material_after": 295,
+    "spirit_before": 0,
+    "spirit_after": 5
+  },
+  "one_key": {
+    "material_after": 90,
+    "stars_after": 7
+  },
+  "first_advance": {
+    "rank": 1,
+    "star": 0,
+    "spirit": 0,
+    "lingqi_before": 50,
+    "lingqi_after": 42,
+    "crystal_before": 50,
+    "crystal_after": 40
+  },
+  "ui_checks": [
+    "empty panel",
+    "equipment selection",
+    "single pour",
+    "one-key seven stars",
+    "advance and original CCBI loading",
+    "original material deduction",
+    "ten-rank preview and maximum",
+    "insufficient material",
+    "inventory detail entry",
+    "lineup detail entry",
+    "Android layered back",
+    "material description popup"
+  ],
+  "boundaries": [
+    "offline settings listed in report",
+    "extra character multiplier not reconstructed"
+  ]
+}

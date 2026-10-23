@@ -1,0 +1,54 @@
+{
+  "date": "2026-10-23",
+  "tests": {
+    "inventory_passed": 18
+  },
+  "source_and_animation_matches_apk": [
+    "lua/local_equip_visuals.lua",
+    "lua/local_equip_advance.lua",
+    "lua/local_inventory.lua",
+    "lua/local_lineup.lua",
+    "01.ccbi",
+    "01/01.plist",
+    "01/01.png",
+    "02.ccbi",
+    "02/02.plist",
+    "02/02.png",
+    "03.ccbi",
+    "03/03.plist",
+    "03/03.png",
+    "04.ccbi",
+    "04/04.plist",
+    "04/04.png"
+  ],
+  "original_badges_matched": 10,
+  "original_save_unchanged": true,
+  "original_materials_unchanged": true,
+  "original_requests_unchanged": true,
+  "original_session_restored": true,
+  "isolated_player_removed": true,
+  "animation_samples": [
+    {
+      "before": "阵容初验.png",
+      "after": "阵容循环后帧.png",
+      "changed_pixels": 3889
+    },
+    {
+      "before": "包裹高阶.png",
+      "after": "包裹循环后帧.png",
+      "changed_pixels": 10702
+    }
+  ],
+  "ui_checks": [
+    "lineup 3,5,6 ranks",
+    "lineup 9,10 and rank zero",
+    "bag ranks 0 through 10",
+    "white equipment level and corner badge",
+    "name-adjacent badge",
+    "scroll clipping",
+    "details name badge",
+    "advance selector",
+    "looping native CCBI"
+  ],
+  "apk_sha256": "f91c38074dfbd8e069a6610e04bfe8992bc78d5827aaaace1422603816983d70"
+}

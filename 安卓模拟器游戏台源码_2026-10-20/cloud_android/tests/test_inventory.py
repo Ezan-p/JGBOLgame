@@ -46,6 +46,95 @@ class InventoryTests(unittest.TestCase):
     def entries(self, key):
         return [e for e in self.raw()["inventory"]["entries"] if e["key"] == key]
 
+    def sale_fixture(self):
+        state = self.raw()
+        candidates = [i for i in self.inventory["items"].values()
+                      if i["category"] == 1 and i["quality"] == 2]
+        key = candidates[0]["key"]
+        for level in (1, 2, 3):
+            grant(state, key, level=level, catalog=self.inventory)
+        self.save(state)
+        return [e["uid"] for e in state["inventory"]["entries"]]
+
+    def test_batch_sale_original_price_and_idempotent_transaction(self):
+        from decimal import Decimal
+        uids = self.sale_fixture()
+        before = self.raw()
+        # Six fractional refunds must add up before flooring the batch total.
+        for _ in range(5):
+            grant(before, before["inventory"]["entries"][0]["key"], level=2, catalog=self.inventory)
+        self.save(before)
+        uids = [e["uid"] for e in before["inventory"]["entries"]]
+        entries = before["inventory"]["entries"]
+        # Independently use the original base price and attenuation constants.
+        expected = int(sum(Decimal(500) + Decimal("0.45") * sum(
+            int(self.inventory["enhance_cost"][str(n)]["star2_money"])
+            for n in range(1, e["level"])) for e in entries))
+        shown = self.game.view(before)["inventory"]["entries"]
+        self.assertEqual(sum(e["sale_price_cents"] for e in shown)//100, expected)
+        self.assertGreater(expected, sum(e["sale_price_cents"]//100 for e in shown))
+        args = {"category": 1, "uids": uids}
+        with concurrent.futures.ThreadPoolExecutor(4) as pool:
+            results = list(pool.map(lambda _: self.game.request(
+                self.player, "same-batch-sale", "bag_sell_batch", args), range(4)))
+        self.assertTrue(all(x == results[0] for x in results))
+        after = self.raw()
+        self.assertEqual(after["silver"] - before["silver"], expected)
+        self.assertEqual(after["inventory"]["entries"], [])
+        with self.assertRaises(GameError):
+            self.call("bag_sell_batch", **args)
+        self.assertEqual(self.raw(), after)
+
+    def test_batch_sale_unloads_stones_without_losing_their_progress(self):
+        uids = self.sale_fixture()
+        from local_game.inventory import new_stone_entry
+        state = self.raw()
+        state["inventory"]["entries"][0]["drill"] = 1
+        gem = new_stone_entry(state["inventory"], "i1090", 7, 23, uids[0], 1)
+        self.save(state)
+        self.call("bag_sell_batch", category=1, uids=[uids[0]])
+        after = self.raw()
+        actual = next(e for e in after["inventory"]["entries"] if e["uid"] == gem["uid"])
+        self.assertEqual(actual, {**gem, "owner_uid": 0, "equip_pos": 0})
+        self.assertEqual(len(after["inventory"]["entries"]), 3)
+
+    def test_batch_sale_rejects_invalid_or_protected_selection_atomically(self):
+        uids = self.sale_fixture()
+        self.call("bag_claim")
+        state = self.raw()
+        state["inventory"]["entries"][1]["hero"] = 5022
+        state["inventory"]["entries"][2]["advance_level"] = 1
+        self.save(state)
+        protected = [uids[1], uids[2], self.entry("i2006")["uid"], self.entry("s43")["uid"],
+                     self.entry("i3002")["uid"], self.entry("i1090")["uid"], 999999]
+        attempts = [[uids[0], uid] for uid in protected]
+        attempts += [[], [uids[0], uids[0]], [True], ["1"], [1.0], list(range(1, 502)), {}, None]
+        before = self.raw()
+        for ids in attempts:
+            with self.subTest(ids=str(ids)[:80]), self.assertRaises(GameError):
+                self.call("bag_sell_batch", category=1, uids=ids)
+            self.assertEqual(self.raw(), before)
+        with self.assertRaises(GameError):
+            self.call("bag_sell_batch", category=True, uids=[uids[0]])
+        self.assertEqual(self.raw(), before)
+        shown = {e["uid"]: e for e in self.game.view(before)["inventory"]["entries"]}
+        self.assertTrue(shown[uids[0]]["sale_eligible"])
+        for uid in (uids[1], uids[2], self.entry("i2006")["uid"]):
+            self.assertFalse(shown[uid]["sale_eligible"])
+
+    def test_batch_sale_accepts_maximum_500(self):
+        self.sale_fixture()
+        state = self.raw()
+        key = state["inventory"]["entries"][0]["key"]
+        state["inventory"]["entries"] = []
+        for _ in range(500):
+            grant(state, key, catalog=self.inventory)
+        self.save(state)
+        uids = [e["uid"] for e in state["inventory"]["entries"]]
+        self.call("bag_sell_batch", category=1, uids=uids)
+        self.assertEqual(self.raw()["silver"] - state["silver"], 250000)
+        self.assertEqual(self.raw()["inventory"]["entries"], [])
+
     def test_extraction_counts_icons_and_reference_examples(self):
         items = self.inventory["items"]
         self.assertEqual(Counter(x["category"] for x in items.values()),

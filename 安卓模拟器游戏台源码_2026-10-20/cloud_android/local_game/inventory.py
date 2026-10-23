@@ -1,6 +1,7 @@
 """Versioned original inventory catalog and explicit, transactional local rules."""
 import copy
 import struct
+from decimal import Decimal
 
 from local_game.assets import Resources
 from local_game.handbook import atlas, UI_RESOURCES
@@ -15,6 +16,22 @@ DRILL_ITEM = "i1093"  # 金刚钻, g_self.DrillMaterial.type_id
 STONE_LEVEL_LIMIT = 10  # ui/stoneUI.lua g_self.Lvlimit
 STONE_MAX_MATERIALS = 250  # stoneUpgradeUI.lua MAX
 INVENTORY_SCHEMA = 4
+
+
+def batch_sale_eligible(entry, item):
+    """batchSaleUI.getShowItems: idle, below four stars, never advanced."""
+    return (1 <= item["category"] <= 3 and 1 <= item["quality"] < 4
+            and entry.get("hero", 0) == 0 and entry.get("advance_level", 0) == 0
+            and entry.get("count", 0) == 1)
+
+
+def sale_price(entry, item, catalog):
+    """Original preview floors the TOTAL, not each individual item's refund."""
+    rule = next(r for r in catalog["raw_tables"]["item_sell_config"]
+                if int(r["equip_quality"]) == item["quality"])
+    spent = sum(int(catalog["enhance_cost"][str(level)][f'star{item["quality"]}_money'])
+                for level in range(1, entry["level"]))
+    return Decimal(rule["base_sell_price"]) + spent * Decimal(rule["price_attenuation"])
 
 
 def stone_row(catalog, category, level):
@@ -259,8 +276,19 @@ def build_inventory(game_root):
     raw_tables = {name: rows(name) for name in (
         "skill_enhance_cost", "skill_enhance_worth", "equip_compose_random",
         "equip_advance_cost", "equip_star_cost", "item_sell_config", "item_receive_config")}
+    dependencies.update(n for n in r.names() if n.endswith(".png") and n.startswith((
+        "v2/multi-selectUI/", "v2/batchBuyUI/", "v2/buttons/filter2",
+        "v2/equipAdvanceUI/menu_ad", "v2/packageUI/piliangchushou")))
+    dependencies.update(("v2/messageUI/frame2.png", "v2/rechargeUI/tip.png",
+                         "v2/introUI/sale1.png", "v2/introUI/sale2.png", "v2/introUI/intro_bkg.png"))
+    sources.extend(r.source(n) for n in ("lua/ui/batchSaleUI.lua", "lua/ui/filterLayer.lua"))
     sources.extend(r.source(n) for n in ("lua/ui/packageUI.lua", "lua/common/common_def.lua", "lua/data.lua",
                                         "lua/ui/wakeUI.lua", "lua/ui/destinyUI.lua"))
+    dependencies.update(n for n in r.names() if n.startswith(("v2/equipAdvanceUI/", "shengjie/", "shengjie02/")))
+    dependencies.update(("shengjie.ccbi", "shengjie02.ccbi", "v2/trainingUI/up.png", "v2/introUI/choose1.png", "v2/introUI/choose2.png", "v2/introUI/change1.png", "v2/introUI/change2.png"))
+    # data.getCcbiByAdvanceLevel: four original looping icon effects.
+    for effect in ("01", "02", "03", "04"):
+        dependencies.update((effect+".ccbi", effect+"/"+effect+".plist", effect+"/"+effect+".png"))
     for n in dependencies:
         r.read(n)
     native_skills = {x["type_id"]: int(x["chushijineng"]) for x in r.rows("csv_config/cortege/cortege_base_0.csv")}
@@ -283,7 +311,8 @@ def build_inventory(game_root):
     sources.append(r.source("csv_config/fate_config.csv"))
     sources.append(r.source("csv_config/cortege/cortege_name_0.csv"))
     from .essence import build_rules as essence_rules
-    return dict(schema=3, essence=essence_rules(r), combat_rules=combat_rules, items=items, categories=CATEGORIES, native_skills=native_skills,
+    from .equip_advance import build_rules as advance_rules
+    return dict(schema=3, equip_advance=advance_rules(r), essence=essence_rules(r), combat_rules=combat_rules, items=items, categories=CATEGORIES, native_skills=native_skills,
         enhance_cost={x["level"]: x for x in costs},
         stones={f'{x["stone_type"]}:{x["level"]}': x for x in stones},
         fates=item_fates,
@@ -433,7 +462,8 @@ def hero_with_inventory(hero, state, catalog):
             bonus = value(item, entry["level"])
             percent_bonus = stone_percent(catalog, item["category"],
                                           stones_for(bag, entry["uid"]))
-            bonuses[stat] += round(bonus * (1 + percent_bonus))
+            from .equip_advance import bonus as advance_bonus
+            bonuses[stat] += round(bonus * (1 + percent_bonus)) + advance_bonus(item, entry, catalog, bonus)
         elif item["category"] == 4:
             position = positions.get(entry['uid'], 0)
             if not position:
@@ -467,6 +497,10 @@ def view(state, catalog, heroes=None):
         row = {**entry, "equip_pos": positions.get(entry["uid"], 0), "value": shown_value,
                "upgrade_cost": upgrade_cost(catalog, item, entry["level"])}
         if item["category"] <= 3:
+            row["sale_eligible"] = batch_sale_eligible(entry, item)
+            # Integer cents keep client previews equal to the server's single
+            # final floor, including odd enhancement prices.
+            row["sale_price_cents"] = int(sale_price(entry, item, catalog) * 100)
             row["stones_list"] = stones_for(bag, entry["uid"])
             percent = stone_percent(catalog, item["category"], row["stones_list"])
             row.update(base_value=shown_value, stone_percent=percent,
@@ -478,7 +512,10 @@ def view(state, catalog, heroes=None):
                        drill=int(entry.get("drill", 0)),
                        max_sockets=SOCKET_SLOTS.get(int(item["quality"]), 1))
             del row["stones_list"]
-            shown_value = round(shown_value * (1 + percent))
+            from .equip_advance import describe as advance_describe, bonus as advance_bonus
+            row["advance"] = advance_describe(item, entry, catalog, bag)
+            row["advance_bonus"] = advance_bonus(item, entry, catalog, shown_value)
+            shown_value = round(shown_value * (1 + percent)) + row["advance_bonus"]
             row["value"] = shown_value
         elif item["category"] == 5:
             level = int(entry.get("level", 1))
@@ -517,6 +554,9 @@ def view(state, catalog, heroes=None):
 
 def apply(state, op, args, catalog, error):
     bag = migrate(state)
+    if op in ("bag_equip_pour", "bag_equip_advance"):
+        from .equip_advance import apply as advance_apply
+        return advance_apply(state, op, args, catalog, error)
     if op.startswith("bag_essence_"):
         from .essence import apply as essence_apply
         return essence_apply(state, op, args, catalog, error)
@@ -550,6 +590,34 @@ def apply(state, op, args, catalog, error):
 
     def material_of(key):
         return next((e for e in bag["entries"] if e["key"] == key and e["count"] > 0), None)
+
+    if op == "bag_sell_batch":
+        uids = args.get("uids")
+        category = integer("category")
+        check(category in (1, 2, 3), "只能批量出售武器、防具或法宝")
+        check(type(uids) is list and 1 <= len(uids) <= 500, "每次请选择1至500件装备")
+        check(all(type(uid) is int and uid > 0 for uid in uids), "装备编号无效")
+        check(len(set(uids)) == len(uids), "不能重复选择同一件装备")
+        by_uid = {e["uid"]: e for e in bag["entries"]}
+        selected, total = [], Decimal(0)
+        # Validate the entire batch before changing silver, objects or stones.
+        for uid in uids:
+            entry = by_uid.get(uid)
+            check(entry is not None, "物品已不存在，请刷新包裹")
+            item = catalog["items"][entry["key"]]
+            check(item["category"] == category, "只能出售当前分类的装备")
+            check(batch_sale_eligible(entry, item), "只能批量出售未装备、未升阶的1至3星装备")
+            selected.append(entry)
+            total += sale_price(entry, item, catalog)
+        sold = set(uids)
+        for gem in bag_stones(bag):
+            if gem.get("owner_uid", 0) in sold:
+                gem["owner_uid"] = 0
+                gem["equip_pos"] = 0
+        bag["entries"] = [e for e in bag["entries"] if e["uid"] not in sold]
+        proceeds = int(total)
+        state["silver"] += proceeds
+        return f"出售成功，{len(selected)}件装备共获得{proceeds}银两"
 
     if op == "bag_claim":
         check(not bag["claimed"], "入门包裹已领取")

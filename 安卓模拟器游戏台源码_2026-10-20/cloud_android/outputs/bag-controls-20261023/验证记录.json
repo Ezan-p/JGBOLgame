@@ -1,0 +1,56 @@
+{
+  "sources": [
+    {
+      "resource": "lua/ui/batchSaleUI.lua",
+      "version": "ver====1061====",
+      "filename": "80037ca721392e44697c11019df23841.data",
+      "sha256": "f8be0aecd2b200a8396a73513e27c3fa676eedd8af536ba9817b4b9c6c124b09"
+    },
+    {
+      "resource": "lua/ui/filterLayer.lua",
+      "version": "ver====1061====",
+      "filename": "90f20fe01c8ba49c3fbacf7c199cf029.data",
+      "sha256": "ba2ef0f430b65d9cc8eb6d19fbb2992e8d55dd96a9904e2cb09df7df2cadb509"
+    },
+    {
+      "resource": "lua/ui/packageUI.lua",
+      "version": "ver====1263====",
+      "filename": "7217a84e47bd7209f3d40111fb0f906a.data",
+      "sha256": "a078d593faf73362826b0c83a0c565afaec9962b9f09f0da1e40e2800dba8cc8"
+    },
+    {
+      "resource": "csv_config/item_sell_config.csv",
+      "version": "ver====1061====",
+      "filename": "4faad77b1e36a69f4d7f152573f6fe81.data",
+      "sha256": "09cf34c2844152b2a6f7ff3bd2a54e10769fc68df76e4b87f9f30aca7513a650"
+    },
+    {
+      "resource": "csv_config/equip_enhance_cost.csv",
+      "version": "ver====1061====",
+      "filename": "774c3219577c22d826581b9d1f6dbb0e.data",
+      "sha256": "18276a5acd46968a47c6adec81cc3ca99a008bc7bd4ca52f2ab8bce5472c1e3e"
+    }
+  ],
+  "regression_tests_passed": 162,
+  "inventory_tests_passed": 18,
+  "native_sale": {
+    "sold": 26,
+    "expected_silver": 15971,
+    "actual_silver": 15971,
+    "returned_stones": 1,
+    "protected_preserved": true,
+    "cancel_and_filter_do_not_mutate": true
+  },
+  "screenshots_use_isolated_fixture": true,
+  "equipment_advance": "entry_only",
+  "final_install": {
+    "installed_apk_sha256": "b0ca0631f770046e14dc76aeadc478a27f06fc56ddb7f1d9caec9ee5ea9e5690",
+    "installed_matches_build": true,
+    "packaged_scripts_match_source": true,
+    "original_session_restored": true,
+    "original_players_preserved": 2,
+    "original_gameplay_unchanged": true,
+    "temporary_player_archived_and_removed": true,
+    "no_preview_overrides": true
+  }
+}

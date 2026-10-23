@@ -1,0 +1,10 @@
+Verifies
+Verified using v1 scheme (JAR signing): true
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+本地 APK： /Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/.runtime/local_game/jingubang-local.apk
+原版渠道客户端和源资源未修改。

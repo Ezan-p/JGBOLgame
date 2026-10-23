@@ -1,0 +1,29 @@
+........................................................./Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/_collections_abc.py:950: NotAppKeyWarning: It is recommended to use web.AppKey instances for keys.
+https://docs.aiohttp.org/en/stable/web_advanced.html#application-s-config
+  self[key] = value
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/.runtime/venv/lib/python3.9/site-packages/aiohttp/web_urldispatcher.py:208: DeprecationWarning: Bare functions are deprecated, use async ones
+  warnings.warn(
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/tests/test_gateway.py:16: NotAppKeyWarning: It is recommended to use web.AppKey instances for keys.
+https://docs.aiohttp.org/en/stable/web_advanced.html#application-s-config
+  app=server.make_app();app.cleanup_ctx.clear();self.stub=Stub();app['stub']=self.stub
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/server.py:88: DeprecationWarning: Changing state of started or joined application is deprecated
+  ws=web.WebSocketResponse(heartbeat=20,max_msg_size=8192);app['controller']=ws
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/server.py:88: NotAppKeyWarning: It is recommended to use web.AppKey instances for keys.
+https://docs.aiohttp.org/en/stable/web_advanced.html#application-s-config
+  ws=web.WebSocketResponse(heartbeat=20,max_msg_size=8192);app['controller']=ws
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/server.py:101: DeprecationWarning: Changing state of started or joined application is deprecated
+  await ws.send_bytes(img.image);app['frames']+=1
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/server.py:101: NotAppKeyWarning: It is recommended to use web.AppKey instances for keys.
+https://docs.aiohttp.org/en/stable/web_advanced.html#application-s-config
+  await ws.send_bytes(img.image);app['frames']+=1
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/server.py:143: DeprecationWarning: Changing state of started or joined application is deprecated
+  if app['controller'] is ws:app['controller']=None
+/Users/ezan/Desktop/vibeCoidng/JGBolgame/安卓模拟器游戏台源码_2026-10-20/cloud_android/server.py:143: NotAppKeyWarning: It is recommended to use web.AppKey instances for keys.
+https://docs.aiohttp.org/en/stable/web_advanced.html#application-s-config
+  if app['controller'] is ws:app['controller']=None
+...............................................................................................................
+----------------------------------------------------------------------
+Ran 168 tests in 43.263s
+
+OK
+AVD 已创建。启动后运行 manage.py doctor 验证 armeabi 支持： /var/folders/zj/frlq7jns0p96hrv2_fjmkkl00000gn/T/tmpt_fq__4m/avd/test32.avd

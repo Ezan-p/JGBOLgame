@@ -4,6 +4,7 @@ local heroDetail=require('local_hero_detail')
 local enhance=require('local_enhance')
 local essence=require('local_essence')
 local inventoryUI=require('local_inventory')
+local equipVisuals=require('local_equip_visuals')
 local M={mode='main',slot=1,offset=0}
 local inventoryData=require("local_inventory_data")
 local rulesOK,combatRules=pcall(require,"local_combat_rules")
@@ -248,8 +249,8 @@ local function main()
         end
         local gear=equipped[i];local category=i
         if gear then
-            atlas(gear.base.icon,770,y,78)
-            equippedLevel(770,y,gear.entry.level or 1)
+            local gearIcon=atlas(gear.base.icon,770,y,78)
+            equipVisuals.equipped(gearIcon,gear.entry)
             label(gear.base.name,770,y-47,16,GOLD,nil,true)
         else image(P..'itemHZ_'..i..'.png',770,y,78,78) end
         hit(770,y,84,98,function()
@@ -540,8 +541,15 @@ local function choiceList(list,title,action,isGear)
             image(P..'char_info.png',x,y,390,78)
             if isGear then
                 local base=inventoryData.items[item.key]
-                atlas(base.icon,x-150,y,60)
-                label(base.name..'  '..item.level..'级',x-108,y+15,19,GOLD)
+                local gearIcon=atlas(base.icon,x-150,y,60)
+                local gearName=label(base.name,x-108,y+15,19,GOLD)
+                local mark
+                if base.category<=3 then
+                    equipVisuals.effect(gearIcon,item)
+                    mark=equipVisuals.nameMark(root,gearName,item,.6)
+                end
+                local nameWidth=gearName:getContentSize().width
+                label(' '..item.level..'级',x-108+nameWidth+(mark and 24 or 0),y+15,17,GOLD)
                 local wearer=owned(item.hero)
                 label('属性 +'..item.value..' · '..(wearer and wearer.name..'佩戴' or '未装备'),x-108,y-15,15,{225,185,122})
             else

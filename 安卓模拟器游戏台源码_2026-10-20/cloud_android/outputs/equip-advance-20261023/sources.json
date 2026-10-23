@@ -1,0 +1,32 @@
+[
+  {
+    "resource": "lua/ui/equipAdvanceUI.lua",
+    "version": "ver====1061====",
+    "filename": "e641c8233876a6480061d24f05e1c237.data",
+    "sha256": "04376a34335767fe7eaaf0a7d2feefef2e2cdbbfe72d5d2fa52124841cdd2cd0"
+  },
+  {
+    "resource": "lua/ui/packageUI.lua",
+    "version": "ver====1263====",
+    "filename": "7217a84e47bd7209f3d40111fb0f906a.data",
+    "sha256": "a078d593faf73362826b0c83a0c565afaec9962b9f09f0da1e40e2800dba8cc8"
+  },
+  {
+    "resource": "csv_config/equip_advance_cost.csv",
+    "version": "ver====1061====",
+    "filename": "1b468892baadb6d999f80515f016f21b.data",
+    "sha256": "1ff63ceafa8d945a7233a79d93612386d616baeeac2680a2a6b63e9e2a944dc8"
+  },
+  {
+    "resource": "csv_config/equip_advance_worth.csv",
+    "version": "ver====1061====",
+    "filename": "ffa66376bb20fe55ba44d8801897f886.data",
+    "sha256": "0f77aa578a393820fc0e0cd4e84e4bc70226ae459fa83a4bea577400b9cd8469"
+  },
+  {
+    "resource": "v2/String.plist",
+    "version": "ver====1061====",
+    "filename": "ca57c7d6d974d37a6b69a0b52f5937cd.data",
+    "sha256": "09454159dbd3286d25793ac13035798fe17949023fbb083a1bc532bd2fafc5dc"
+  }
+]
